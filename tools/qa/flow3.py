@@ -1,0 +1,50 @@
+import asyncio
+from playwright.async_api import async_playwright
+async def main():
+    async with async_playwright() as p:
+        b = await p.chromium.launch(); ctx = await b.new_context(viewport={'width':390,'height':844}); await ctx.route('**/*supabase*', lambda r: r.abort())
+        pg = await ctx.new_page(); errs=[]; pg.on('pageerror', lambda e: errs.append(str(e)))
+        await pg.goto('http://127.0.0.1:8765/', wait_until='networkidle')
+        await pg.click('[data-act=sampleclassic]'); await pg.wait_for_timeout(1500)
+        await pg.click('[data-act=pickme][data-id=__guest]'); await pg.wait_for_timeout(300)
+        code = await pg.evaluate('TRIP.code')
+        await pg.evaluate("view.tab='admin'; render()"); await pg.wait_for_timeout(200)
+        await pg.fill('#pin','1234'); await pg.click('[data-act=unlock]'); await pg.wait_for_timeout(500)
+        mid = await pg.evaluate("(() => { syncEngine(); const m=allMatches(true).find(m=>bothKnown(m)&&!state.results[m.id]&&typeof m.slotIdx==='number'); view.matchId=m.id; view.modal='move'; view.mv=null; render(); return m.id })()")
+        await pg.wait_for_timeout(200)
+        print('confirm disabled initially:', await pg.evaluate("document.querySelector('[data-act=domove]').disabled"))
+        cur = await pg.evaluate("+document.getElementById('mv-slot').value")
+        await pg.select_option('#mv-slot', str(cur+1)); await pg.wait_for_timeout(300)
+        print('preview:', (await pg.inner_text('.sheet section'))[:200].replace('\n',' | '))
+        await pg.click('[data-act=domove]'); await pg.wait_for_timeout(400)
+        print('moved:', await pg.evaluate(f"(() => {{ syncEngine(); const m=findMatch('{mid}'); return [m.moved, m.when, statusInfo(m)] }})()"))
+        await pg.evaluate("view.tab='schedule'; view.admin=true; render()"); await pg.wait_for_timeout(200)
+        print('schedule shows:', await pg.locator('.mr .st.warn').all_inner_texts())
+        # announce ask
+        await pg.evaluate("view.tab='admin'; view.dws='run'; render()"); await pg.wait_for_timeout(200)
+        await pg.fill('#announce','Test notice'); await pg.click('[data-act=announceask]'); await pg.wait_for_timeout(200)
+        n0 = await pg.evaluate("Store.keys('chat:').filter(k=>Store.get(k).ann).length")
+        await pg.click('[data-act=askno]'); await pg.wait_for_timeout(200)
+        print('ann cancelled, count unchanged:', n0 == await pg.evaluate("Store.keys('chat:').filter(k=>Store.get(k).ann).length"))
+        # chat send
+        await pg.evaluate("view.tab='chat'; view.ctab='chat'; render()"); await pg.wait_for_timeout(200)
+        await pg.fill('#chatDraft','hello there'); await pg.click('[data-act=send]'); await pg.wait_for_timeout(400)
+        print('sent:', await pg.evaluate("Store.keys('chat:').map(k=>Store.get(k)).filter(m=>m.text==='hello there').length"), 'draft:', await pg.evaluate('view.draft'))
+        await pg.evaluate("window._si = saveImg; saveImg = () => Promise.reject(new Error('x')); view.chatImg='data:image/png;base64,iVBORw0KGgo='; view.draft='with pic'; render()"); await pg.wait_for_timeout(200)
+        await pg.click('[data-act=send]'); await pg.wait_for_timeout(400)
+        print('upload fail:', await pg.inner_text('.bk-note.err'), '| draft kept:', await pg.evaluate('view.draft'), '| img kept:', await pg.evaluate('!!view.chatImg'))
+        # deep link loading
+        pg2 = await ctx.new_page(); await pg2.goto(f'http://127.0.0.1:8765/?join={code}'); 
+        txt = await pg2.evaluate("document.body.innerText.slice(0,80)"); print('deeplink first paint:', txt.replace('\n',' '))
+        await pg2.wait_for_timeout(1500); print('deeplink after:', await pg2.evaluate("[!!TRIP, view.resolving]"))
+        pg3 = await ctx.new_page(); await pg3.goto('http://127.0.0.1:8765/?join=ZZZZZZ'); await pg3.wait_for_timeout(1500)
+        print('bad code:', await pg3.evaluate("[!!TRIP, view.resolving, view.joinErr]"))
+        # prepub courts
+        pg4 = await ctx.new_page(); await pg4.goto('http://127.0.0.1:8765/', wait_until='networkidle')
+        await pg4.evaluate("LS.del('bkt-last'); leaveTrip && leaveTrip()"); await pg4.wait_for_timeout(500)
+        await pg4.click('[data-act=sampleprepub]'); await pg4.wait_for_timeout(1500)
+        await pg4.evaluate("view.me='__guest'; view.tab='courts'; render()"); await pg4.wait_for_timeout(200)
+        print('prepub courts:', (await pg4.inner_text('main'))[:260].replace('\n',' | '))
+        print('errors:', errs)
+        await b.close()
+asyncio.run(main())

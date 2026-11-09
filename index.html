@@ -1173,6 +1173,138 @@ table.sc2{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
 .court .cnext,.court .cnow{min-height:var(--tap)}
 @media (max-width:360px){ .bk-word{display:none} .bk-h1{font-size:30px} .sc2wrap{padding-left:var(--s3);padding-right:var(--s3)} .scin{width:46px} .sc2 td{width:50px} }
 @media (prefers-reduced-motion:reduce){ .bk-disc > summary::after{transition:none} }
+/* ================= Phase 2-4 redesign ================= */
+.vs,.tvc2 i,.tvrow i{font-style:normal;color:var(--muted);font-weight:400}
+/* Courts */
+.crows{list-style:none;margin:var(--s3) 0;padding:0;border-top:1px solid var(--bd)}
+.crow{padding:var(--s3) 0;border-bottom:1px solid var(--bd)}
+.crow-h{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);flex-wrap:wrap}
+.crow-h h2{font:600 18px/1.25 var(--fb);margin:0;color:var(--ink)}
+.crow-m{display:block;width:100%;text-align:left;min-height:var(--tap);padding:6px 0;color:var(--ink)}
+.crow-m .crow-l{display:block;font:500 13.5px/1.35 var(--fb);color:var(--muted)}
+.crow-m .crow-t{display:block;font:600 16px/1.35 var(--fb);overflow-wrap:anywhere}
+.crow.busy .crow-m:first-of-type .crow-t{font-size:17px}
+.crow-m.nx .crow-t{font-weight:500}
+.crow-none{margin:6px 0 0;color:var(--muted);font:400 14.5px/1.4 var(--fb)}
+/* Filters */
+.bk-filters{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s3) 0}
+.bk-filters label{flex:1 1 140px;min-width:0;display:flex;flex-direction:column;gap:4px;font:600 13px/1.2 var(--fb);color:var(--muted)}
+.bk-filters select{min-height:var(--tap);width:100%;padding:8px 10px;font:400 16px var(--fb);border:1px solid var(--bd);border-radius:var(--rad-c);background:var(--card);color:var(--ink)}
+.bk-lbl{display:block;font:600 14px/1.3 var(--fb);color:var(--ink);margin:var(--s3) 0 6px}
+.bk-feature .bk-lbl{color:inherit}
+select.bk-input{appearance:auto}
+/* Players */
+.plrows .st,.bk-row b .st{display:inline-block!important;vertical-align:2px;margin:0 0 0 6px!important}
+.plres{display:flex;flex-direction:column;gap:4px;margin-bottom:var(--s2)}
+.plres > .st{align-self:flex-start}
+.claim{border-top:1px solid var(--bd);padding-top:var(--s3)}
+/* Schedule */
+.seg2.days button{display:flex;flex-direction:column;align-items:center;line-height:1.15}
+.seg2.days small{font-weight:400;font-size:12.5px;opacity:.85}
+.agx{display:flex;flex-direction:column;gap:3px;padding:var(--s3);margin:0 0 var(--s2);border:1px dashed var(--bd);border-radius:var(--rad-c);background:var(--card)}
+.agx .st{align-self:flex-start}
+.agx b{font:600 16px/1.3 var(--fb)}.agx span:not(.st){color:var(--muted);font-size:14.5px}
+.bk-scrollx,.sc2wrap{position:relative}
+.sgrid{margin:var(--s3) 0;max-height:70vh;overflow:auto;border:1px solid var(--bd);border-radius:var(--rad-c)}
+.sgrid table{border-collapse:separate;border-spacing:0;min-width:100%}
+.sgrid th,.sgrid td{border-bottom:1px solid var(--bd);border-right:1px solid var(--bd);padding:0;vertical-align:top;background:var(--card)}
+.sgrid thead th{position:sticky;top:0;z-index:2;padding:8px 10px;font:600 13.5px var(--fb);text-align:left;white-space:nowrap;background:var(--paper)}
+.sgrid tbody th{position:sticky;left:0;z-index:1;padding:8px 10px;font:600 13.5px var(--fb);white-space:nowrap;background:var(--paper)}
+.sgrid td button{display:flex;flex-direction:column;gap:2px;width:100%;min-width:150px;min-height:64px;padding:8px 10px;text-align:left;color:var(--ink);font:500 14px/1.3 var(--fb)}
+.sgrid td button small{color:var(--muted);font-size:12.5px}
+.sgrid td.empty{min-width:120px}
+/* Chat */
+.pinned{position:sticky;top:0;z-index:3;background:var(--warn-bg);color:var(--warn-ink);border-radius:var(--rad-c);padding:var(--s3);margin:var(--s2) 0 var(--s3);font:500 15px/1.45 var(--fb);box-shadow:var(--shadow)}
+.pinned .bk-eyebrow{display:block;color:var(--warn-ink);margin:0 0 4px}
+.newdiv{display:flex;align-items:center;gap:8px;margin:10px 0;color:var(--accent);font:600 13px var(--fb)}
+.newdiv::before,.newdiv::after{content:"";flex:1;height:1px;background:currentColor;opacity:.5}
+.msg .who b{font-weight:600;color:var(--ink)}
+.msg .who span{color:var(--muted)}
+.msg.cont{margin-top:-6px}
+.composer .camb{flex:0 0 auto;width:var(--tap)!important;height:var(--tap)!important}
+.composer .send{min-height:var(--tap);min-width:64px}
+.composer .bk-hint{margin:0 0 6px;text-align:center}
+.composer input:disabled,.composer button:disabled{opacity:.6}
+.pwhead .bk-btn{display:flex;align-items:center;justify-content:center;cursor:pointer}
+.reacts button{min-height:36px;min-width:44px}
+/* Notifications */
+.aswitches{border-top:1px solid var(--bd)}
+.aswitch{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);min-height:64px;padding:var(--s2) 0;border-bottom:1px solid var(--bd);cursor:pointer}
+.aswitch b{display:block;font:600 16px/1.3 var(--fb)}
+.aswitch small{display:block;color:var(--muted);font:400 14px/1.4 var(--fb);margin-top:2px}
+.aswitch input{position:absolute;opacity:0;width:52px;height:44px;margin:0}
+.aswitch{position:relative}
+.aswitch i{flex:0 0 auto;position:relative;width:48px;height:28px;border-radius:999px;background:var(--bd);transition:background .15s}
+.aswitch i::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);transition:transform .15s}
+.aswitch input:checked + i{background:var(--navy)}
+.aswitch input:checked + i::after{transform:translateX(20px)}
+.aswitch input:focus-visible + i{outline:3px solid var(--accent);outline-offset:2px}
+.aswitch input{right:0}
+.dstate{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad-c);padding:var(--s3);margin:var(--s3) 0}
+.dstate h3{margin-top:0}
+.dstate dl{margin:0}.dstate dl div{display:flex;justify-content:space-between;align-items:center;gap:var(--s2);flex-wrap:wrap;padding:6px 0;border-bottom:1px solid var(--bd)}
+.dstate dt{font:500 14.5px var(--fb)}.dstate dd{margin:0}
+/* Director workspace */
+.dws-top{margin:var(--s2) 0 0}
+.dws-tabs button{min-width:0;flex:1 1 40%}
+.dstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s2);margin:0}
+.dstats dt{font:500 13px/1.3 var(--fb);color:var(--muted)}.dstats dd{margin:2px 0 0;font:600 20px/1.2 var(--fb);color:var(--ink)}
+.bk-dz summary{color:var(--danger)}
+.lookbar{position:sticky;top:0;z-index:4;background:var(--paper);padding:var(--s2) 0}
+.lookbar button:disabled{opacity:.5}
+.lookprev{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad);padding:var(--s4)}
+.themes button,.seg button{min-height:var(--tap)}
+.mvcmp{display:grid;grid-template-columns:1fr 1fr;gap:var(--s2);margin:var(--s3) 0}
+.mvcmp div{border:1px solid var(--bd);border-radius:var(--rad-c);padding:var(--s3);background:var(--card);display:flex;flex-direction:column;gap:2px;min-width:0}
+.mvcmp div:last-child{border-color:var(--navy)}
+.mvcmp b{font:600 15px/1.3 var(--fb);overflow-wrap:anywhere}.mvcmp span:not(.bk-eyebrow){color:var(--muted);font-size:14px}
+.bk-btn:disabled{opacity:.5;cursor:default}
+/* Share */
+.dest{border:1px solid var(--bd);border-radius:var(--rad-c);background:var(--card);padding:var(--s3) var(--s4);margin:var(--s3) 0}
+.dest-h{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);flex-wrap:wrap}
+.dest-h h3{margin:0}
+.dest code{display:block;overflow-wrap:anywhere;font-size:13px;color:var(--muted);margin:var(--s2) 0}
+.dest .qrs{justify-content:flex-start}
+.bk-actions a.btn{text-decoration:none;display:inline-flex;align-items:center;min-height:var(--tap)}
+/* Scoring */
+.sc2 td.na input{background:transparent;border-style:dashed;opacity:.55}
+.bk-hist{margin:0;padding-left:20px}.bk-hist li{margin:0 0 var(--s2)}.bk-hist span{display:block;color:var(--muted);font-size:14px}
+.wtag + .wtag{margin-left:4px}
+/* TV */
+.tv2 h2{font-size:30px!important;margin:12px 0 10px}
+.tvcourts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tvc2{border:2px solid var(--bd);border-radius:var(--rad-c);padding:14px 16px;background:var(--card);min-width:0}
+.tvc2.busy{border-color:var(--navy)}
+.tvc2-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.tvc2-h b{font:700 26px/1.2 var(--fb)}
+.tvc2 .st{font-size:17px}
+.tvc2-t{font:600 24px/1.3 var(--fb);margin:8px 0 2px;overflow-wrap:anywhere}
+.tvc2-s,.tvc2-n{font:400 19px/1.35 var(--fb);color:var(--muted);margin:4px 0 0}
+.tv2 .tvrow{font-size:21px;line-height:1.35;padding:10px 0;border-bottom:1px solid var(--bd)}
+.tv2 .tvrow b{font-size:20px}.tv2 .tvrow span{display:block;color:var(--muted);font-size:17px}
+.tv2 .tvsc{display:block;font:700 24px var(--fb)}
+.tv2 .tvdraw{zoom:1.3;overflow:hidden}
+.tv2 .tvgrid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:24px;overflow:hidden}
+@media (max-width:900px){.tv2 .tvgrid{grid-template-columns:1fr}}
+.tvcourts .tvmore{grid-column:1/-1;margin:0}
+.tvempty,.tvmore{font-size:20px;color:var(--muted)}
+.tv2 .tvh span{font-size:20px}
+/* Landing */
+.land2{max-width:560px;margin:0 auto;padding:max(var(--s5),env(safe-area-inset-top)) var(--s4) calc(var(--s5) + env(safe-area-inset-bottom))}
+.land2-hero{text-align:center}.land2-hero img{width:140px;height:auto}.land2-hero p{margin:var(--s2) 0 0;color:var(--muted);font:400 16px/1.45 var(--fb)}
+.land2 .bk-feature h1{color:var(--onp);margin:0 0 var(--s2);font:600 24px/1.2 var(--fd)}
+.land2 .bk-feature .bk-rules{color:color-mix(in srgb,var(--onp) 88%,transparent)}
+.joinrow{display:flex;gap:var(--s2)}.joinrow input{flex:1;min-width:0;text-transform:uppercase;letter-spacing:.12em}
+.joinrow .btn{min-height:48px;min-width:88px;background:var(--onp);color:var(--navy);border-color:var(--onp)}
+.bk-loading{text-align:center;padding:80px 0;color:var(--muted);font:500 17px var(--fb)}
+.bk-loading img{animation:bkpulse 1.4s ease-in-out infinite}
+@keyframes bkpulse{50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.bk-loading img{animation:none}}
+.bk-inline{min-height:var(--tap)}
+@media (min-width:900px){.tvcourts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:360px){.dstats dd{font-size:17px}.mvcmp{grid-template-columns:1fr}}
+main input[type=text],main input[type=number],main input[type=search],main input:not([type]){min-height:var(--tap)}
+@media print{.noprint,.bk-nav,.tabs{display:none!important}.psec{break-after:page}.psec:last-child{break-after:auto}}
 </style>
 </head>
 <body>
@@ -1474,7 +1606,7 @@ const FONTSETS = {
 const hex2rgb = h => { h = String(h || '#888').replace('#',''); if (h.length === 3) h = h.split('').map(c => c + c).join(''); return [0,2,4].map(i => parseInt(h.substr(i,2),16) || 0) };
 const rgb2hex = a => '#' + a.map(x => Math.max(0, Math.min(255, Math.round(x))).toString(16).padStart(2,'0')).join('');
 const mix = (a, b, t) => { const x = hex2rgb(a), y = hex2rgb(b); return rgb2hex(x.map((v,i) => v + (y[i]-v)*t)) };
-function styleOf(){ const d = {preset:'courtside', fonts:'bracketly', corners:'round', borders:'bold', density:'comfortable'}; if (!TRIP || !cfg()) return d; return Object.assign(d, cfg().style || {}) }
+function styleOf(){ const d = {preset:'courtside', fonts:'bracketly', corners:'round', borders:'bold', density:'comfortable'}; if (!TRIP || !cfg()) return d; return Object.assign(d, view.styleDraft || cfg().style || {}) }
 function palette(){
   if (!TRIP || !cfg()) return Object.assign({}, THEMES.courtside);
   const st = styleOf(), base = THEMES[st.preset] || THEMES.courtside;
@@ -4692,30 +4824,6 @@ async function pushEnable(){
 }
 async function pushDisable(){ const ep = pushEndpoint(); LS.del(TK('push')); if (ep) try{ await Dir.pushDelete(ep) }catch(e){} }
 function pushSyncPrefs(){ const ep = pushEndpoint(); if (ep && Dir.pushReady()) Dir.pushPrefs(ep, view.me === GUEST ? null : view.me, pushPrefs()).catch(() => {}) }
-function alertsSheet(){
-  const perm = 'Notification' in window ? Notification.permission : 'unsupported', standalone = isStandalone();
-  const chk = (f, label, sub) => `<label class="aset"><input type="checkbox" data-chg="alertset" data-f="${f}" ${ALERTS[f] ? 'checked' : ''}><span><b>${label}</b><small>${sub}</small></span></label>`;
-  const fl = following().filter(P);
-  return `<div class="modal" data-act="closemodal"><div class="sheet" data-stop="1">
-    <div class="row" style="justify-content:space-between"><h2 style="margin:0">Alerts</h2><button class="btn alt sm" data-act="closemodal">Done</button></div>
-    <p class="small muted">Set on this phone only.${view.me && view.me !== GUEST ? '' : ' Pick your name first to get alerts about your own matches.'}</p>
-    ${chk('mine', 'My matches', 'When you\'re up next, on court, moved, and your results')}
-    ${chk('remind', 'Starts-soon reminders', 'About 20 minutes before each of your matches')}
-    ${chk('follow', 'Players I follow', fl.length ? 'Results for ' + fl.map(p => p.name).join(', ') : 'Tap a player\'s name, then Follow')}
-    ${chk('all', 'Every result', 'Every score in the tournament')}
-    ${chk('draws', 'Draws and announcements', 'New draws and messages from the director')}
-    ${betsOn() ? chk('bets', 'Bets', 'Offers, takers and payouts') : ''}
-    ${chk('chat', 'Chat messages', 'New messages and photos')}
-    ${Dir.pushReady() ? `<div class="card" style="margin-top:12px"><b>Alerts when the app is closed</b>
-      <p class="small" style="margin:4px 0 8px">${pushOn() ? 'On. Results, draws, bets and chat come to your lock screen even with Bracketly closed.' : isIOS() && !standalone ? 'On iPhone this works from the home-screen app: tap Share, then Add to Home Screen, open it from there, and turn this on.' : 'Get lock-screen alerts even when Bracketly is closed.'}</p>
-      ${pushOn() ? '<button class="btn alt sm" data-act="pushoff">Turn off</button>' : view.pushBusy ? '<button class="btn sm" disabled>Setting up…</button>' : '<button class="btn sm" data-act="pushon">Turn on</button>'}
-      ${view.pushErr ? `<p class="small" style="color:var(--red);margin:8px 0 0"><b>Didn't work:</b> ${esc(view.pushErr)}</p>` : ''}</div>` : ''}
-    ${pushOn() ? '' : `<div class="card" style="margin-top:8px"><b>Lock-screen notifications</b>
-      <p class="small" style="margin:4px 0 8px">${perm === 'granted' && ALERTS.notify ? 'On while Bracketly is open in the background.' : !standalone && isIOS() ? 'On iPhone, add Bracketly to your home screen first, then turn this on.' : perm === 'denied' ? 'Blocked in this browser\'s settings.' : 'Show alerts on your lock screen while Bracketly is open in the background.'}</p>
-      ${perm !== 'denied' && perm !== 'unsupported' && !(perm === 'granted' && ALERTS.notify) ? '<button class="btn sm" data-act="notifyon">Turn on</button>' : perm === 'granted' && ALERTS.notify ? '<button class="btn alt sm" data-act="notifyoff">Turn off</button>' : ''}</div>`}
-    ${perm === 'granted' ? '<button class="btn alt sm" style="margin-top:6px" data-act="alerttest">Send a test</button>' : ''}
-  </div></div>`;
-}
 /* Text a result in plain words, saved with it so the push function can send it as-is */
 function resultText(m, w){ const l = w === 'team1' || w === 'A' ? 'team2' : 'team1', ws = w === 'A' ? 'team1' : w === 'B' ? 'team2' : w; return `${sideLabel(m, ws, true)} d. ${sideLabel(m, l, true)}` }
 
@@ -4736,12 +4844,6 @@ function photoStrip(){
   <div class="pstrip">${ph.map(p => `<button data-act="photoopen" data-k="${esc(p.k)}"><img src="${esc(p.url)}" alt="${esc(p.caption || 'Photo')}" loading="lazy"></button>`).join('')}</div>`;
 }
 function chatSeg(){ return `<div class="seg chatseg">${[['chat', 'Chat'], ['photos', `Photos${photos().length ? ' · ' + photos().length : ''}`]].map(([k, l]) => `<button class="${(view.ctab || 'chat') === k ? 'on' : ''}" data-act="ctab" data-v="${k}">${l}</button>`).join('')}</div>` }
-function photoWall(){
-  const ph = photos(), me = view.me;
-  return `<div class="pwhead"><label class="btn gold">${view.photoBusy ? 'Adding…' : '+ Add photos'}<input type="file" accept="image/*" multiple hidden data-chg="photoadd" ${view.photoBusy ? 'disabled' : ''}></label>
-    <span class="small muted">${ph.length ? `${ph.length} photo${ph.length === 1 ? '' : 's'} from ${new Set(ph.map(photoBy)).size} ${new Set(ph.map(photoBy)).size === 1 ? 'person' : 'people'}` : 'Courtside shots, team photos, the trophy. Photos sent in chat land here too.'}</span></div>
-  ${ph.length ? `<div class="pwall">${ph.map(p => `<button class="pw" data-act="photoopen" data-k="${esc(p.k)}"><img src="${esc(p.url)}" alt="${esc(p.caption || 'Photo')}" loading="lazy">${(p.likes || []).length ? `<span class="pl">♥ ${(p.likes || []).length}</span>` : ''}</button>`).join('')}</div>` : '<div class="empty-state">No photos yet.</div>'}`;
-}
 function photoSheet(){
   const ph = photos(), i = ph.findIndex(p => p.k === view.photo), p = ph[i]; if (!p) return '';
   const me = view.me, liked = (p.likes || []).includes(me), mine = p.by && p.by === me;
@@ -4759,15 +4861,6 @@ function photoSheet(){
       <button class="btn alt sm" data-act="closemodal">Close</button></div>
   </div></div>`;
 }
-async function addPhotos(files){
-  let n = 0;
-  for (const f of [...files].slice(0, 20)){
-    try{ const url = await saveImg(await readImg(f, 1600, false), 'jpg'); Store.set('photo:' + uid(), {url, by:view.me || GUEST, name:view.me === GUEST ? 'Spectator' : undefined, ts:Date.now(), caption:'', likes:[]}); n++ }
-    catch(e){ console.warn('photo', e) }
-  }
-  return n;
-}
-
 /* ================= Doubles team levels ================= */
 // Men's and women's teams pick a level (each player is rated at that level);
 // mixed teams pick a combined level. Pickleball keeps typed ratings.
@@ -4908,12 +5001,13 @@ function whenFull(m){ const t = slotParts(m); return t ? `${t.day} · ${t.time} 
 /* Text status for a match, derived from the existing matchStatus(). Null = nothing to add beyond the time. */
 function statusInfo(m){
   const st = matchStatus(m), r = resOf(m.id) || {};
-  if (st === 'done') return {cls:'ok', label:'Final', note:r.note || ''};
+  if (st === 'done') return {cls:'ok', label:r.corrected ? 'Final · corrected' : 'Final', note:r.note || ''};
   if (st === 'bye') return {cls:'neutral', label:'Bye'};
   if (st === 'live') return {cls:'live', label:'On court'};
   if (st === 'now') return {cls:'live', label:'Scheduled now'};
   if (st === 'late') return bothKnown(m) ? {cls:'warn', label:'Awaiting result'} : null;
   if (st === 'unscheduled') return {cls:'neutral', label:'Time to be set'};
+  const mv = movedInfo(m); if (mv) return {cls:'warn', label:mv.label, note:mv.was ? `Was ${mv.was}` : ''};
   return null;
 }
 const stChip = s => s ? `<span class="st ${s.cls}">${s.cls === 'live' ? '<i class="st-dot" aria-hidden="true"></i>' : ''}${esc(s.label)}</span>` : '';
@@ -5067,21 +5161,221 @@ function weekendList(){
   let last = '';
   return `<section class="bk-sec" aria-labelledby="wk-h"><h2 class="bk-h2" id="wk-h">The weekend</h2><div class="wk">${items.map(x => { const head = x.date !== last ? `<div class="wkday">${esc(dayLabel(x.date))}</div>` : ''; last = x.date; return head + `<div class="wki ${x.tennis ? 'tennis' : ''}"><b>${esc(fmtClock(x.time) || 'Time to be set')}</b><span><span class="t">${esc(x.title)}</span>${x.place ? `<span class="n">${mapLink(x.place)}</span>` : ''}${x.notes ? `<span class="n">${esc(x.notes)}</span>` : ''}</span></div>` }).join('')}</div></section>`;
 }
+/* ================= Phase 2: courts, players, schedule, chat, notifications ================= */
+/* Placement changes recorded by "Move match" (Phase 3). Older matches have no record, so no label. */
+function movedInfo(m){
+  const mv = m && m.moved; if (!mv || !mv.from || state.results[m.id]) return null;
+  const tChg = mv.from.when !== m.when, cChg = mv.from.court !== m.court;
+  if (!tChg && !cChg) return null;
+  const was = [tChg && mv.from.when ? slotKeyLabel(mv.from.when) : '', cChg && mv.from.court ? courtName(mv.from.court) : ''].filter(Boolean).join(' · ');
+  return {label:tChg && cChg ? 'Time and court changed' : tChg ? 'Time changed' : 'Court changed', was};
+}
+function slotKeyLabel(k){ const i = SLOT_KEYS.indexOf(k); if (i >= 0 && TIME_SLOTS[i]) return `${TIME_SLOTS[i][0].split(',')[0]} ${TIME_SLOTS[i][1]}`; const d = String(k || ''); return d ? `${dayLabel(d.slice(0, 10))} ${fmtClock(d.slice(11))}` : '' }
+const movedNote = m => { const x = movedInfo(m); return x ? `<p class="bk-note warn"><b>${esc(x.label)}.</b>${x.was ? ` Was ${esc(x.was)}.` : ''}</p>` : '' };
+
+/* ---------- Courts ---------- */
+function courtsView(){
+  const c = cfg() || {}, n = (c.courts || []).length;
+  if (!n) return `${pageHead('Courts')}<div class="bk-feature quiet"><h2>No courts set up yet</h2><p>The director adds courts during setup.</p></div>`;
+  const tiles = courtBoard(), anyPub = allMatches(true).length > 0;
+  const now = new Date(), todayK = dayKey(isoDay(now));
+  const days = dayRows().filter(d => d.enabled), isDay = days.some(d => d.day === todayK);
+  const f = view.cf || 'all';
+  const rows = tiles.filter(t => f === 'all' || (f === 'playing' ? !!t.cur : !t.cur && !!t.nxt));
+  const nPlay = tiles.filter(t => t.cur).length;
+  const ctx = isDay ? `Today, ${now.toLocaleDateString('en-US', {weekday:'long', month:'short', day:'numeric'})} · updated ${now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})}` : days.length ? `Tournament days: ${days.map(d => d.day.split(',')[0]).join(', ')}. No play today.` : '';
+  const teams = m => `${esc(sideLabel(m, 'team1', true))} <span class="vs">vs</span> ${esc(sideLabel(m, 'team2', true))}`;
+  const when = m => { const t = slotParts(m); return !t ? 'Time to be set' : (t.day === todayK ? t.time : `${t.dayShort} ${t.time}`) };
+  const row = t => {
+    const ev = t.cur ? findEvent(t.cur.eventId) || {} : null, st = t.cur ? matchStatus(t.cur) : '';
+    const chip = t.cur ? (st === 'live' ? {cls:'live', label:'Match in progress'} : {cls:'live', label:'Scheduled now'}) : {cls:'neutral', label:'No match in progress'};
+    return `<li class="crow ${t.cur ? 'busy' : ''}"><div class="crow-h"><h2>${esc(courtName(t.c))}</h2>${stChip(chip)}</div>
+      ${t.cur ? `<button class="crow-m" data-act="openmatch" data-id="${esc(t.cur.id)}"><span class="crow-l">${st === 'live' ? 'Now' : `Due ${esc(when(t.cur))}`} · ${esc(ev.name || '')} · ${esc(roundName(t.cur))}</span><span class="crow-t">${teams(t.cur)}</span></button>` : ''}
+      ${t.nxt ? `<button class="crow-m nx" data-act="openmatch" data-id="${esc(t.nxt.id)}"><span class="crow-l">Next assignment · ${esc(when(t.nxt))}</span><span class="crow-t">${teams(t.nxt)}</span></button>` : `<p class="crow-none">${anyPub ? 'No more matches assigned here.' : 'No matches assigned yet.'}</p>`}
+    </li>`;
+  };
+  return `${pageHead('Courts')}<p class="bk-meta">${esc(ctx)}</p>
+  ${!anyPub ? '<p class="bk-note">Court assignments show here once the director publishes the draws.</p>' : ''}
+  <div class="seg2" role="group" aria-label="Show courts">${[['all', `All ${n}`], ['playing', `Playing ${nPlay}`], ['upcoming', 'Upcoming']].map(([k, l]) => `<button data-act="cfilter" data-v="${k}" aria-pressed="${f === k}">${l}</button>`).join('')}</div>
+  ${rows.length ? `<ul class="crows">${rows.map(row).join('')}</ul>` : `<p class="bk-empty">${f === 'playing' ? 'No match is in progress right now.' : 'No courts with an upcoming assignment and nothing on now.'}</p>`}
+  <p class="bk-hint">"No match in progress" only means Bracketly has nothing on that court right now. It doesn't mean the court is free to book. Times come from the published schedule; "Match in progress" shows once someone marks the match on court.</p>
+  ${(() => { const r = recentResults(5); return r.length ? `<section class="bk-sec"><h2 class="bk-h2">Just finished</h2>${r.map(m => matchRow(m)).join('')}</section>` : '' })()}`;
+}
+
+/* ---------- Players directory and profile ---------- */
+function playersView(){
+  syncEngine();
+  const all = players(), q = normName(view.q || ''), fe = view.pev || '', fr = view.prt || '';
+  const evs = state.events.filter(e => (e.entrants || []).length || (e.pairs || []).length || e.clubCup);
+  const ratings = [...new Set(all.map(p => p.rating).filter(r => r != null && r !== '').map(Number))].sort((a, b) => a - b);
+  const me = view.me, fl = following();
+  const pl = all.filter(p => (!q || normName(p.name).includes(q)) && (!fe || eventsOfPlayer(p.id).some(e => e.id === fe)) && (!fr || String(Number(p.rating)) === fr)).sort((a, b) => a.name.localeCompare(b.name));
+  const opt = (v, l, cur) => `<option value="${esc(v)}" ${String(cur) === String(v) ? 'selected' : ''}>${esc(l)}</option>`;
+  return `${pageHead('Players')}<p class="bk-meta">${all.length} player${all.length === 1 ? '' : 's'} entered</p>
+  <label class="sr" for="plq">Search players</label><input id="plq" class="bk-input" type="search" placeholder="Search by name" value="${esc(view.q || '')}" autocomplete="off">
+  <div class="bk-filters">
+    <label><span>Division</span><select data-chg="pfilter" data-f="pev">${opt('', 'All divisions', fe)}${evs.map(e => opt(e.id, e.name, fe)).join('')}</select></label>
+    ${ratings.length > 1 ? `<label><span>${esc(sport().rating)}</span><select data-chg="pfilter" data-f="prt">${opt('', 'Any rating', fr)}${ratings.map(r => opt(String(r), fmtRating(r), fr)).join('')}</select></label>` : ''}
+  </div>
+  <p class="bk-hint" role="status">${pl.length === all.length ? `Showing all ${all.length}` : `Showing ${pl.length} of ${all.length}`}</p>
+  ${pl.length ? `<ul class="bk-rows plrows">${pl.map(p => { const pe = eventsOfPlayer(p.id); return `<li><button class="bk-row" data-act="openplayer" data-id="${esc(p.id)}"><span><b>${esc(p.name)}${p.id === me ? ' <span class="st neutral">You</span>' : fl.includes(p.id) ? ' <span class="st neutral">Following</span>' : ''}</b><span>${[p.rating != null && p.rating !== '' ? sport().rating + ' ' + fmtRating(p.rating) : '', pe.map(e => e.name).join(', ')].filter(Boolean).map(esc).join(' · ') || 'Not in a division yet'}</span></span>${CHEV}</button></li>` }).join('')}</ul>` : '<p class="bk-empty">No players match. Try a different name or clear the filters.</p>'}`;
+}
+function playerSheet(){
+  syncEngine();
+  const p = P(view.pid); if (!p) return '';
+  const ms = myMatches(p.id).sort((a, b) => (a.slotIdx ?? 1e6) - (b.slotIdx ?? 1e6));
+  const done = ms.filter(m => state.results[m.id] && resOf(m.id)), open = ms.filter(m => !state.results[m.id]);
+  const nxt = open.find(m => TIME_SLOTS[m.slotIdx] && bothKnown(m)) || open[0];
+  const rest = open.filter(m => m !== nxt), n = pname(p.id);
+  const wl = m => { const w = winnerSlot(m); if (!w) return ''; const mine = (sideNames(m, w) || []).includes(n); return `<span class="st ${mine ? 'ok' : 'neutral'}">${mine ? 'Won' : 'Lost'}</span>` };
+  const fol = following().includes(p.id), isMe = view.me === p.id, pe = eventsOfPlayer(p.id);
+  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="pl-h">
+    <div class="sh-top"><p class="bk-eyebrow">Player profile</p><button class="hclose" data-act="closemodal" aria-label="Close player profile"><span aria-hidden="true">×</span></button></div>
+    <h2 class="sh-h" id="pl-h">${esc(p.name)}${isMe ? ' <span class="st neutral">You</span>' : ''}</h2>
+    <p class="bk-meta">${[p.rating != null && p.rating !== '' ? sport().rating + ' ' + fmtRating(p.rating) : '', p.club, pe.map(e => e.name).join(', ')].filter(Boolean).map(esc).join(' · ')}</p>
+    ${isMe ? '' : `<button class="bk-btn ${fol ? 'alt' : ''}" data-act="follow" data-id="${esc(p.id)}" aria-pressed="${fol}">${fol ? 'Following · tap to stop' : 'Follow'}</button><p class="bk-hint">Following shows their results in your alerts on this device. They aren't told.</p>`}
+    <section class="bk-sec"><h3 class="bk-h2">Next match</h3>${nxt ? matchRow(nxt) : `<p class="bk-empty">${done.length ? 'No more matches scheduled.' : 'No matches scheduled yet.'}</p>`}</section>
+    ${rest.length ? `<section class="bk-sec"><h3 class="bk-h2">Later</h3>${rest.map(m => matchRow(m)).join('')}</section>` : ''}
+    <section class="bk-sec"><h3 class="bk-h2">Results</h3>${done.length ? done.map(m => `<div class="plres">${wl(m)}${matchRow(m)}</div>`).join('') : '<p class="bk-empty">No results yet.</p>'}</section>
+    ${isMe ? '' : `<div class="bk-sec claim"><h3 class="bk-h2">Is this you?</h3><p class="bk-rules">Using this name on this device shows your matches first and turns on alerts about them. It doesn't sign you in or prove who you are.</p><button class="btn alt" data-act="pickme" data-id="${esc(p.id)}">Use this name on this device</button></div>`}
+  </div></div>`;
+}
+
+/* ---------- Schedule: agenda first, grid as an alternate ---------- */
 function scheduleView(){
   syncEngine();
   const days = dayRows().filter(d => d.enabled);
-  const pub = state.events.some(e => (e.published || view.admin) && e.matches.length);
-  if (!pub) return `${pageHead('Schedule')}<div class="bk-feature quiet"><h2>Match times aren't out yet</h2><p>Match times appear here once the director publishes the draws.</p></div>${weekendList()}`;
+  const pubEvs = state.events.filter(e => (e.published || view.admin) && e.matches.length);
+  if (!pubEvs.length) return `${pageHead('Schedule')}<div class="bk-feature quiet"><h2>Match times aren't out yet</h2><p>Match times appear here once the director publishes the draws.</p></div>${weekendList()}`;
   const todayKey = dayKey(isoDay(new Date()));
   const dayK = view.day || (days.find(d => d.day === todayKey) || days[0] || {}).day;
-  const ms = allMatches(true).filter(m => TIME_SLOTS[m.slotIdx] && TIME_SLOTS[m.slotIdx][0] === dayK).sort((a, b) => a.slotIdx - b.slotIdx || (a.court || 0) - (b.court || 0));
-  const groups = []; ms.forEach(m => { const t = TIME_SLOTS[m.slotIdx][1]; const g = groups[groups.length - 1]; if (g && g.t === t) g.ms.push(m); else groups.push({t, ms:[m]}) });
+  const dRow = days.find(d => d.day === dayK) || {};
+  const sf = view.sf || {}, me = view.me && view.me !== GUEST ? view.me : null, myN = me ? pname(me) : null;
+  const courts = (cfg() || {}).courts || [];
+  let ms = allMatches(true).filter(m => TIME_SLOTS[m.slotIdx] && TIME_SLOTS[m.slotIdx][0] === dayK);
+  if (sf.ev) ms = ms.filter(m => m.eventId === sf.ev);
+  if (sf.court) ms = ms.filter(m => String(m.court) === String(sf.court));
+  if (sf.mine && myN){ const mm = new Set(myMatches(me).map(x => x.id)); ms = ms.filter(m => mm.has(m.id)) }
+  ms.sort((a, b) => a.slotIdx - b.slotIdx || (a.court || 0) - (b.court || 0));
+  const social = sf.ev || sf.court || sf.mine ? [] : extras().filter(x => x.date === dRow.date);
+  const items = ms.map(m => ({t:SLOT_KEYS[m.slotIdx].slice(11), m})).concat(social.map(x => ({t:x.time || '99:99', x})));
+  items.sort((a, b) => a.t.localeCompare(b.t) || (a.x ? -1 : 0) - (b.x ? -1 : 0));
+  const groups = []; items.forEach(it => { const g = groups[groups.length - 1]; if (g && g.t === it.t) g.items.push(it); else groups.push({t:it.t, items:[it]}) });
+  const grid = view.sgrid;
+  const opt = (v, l, cur) => `<option value="${esc(v)}" ${String(cur || '') === String(v) ? 'selected' : ''}>${esc(l)}</option>`;
   const uns = allMatches(true).filter(m => !TIME_SLOTS[m.slotIdx] && !state.results[m.id]).length;
+  const extra = x => `<div class="agx"><span class="st neutral">Club event</span><b>${esc(x.title)}</b>${x.place ? `<span>${placeLink(x.place)}</span>` : ''}${x.notes ? `<span>${esc(x.notes)}</span>` : ''}</div>`;
+  const filtered = sf.ev || sf.court || sf.mine;
   return `${pageHead('Schedule')}
-  ${days.length > 1 ? `<div class="seg2" role="group" aria-label="Day">${days.map(d => `<button data-act="day" data-v="${esc(d.day)}" aria-pressed="${d.day === dayK}">${esc(d.day)}</button>`).join('')}</div>` : `<p class="bk-meta">${esc(dayK || '')}</p>`}
-  ${groups.length ? groups.map(g => `<h2 class="bk-group">${esc(g.t)}</h2>${g.ms.map(m => matchRow(m, {noTime:true})).join('')}`).join('') : '<p class="bk-empty">No matches scheduled this day.</p>'}
+  ${days.length > 1 ? `<div class="seg2 days" role="group" aria-label="Day">${days.map(d => `<button data-act="day" data-v="${esc(d.day)}" aria-pressed="${d.day === dayK}">${esc(d.day.split(',')[0])}<small>${esc(d.day.split(',').slice(1).join(',').trim())}</small></button>`).join('')}</div>` : `<p class="bk-meta">${esc(dayK || '')}</p>`}
+  <div class="bk-filters">
+    <label><span>Event</span><select data-chg="sfilter" data-f="ev">${opt('', 'All events', sf.ev)}${pubEvs.map(e => opt(e.id, e.name, sf.ev)).join('')}</select></label>
+    ${courts.length > 1 ? `<label><span>Court</span><select data-chg="sfilter" data-f="court">${opt('', 'All courts', sf.court)}${courts.map((c, i) => opt(i + 1, courtName(i + 1), sf.court)).join('')}</select></label>` : ''}
+  </div>
+  <div class="bk-actions">${myN ? `<button class="btn alt" data-act="sfmine" aria-pressed="${!!sf.mine}">${sf.mine ? '✓ ' : ''}My matches only</button>` : ''}<button class="btn alt" data-act="sgrid" aria-pressed="${!!grid}">${grid ? 'Agenda view' : 'Grid view'}</button>${filtered ? '<button class="btn alt" data-act="sfclear">Clear filters</button>' : ''}</div>
+  ${grid ? schedGridView(dayK, ms) : groups.length ? groups.map(g => `<h2 class="bk-group">${esc(g.t === '99:99' ? 'Time to be set' : fmtClock(g.t))}</h2>${g.items.map(it => it.m ? matchRow(it.m, {noTime:true}) : extra(it.x)).join('')}`).join('') : `<p class="bk-empty">${filtered ? 'No matches match these filters on this day.' : 'No matches scheduled this day.'}</p>`}
   ${uns ? `<p class="bk-note warn">${uns} match${uns === 1 ? '' : 'es'} still waiting for a time.</p>` : ''}
   ${weekendList()}`;
+}
+function schedGridView(dayK, ms){
+  const slots = [...new Set(ms.map(m => m.slotIdx))].sort((a, b) => a - b);
+  const cs = [...new Set(ms.map(m => m.court))].sort((a, b) => a - b);
+  if (!slots.length) return '<p class="bk-empty">No matches scheduled this day.</p>';
+  return `<div class="bk-scrollx sgrid" tabindex="0" role="region" aria-label="Schedule grid, ${esc(dayK)}"><table><caption class="sr">Matches by time and court</caption><thead><tr><th scope="col">Time</th>${cs.map(c => `<th scope="col">${esc(courtName(c))}</th>`).join('')}</tr></thead><tbody>
+  ${slots.map(s => `<tr><th scope="row">${esc(TIME_SLOTS[s][1])}</th>${cs.map(c => { const m = ms.find(x => x.slotIdx === s && x.court === c); if (!m) return '<td class="empty"><span class="sr">No match</span></td>'; const si = statusInfo(m); return `<td><button data-act="openmatch" data-id="${esc(m.id)}"><small>${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundName(m))}</small><span>${esc(sideLabel(m, 'team1', true))}</span><span>${esc(sideLabel(m, 'team2', true))}</span>${si ? `<small>${esc(si.label)}</small>` : ''}</button></td>` }).join('')}</tr>`).join('')}
+  </tbody></table></div>`;
+}
+/* Internal places (a court, "the clubhouse") map to the venue address; real addresses map to themselves. */
+function placeLink(place){
+  const w = welcome(), courts = ((cfg() || {}).courts || []).map((c, i) => normName(courtName(i + 1)));
+  const internal = courts.includes(normName(place)) || !/\d/.test(place);
+  if (internal && w.address) return `${esc(place)} · <a href="https://maps.google.com/?q=${encodeURIComponent(w.address)}" target="_blank" rel="noopener">Venue map<span class="sr"> (opens in a new tab)</span></a>`;
+  if (internal) return esc(place);
+  return mapLink(place);
+}
+
+/* ---------- Chat & photos ---------- */
+function chatView(){
+  if (!view.me) return '';
+
+  const msgs = Store.keys('chat:').map(k => Object.assign({k}, Store.get(k))).filter(m => m.ts).sort((a, b) => a.ts - b.ts).slice(-250);
+  const anns = msgs.filter(m => m.ann), pin = anns[anns.length - 1];
+  const mark = view.chatMark || 0, me = view.me;
+  let prev = null, divided = false;
+  const name = m => { const p = P(m.by); return m.by === me ? 'You' : p ? p.name : (m.name || 'Spectator') };
+  const list = msgs.map(m => {
+    let out = '';
+    if (!divided && mark && m.ts > mark && m.by !== me && !m.auto){ divided = true; out += '<div class="newdiv" role="separator"><span>New messages</span></div>'; prev = null }
+    if (m.auto){ prev = null; return out + `<div class="auto">${esc(m.text)}<span class="t">${timeLabel(m.ts)}</span></div>` }
+    if (m.ann){ prev = null; return out + `<div class="ann"><div class="lbl">Director announcement · ${timeLabel(m.ts)}</div>${fmtText(m.text)}</div>` }
+    const grouped = prev && prev.by === m.by && (prev.name || '') === (m.name || '') && m.ts - prev.ts < 5 * 60000;
+    prev = m;
+    const mine = m.by === me, rx = m.reactions || {}, used = REACTIONS.filter(e => (rx[e] || []).length);
+    return out + `<div class="msg ${mine ? 'mine' : ''} ${grouped ? 'cont' : ''}">${grouped ? '' : `<div class="who"><b>${esc(name(m))}</b> <span>${timeLabel(m.ts)}</span></div>`}
+      <div class="bub">${m.img ? `<img src="${esc(m.img)}" alt="Photo from ${esc(name(m))}">` : ''}${m.text ? fmtText(m.text) : ''}</div>
+      <div class="reacts">${used.map(e => `<button class="${rx[e].includes(me) ? 'on' : ''}" data-act="react" data-k="${m.k}" data-e="${e}" aria-pressed="${rx[e].includes(me)}">${e} ${rx[e].length}</button>`).join('')}${view.reactOpen === m.k ? REACTIONS.filter(e => !used.includes(e)).map(e => `<button data-act="react" data-k="${m.k}" data-e="${e}">${e}</button>`).join('') : `<button class="add" data-act="reactopen" data-k="${m.k}" aria-label="Add a reaction">+</button>`}</div></div>`;
+  }).join('');
+  return `${pin ? `<div class="pinned" role="note"><span class="bk-eyebrow">Pinned · director announcement · ${timeLabel(pin.ts)}</span>${fmtText(pin.text)}</div>` : ''}
+  ${view.chatErr ? `<p class="bk-note err" role="alert">${esc(view.chatErr)}</p>` : ''}
+  <div class="chat" aria-live="polite">${list || '<div class="bk-empty">No messages yet. Say hi, post a court change, or share a photo.</div>'}</div>`;
+}
+function composer(){
+  const busy = view.sending;
+  return `<div class="composer">${view.chatImg ? `<div class="preview"><img src="${view.chatImg}" alt="Photo to send"><button class="btn alt sm" data-act="rmimg">Remove photo</button></div>` : ''}
+    ${busy ? `<p class="bk-hint" role="status">${view.chatImg || busy === 'img' ? 'Uploading photo…' : 'Sending…'}</p>` : ''}
+    <div class="in"><label class="camb" title="Add a photo">${ICON.cam}<span class="sr">Add a photo</span><input type="file" accept="image/*" data-chg="chatimg" hidden ${busy ? 'disabled' : ''}></label>
+      <label class="sr" for="chatDraft">Message</label><input type="text" id="chatDraft" placeholder="Message the tournament" enterkeyhint="send" autocomplete="off" value="${esc(view.draft || '')}" ${busy ? 'disabled' : ''}><button class="send" data-act="send" ${busy ? 'disabled' : ''}>Send</button></div></div>`;
+}
+function photoWall(){
+  const ph = photos();
+  const prog = view.photoProg;
+  return `<div class="pwhead"><label class="bk-btn ${view.photoBusy ? 'alt' : ''}">${view.photoBusy ? (prog ? `Adding ${prog[0]} of ${prog[1]}…` : 'Adding…') : 'Add photos'}<input type="file" accept="image/*" multiple hidden data-chg="photoadd" ${view.photoBusy ? 'disabled' : ''}></label>
+    <p class="bk-hint" role="status">${view.photoErr ? esc(view.photoErr) : ph.length ? `${ph.length} photo${ph.length === 1 ? '' : 's'} from ${new Set(ph.map(photoBy)).size} ${new Set(ph.map(photoBy)).size === 1 ? 'person' : 'people'}. Photos sent in chat land here too.` : 'Courtside shots, team photos, the trophy. Photos sent in chat land here too.'}</p></div>
+  ${ph.length ? `<div class="pwall">${ph.map(p => `<button class="pw" data-act="photoopen" data-k="${esc(p.k)}" aria-label="Open photo from ${esc(photoBy(p))}${p.caption ? ': ' + esc(p.caption) : ''}"><img src="${esc(p.url)}" alt="" loading="lazy">${(p.likes || []).length ? `<span class="pl">♥ ${(p.likes || []).length}</span>` : ''}</button>`).join('')}</div>` : '<div class="bk-empty">No photos yet.</div>'}`;
+}
+async function addPhotos(files){
+  let n = 0, bad = 0; const list = [...files].slice(0, 20);
+  for (let i = 0; i < list.length; i++){
+    view.photoProg = [i + 1, list.length]; render();
+    try{ const url = await saveImg(await readImg(list[i], 1600, false), 'jpg'); Store.set('photo:' + uid(), {url, by:view.me || GUEST, name:view.me === GUEST ? 'Spectator' : undefined, ts:Date.now(), caption:'', likes:[]}); n++ }
+    catch(e){ console.warn('photo', e); bad++ }
+  }
+  view.photoProg = null; view.photoErr = bad ? `${bad} photo${bad === 1 ? '' : 's'} couldn't be added. Try a smaller image.` : null;
+  return n;
+}
+
+/* ---------- Notifications ---------- */
+function alertsSheet(){
+  const perm = 'Notification' in window ? Notification.permission : 'unsupported', standalone = isStandalone();
+  const sw = (f, label, sub) => `<label class="aswitch"><span><b>${label}</b><small>${sub}</small></span><input type="checkbox" role="switch" data-chg="alertset" data-f="${f}" ${ALERTS[f] ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
+  const fl = following().filter(P), me = view.me && view.me !== GUEST;
+  const permTxt = {granted:['ok', 'Allowed'], denied:['warn', 'Blocked in browser settings'], default:['neutral', 'Not asked yet'], unsupported:['neutral', 'Not supported in this browser']}[perm] || ['neutral', perm];
+  const showing = perm === 'granted' && ALERTS.notify;
+  const push = Dir.pushReady() ? (pushOn() ? ['ok', 'On'] : ['neutral', 'Off']) : ['neutral', 'Not available for this tournament'];
+  const grp = (title, inner) => `<section class="bk-sec"><h3 class="bk-h2">${title}</h3><div class="aswitches">${inner}</div></section>`;
+  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="al-h">
+    <div class="sh-top"><p class="bk-eyebrow">This device only</p><button class="hclose" data-act="closemodal" aria-label="Close notifications"><span aria-hidden="true">×</span></button></div>
+    <h2 class="sh-h" id="al-h">Notifications</h2>
+    <div class="dstate"><h3 class="bk-h2">Delivery on this device</h3>
+      <dl><div><dt>Browser permission</dt><dd>${stChip({cls:permTxt[0], label:permTxt[1]})}</dd></div>
+      <div><dt>While Bracketly is open</dt><dd>${stChip(showing ? {cls:'ok', label:'Showing alerts'} : {cls:'neutral', label:'In-app banners only'})}</dd></div>
+      <div><dt>When the app is closed</dt><dd>${stChip({cls:push[0], label:push[1]})}</dd></div></dl>
+      <p class="bk-rules">The switches below choose what Bracketly tells you about. Your phone only shows them outside the app if the browser allows it${Dir.pushReady() ? ', and only when the app is closed if closed-app alerts are on' : ''}.${!me ? ' Pick your name first to get alerts about your own matches.' : ''}</p>
+      <div class="bk-actions">
+        ${perm !== 'denied' && perm !== 'unsupported' && !showing && !(!standalone && isIOS()) ? '<button class="btn" data-act="notifyon">Allow notifications</button>' : ''}
+        ${showing ? '<button class="btn alt" data-act="notifyoff">Stop showing alerts</button>' : ''}
+        ${Dir.pushReady() ? (pushOn() ? '<button class="btn alt" data-act="pushoff">Turn off closed-app alerts</button>' : view.pushBusy ? '<button class="btn" disabled>Setting up…</button>' : (isIOS() && !standalone ? '' : '<button class="btn alt" data-act="pushon">Turn on closed-app alerts</button>')) : ''}
+        ${perm === 'granted' ? '<button class="btn alt" data-act="alerttest">Show a test alert</button>' : ''}
+      </div>
+      ${isIOS() && !standalone ? '<p class="bk-note">On iPhone, alerts outside the app need the home-screen app: tap Share, then Add to Home Screen, and open Bracketly from there.</p>' : ''}
+      ${perm === 'denied' ? '<p class="bk-note warn">This browser is blocking notifications. Change it in the browser\'s site settings; Bracketly can\'t ask again.</p>' : ''}
+      ${view.pushErr ? `<p class="bk-note err" role="alert"><b>Didn't work:</b> ${esc(view.pushErr)}</p>` : ''}
+    </div>
+    ${grp('My matches', sw('mine', 'My matches', me ? 'Up next, on court, moved, and your results' : 'Pick your name to use this') + sw('remind', 'Starts-soon reminders', 'About 20 minutes before each of your matches'))}
+    ${grp('Followed players', sw('follow', 'Players I follow', fl.length ? 'Results for ' + esc(fl.map(p => p.name).join(', ')) : 'Open a player and tap Follow'))}
+    ${grp('Tournament', sw('draws', 'Draws and announcements', 'New draws and messages from the director') + sw('all', 'Every result', 'Every score in the tournament'))}
+    ${grp('Social', sw('chat', 'Chat messages', 'New messages and photos') + (betsOn() ? sw('bets', 'Bets', 'Offers, takers and payouts') : ''))}
+  </div></div>`;
 }
 function moreView(){
   const me = view.me && view.me !== GUEST ? view.me : null, un = unreadCount(), pend = me && betsOn() ? bets().filter(b => betNeedsMe(b, me)).length : 0;
@@ -5170,17 +5464,6 @@ function courtBoard(){
   }
   return tiles;
 }
-function courtsView(){
-  const tiles = courtBoard();
-  if (!tiles.length) return '<div class="empty-state">No courts set up yet.</div>';
-  return `<h2 style="margin-top:6px">Courts</h2><div class="courts">${tiles.map(t => `<div class="court ${t.cur ? 'busy' : ''}">
-    <div class="ch"><b>${esc(courtName(t.c))}</b><span>${t.cur ? 'In use' : 'Open'}</span></div>
-    ${t.cur ? `<button class="cnow" data-act="openmatch" data-id="${esc(t.cur.id)}"><small>${esc((findEvent(t.cur.eventId) || {}).name)} · ${esc(roundName(t.cur))}</small>${teamLine(t.cur, 'team1', {short:true})}${teamLine(t.cur, 'team2', {short:true})}</button>` : '<div class="cnow empty">No match on now</div>'}
-    ${t.nxt ? `<button class="cnext" data-act="openmatch" data-id="${esc(t.nxt.id)}"><span>Next · ${esc(TIME_SLOTS[t.nxt.slotIdx][1])}</span>${esc(sideLabel(t.nxt, 'team1', true))} vs ${esc(sideLabel(t.nxt, 'team2', true))}</button>` : ''}
-  </div>`).join('')}</div>
-  ${(() => { const r = recentResults(5); return r.length ? `<h3>Just finished</h3>${r.map(m => matchRow(m)).join('')}` : '' })()}`;
-}
-
 /* ---------- Draws ---------- */
 /* ---------- Draws (Phase 1 redesign) ---------- */
 function visibleEvents(){ return state.events.filter(e => e.published || view.admin) }
@@ -5289,35 +5572,8 @@ function clubCupView(ev, print){
 const fmtPts = n => { const w = Math.floor(n + 1e-9), h = n - w >= .49; return h ? (w ? w + '½' : '½') : String(w) };
 
 /* ---------- Players ---------- */
-function playersView(){
-  syncEngine();
-  const q = normName(view.q), pl = players().filter(p => !q || normName(p.name).includes(q)).sort((a,b) => a.name.localeCompare(b.name));
-  return `<h2 style="margin-top:6px">Players <span class="small muted">${players().length}</span></h2>
-  <input id="plq" class="codebox" style="text-align:left;letter-spacing:0;font-size:16px;margin-bottom:10px" placeholder="Search" value="${esc(view.q)}" autocomplete="off">
-  <div class="plist">${pl.map(p => { const evs = eventsOfPlayer(p.id); return `<button class="prow ${p.id === view.me ? 'mine' : ''}" data-act="openplayer" data-id="${p.id}"><b>${esc(p.name)}</b><span>${[p.rating != null ? sport().rating + ' ' + fmtRating(p.rating) : '', evs.map(e => e.name).join(', ')].filter(Boolean).map(esc).join(' · ')}</span></button>` }).join('')}</div>`;
-}
-
 /* ---------- Chat (same as Roundly) ---------- */
 function fmtText(t){ let s = esc(t); players().forEach(p => { const n = esc(p.name); if (n) s = s.split('@' + n).join(`<span class="at">@${n}</span>`) }); return s }
-function chatView(){
-  if (!view.me) return '';
-  const msgs = Store.keys('chat:').map(k => Object.assign({k}, Store.get(k))).filter(m => m.ts).sort((a,b) => a.ts - b.ts).slice(-250);
-  const list = msgs.map(m => {
-    if (m.auto) return `<div class="auto">${esc(m.text)}<span class="t">${timeLabel(m.ts)}</span></div>`;
-    const p = P(m.by), mine = m.by === view.me, rx = m.reactions || {}, used = REACTIONS.filter(e => (rx[e] || []).length);
-    if (m.ann) return `<div class="ann"><div class="lbl">Announcement · ${timeLabel(m.ts)}</div>${fmtText(m.text)}</div>`;
-    return `<div class="msg ${mine ? 'mine' : ''}"><div class="who">${mine ? '' : `<span class="dot" style="--c:var(--navy)"></span>${esc(p ? p.name : (m.name || 'Spectator'))}  `}${timeLabel(m.ts)}</div>
-      <div class="bub">${m.img ? `<img src="${m.img}" alt="Photo">` : ''}${m.text ? fmtText(m.text) : ''}</div>
-      <div class="reacts">${used.map(e => `<button class="${rx[e].includes(view.me) ? 'on' : ''}" data-act="react" data-k="${m.k}" data-e="${e}">${e} ${rx[e].length}</button>`).join('')}${view.reactOpen === m.k ? REACTIONS.filter(e => !used.includes(e)).map(e => `<button data-act="react" data-k="${m.k}" data-e="${e}">${e}</button>`).join('') : `<button class="add" data-act="reactopen" data-k="${m.k}" aria-label="React">+</button>`}</div></div>`;
-  }).join('');
-  return `<div class="chat">${list || '<div class="empty-state">No messages yet. Say hi, post a court change, or share a photo.</div>'}</div>`;
-}
-function composer(){
-  return `<div class="composer">${view.chatImg ? `<div class="preview"><img src="${view.chatImg}" alt="Photo to send"><button class="btn alt sm" data-act="rmimg">Remove</button></div>` : ''}
-    <div class="in"><label aria-label="Add photo">${ICON.cam}<input type="file" accept="image/*" data-chg="chatimg" hidden></label>
-      <input type="text" id="chatDraft" placeholder="Say something" enterkeyhint="send" autocomplete="off" value="${esc(view.draft)}"><button class="send" data-act="send">Send</button></div></div>`;
-}
-
 /* ---------- Sheets ---------- */
 function modal(){
   if (view.modal === 'who') return `<div class="modal" data-act="closemodal"><div class="sheet" data-stop="1"><h2 style="margin-top:0">Who are you?</h2>
@@ -5332,14 +5588,6 @@ function modal(){
   if (view.modal === 'divpick') return divPicker();
   return '';
 }
-function playerSheet(){
-  const p = P(view.pid); if (!p) return '';
-  const ms = myMatches(p.id).sort((a,b) => (a.slotIdx ?? 1e6) - (b.slotIdx ?? 1e6));
-  return `<div class="modal" data-act="closemodal"><div class="sheet" data-stop="1"><h2 style="margin-top:0">${esc(p.name)}</h2>
-    <p class="small muted" style="margin-top:-6px">${[p.rating != null ? sport().rating + ' ' + fmtRating(p.rating) : '', p.gender === 'M' ? 'Men' : p.gender === 'F' ? 'Women' : '', p.club].filter(Boolean).map(esc).join(' · ')}</p>
-    ${ms.length ? ms.map(m => matchRow(m)).join('') : '<p class="muted">No matches yet.</p>'}
-    <p class="row"><button class="btn alt" data-act="closemodal">Close</button>${view.me !== p.id ? `<button class="btn ${following().includes(p.id) ? 'alt' : ''}" data-act="follow" data-id="${p.id}">${following().includes(p.id) ? 'Following' : 'Follow'}</button><button class="btn alt" data-act="pickme" data-id="${p.id}">This is me</button>` : ''}</p></div></div>`;
-}
 /* ---------- Match details and score entry (Phase 1 redesign) ----------
    Teams are rows, sets are columns. Entry -> review -> confirm. Saving still goes
    through ACT.savescore with the same validation and stored shape as v2.5.4. */
@@ -5353,12 +5601,6 @@ function colLabel(l){
   if (/^Game to/i.test(l)) return `<abbr title="${esc(l)}">Points</abbr>`;
   return esc(l);
 }
-function scoreRules(m, sr){
-  const unit = /^Game/.test(sr.labels[0]) ? 'games' : 'sets';
-  if (m.proAm) return 'Enter the games each team won in the pro set. The team with more games is recorded as the winner.';
-  if (sr.rows > 1) return `Leave ${sr.labels[sr.rows - 1]} blank if the match was decided in two ${unit}. The team that wins more ${unit} is recorded as the winner.`;
-  return `Enter each team's final ${/^Game to/.test(sr.labels[0]) ? 'points' : 'games'}. The higher score is recorded as the winner.`;
-}
 /* Read the score inputs exactly the way v2.5.4 did (blank -> null, non-numbers -> null). */
 function readScoreInputs(m){
   const sr = scoreRowsFor(m), rows = [];
@@ -5366,81 +5608,229 @@ function readScoreInputs(m){
   return rows;
 }
 /* Same winner rule as v2.5.4: trailing empty rows dropped, more rows won = winner. */
-function checkScoreRows(raw){
-  const rows = (raw || []).map(r => r.slice());
-  while (rows.length && rows[rows.length - 1][0] == null && rows[rows.length - 1][1] == null) rows.pop();
-  if (!rows.length) return {err:'Enter the score, or use Retirement or walkover below.'};
-  let w1 = 0, w2 = 0; rows.forEach(r => { if (r[0] > r[1]) w1++; else if (r[1] > r[0]) w2++ });
-  const w = w1 > w2 ? 'team1' : w2 > w1 ? 'team2' : null;
-  if (!w) return {err:"That score doesn't have a winner yet."};
-  return {rows, w};
-}
 function sideCell(m, slot, ev){
   const names = sideNames(m, slot), cc = m.sessionId != null && ev.clubCup ? (slot === 'team1' ? ev.clubCup.teamAName : ev.clubCup.teamBName) : '';
   const inner = names === null ? `<span class="pn tbd">${esc(feederLabel(m, slot))}</span>` : (names.length ? names.map(n => `<span class="pn">${esc(n)}</span>`).join('') : '<span class="pn">—</span>');
   return inner + (cc ? `<span class="club">${esc(cc)}</span>` : '');
-}
-function scoreTable(m, sr, mode, rows){
-  const ev = findEvent(m.eventId) || {}, w = mode === 'view' ? winnerSlot(m) : (mode === 'review' ? (checkScoreRows(rows).w || null) : null);
-  const cell = (slot, i) => {
-    const j = slot === 'team1' ? 0 : 1, v = rows && rows[i] ? rows[i][j] : null;
-    if (mode === 'edit') return `<td><input class="scin" inputmode="numeric" pattern="[0-9]*" autocomplete="off" id="sc-${i}-${j}" value="${esc(v ?? '')}" aria-label="${esc(`${sr.labels[i] || 'Set ' + (i + 1)}, ${sideLabel(m, slot)}`)}"></td>`;
-    return v == null || v === '' ? `<td class="empty"><span aria-hidden="true">—</span><span class="sr">not played</span></td>` : `<td>${esc(v)}</td>`;
-  };
-  const tr = slot => `<tr class="${w === slot ? 'won' : w ? 'lost' : ''}"><th scope="row">${sideCell(m, slot, ev)}${w === slot ? '<span class="st ok wtag">Winner</span>' : ''}</th>${Array.from({length:sr.rows}, (_, i) => cell(slot, i)).join('')}</tr>`;
-  return `<div class="sc2wrap"><table class="sc2"><caption class="sr">Score by ${/^Game/.test(sr.labels[0]) ? 'game' : 'set'}</caption><thead><tr><th scope="col">Team</th>${sr.labels.slice(0, sr.rows).map(l => `<th scope="col">${colLabel(l)}</th>`).join('')}</tr></thead><tbody>${tr('team1')}${tr('team2')}</tbody></table></div>`;
 }
 /* Saved rows -> table rows, in team1/team2 order (handles the pro-am {t1,t2} shape). */
 function savedRows(m, sr){
   const s = state.scores[m.id] || [];
   return Array.from({length:sr.rows}, (_, i) => { const x = s[i]; if (!x) return [null, null]; return Array.isArray(x) ? [x[0] ?? null, x[1] ?? null] : [x.t1 ?? null, x.t2 ?? null] });
 }
+/* ================= Phase 4: format-aware scoring =================
+   Backward compatible. Old records ({w, s, note, by, ts}) read exactly as before.
+   New optional fields on m:<id>: outcome ('retired'|'walkover'), retired (slot),
+   hist (earlier versions, recorded from now on), corrected, cby/cts, override. */
+const BO3_KEYS = ['tennis_bo3_mtb10', 'tennis_bo3_full', 'pb_bo3_to_11'];
+function rowRule(m, i){
+  if (m && m.proAm) return {kind:'free'};
+  const k = m ? getScoringFormatKey(m) : '';
+  const set6 = {kind:'set', to:6}, mtb = {kind:'race', to:10, what:'A match tiebreak'};
+  switch (k){
+    case 'tennis_bo3_mtb10': return i < 2 ? set6 : mtb;
+    case 'tennis_bo3_full': case 'tennis_one_set': return set6;
+    case 'tennis_pro8': return {kind:'set', to:8, pro:true};
+    case 'tennis_pro10': return {kind:'set', to:10, pro:true};
+    case 'tennis_mtb10': return mtb;
+    case 'pb_to_11': case 'pb_bo3_to_11': return {kind:'race', to:11, what:'A game'};
+    case 'pb_to_15': return {kind:'race', to:15, what:'A game'};
+    case 'pb_to_21': return {kind:'race', to:21, what:'A game'};
+    default: return {kind:'free'};
+  }
+}
+/* '' when the row is a finished set/game under the rule, otherwise a plain-English reason. */
+function rowProblem(rule, a, b, label){
+  const hi = Math.max(a, b), lo = Math.min(a, b);
+  if (a === b) return `${label}: a finished ${rule.kind === 'set' ? 'set' : 'game'} can't be tied.`;
+  if (rule.kind === 'set'){
+    const n = rule.to, ok = (hi === n && lo <= n - 2) || (hi === n + 1 && (lo === n - 1 || lo === n));
+    return ok ? '' : `${label}: ${hi}–${lo} isn't a finished ${rule.pro ? 'pro set' : 'set'}. It ends ${n}–0 to ${n}–${n - 2}, ${n + 1}–${n - 1}, or ${n + 1}–${n} after a tiebreak.`;
+  }
+  if (rule.kind === 'race'){
+    const n = rule.to, ok = hi >= n && hi - lo >= 2 && (hi === n || hi - lo === 2);
+    return ok ? '' : `${label}: ${hi}–${lo} doesn't finish. ${rule.what} goes to ${n}, win by 2 (${n}–${n - 2}, ${n + 1}–${n - 1}…).`;
+  }
+  return '';
+}
+const rowDone = r => r && r[0] != null && r[1] != null;
+/* Best-of-3 decided in the first two sets/games: the deciding column is not needed. */
+function decidedEarly(m, rows){
+  if (!m || m.proAm || !BO3_KEYS.includes(getScoringFormatKey(m))) return false;
+  const a = rows && rows[0], b = rows && rows[1];
+  if (!rowDone(a) || !rowDone(b) || a[0] === a[1] || b[0] === b[1]) return false;
+  return (a[0] > a[1]) === (b[0] > b[1]);
+}
+/* Same winner rule as v2.5.4 (trailing empty rows dropped, more rows won = winner), plus,
+   when m is given, the event's real scoring format. opts.loose = director override. */
+function checkScoreRows(raw, m, opts){
+  opts = opts || {};
+  const rows = (raw || []).map(r => (r || [null, null]).slice());
+  if (m && decidedEarly(m, rows) && rows[2]) rows[2] = [null, null];
+  while (rows.length && rows[rows.length - 1][0] == null && rows[rows.length - 1][1] == null) rows.pop();
+  if (!rows.length) return {err:'Enter the score, or use Retirement or Walkover below.'};
+  const sr = m ? scoreRowsFor(m) : {labels:[]};
+  const lab = i => (sr.labels[i] || `Set ${i + 1}`).replace('10-pt MTB', 'Match tiebreak');
+  for (let i = 0; i < rows.length; i++){
+    const r = rows[i];
+    if (r[0] == null || r[1] == null) return {err:`${lab(i)}: enter a score for both sides, or leave both blank.`};
+    if (r[0] < 0 || r[1] < 0 || r[0] > 99 || r[1] > 99) return {err:`${lab(i)}: scores must be between 0 and 99.`};
+  }
+  if (m && !opts.loose){
+    for (let i = 0; i < rows.length; i++){ const p = rowProblem(rowRule(m, i), rows[i][0], rows[i][1], lab(i)); if (p) return {err:p, fmt:true} }
+    if (BO3_KEYS.includes(getScoringFormatKey(m)) && !m.proAm){
+      if (rows.length === 1) return {err:`Enter ${lab(1)} too. This match is best of three.`, fmt:true};
+      const w0 = rows[0][0] > rows[0][1], w1 = rows[1][0] > rows[1][1];
+      if (rows.length === 2 && w0 !== w1) return {err:`It's one ${/^Game/.test(sr.labels[0]) ? 'game' : 'set'} each. Enter the ${lab(2).toLowerCase()} that decided it.`, fmt:true};
+    }
+  }
+  let w1 = 0, w2 = 0; rows.forEach(r => { if (r[0] > r[1]) w1++; else if (r[1] > r[0]) w2++ });
+  const w = w1 > w2 ? 'team1' : w2 > w1 ? 'team2' : null;
+  if (!w) return {err:"That score doesn't have a winner yet."};
+  return {rows, w};
+}
+/* Retirement keeps whatever was played. Rows need both numbers or neither. */
+function checkPartialRows(raw){
+  const rows = (raw || []).map(r => (r || [null, null]).slice());
+  while (rows.length && rows[rows.length - 1][0] == null && rows[rows.length - 1][1] == null) rows.pop();
+  for (let i = 0; i < rows.length; i++){ const r = rows[i]; if ((r[0] == null) !== (r[1] == null)) return {err:`Row ${i + 1}: enter both numbers or leave both blank.`}; if (r[0] != null && (r[0] < 0 || r[1] < 0 || r[0] > 99 || r[1] > 99)) return {err:'Scores must be between 0 and 99.'} }
+  return {rows};
+}
+function scoreRules(m, sr){
+  if (m.proAm) return 'Enter the games each team won in the pro set. The team with more games is recorded as the winner.';
+  const r0 = rowRule(m, 0), k = getScoringFormatKey(m);
+  const unit = /^Game/.test(sr.labels[0]) ? 'games' : 'sets';
+  const setTxt = r0.kind === 'set' ? `A ${r0.pro ? 'pro set' : 'set'} ends ${r0.to}–${r0.to - 2} or better, ${r0.to + 1}–${r0.to - 1}, or ${r0.to + 1}–${r0.to} with a tiebreak.` : r0.kind === 'race' ? `${r0.what} goes to ${r0.to}, win by 2.` : '';
+  if (BO3_KEYS.includes(k)) return `${setTxt} ${k === 'tennis_bo3_mtb10' ? 'The match tiebreak goes to 10, win by 2.' : ''} The ${sr.labels[2]} column switches off when the first two ${unit} go the same way.`.replace(/\s+/g, ' ').trim();
+  return setTxt || `Enter each team's final ${/^Game to/.test(sr.labels[0]) ? 'points' : 'games'}. The higher score is recorded as the winner.`;
+}
+function scoreTable(m, sr, mode, rows, opts){
+  opts = opts || {};
+  const ev = findEvent(m.eventId) || {};
+  const w = opts.w !== undefined ? opts.w : mode === 'view' ? winnerSlot(m) : null;
+  const early = !opts.partial && decidedEarly(m, rows);
+  const cols = mode !== 'edit' && early && sr.rows === 3 ? 2 : sr.rows;
+  const cell = (slot, i) => {
+    const j = slot === 'team1' ? 0 : 1, v = rows && rows[i] ? rows[i][j] : null, lab = `${sr.labels[i] || 'Set ' + (i + 1)}, ${sideLabel(m, slot)}`;
+    if (mode === 'edit'){
+      if (early && i === 2) return `<td class="na"><input class="scin" id="sc-${i}-${j}" value="" disabled placeholder="–" aria-label="${esc(lab)}: not needed, decided in straight ${/^Game/.test(sr.labels[0]) ? 'games' : 'sets'}"></td>`;
+      return `<td><input class="scin" inputmode="numeric" pattern="[0-9]*" autocomplete="off" id="sc-${i}-${j}" value="${esc(v ?? '')}" aria-label="${esc(lab)}"></td>`;
+    }
+    return v == null || v === '' ? `<td class="empty"><span aria-hidden="true">—</span><span class="sr">not played</span></td>` : `<td>${esc(v)}</td>`;
+  };
+  const tr = slot => `<tr class="${w === slot ? 'won' : w ? 'lost' : ''}"><th scope="row">${sideCell(m, slot, ev)}${w === slot ? '<span class="st ok wtag">Winner</span>' : ''}${opts.retired === slot ? '<span class="st warn wtag">Retired</span>' : ''}</th>${Array.from({length:cols}, (_, i) => cell(slot, i)).join('')}</tr>`;
+  return `<div class="sc2wrap"><table class="sc2"><caption class="sr">Score by ${/^Game/.test(sr.labels[0]) ? 'game' : 'set'}</caption><thead><tr><th scope="col">Team</th>${sr.labels.slice(0, cols).map(l => `<th scope="col">${colLabel(l)}</th>`).join('')}</tr></thead><tbody>${tr('team1')}${tr('team2')}</tbody></table></div>
+  ${mode === 'edit' && early && sr.rows === 3 ? `<p class="bk-hint" role="status">${esc(sr.labels[2])} not needed: the first two ${/^Game/.test(sr.labels[0]) ? 'games' : 'sets'} went the same way.</p>` : ''}`;
+}
+/* Result state for the text chip. Only what the record actually says. */
+function resultState(r){
+  if (!r || !r.w) return null;
+  if (r.corrected) return {cls:'ok', label:'Corrected'};
+  return {cls:'ok', label:'Final'};
+}
+const whoBy = b => !b ? 'someone' : b === GUEST ? 'a spectator' : (P(b) ? pname(b) : 'a director');
+function rowsText(s, w){
+  if (!s || !s.length) return '';
+  if (s[0] && typeof s[0] === 'object' && !Array.isArray(s[0])) return s.map(x => w === 'team2' || w === 'B' ? `${x.t2}–${x.t1}` : `${x.t1}–${x.t2}`).join(', ');
+  return s.filter(r => r && (r[0] != null || r[1] != null)).map(r => w === 'team2' || w === 'B' ? `${r[1] ?? '?'}–${r[0] ?? '?'}` : `${r[0] ?? '?'}–${r[1] ?? '?'}`).join(', ');
+}
+function resultAttr(m, r){
+  if (!r || !r.w) return '';
+  const first = (r.hist && r.hist[0]) || r;
+  const lines = [];
+  if (r.corrected && r.hist && r.hist.length) lines.push(`First entered by ${esc(whoBy(first.by))} at ${timeLabel(first.ts)}. Corrected by ${esc(whoBy(r.by))} at ${timeLabel(r.ts)}.`);
+  else lines.push(`Entered by ${esc(whoBy(r.by))}${r.ts ? ` at ${timeLabel(r.ts)}` : ''}.`);
+  if (r.note) lines.push(esc(r.note) + '.');
+  if (r.override) lines.push('Saved by a director outside the usual format rules.');
+  const hist = (r.hist || []).slice().reverse();
+  const slotOf = w => w === 'A' ? 'team1' : w === 'B' ? 'team2' : w;
+  const histHtml = hist.length ? disc('hist-' + m.id, `Correction history (${hist.length})`, `<ol class="bk-hist">${hist.map(h => `<li><b>${esc(sideLabel(m, slotOf(h.w), true))} won${h.s ? ' ' + esc(rowsText(h.s, h.w)) : ''}</b>${h.note ? ` · ${esc(h.note)}` : ''}<span>Entered by ${esc(whoBy(h.by))}${h.ts ? ` at ${timeLabel(h.ts)}` : ''}. Replaced later.</span></li>`).join('')}</ol><p class="bk-rules">History is kept from this version on. Results saved before it show only the latest entry.</p>`) : '';
+  return `<p class="bk-attr">${lines.join(' ')}</p>${histHtml}`;
+}
+/* Write a result, keeping the earlier version in hist when this replaces one. */
+function writeResult(m, rec){
+  const prev = Store.get('m:' + m.id);
+  if (prev && prev.w){
+    rec.hist = (prev.hist || []).concat([{w:prev.w, s:prev.s || null, by:prev.by || null, ts:prev.ts || null, note:prev.note || '', outcome:prev.outcome || ''}]).slice(-10);
+    rec.corrected = true;
+  }
+  Store.set('m:' + m.id, rec);
+  return !!(prev && prev.w);
+}
+const ccW = (m, slot) => m.sessionId != null ? (slot === 'team1' ? 'A' : 'B') : slot;
 function matchSheet(){
   syncEngine();
   const m = findMatch(view.matchId); if (!m) return '';
   const ev = findEvent(m.eventId) || {}, r = resOf(m.id) || {}, w = winnerSlot(m), cc = m.sessionId != null;
   const known = bothKnown(m), st = matchStatus(m), can = canScore() && known && st !== 'bye';
-  const sr = scoreRowsFor(m), s0 = statusInfo(m);
+  const sr = scoreRowsFor(m);
   const sm = view.sm && view.sm.id === m.id ? view.sm : null;
   const mode = can && sm && sm.mode !== 'view' ? sm.mode : (can && !w && !sm ? 'edit' : 'view');
   const fmt = m.proAm ? 'Pro set · games won' : ((getScoringFormat(m) || {}).label || '');
-  const title = mode === 'edit' ? (w ? 'Correct score' : 'Enter score') : mode === 'review' ? 'Review result' : 'Match details';
+  const title = {edit:w ? 'Correct score' : 'Enter score', review:'Review result', retire:'Record a retirement', retreview:'Review retirement', wo:'Record a walkover'}[mode] || 'Match details';
   const sessNote = cc ? (((ev.clubCup || {}).sessions || []).find(x => x.id === m.sessionId) || {}).notes : '';
+  const id = esc(m.id);
   const head = `<div class="sh-top"><p class="bk-eyebrow">${esc(ev.name || '')} · ${esc(roundName(m))}</p><button class="hclose" data-act="closemodal" aria-label="Close match details"><span aria-hidden="true">×</span></button></div>
     <h2 class="sh-h" id="sheet-h">${title}</h2>
-    <p class="bk-meta"><b>${esc(whenFull(m))}</b>${view.admin ? ` · <button class="bk-inline" data-act="movemenu" data-id="${esc(m.id)}">Move match</button>` : ''}</p>
-    ${fmt ? `<p class="bk-meta">${esc(fmt)}</p>` : ''}${sessNote ? `<p class="bk-meta">${esc(sessNote)}</p>` : ''}`;
-  const attr = r.by && r.w ? `<p class="bk-attr">Entered by ${esc(r.by === GUEST ? 'a spectator' : pname(r.by))} at ${timeLabel(r.ts)}${r.note ? ` · ${esc(r.note)}` : ''}</p>` : '';
-  const rw = can && mode !== 'review' ? disc('rw-' + m.id, 'Retirement or walkover', `<p class="bk-rules">Record the winner without a full score. The result is saved as "Walkover or retired" and any set scores on this match are not kept.</p><div class="bk-actions"><button class="btn alt" data-act="confirmwin" data-id="${esc(m.id)}" data-v="${cc ? 'A' : 'team1'}">${esc(sideLabel(m, 'team1', true))} won</button><button class="btn alt" data-act="confirmwin" data-id="${esc(m.id)}" data-v="${cc ? 'B' : 'team2'}">${esc(sideLabel(m, 'team2', true))} won</button></div>`) : '';
+    <p class="bk-meta"><b>${esc(whenFull(m))}</b>${view.admin ? ` · <button class="bk-inline" data-act="movemenu" data-id="${id}">Move match</button>` : ''}</p>
+    ${movedNote(m)}
+    ${fmt ? `<p class="bk-meta">Scoring: ${esc(fmt)}</p>` : ''}${sessNote ? `<p class="bk-meta">${esc(sessNote)}</p>` : ''}`;
+  const replaceNote = w ? '<p class="bk-note warn">This match already has a result. Saving keeps the earlier one in the correction history and replaces it.</p>' : '';
+  const other = can && (mode === 'edit' || mode === 'view') ? `<div class="bk-sec"><h3 class="bk-h2">Didn't finish?</h3><div class="bk-actions"><button class="btn alt" data-act="scmode" data-id="${id}" data-v="retire">Retirement</button><button class="btn alt" data-act="scmode" data-id="${id}" data-v="wo">Walkover</button></div><p class="bk-rules">Retirement keeps the games played. A walkover means the match wasn't played.</p></div>` : '';
+  const pending = '<span class="st warn">Pending · not saved yet</span>';
   let main;
   if (st === 'bye') main = '<p class="bk-note ok">This is a bye. The other side moves on.</p>';
   else if (!known) main = `<p class="bk-note warn">Waiting on earlier matches.</p>${scoreTable(m, sr, 'view', savedRows(m, sr))}`;
   else if (mode === 'edit'){
     const rows = sm && sm.rows ? sm.rows : savedRows(m, sr);
-    main = `${w ? '<p class="bk-note warn">This match already has a result. Saving replaces it.</p>' : ''}
+    main = `${replaceNote}
     ${scoreTable(m, sr, 'edit', rows)}
     <p class="bk-rules">${esc(scoreRules(m, sr))}</p>
-    ${sm && sm.err ? `<p class="bk-note err" role="alert">${esc(sm.err)}</p>` : ''}
-    <button class="bk-btn" data-act="reviewscore" data-id="${esc(m.id)}">Review result</button>
-    ${w ? `<button class="bk-btn alt" data-act="scoreview" data-id="${esc(m.id)}">Cancel</button>` : ''}
-    ${st !== 'done' ? `<div class="bk-actions"><button class="btn alt" data-act="setlive" data-id="${esc(m.id)}">${r.live ? 'Mark not on court' : 'Mark on court now'}</button></div>` : ''}
-    ${rw}`;
+    ${sm && sm.err ? `<p class="bk-note err" role="alert">${esc(sm.err)}</p>${sm.fmt && view.admin ? `<button class="bk-btn alt" data-act="reviewscore" data-id="${id}" data-v="loose">Director: review anyway</button>` : ''}` : ''}
+    <button class="bk-btn" data-act="reviewscore" data-id="${id}">Review result</button>
+    ${w ? `<button class="bk-btn alt" data-act="scoreview" data-id="${id}">Cancel</button>` : ''}
+    ${st !== 'done' ? `<div class="bk-actions"><button class="btn alt" data-act="setlive" data-id="${id}">${r.live ? 'Mark not on court' : 'Mark on court now'}</button></div>` : ''}
+    ${other}`;
   } else if (mode === 'review'){
-    const chk = checkScoreRows(sm.rows), ws = chk.w, ls = ws === 'team1' ? 'team2' : 'team1';
-    const txt = chk.rows.map(x => ws === 'team2' ? `${x[1] ?? '?'}–${x[0] ?? '?'}` : `${x[0] ?? '?'}–${x[1] ?? '?'}`).join(', ');
-    main = `<p class="bk-note warn" role="status"><b>Not saved yet.</b> ${esc(sideLabel(m, ws))} def. ${esc(sideLabel(m, ls))} ${esc(txt)}</p>
-    ${scoreTable(m, sr, 'review', sm.rows)}
-    ${w ? '<p class="bk-rules">Confirming replaces the result already saved for this match.</p>' : ''}
-    <button class="bk-btn" data-act="savescore" data-id="${esc(m.id)}">Confirm and save</button>
-    <button class="bk-btn alt" data-act="scoreedit" data-id="${esc(m.id)}">Edit score</button>`;
+    const chk = checkScoreRows(sm.rows, m, {loose:sm.loose}), ws = chk.w, ls = ws === 'team1' ? 'team2' : 'team1';
+    if (chk.err){ view.sm = {id:m.id, mode:'edit', rows:sm.rows, err:chk.err, fmt:chk.fmt}; return matchSheet() }
+    main = `<p>${pending}</p><p class="bk-note warn" role="status">${esc(sideLabel(m, ws))} def. ${esc(sideLabel(m, ls))} ${esc(rowsText(chk.rows, ws))}</p>
+    ${scoreTable(m, sr, 'review', chk.rows, {w:ws})}
+    ${sm.loose ? '<p class="bk-note warn">This score is outside the usual rules for this format. It will be marked as a director override.</p>' : ''}
+    ${w ? '<p class="bk-rules">Confirming replaces the saved result. The earlier one stays in the correction history.</p>' : ''}
+    <button class="bk-btn" data-act="savescore" data-id="${id}">Confirm and save</button>
+    <button class="bk-btn alt" data-act="scoreedit" data-id="${id}">Edit score</button>`;
+  } else if (mode === 'retire'){
+    const rows = sm.rows || savedRows(m, sr), ret = sm.ret;
+    const pick = slot => `<button class="btn ${ret === slot ? '' : 'alt'}" aria-pressed="${ret === slot}" data-act="retpick" data-id="${id}" data-v="${slot}">${esc(sideLabel(m, slot, true))}</button>`;
+    main = `${replaceNote}<h3 class="bk-h2">Who retired?</h3><div class="bk-actions">${pick('team1')}${pick('team2')}</div>
+    <h3 class="bk-h2">Score when play stopped</h3>
+    ${scoreTable(m, sr, 'edit', rows, {partial:true})}
+    <p class="bk-rules">Enter what was played, including an unfinished set. Leave it blank if no games were played. The other side is recorded as the winner.</p>
+    ${sm.err ? `<p class="bk-note err" role="alert">${esc(sm.err)}</p>` : ''}
+    <button class="bk-btn" data-act="retreview" data-id="${id}">Review retirement</button>
+    <button class="bk-btn alt" data-act="scoreedit" data-id="${id}">Back to the score</button>`;
+  } else if (mode === 'retreview'){
+    const ret = sm.ret, ws = ret === 'team1' ? 'team2' : 'team1', part = checkPartialRows(sm.rows).rows || [];
+    main = `<p>${pending}</p><p class="bk-note warn" role="status">${esc(sideLabel(m, ws))} def. ${esc(sideLabel(m, ret))}${part.length ? ' ' + esc(rowsText(part, ws)) : ''}, retired</p>
+    ${part.length ? scoreTable(m, sr, 'review', part, {w:ws, partial:true, retired:ret}) : '<p class="bk-rules">No games recorded.</p>'}
+    ${w ? '<p class="bk-rules">Confirming replaces the saved result. The earlier one stays in the correction history.</p>' : ''}
+    <button class="bk-btn" data-act="saveret" data-id="${id}">Confirm and save</button>
+    <button class="bk-btn alt" data-act="scmode" data-id="${id}" data-v="retire">Edit</button>`;
+  } else if (mode === 'wo'){
+    const pick = slot => `<button class="btn alt" data-act="savewo" data-id="${id}" data-v="${slot}">${esc(sideLabel(m, slot, true))} advances</button>`;
+    main = `${replaceNote}<p class="bk-rules">Use this when the match wasn't played. No score is saved. You'll be asked to confirm.</p>
+    <h3 class="bk-h2">Who advances?</h3><div class="bk-actions">${pick('team1')}${pick('team2')}</div>
+    <button class="bk-btn alt" data-act="scoreedit" data-id="${id}">Back to the score</button>`;
   } else {
-    main = `<p>${stChip(s0) || '<span class="st neutral">Not played yet</span>'}</p>
-    ${scoreTable(m, sr, 'view', savedRows(m, sr))}
-    ${attr}
-    ${can ? `<button class="bk-btn" data-act="scoreedit" data-id="${esc(m.id)}">${w ? 'Correct score' : 'Enter score'}</button>${st !== 'done' ? `<div class="bk-actions"><button class="btn alt" data-act="setlive" data-id="${esc(m.id)}">${r.live ? 'Mark not on court' : 'Mark on court now'}</button></div>` : ''}${rw}` : (!canScore() ? '<p class="bk-rules">Only directors enter scores in this tournament.</p>' : '')}
-    ${can && w ? `<div class="bk-danger"><p>Removing a result sends later matches that depend on it back to TBD and reopens bets on it.</p><button class="btn danger" data-act="clearres" data-id="${esc(m.id)}">Clear result</button></div>` : ''}`;
+    const rs = resultState(r), s0 = statusInfo(m);
+    main = `<p>${rs ? stChip(rs) : (stChip(s0) || '<span class="st neutral">Not played yet</span>')}${r.outcome === 'retired' ? ' <span class="st warn">Retired</span>' : r.outcome === 'walkover' ? ' <span class="st neutral">Walkover</span>' : ''}</p>
+    ${r.outcome === 'walkover' || (r.w && !r.s && r.note) ? '' : scoreTable(m, sr, 'view', savedRows(m, sr), {partial:r.outcome === 'retired', retired:r.retired})}
+    ${resultAttr(m, r)}
+    ${can ? `<button class="bk-btn" data-act="scoreedit" data-id="${id}">${w ? 'Correct score' : 'Enter score'}</button>${st !== 'done' ? `<div class="bk-actions"><button class="btn alt" data-act="setlive" data-id="${id}">${r.live ? 'Mark not on court' : 'Mark on court now'}</button></div>` : ''}${other}` : (!canScore() ? '<p class="bk-rules">Only directors enter scores in this tournament.</p>' : '')}
+    ${can && w ? `<div class="bk-danger"><p>Removing a result sends later matches that depend on it back to TBD and reopens bets on it. Its history is removed too.</p><button class="btn danger" data-act="clearres" data-id="${id}">Clear result</button></div>` : ''}`;
   }
-  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="sheet-h">${head}${main}${mode === 'edit' ? attr : ''}</div></div>`;
+  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="sheet-h">${head}${main}${mode === 'edit' && r.w ? resultAttr(m, r) : ''}</div></div>`;
 }
 function divPicker(){
   const evs = state.events, q = normName(view.dq || ''), cur = evs.find(e => e.id === view.ev) || evs[0];
@@ -5451,34 +5841,12 @@ function divPicker(){
     <ul class="divlist">${list.map(e => `<li><button data-act="pickdiv" data-v="${esc(e.id)}" ${cur && e.id === cur.id ? 'aria-current="true"' : ''}><span><b>${esc(e.name)}</b><span>${esc(drawFormatLabel(e))}</span></span>${stChip(drawStateChip(e))}</button></li>`).join('') || '<li><p class="bk-empty">No division matches that search.</p></li>'}</ul>
   </div></div>`;
 }
-function moveSheet(){
-  syncEngine();
-  const m = findMatch(view.matchId); if (!m) return '';
-  const days = [...new Set(TIME_SLOTS.map(s => s[0]))];
-  return `<div class="modal" data-act="closemodal"><div class="sheet" data-stop="1"><h2 style="margin-top:0">Move match</h2>
-    <p class="small muted">${esc(sideLabel(m,'team1'))} vs ${esc(sideLabel(m,'team2'))}</p>
-    <div class="card adm"><label class="small muted">Time</label><select id="mv-slot">${TIME_SLOTS.map((s, i) => `<option value="${i}" ${i === m.slotIdx ? 'selected' : ''}>${esc(s[0])} · ${esc(s[1])}</option>`).join('')}</select>
-    <label class="small muted" style="margin-top:8px;display:block">Court</label><select id="mv-court">${((cfg() || {}).courts || []).map((c, i) => `<option value="${i + 1}" ${i + 1 === m.court ? 'selected' : ''}>${esc(courtName(i + 1))}</option>`).join('')}</select></div>
-    <p class="row"><button class="btn" data-act="domove" data-id="${esc(m.id)}">Move it</button>${m.pin ? `<button class="btn alt" data-act="unpin" data-id="${esc(m.id)}">Unpin (let the app place it)</button>` : ''}<button class="btn alt" data-act="closemodal">Cancel</button></p></div></div>`;
-}
-
 /* ---------- Share: links and QR codes ---------- */
 const baseURL = () => location.href.split('#')[0].split('?')[0];
 const inviteLink = () => `${baseURL()}?join=${TRIP.code}`;
 const tvLink = () => `${baseURL()}?join=${TRIP.code}&tv=1`;
 const signupLink = () => `${baseURL()}?join=${TRIP.code}&signup=1`;
 function qrBox(text, label){ return `<figure class="qr"><div class="qrc" data-qr="${esc(text)}"></div><figcaption>${esc(label)}</figcaption></figure>` }
-function shareCards(){
-  const c = cfg() || {};
-  const link = (label, url, note, act) => `<div class="share1"><div><b>${label}</b><span class="small muted">${note}</span><code>${esc(url)}</code></div><button class="btn alt sm" data-act="copy" data-v="${esc(url)}">Copy</button></div>`;
-  return `<div class="invite"><div class="lbl">Join code</div><div class="code">${esc(TRIP.code)}</div><p class="small" style="margin:4px 0 10px">Anyone with the code can follow along. Only directors with the PIN can change setup.</p>
-    <div class="row" style="justify-content:center">${navigator.share ? `<button class="btn sm" data-act="shareinvite">Share</button>` : ''}<a class="btn alt sm" style="text-decoration:none" href="sms:${isIOS() ? '&' : '?'}body=${encodeURIComponent(`${tripTitle()}: ${inviteLink()}\nJoin code: ${TRIP.code}`)}">Text it</a></div></div>
-  ${link('Public link', inviteLink(), 'Players and fans pick their name or just watch.')}
-  ${link('TV mode', tvLink(), 'Open on a TV or laptop by the courts. It rotates courts, results and draws.')}
-  ${c.signupsOpen ? link('Signup link', signupLink(), 'Players enter their name, rating and partner.') : `<p class="small muted">Signups are closed. Open them on the Players step to get a signup link.</p>`}
-  <div class="qrs">${qrBox(inviteLink(), 'Public')}${qrBox(tvLink(), 'TV mode')}${c.signupsOpen ? qrBox(signupLink(), 'Signup') : ''}</div>
-  ${Dir.mode === 'local' ? `<p class="warn">This tournament only lives on this device. Connect Supabase (see SETUP.md) before sharing.</p>` : ''}`;
-}
 let qrLib = null;
 function fillQRs(){
   const els = [...document.querySelectorAll('.qrc[data-qr]')].filter(e => !e.dataset.done);
@@ -5488,22 +5856,6 @@ function fillQRs(){
 }
 
 /* ---------- TV mode ---------- */
-function tvView(){
-  syncEngine();
-  const tiles = courtBoard(), rec = recentResults(6), nxt = upNext(6), evs = visibleEvents().filter(e => e.published && e.matches.length);
-  const ph = photos().slice(0, 12), slides = evs.length + 1 + (ph.length ? 1 : 0);
-  const k = Math.floor(Date.now() / 25000) % slides, ev = k > 0 && k <= evs.length ? evs[k - 1] : null, showPhotos = ph.length && k === slides - 1 && k > 0;
-  if (showPhotos) return `<div class="tv"><header class="tvh">${crest(64)}<div><h1>${esc(tripTitle())}</h1><span>${esc(tsub())}</span></div><div class="tvclock">${new Date().toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})}</div></header><section class="tvphotos">${ph.map(p => `<figure><img src="${esc(p.url)}" alt=""><figcaption>${esc(p.caption || photoBy(p))}</figcaption></figure>`).join('')}</section></div>`;
-  return `<div class="tv">
-    <header class="tvh">${crest(64)}<div><h1>${esc(tripTitle())}</h1><span>${esc(tsub())}</span></div><div class="tvclock">${new Date().toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})}</div></header>
-    ${ev ? `<section class="tvdraw"><h2>${esc(ev.name)}</h2>${eventDraw(ev, true)}</section>` : `
-    <section class="tvgrid"><div><h2>Courts</h2><div class="courts tvc">${tiles.map(t => `<div class="court ${t.cur ? 'busy' : ''}"><div class="ch"><b>${esc(courtName(t.c))}</b><span>${t.cur ? esc((findEvent(t.cur.eventId) || {}).name) : 'Open'}</span></div>${t.cur ? `<div class="cnow">${teamLine(t.cur, 'team1', {short:true})}${teamLine(t.cur, 'team2', {short:true})}</div>` : '<div class="cnow empty">—</div>'}${t.nxt ? `<div class="cnext"><span>Next ${esc(TIME_SLOTS[t.nxt.slotIdx][1])}</span>${esc(sideLabel(t.nxt, 'team1', true))} vs ${esc(sideLabel(t.nxt, 'team2', true))}</div>` : ''}</div>`).join('')}</div></div>
-    <div><h2>Up next</h2>${nxt.map(m => `<div class="tvrow"><b>${esc(TIME_SLOTS[m.slotIdx][1])}</b><span>${esc(courtName(m.court))} · ${esc((findEvent(m.eventId) || {}).name)}</span><div>${esc(sideLabel(m,'team1',true))} vs ${esc(sideLabel(m,'team2',true))}</div></div>`).join('') || '<p class="muted">Nothing left today.</p>'}
-    <h2>Results</h2>${rec.map(m => `<div class="tvrow"><b>${esc((findEvent(m.eventId) || {}).name)}</b><span>${esc(roundName(m))}</span><div><strong>${esc(sideLabel(m, winnerSlot(m), true))}</strong> d. ${esc(sideLabel(m, winnerSlot(m) === 'team1' ? 'team2' : 'team1', true))} ${esc(scoreText(m))}</div></div>`).join('') || '<p class="muted">No results yet.</p>'}</div></section>`}
-    ${sponsorsHtml()}
-  </div>`;
-}
-
 /* ---------- Public signup ---------- */
 function signupView(){
   const c = cfg() || {}, evs = events().filter(e => e.kind !== 'clubcup'), s = view.su || {};
@@ -5543,22 +5895,6 @@ function printView(){
 /* ================= Landing, setup wizard, director ================= */
 const inp = (attrs, v) => `<input ${attrs} value="${esc(v ?? '')}">`;
 const sel = (attrs, opts, v) => `<select ${attrs}>${opts.map(([k, l]) => `<option value="${esc(k)}" ${String(k) === String(v ?? '') ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select>`;
-
-function landingView(){
-  const mine = view.myTrips || Dir.known();
-  return `<div class="land"><div class="land-hero"><img class="lh-logo" src="${BRAND_HERO}" alt="Bracketly. Tennis. Pickleball. Together." width="280" height="280"><p>Draws, live courts, scores and chat for your club tournament.</p></div>
-  <div class="land-in">
-    ${Dir.err ? `<div class="card"><b style="color:var(--red)">Can't reach the server.</b><p class="small">${esc(Dir.err)}</p><p class="small muted">If anonymous sign-ins are off, turn them on in Supabase → Authentication → Sign In / Providers. See SETUP.md.</p></div>` : ''}
-    ${mine.length ? `<h3>Your tournaments</h3>${mine.map(t => `<button class="trow" data-act="opentrip" data-code="${esc(t.code)}"><div style="min-width:0"><b>${esc(t.name)}</b><span>Code ${esc(t.code)}${t.role === 'admin' ? ' · director' : ''}</span></div><i class="btn sm" style="font-style:normal">Open</i></button>`).join('')}` : ''}
-    <div class="ltiles"><button class="ltile go" data-act="newtrip"><b>Run a tournament</b><span>Singles, doubles and mixed. Ratings, auto-pairing, seeding, every draw format, live courts and TV mode.</span></button></div>
-    <div class="card form ljoin"><h3 style="margin-top:0">Got a code?</h3><p class="small muted" style="margin-top:-4px">Enter the 6-character code from the tournament director.</p>
-      <div class="row" style="flex-wrap:nowrap"><input id="joincode" class="codebox" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC123" value="${esc(view.joinCode || '')}"><button class="btn" data-act="join">Join</button></div>
-      ${view.joinErr ? `<p class="warn">${esc(view.joinErr)}</p>` : ''}</div>
-    <p style="text-align:center;margin:14px 0 0"><button class="small" style="text-decoration:underline" data-act="sampletrip">Look around a sample: the Oak &amp; Pheasant Cup</button></p>
-    ${Dir.mode === 'local' ? `<p class="small" style="text-align:center;margin:10px 0 0">Local preview: <button class="small" style="text-decoration:underline;min-height:44px" data-act="sampleclassic">Club Classic (brackets and pools)</button> · <button class="small" style="text-decoration:underline;min-height:44px" data-act="sampleprepub">Before draws are published</button></p>` : ''}
-    <p class="small muted" style="text-align:center;margin-top:18px"><span class="modebadge">${esc(Dir.label())}</span> · v${APP_VERSION}</p>
-  </div></div>`;
-}
 
 /* ================= Entry lists grouped by division =================
    Women's 2.5
@@ -5932,7 +6268,7 @@ function wizardView(){
   const si = i < 0 ? 0 : i;
   return `<div class="focus">
     <header class="ftop"><div><b>${fresh ? 'New tournament' : esc(tripTitle())}</b><span>${fresh ? APP_NAME : step === 'style' ? 'Look' : `Setup · step ${si + 1} of ${WZ_STEPS.length}`}</span></div>
-      <button class="btn alt sm" data-act="${fresh ? 'leavetrip' : 'wzclose'}">${fresh ? 'Cancel' : 'Done'}</button></header>
+      <button class="btn alt sm" data-act="${fresh ? 'leavetrip' : 'wzclose'}">${fresh ? 'Cancel' : 'Return to tournament'}</button></header>
     <div id="scroller"><div class="wz">
       ${fresh ? '' : `<div class="wsteps">${WZ_STEPS.map(([k, l], j) => `<button class="${k === step ? 'on' : ''} ${stepDone(k) ? 'ok' : ''}" data-act="wzstep" data-v="${k}">${j + 1}. ${l}</button>`).join('')}</div>${step !== 'share' ? missingCard(true) : ''}`}
       ${inner}
@@ -6229,30 +6565,6 @@ function wzShare(){
 }
 
 /* ---------- Style (from Roundly) ---------- */
-function wzStyle(){
-  const st = styleOf(), p = palette();
-  const seg = (f, opts) => `<div class="seg">${opts.map(([v, l]) => `<button class="${String(st[f]) === String(v) ? 'on' : ''}" data-act="styleopt" data-f="${f}" data-v="${v}">${l}</button>`).join('')}</div>`;
-  return `<h2 style="margin-top:4px">Look</h2>
-  <p class="wnote">Changes show right away, here and on every phone.</p>
-  <h3>Color theme</h3>
-  <div class="themes">${Object.entries(THEMES).map(([k, t]) => `<button class="${st.preset === k && !st.colors ? 'on' : ''}" data-act="stylepreset" data-v="${k}"><span class="sw"><i style="background:${t.primary}"></i><i style="background:${t.paper}"></i><i style="background:${t.card}"></i><i style="background:${t.accent}"></i></span><b>${t.label}</b><span>${t.note}</span></button>`).join('')}</div>
-  <h3>Custom colors</h3>
-  <div class="card adm"><div class="colorrow">
-    <div><label class="small muted">Main</label><input type="color" value="${p.primary}" data-chg="stylecolor" data-f="primary"></div>
-    <div><label class="small muted">Accent</label><input type="color" value="${p.accent}" data-chg="stylecolor" data-f="accent"></div>
-    <div><label class="small muted">Background</label><input type="color" value="${p.paper}" data-chg="stylecolor" data-f="paper"></div>
-    <div><label class="small muted">Cards</label><input type="color" value="${p.card}" data-chg="stylecolor" data-f="card"></div>
-    <div><label class="small muted">Text</label><input type="color" value="${p.ink}" data-chg="stylecolor" data-f="ink"></div>
-    <div><label class="small muted">Trim</label><input type="color" value="${p.gold}" data-chg="stylecolor" data-f="gold"></div></div>
-    ${st.colors ? `<p class="wnote" style="margin-bottom:0">Custom colors on top of ${esc((THEMES[st.preset] || THEMES.court).label)}. <button class="small" style="text-decoration:underline" data-act="stylereset">Back to the preset</button></p>` : ''}${contrastWarn(p)}</div>
-  <h3>Fonts</h3>
-  <div class="themes">${Object.entries(FONTSETS).map(([k, f]) => `<button class="${st.fonts === k ? 'on' : ''}" data-act="stylefont" data-v="${k}"><b style="font-family:${f.fd.replace(/"/g, "'")}">${f.label}</b><span style="font-family:${f.fb.replace(/"/g, "'")};font-size:13px;color:var(--ink)">Semifinal · Court 3</span><span>${f.note}</span></button>`).join('')}</div>
-  <h3>Layout</h3>
-  <div class="card adm"><label class="small muted">Corners</label>${seg('corners', [['square','Square'],['round','Rounded']])}
-    <label class="small muted" style="margin-top:10px;display:block">Borders</label>${seg('borders', [['bold','Bold ink'],['thin','Thin']])}
-    <label class="small muted" style="margin-top:10px;display:block">Spacing</label>${seg('density', [['comfortable','Comfortable'],['compact','Compact']])}</div>
-  <h3>Preview</h3><div class="card">${(() => { const fake = {id:'x', round:'SF', eventId:'_'}; return `<div class="row"><span class="btn">Button</span><span class="btn alt">Second button</span><span class="pill live">On court</span></div>` })()}</div>`;
-}
 function contrastWarn(p){
   const L = h => { const c = hex2rgb(h).map(x => { x /= 255; return x <= .03928 ? x/12.92 : Math.pow((x+.055)/1.055, 2.4) }); return .2126*c[0] + .7152*c[1] + .0722*c[2] };
   const ratio = (a, b) => { const x = L(a), y = L(b); return (Math.max(x,y) + .05) / (Math.min(x,y) + .05) };
@@ -6263,42 +6575,186 @@ function contrastWarn(p){
 }
 
 /* ---------- Director ---------- */
+/* ================= Phase 3: director workspace, Look, rescheduling, share, TV, landing ================= */
 function adminView(){
-  if (!view.admin) return `<div class="card form" style="margin-top:10px"><h3 style="margin-top:0">Director</h3><p class="muted small">Enter the director PIN to run setup and fix scores.</p><label for="pin">PIN</label><input id="pin" type="password" inputmode="numeric" autocomplete="off" data-1p-ignore data-lpignore="true" value="${esc(view.pin)}"><button class="btn" style="margin-top:8px" data-act="unlock">Unlock</button>${view.me ? '' : `<p class="small" style="margin-bottom:0"><button class="small" style="text-decoration:underline" data-act="tab" data-v="today">Back</button></p>`}</div>`;
-  const c = cfg();
-  return `<div class="adm">
-  <div class="row" style="justify-content:space-between;margin-top:6px"><h2 style="margin:0">Director</h2><div class="row"><button class="btn alt sm" data-act="lock">Lock</button><button class="btn alt sm" data-act="leavetrip">All tournaments</button></div></div>
-  <div class="card" style="margin-top:10px"><p class="small muted" style="margin-top:0">Join code <b style="font-size:16px;letter-spacing:.12em">${esc(TRIP.code)}</b> · ${esc(Dir.label())}</p>
-    <div class="row">${WZ_STEPS.map(([k, l]) => `<button class="btn ${stepDone(k) ? 'alt' : ''} sm" data-act="wzopen" data-v="${k}">${l}</button>`).join('')}</div></div>
-  ${missingCard(false)}
-  <h3>Announce</h3>
-  <div class="card"><p class="small muted" style="margin-top:0">Goes to everyone at the top of chat, and as an alert to anyone with draws and announcements on.</p>
-    <textarea id="announce" rows="2" placeholder="Rain delay: all 11:00 matches start at 11:30.">${esc(view.annDraft || '')}</textarea>
-    <button class="btn sm" style="margin-top:6px" data-act="announce">Send announcement</button></div>
-  <h3>Bets</h3>
-  <div class="card"><label class="aset"><input type="checkbox" data-chg="cfgbool" data-p="bets" ${c.bets !== false ? 'checked' : ''}><span><b>Friendly bets</b><small>Players can post and take bets on matches and events, with a ledger and Venmo settle-up. Turn off to hide the Bets tab.</small></span></label></div>
-  <h3>Scores</h3>
-  <div class="card"><label class="aset"><input type="checkbox" data-chg="openscoring" ${c.openScoring !== false ? 'checked' : ''}><span><b>Players can enter scores</b><small>Anyone with the join code can score a match. Turn off so only directors can.</small></span></label></div>
-  <h3>TV and printing</h3>
-  <div class="card row"><a class="btn alt sm" style="text-decoration:none" href="${esc(tvLink())}" target="_blank" rel="noopener">${ICON.tv} Open TV mode</a><button class="btn alt sm" data-act="print" data-v="">${ICON.print} Print all draws</button></div>
-  <h3>Live sync</h3>
-  <div class="card"><p style="margin:0">${Store.mode === 'live' ? (Store.online ? '<span class="live-dot"></span>Connected. Every phone sees scores and chat as they happen.' : 'Offline right now. Changes are saved on this phone and sync when signal comes back.') + (Store.pending() ? ` ${Store.pending()} changes waiting.` : '') : 'This device only. Connect Supabase to share the tournament.'}</p>${Store.lastErr ? `<p class="small" style="color:var(--red)">Last problem: ${esc(Store.lastErr)}</p>` : ''}</div>
-  <h3>Data</h3>
-  <div class="card row">
-    <button class="btn alt sm" data-act="export">Export backup</button>
-    <label class="btn alt sm">Import backup<input type="file" accept="application/json,.json" hidden data-chg="import"></label>
-    <label class="btn alt sm">Import from old Bracketly<input type="file" accept=".bracketly,application/json,.json" hidden data-chg="importbk"></label>
-    <button class="btn alt sm" data-act="demoscores">Fill demo scores</button>
-    <button class="btn alt sm" data-act="clearscores">Clear all scores</button>
-    <button class="btn alt sm" data-act="clearbets">Clear all bets</button>
-    <button class="btn alt sm" data-act="clearchat">Clear chat</button>
-    <span class="small muted" style="width:100%">Old Bracketly: open the tournament there, use Export, then load the file here. Brackets, scores and branding come across, and the roster is built from the teams.</span>
-    <span class="small muted" style="width:100%">App version ${APP_VERSION}.</span>
-    <button class="btn danger sm" data-act="deltrip">Delete this tournament</button>
-  </div></div>`;
+  if (!view.admin) return `${pageHead('Director tools')}<div class="bk-feature quiet"><h2>Enter the director PIN</h2><p>Directors run setup, publish draws and correct scores. Players don't need this.</p>
+    <label for="pin" class="bk-lbl">Director PIN</label><input id="pin" class="bk-input" type="password" inputmode="numeric" autocomplete="off" data-1p-ignore data-lpignore="true" value="${esc(view.pin || '')}">
+    <button class="bk-btn" data-act="unlock">Unlock on this device</button></div>
+    <button class="bk-btn alt" data-act="tab" data-v="today">Return to the tournament</button>`;
+  syncEngine();
+  const c = cfg() || {}, sec = view.dws || 'run';
+  const evs = state.events, pub = evs.filter(e => e.published && e.matches.length).length, drawn = evs.filter(e => e.matches.length).length;
+  const ms = allMatches(false), done = ms.filter(m => state.results[m.id] && resOf(m.id)).length, live = ms.filter(m => matchStatus(m) === 'live').length;
+  const conf = (() => { try{ return detectConflicts().length + doubleBooked().length }catch(e){ return 0 } })();
+  const tabs = [['run', 'Run tournament'], ['setup', 'Setup'], ['perm', 'Permissions'], ['data', 'Data']];
+  const row = (act, v, title, sub, extra) => `<li><button class="bk-row" data-act="${act}" ${v ? `data-v="${v}"` : ''}><span><b>${esc(title)}</b><span>${esc(sub)}</span></span>${extra || ''}${CHEV}</button></li>`;
+  const stepSub = {basics:'Name, venue, dates, director PIN', events:'Divisions and their formats', players:'Entries, ratings and partners', bracket:'Draws, seeding and publication', courts:'Courts and session times', schedule:'Match times and court placement', welcome:'Welcome page, sponsors, club events', share:'Player, TV and signup links'};
+  let body = '';
+  if (sec === 'run') body = `
+    <div class="bk-feature quiet"><p class="bk-eyebrow">Now</p>
+      <dl class="dstats"><div><dt>Draws published</dt><dd>${pub} of ${drawn || evs.length}</dd></div><div><dt>Results in</dt><dd>${done} of ${ms.length}</dd></div><div><dt>Marked on court</dt><dd>${live}</dd></div></dl>
+      ${conf ? `<p class="bk-note warn">${conf} scheduling conflict${conf === 1 ? '' : 's'}: a player is booked in two places at once. Review the schedule.</p>` : ''}</div>
+    ${missingCard(false)}
+    <ul class="bk-rows">
+      ${row('wzopen', 'schedule', 'Schedule and courts', 'Review times, move matches, check conflicts')}
+      ${row('wzopen', 'bracket', 'Draws and publication', `${pub} published · publishing makes a draw visible to players`)}
+      ${row('tab', 'draws', 'Enter or correct scores', 'Open a match from the draws or courts')}
+      ${row('invite', '', 'Share, TV and print', 'Player link, TV screen, signup link, printable draws')}
+    </ul>
+    <section class="bk-sec"><h2 class="bk-h2">Announcement</h2>
+      <p class="bk-rules">An announcement is pinned at the top of chat for everyone, and alerts anyone with "Draws and announcements" on. Nothing sends until you confirm.</p>
+      <label class="sr" for="announce">Announcement text</label><textarea id="announce" class="bk-input" rows="3" placeholder="Rain delay: all 11:00 matches start at 11:30.">${esc(view.annDraft || '')}</textarea>
+      <button class="bk-btn alt" data-act="announceask">Review and send…</button></section>`;
+  else if (sec === 'setup') body = `<p class="bk-rules">Setup opens step by step. Changes save as you go and reach every phone.</p>
+    <ul class="bk-rows">${WZ_STEPS.map(([k, l]) => row('wzopen', k, l, stepSub[k] || '', stepDone(k) ? '<span class="st ok">Done</span>' : '<span class="st neutral">To do</span>')).join('')}
+      ${row('wzopen', 'style', 'Look', 'Colors, fonts and layout. Preview before applying.')}</ul>`;
+  else if (sec === 'perm') body = `
+    <section class="bk-sec"><h2 class="bk-h2">Who can enter scores</h2>
+      <p class="bk-note ${c.openScoring !== false ? 'warn' : 'ok'}" role="status"><b>${c.openScoring !== false ? 'Open scoring is on.' : 'Directors only.'}</b> ${c.openScoring !== false ? 'Anyone with the join code can enter and correct scores. Each result shows who entered it.' : 'Only people with the director PIN can enter or correct scores.'}</p>
+      <label class="aswitch"><span><b>Players can enter scores</b><small>Turn off so only directors can.</small></span><input type="checkbox" role="switch" data-chg="openscoring" ${c.openScoring !== false ? 'checked' : ''}><i aria-hidden="true"></i></label></section>
+    <section class="bk-sec"><h2 class="bk-h2">Director access</h2>
+      <p class="bk-rules">Anyone with the director PIN can change setup, publish draws and fix scores. Change the PIN in Setup → ${esc((WZ_STEPS.find(s => s[0] === 'basics') || [, 'Basics'])[1])}.</p>
+      <button class="btn alt" data-act="lock">Lock director tools on this device</button></section>
+    <section class="bk-sec"><h2 class="bk-h2">Optional features</h2>
+      <label class="aswitch"><span><b>Friendly bets</b><small>Shows Bets under More. Off hides it for everyone.</small></span><input type="checkbox" role="switch" data-chg="cfgbool" data-p="bets" ${c.bets !== false ? 'checked' : ''}><i aria-hidden="true"></i></label></section>`;
+  else body = `
+    <section class="bk-sec"><h2 class="bk-h2">Live sync</h2><p class="bk-rules">${Store.mode === 'live' ? (Store.online ? 'Connected. Every phone sees scores and chat as they happen.' : 'Offline right now. Changes are saved on this device and sync when signal comes back.') + (Store.pending() ? ` ${Store.pending()} changes waiting.` : '') : 'This device only. Nothing is shared with other phones.'}</p>${Store.lastErr ? `<p class="bk-note err">Last problem: ${esc(Store.lastErr)}</p>` : ''}</section>
+    <section class="bk-sec"><h2 class="bk-h2">Backups</h2><div class="bk-actions">
+      <button class="btn alt" data-act="export">Export backup</button>
+      <label class="btn alt">Import backup<input type="file" accept="application/json,.json" hidden data-chg="import"></label>
+      <label class="btn alt">Import from old Bracketly<input type="file" accept="application/json,.json" hidden data-chg="importbk"></label></div>
+      <p class="bk-rules">Importing replaces this tournament's setup. Export a backup first.</p></section>
+    <details class="bk-disc bk-dz" data-k="dz" ${isOpen('dz') ? 'open' : ''}><summary>Bulk and destructive actions</summary><div>
+      <p class="bk-note warn">These change or remove data for everyone and can't be undone. Each asks you to confirm.</p>
+      <div class="bk-actions"><button class="btn alt" data-act="demoscores">Fill demo scores</button>
+      <button class="btn danger" data-act="clearscores">Clear all scores</button>
+      <button class="btn danger" data-act="clearbets">Clear all bets</button>
+      <button class="btn danger" data-act="clearchat">Clear chat</button>
+      <button class="btn danger" data-act="deltrip">Delete tournament</button></div></div></details>
+    <details class="bk-disc" data-k="diag" ${isOpen('diag') ? 'open' : ''}><summary>Diagnostics</summary><div><p class="bk-diag">Bracketly ${APP_VERSION} · ${esc(Dir.label())} · join code ${esc(TRIP.code)}</p></div></details>`;
+  return `<div class="dws"><div class="dws-top"><button class="bk-link" data-act="tab" data-v="today">‹ Return to the tournament</button></div>
+    <p class="bk-eyebrow">Director workspace</p>${pageHead(tripTitle())}<p class="bk-meta">Join code <b>${esc(TRIP.code)}</b></p>
+    <div class="seg2 dws-tabs" role="group" aria-label="Director sections">${tabs.map(([k, l]) => `<button data-act="dws" data-v="${k}" aria-pressed="${sec === k}">${l}</button>`).join('')}</div>
+    ${body}</div>`;
 }
 
+/* ---------- Look: preview on this device, then apply for everyone ---------- */
+function styleEdit(fn){ if (!view.styleDraft) view.styleDraft = JSON.parse(JSON.stringify((cfg() || {}).style || {})); fn(view.styleDraft) }
+function wzStyle(){
+  const st = styleOf(), p = palette(), dirty = !!view.styleDraft && JSON.stringify(view.styleDraft) !== JSON.stringify((cfg() || {}).style || {});
+  const seg = (f, opts) => `<div class="seg">${opts.map(([v, l]) => `<button class="${String(st[f]) === String(v) ? 'on' : ''}" aria-pressed="${String(st[f]) === String(v)}" data-act="styleopt" data-f="${f}" data-v="${v}">${l}</button>`).join('')}</div>`;
+  return `<h2 style="margin-top:4px">Look</h2>
+  <div class="bk-note ${dirty ? 'warn' : ''}" role="status">${dirty ? '<b>Previewing on this device only.</b> Players still see the current look until you apply.' : 'Pick a theme or adjust colors. You\'ll see a preview here first; nothing changes for players until you apply.'}</div>
+  <div class="bk-actions lookbar"><button class="btn" data-act="styleapply" ${dirty ? '' : 'disabled'}>Apply for everyone</button><button class="btn alt" data-act="stylecancel" ${dirty ? '' : 'disabled'}>Cancel preview</button><button class="btn alt" data-act="stylecourtside">Courtside preset</button></div>
+  <h3>Color theme</h3>
+  <div class="themes">${Object.entries(THEMES).map(([k, t]) => `<button class="${st.preset === k && !st.colors ? 'on' : ''}" aria-pressed="${st.preset === k && !st.colors}" data-act="stylepreset" data-v="${k}"><span class="sw"><i style="background:${t.primary}"></i><i style="background:${t.paper}"></i><i style="background:${t.card}"></i><i style="background:${t.accent}"></i></span><b>${t.label}</b><span>${t.note}</span></button>`).join('')}</div>
+  <h3>Custom colors</h3>
+  <div class="card adm"><div class="colorrow">
+    ${[['primary', 'Main'], ['accent', 'Accent'], ['paper', 'Background'], ['card', 'Cards'], ['ink', 'Text'], ['gold', 'Trim']].map(([f, l]) => `<div><label class="small muted" for="col-${f}">${l}</label><input id="col-${f}" type="color" value="${p[f]}" data-chg="stylecolor" data-f="${f}"></div>`).join('')}</div>
+    ${st.colors ? `<p class="wnote" style="margin-bottom:0">Custom colors on top of ${esc((THEMES[st.preset] || THEMES.courtside).label)}. <button class="small" style="text-decoration:underline;min-height:44px" data-act="stylereset">Back to the preset colors</button></p>` : ''}${contrastWarn(p)}</div>
+  <h3>Fonts</h3>
+  <div class="themes">${Object.entries(FONTSETS).map(([k, f]) => `<button class="${st.fonts === k ? 'on' : ''}" aria-pressed="${st.fonts === k}" data-act="stylefont" data-v="${k}"><b style="font-family:${f.fd.replace(/"/g, "'")}">${f.label}</b><span style="font-family:${f.fb.replace(/"/g, "'")};font-size:13px;color:var(--ink)">Semifinal · Court 3</span><span>${f.note}</span></button>`).join('')}</div>
+  <h3>Layout</h3>
+  <div class="card adm"><p class="small muted">Corners</p>${seg('corners', [['square','Square'],['round','Rounded']])}
+    <p class="small muted" style="margin-top:10px">Borders</p>${seg('borders', [['bold','Bold ink'],['thin','Thin']])}
+    <p class="small muted" style="margin-top:10px">Spacing</p>${seg('density', [['comfortable','Comfortable'],['compact','Compact']])}</div>
+  <h3>Preview</h3><div class="lookprev"><p class="bk-eyebrow">Men's 4.0 · Semifinal</p><p class="bk-h2" style="margin:2px 0 8px">Saturday 10:30 AM · ${esc(courtName(1))}</p><div class="bk-actions"><span class="btn">Button</span><span class="btn alt">Second button</span>${stChip({cls:'live', label:'On court'})}${stChip({cls:'ok', label:'Final'})}</div></div>`;
+}
 
+/* ---------- Rescheduling: current vs proposed, then confirm ---------- */
+function moveSheet(){
+  syncEngine();
+  const m = findMatch(view.matchId); if (!m) return '';
+  const mv = view.mv && view.mv.id === m.id ? view.mv : {id:m.id, slot:m.slotIdx, court:m.court};
+  const slot = mv.slot, court = mv.court, same = slot === m.slotIdx && court === m.court;
+  const slotTxt = i => TIME_SLOTS[i] ? `${TIME_SLOTS[i][0]} · ${TIME_SLOTS[i][1]}` : 'Time to be set';
+  const all = allMatches(false);
+  const occ = all.find(o => o.id !== m.id && o.slotIdx === slot && o.court === court);
+  const mine = getKnownMatchPlayers(m);
+  const clash = all.filter(o => o.id !== m.id && o !== occ && o.slotIdx === slot && getKnownMatchPlayers(o).some(p => mine.includes(p)));
+  const occClash = occ && typeof m.slotIdx === 'number' ? all.filter(o => o.id !== occ.id && o.id !== m.id && o.slotIdx === m.slotIdx && getKnownMatchPlayers(o).some(p => getKnownMatchPlayers(occ).includes(p))) : [];
+  const affected = [...new Set(mine.concat(occ ? getKnownMatchPlayers(occ) : []))];
+  const warns = [];
+  if (occ) warns.push(`${courtName(court)} already has ${sideLabel(occ, 'team1', true)} vs ${sideLabel(occ, 'team2', true)} then. They swap into this match's current place${typeof m.slotIdx === 'number' ? ` (${slotTxt(m.slotIdx)}, ${courtName(m.court)})` : ''}.`);
+  if (occ && resOf(occ.id) && resOf(occ.id).w) warns.push('That match already has a result.');
+  clash.forEach(o => warns.push(`${getKnownMatchPlayers(o).filter(p => mine.includes(p)).join(', ')} also play${''} ${(findEvent(o.eventId) || {}).name || ''} at that time on ${courtName(o.court)}.`));
+  occClash.forEach(o => warns.push(`After the swap, ${getKnownMatchPlayers(o).filter(p => getKnownMatchPlayers(occ).includes(p)).join(', ')} would be double-booked at ${slotTxt(m.slotIdx)}.`));
+  const sd = slotDate(slot); if (sd && sd.getTime() < Date.now() - 30 * 60000) warns.push('That time has already passed.');
+  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="mv-h">
+    <div class="sh-top"><p class="bk-eyebrow">${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundName(m))}</p><button class="hclose" data-act="closemodal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+    <h2 class="sh-h" id="mv-h">Move match</h2>
+    <p class="bk-meta">${esc(sideLabel(m, 'team1'))} vs ${esc(sideLabel(m, 'team2'))}</p>
+    <div class="mvcmp"><div><span class="bk-eyebrow">Current</span><b>${esc(slotTxt(m.slotIdx))}</b><span>${esc(courtName(m.court))}${m.pin ? ' · pinned' : ''}</span></div>
+      <div><span class="bk-eyebrow">Proposed</span><b>${same ? 'No change yet' : esc(slotTxt(slot))}</b><span>${same ? '' : esc(courtName(court))}</span></div></div>
+    <label class="bk-lbl" for="mv-slot">New time</label><select id="mv-slot" class="bk-input" data-chg="mvprev">${TIME_SLOTS.map((s, i) => `<option value="${i}" ${i === slot ? 'selected' : ''}>${esc(s[0])} · ${esc(s[1])}</option>`).join('')}</select>
+    <label class="bk-lbl" for="mv-court">New court</label><select id="mv-court" class="bk-input" data-chg="mvprev">${((cfg() || {}).courts || []).map((c, i) => `<option value="${i + 1}" ${i + 1 === court ? 'selected' : ''}>${esc(courtName(i + 1))}</option>`).join('')}</select>
+    ${same ? '' : `<section class="bk-sec" aria-live="polite"><h3 class="bk-h2">What happens</h3>
+      ${warns.length ? warns.map(w => `<p class="bk-note warn">${esc(w)}</p>`).join('') : '<p class="bk-note ok">No conflicts found for the players we know.</p>'}
+      ${affected.length ? `<p class="bk-rules"><b>Affected players:</b> ${esc(affected.join(', '))}.</p>` : ''}
+      <p class="bk-rules">The match is pinned to the new place. Players with "My matches" alerts see a "moved" alert the next time their phone syncs, and the schedule shows it as changed. Nothing is sent until you confirm.</p></section>`}
+    <button class="bk-btn" data-act="domove" data-id="${esc(m.id)}" ${same ? 'disabled' : ''}>Confirm move</button>
+    ${m.pin ? `<button class="bk-btn alt" data-act="unpin" data-id="${esc(m.id)}">Unpin (let the app place it)</button>` : ''}
+    <button class="bk-btn alt" data-act="closemodal">Cancel</button></div></div>`;
+}
+/* Remember where a match was first placed before a director move, so the schedule can say "Time changed". */
+function stampMoved(evs, before){
+  evs.flatMap(e => e.matches).forEach(m => { const b = before[m.id]; if (!b) return;
+    if (b.when === m.when && b.court === m.court) return;
+    const from = m.moved && m.moved.from ? m.moved.from : b;
+    if (from.when === m.when && from.court === m.court) delete m.moved; else m.moved = {from, at:Date.now()} });
+}
+
+/* ---------- Share destinations ---------- */
+function shareCards(){
+  syncEngine();
+  const c = cfg() || {}, pub = state.events.filter(e => e.published && e.matches.length).length;
+  const dest = (key, label, purpose, url, ready, stateTxt) => `<section class="dest"><div class="dest-h"><h3 class="bk-h2">${label}</h3>${stChip(ready ? {cls:'ok', label:stateTxt} : {cls:'neutral', label:stateTxt})}</div>
+    <p class="bk-rules">${purpose}</p>${url ? `<code>${esc(url)}</code><div class="bk-actions"><button class="btn alt" data-act="copy" data-v="${esc(url)}">Copy ${label.toLowerCase()} link</button>${key === 'tv' ? `<a class="btn alt" href="${esc(url)}" target="_blank" rel="noopener">Open TV screen<span class="sr"> (new tab)</span></a>` : ''}</div><div class="qrs">${qrBox(url, label)}</div>` : ''}</section>`;
+  return `<div class="invite"><div class="lbl">Join code</div><div class="code">${esc(TRIP.code)}</div><p class="small" style="margin:4px 0 10px">Anyone with the code can follow along. Only directors with the PIN can change setup.</p>
+    <div class="row" style="justify-content:center">${navigator.share ? `<button class="btn" data-act="shareinvite">Share</button>` : ''}<a class="btn alt" href="sms:${isIOS() ? '&' : '?'}body=${encodeURIComponent(`${tripTitle()}: ${inviteLink()}\nJoin code: ${TRIP.code}`)}">Text it</a></div></div>
+  ${dest('player', 'Player', 'For players and fans: pick a name or just watch. Shows the schedule, draws and courts.', inviteLink(), pub > 0, pub ? `${pub} draw${pub === 1 ? '' : 's'} published` : 'No draws published yet')}
+  ${dest('tv', 'TV', 'For a screen by the courts. Shows courts, up next and results in large type, and rotates through published draws.', tvLink(), pub > 0, pub ? 'Ready' : 'Will show courts only')}
+  ${dest('signup', 'Signup', c.signupsOpen ? 'Players enter their name, rating and partner.' : 'Players enter their name, rating and partner. Open signups on the Players step to get this link.', c.signupsOpen ? signupLink() : '', !!c.signupsOpen, c.signupsOpen ? 'Open' : 'Closed')}
+  <section class="dest"><div class="dest-h"><h3 class="bk-h2">Print</h3></div><p class="bk-rules">Printable draws for the desk or a notice board. Check the print preview before printing.</p><div class="bk-actions"><button class="btn alt" data-act="print" data-v="">Print draws</button></div></section>
+  ${Dir.mode === 'local' ? `<p class="bk-note warn">This tournament only lives on this device, so these links won't work on other phones.</p>` : ''}`;
+}
+
+/* ---------- TV: distance-readable, bounded ---------- */
+function tvView(){
+  syncEngine();
+  const tiles = courtBoard(), rec = recentResults(4), nxt = upNext(4), evs = visibleEvents().filter(e => e.published && e.matches.length);
+  const ph = photos().slice(0, 8), slides = evs.length + 1 + (ph.length ? 1 : 0);
+  const k = Math.floor(Date.now() / 25000) % slides, ev = k > 0 && k <= evs.length ? evs[k - 1] : null, showPhotos = ph.length && k === slides - 1 && k > 0;
+  const now = new Date();
+  const head = `<header class="tvh">${crest(64)}<div><h1>${esc(tripTitle())}</h1><span>${esc(now.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'}))}${(cfg() || {}).club ? ' · ' + esc(cfg().club) : ''}</span></div><div class="tvclock">${now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})}</div></header>`;
+  if (showPhotos) return `<div class="tv">${head}<section class="tvphotos">${ph.map(p => `<figure><img src="${esc(p.url)}" alt=""><figcaption>${esc(p.caption || photoBy(p))}</figcaption></figure>`).join('')}</section></div>`;
+  const tK = dayKey(isoDay(now)), at = i => TIME_SLOTS[i] ? (TIME_SLOTS[i][0] === tK ? TIME_SLOTS[i][1] : `${TIME_SLOTS[i][0].split(',')[0]} ${TIME_SLOTS[i][1]}`) : '';
+  const vs = m => `${esc(sideLabel(m, 'team1', true))} <i>vs</i> ${esc(sideLabel(m, 'team2', true))}`;
+  return `<div class="tv tv2">${head}
+    ${ev ? `<section class="tvdraw"><h2>${esc(ev.name)}</h2>${eventDraw(ev, true)}</section>` : `
+    <section class="tvgrid"><div><h2>Courts</h2><div class="tvcourts">${tiles.slice(0, 6).map(t => { const st = t.cur ? matchStatus(t.cur) : ''; return `<div class="tvc2 ${t.cur ? 'busy' : ''}"><div class="tvc2-h"><b>${esc(courtName(t.c))}</b><span class="st ${t.cur ? 'live' : 'neutral'}">${t.cur ? (st === 'live' ? 'In progress' : 'Scheduled now') : 'No match in progress'}</span></div>${t.cur ? `<p class="tvc2-t">${vs(t.cur)}</p><p class="tvc2-s">${esc((findEvent(t.cur.eventId) || {}).name || '')}</p>` : ''}${t.nxt ? `<p class="tvc2-n">Next ${esc(at(t.nxt.slotIdx))} · ${vs(t.nxt)}</p>` : ''}</div>` }).join('')}${tiles.length > 6 ? `<p class="tvmore">+ ${tiles.length - 6} more courts on the app</p>` : ''}</div></div>
+    <div><h2>Up next</h2>${nxt.map(m => `<div class="tvrow"><b>${esc(at(m.slotIdx))} · ${esc(courtName(m.court))}</b><div>${vs(m)}</div><span>${esc((findEvent(m.eventId) || {}).name || '')}</span></div>`).join('') || '<p class="tvempty">Nothing else scheduled today.</p>'}</div>
+    <div><h2>Results</h2>${rec.map(m => { const w = winnerSlot(m); return `<div class="tvrow"><div><strong>${esc(sideLabel(m, w, true))}</strong> d. ${esc(sideLabel(m, w === 'team1' ? 'team2' : 'team1', true))}</div><b class="tvsc">${esc(scoreText(m) || (resOf(m.id) || {}).note || '')}</b><span>${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundName(m))}</span></div>` }).join('') || '<p class="tvempty">No results yet.</p>'}</div></section>`}
+    ${sponsorsHtml()}
+  </div>`;
+}
+
+/* ---------- Landing / switcher ---------- */
+function landingView(){
+  if (view.resolving) return `<div class="land2"><div class="bk-loading" role="status" aria-live="polite"><img src="${BRAND_HERO}" alt="" width="96" height="96"><p>Opening tournament ${esc(view.resolving)}…</p></div></div>`;
+  const mine = view.myTrips || Dir.known();
+  return `<div class="land2"><div class="land2-hero"><img class="lh-logo" src="${BRAND_HERO}" alt="Bracketly. Tennis. Pickleball. Together." width="160" height="160"><p>Draws, live courts, scores and chat for your club tournament.</p></div>
+  <section class="bk-feature" aria-labelledby="join-h"><h1 class="bk-h2" id="join-h">Join a tournament</h1><p class="bk-rules">Enter the code from the tournament director, or open the link they shared.</p>
+    <label class="sr" for="joincode">Join code</label><div class="joinrow"><input id="joincode" class="bk-input codebox" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC123" value="${esc(view.joinCode || '')}"><button class="btn" data-act="join">Join</button></div>
+    ${view.joinErr ? `<p class="bk-note err" role="alert">${esc(view.joinErr)}</p>` : ''}</section>
+  ${Dir.err ? `<p class="bk-note err" role="alert"><b>Can't reach the server.</b> Joining and recent tournaments may not load. Details are under Diagnostics.</p>` : ''}
+  ${mine.length ? `<section class="bk-sec"><h2 class="bk-h2">Recent tournaments</h2><ul class="bk-rows">${mine.map(t => `<li><button class="bk-row" data-act="opentrip" data-code="${esc(t.code)}"><span><b>${esc(t.name)}</b><span>Code ${esc(t.code)}${t.role === 'admin' ? ' · director on this device' : ''}</span></span>${CHEV}</button></li>`).join('')}</ul></section>` : ''}
+  <section class="bk-sec"><h2 class="bk-h2">Organizers</h2><ul class="bk-rows"><li><button class="bk-row" data-act="newtrip"><span><b>Run a tournament</b><span>Set up events, draws, courts and a schedule</span></span>${CHEV}</button></li>
+    <li><button class="bk-row" data-act="sampletrip"><span><b>Look around a sample</b><span>The Oak &amp; Pheasant Cup</span></span>${CHEV}</button></li></ul>
+    ${Dir.mode === 'local' ? `<h3 class="bk-h2">Local preview samples</h3><ul class="bk-rows"><li><button class="bk-row" data-act="sampleclassic"><span><b>Club Classic</b><span>Brackets and pools, with results. This device only.</span></span>${CHEV}</button></li><li><button class="bk-row" data-act="sampleprepub"><span><b>Club Classic before publishing</b><span>Draws not published yet. This device only.</span></span>${CHEV}</button></li></ul>` : ''}</section>
+  <details class="bk-disc" data-k="ldiag" ${isOpen('ldiag') ? 'open' : ''}><summary>Diagnostics</summary><div><p class="bk-diag">Bracketly v${APP_VERSION} · ${esc(Dir.label())}</p>${Dir.err ? `<p class="bk-diag">${esc(Dir.err)}</p><p class="bk-diag">If anonymous sign-ins are off, turn them on in Supabase → Authentication → Sign In / Providers. See SETUP.md.</p>` : ''}</div></details>
+  </div>`;
+}
 /* ================= Render ================= */
 const app = document.getElementById('app');
 let raf = 0;
@@ -6363,6 +6819,7 @@ function finishDraw(keep, fid, sel){
 function toast(msg){ const t = document.getElementById('toast'); if (!t) return; t.textContent = msg; t.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('on'), 2600) }
 function setPath(o, path, v){ const ks = path.split('.'); let x = o; ks.slice(0, -1).forEach(k => { if (x[k] == null) x[k] = {}; x = x[k] }); x[ks[ks.length - 1]] = v }
 function updateURL(){ try{ const qs = new URLSearchParams(location.search); qs.delete('join'); if (!view.tv) qs.delete('tv'); if (!view.signup) qs.delete('signup'); const q = qs.toString(); history.replaceState(null, '', location.pathname + (q ? '?' + q : '') + (TRIP ? '#t=' + TRIP.code : '')) }catch(e){} }
+function dropStyleDraft(){ if (view.styleDraft){ view.styleDraft = null; setTimeout(restyleLogos, 300); toast('Look preview discarded. Nothing changed for players.') } }
 const evsCopy = () => events().map(e => normEvent(JSON.parse(JSON.stringify(e))));
 function withEvent(id, fn){ const evs = evsCopy(), ev = evs.find(e => e.id === id); if (!ev) return; const out = fn(ev, evs); saveEvents(evs); try{ inferFromEvents() }catch(e){ console.warn('infer', e) } return out }
 function needAdmin(){ if (!view.admin){ toast('Unlock with the director PIN first.'); view.tab = 'admin'; view.screen = 'app'; return true } return false }
@@ -6422,9 +6879,9 @@ const ACT = {
   async sampleclassic(){ if (Dir.mode !== 'local') return; const t = await Dir.create('Sample Club Classic', '1234'); await enterTrip(t); buildSampleClassic(); view.admin = false; TRIP.role = 'player'; view.tab = 'today'; toast('Local sample. Director PIN 1234.') },
   async sampleprepub(){ if (Dir.mode !== 'local') return; const t = await Dir.create('Sample Club Classic', '1234'); await enterTrip(t); buildSampleClassic(); Store.keys('m:').forEach(k => Store.del(k)); Store.keys('chat:').forEach(k => Store.del(k)); saveEvents(evsCopy().map(e => Object.assign(e, {published:false}))); view.admin = false; TRIP.role = 'player'; view.tab = 'today'; toast('Local sample before publication. Director PIN 1234.') },
   /* wizard */
-  wzstep(el){ view.wz = Object.assign(view.wz || {}, {step:el.dataset.v}); view.resetScroll = true },
+  wzstep(el){ dropStyleDraft(); view.wz = Object.assign(view.wz || {}, {step:el.dataset.v}); view.resetScroll = true },
   wzopen(el){ if (needAdmin()) return; try{ inferFromEvents() }catch(e){} view.screen = 'wizard'; view.wz = {step:el.dataset.v || 'basics'}; view.modal = null; view.resetScroll = true },
-  wzclose(){ view.screen = 'app'; view.wz = null; view.tab = 'today'; view.resetScroll = true; if (!view.me){ view.me = GUEST; LS.set(TK('me'), GUEST) } },
+  wzclose(){ dropStyleDraft(); view.screen = 'app'; view.wz = null; view.tab = 'today'; view.resetScroll = true; if (!view.me){ view.me = GUEST; LS.set(TK('me'), GUEST) } },
   togglemissing(){ view.wz.showMissing = !view.wz.showMissing },
   cfgset(el){ const c = cfg(); let v = el.dataset.v; if (el.dataset.num) v = +v; setPath(c, el.dataset.p, v); Store.set('config', c);
     if (el.dataset.p === 'sport') saveEvents(evsCopy().map(e => { if (!hasResults(e)){ e.scoring = {main:sport().main, consolation:sport().cons}; e.scoringOverride = e.scoring } return e })) },
@@ -6557,10 +7014,13 @@ const ACT = {
   publish(el){ withEvent(el.dataset.id, ev => { ev.published = !ev.published; if (ev.published) Store.set('chat:' + uid(), {auto:true, text:`${ev.name} draw is out.`, ts:Date.now()}) }) },
   publishall(){ const evs = evsCopy(); const n = evs.filter(e => isDrawn(e) && !e.published); n.forEach(e => e.published = true); saveEvents(evs); if (n.length) Store.set('chat:' + uid(), {auto:true, text:`Draws are out: ${n.map(e => e.name).join(', ')}.`, ts:Date.now()}) },
   sday(el){ view.sday = el.dataset.v },
-  movemenu(el){ if (needAdmin()) return; view.matchId = el.dataset.id; view.modal = 'move' },
-  domove(el){ const s = +(document.getElementById('mv-slot') || {}).value, c = +(document.getElementById('mv-court') || {}).value; const evs = evsCopy();
-    setMatchSlot(evs, el.dataset.id, s, c); saveEvents(evs); view.modal = null; toast('Moved and pinned. If a match was there, they swapped.') },
-  unpin(el){ const evs = evsCopy(); setMatchSlot(evs, el.dataset.id, ''); saveEvents(evs); view.modal = null; toast('The app will place this match again.') },
+  movemenu(el){ if (needAdmin()) return; view.matchId = el.dataset.id; view.modal = 'move'; view.mv = null },
+  dws(el){ view.dws = el.dataset.v; view.resetScroll = true },
+  async announceask(){ if (needAdmin()) return; const t = ((document.getElementById('announce') || {}).value || view.annDraft || '').trim(); if (!t) return toast('Write the announcement first.'); if (!await ask(`Send this announcement to everyone?\n\n"${t}"`, {ok:'Send announcement'})) return; Store.set('chat:' + uid(), {ann:true, by:view.me, text:t, ts:Date.now(), reactions:{}}); view.annDraft = ''; toast('Announcement sent.') },
+  domove(el){ if (needAdmin()) return; const s = +(document.getElementById('mv-slot') || {}).value, c = +(document.getElementById('mv-court') || {}).value; const evs = evsCopy();
+    const before = {}; evs.forEach(e => e.matches.forEach(m => { before[m.id] = {when:m.when || null, court:m.court || null} }));
+    setMatchSlot(evs, el.dataset.id, s, c); stampMoved(evs, before); saveEvents(evs); view.modal = null; view.mv = null; toast('Moved and pinned. If a match was there, they swapped.') },
+  unpin(el){ if (needAdmin()) return; const evs = evsCopy(); const before = {}; evs.forEach(e => e.matches.forEach(m => { before[m.id] = {when:m.when || null, court:m.court || null} })); setMatchSlot(evs, el.dataset.id, ''); stampMoved(evs, before); saveEvents(evs); view.modal = null; view.mv = null; toast('The app will place this match again.') },
   rtopen(el){ view.rtOpen = view.rtOpen === el.dataset.id ? null : el.dataset.id },
   divread(){ const t = ((document.getElementById('divpaste') || {}).value || view.divPaste || ''); const dl = parseDivisionList(t); view.divErr = null;
     if (!dl) return view.divErr = 'No divisions found. Put each division name on its own line (like "Women\'s 3.0"), with its teams under it.'; view.divImp = {parsed:dl} },
@@ -6681,26 +7141,54 @@ const ACT = {
   announce(){ if (needAdmin()) return; const t = ((document.getElementById('announce') || {}).value || '').trim(); if (!t) return toast('Write the announcement first.'); Store.set('chat:' + uid(), {ann:true, by:view.me, text:t, ts:Date.now(), reactions:{}}); view.annDraft = ''; toast('Announcement sent.') },
   /* photos */
   ctab(el){ view.ctab = el.dataset.v; if (view.ctab === 'chat') view.stick = true },
-  photowall(){ view.tab = 'chat'; view.ctab = 'photos'; view.resetScroll = true },
+  photowall(){ view.tab = 'chat'; view.ctab = 'photos'; view.resetScroll = true; view.chatMark = chatSeen() },
   photoopen(el){ view.photo = el.dataset.k; view.modal = 'photo' },
   photolike(el){ const p = Store.get(el.dataset.k); if (!p || !view.me || view.me === GUEST) return; const l = p.likes || []; Store.set(el.dataset.k, Object.assign({}, p, {likes:l.includes(view.me) ? l.filter(x => x !== view.me) : l.concat(view.me)})) },
   async photodel(el){ const k = el.dataset.k, p = Store.get(k); if (!p) return; if (!await ask('Remove this photo from the wall?')) return; if (k.startsWith('chat:')) Store.set(k, Object.assign({}, p, {img:null})); else { Store.del(k); if (p.chat){ const c = Store.get(p.chat); if (c) Store.set(p.chat, Object.assign({}, c, {img:null})) } } view.modal = null; toast('Removed.') },
   /* app */
-  tab(el){ view.tab = el.dataset.v; view.modal = null; view.reactOpen = null; view.resetScroll = true; if (view.tab === 'chat') view.stick = true; view.q = '' },
+  tab(el){ view.tab = el.dataset.v; view.modal = null; view.reactOpen = null; view.resetScroll = true; if (view.tab === 'chat'){ view.stick = true; view.chatMark = chatSeen() } view.q = '' },
   day(el){ view.day = el.dataset.v },
+  cfilter(el){ view.cf = el.dataset.v },
+  sfmine(){ view.sf = Object.assign({}, view.sf || {}); view.sf.mine = !view.sf.mine },
+  sfclear(){ view.sf = {} },
+  sgrid(){ view.sgrid = !view.sgrid },
   who(){ view.modal = 'who'; view.q = '' },
   pickme(el){ view.me = el.dataset.id; LS.set(TK('me'), view.me); view.modal = null; view.resetScroll = true; view.q = ''; if (view.me !== GUEST) Dir.setMyPlayer(view.me); if (view.tab === 'admin' && !view.admin) view.tab = 'today'; toast(view.me === GUEST ? 'Enjoy the tennis.' : `Welcome, ${firstName(view.me)}.`) },
   closemodal(el, e){ if (e && e.target.closest('[data-stop]') && el.classList.contains('modal')) return; view.modal = null },
   invite(){ view.modal = 'invite' },
   openmatch(el){ view.matchId = el.dataset.id; view.modal = 'match'; view.sm = null },
   /* Phase 1 redesign: score entry -> review -> confirm (savescore), draw navigation */
-  scoreedit(el){ view.sm = {id:el.dataset.id, mode:'edit', rows:view.sm && view.sm.id === el.dataset.id ? view.sm.rows : null} },
+  scoreedit(el){ const keep = view.sm && view.sm.id === el.dataset.id && view.sm.mode !== 'retire' && view.sm.mode !== 'retreview' ? view.sm.rows : null; view.sm = {id:el.dataset.id, mode:'edit', rows:keep} },
   scoreview(el){ view.sm = {id:el.dataset.id, mode:'view'} },
+  scmode(el){ syncEngine(); const m = findMatch(el.dataset.id); if (!m) return; const prev = view.sm && view.sm.id === m.id ? view.sm : {}; const r = resOf(m.id) || {};
+    if (el.dataset.v === 'retire') view.sm = {id:m.id, mode:'retire', rows:prev.mode === 'retreview' || prev.mode === 'retire' ? prev.rows : (prev.rows || savedRows(m, scoreRowsFor(m))), ret:prev.ret || r.retired || null};
+    else view.sm = {id:m.id, mode:'wo'} },
+  retpick(el){ if (view.sm) { view.sm.ret = el.dataset.v; view.sm.err = null } },
+  retreview(el){ syncEngine(); const m = findMatch(el.dataset.id); if (!m || !view.sm) return; const rows = readScoreInputs(m), chk = checkPartialRows(rows);
+    if (!view.sm.ret) { view.sm.rows = rows; view.sm.err = 'Choose who retired.'; return }
+    if (chk.err) { view.sm.rows = rows; view.sm.err = chk.err; return }
+    view.sm = {id:m.id, mode:'retreview', rows, ret:view.sm.ret} },
+  saveret(el){
+    if (!canScore()) return toast('Only directors enter scores here.');
+    syncEngine(); const m = findMatch(el.dataset.id), sm = view.sm; if (!m || !sm || !sm.ret) return;
+    const part = (checkPartialRows(sm.rows).rows || []), ws = sm.ret === 'team1' ? 'team2' : 'team1', w = ccW(m, ws);
+    const s = !part.length ? null : m.proAm ? part.map(r => ({t1:String(r[0] ?? 0), t2:String(r[1] ?? 0)})) : part;
+    const note = `${sideLabel(m, sm.ret, true)} retired`;
+    const fixed = writeResult(m, {w, s, note, outcome:'retired', retired:sm.ret, by:view.me, ts:Date.now(), names:namesIn(m), ev:(findEvent(m.eventId) || {}).name, txt:`${resultText(m, w)} ${rowsText(part, ws)} (retired)`.replace(/\s+/g, ' ').trim()});
+    view.modal = null; view.sm = null; toast(fixed ? 'Result corrected.' : 'Result saved.'); settleBets();
+  },
+  savewo(el){
+    if (!canScore()) return toast('Only directors enter scores here.');
+    syncEngine(); const m = findMatch(el.dataset.id); if (!m) return; const slot = el.dataset.v, w = ccW(m, slot);
+    return ask(`Record a walkover: ${sideLabel(m, slot)} advances?\n\nNo score is saved with this result.`, {ok:'Record walkover'}).then(ok => { if (!ok) return;
+      const fixed = writeResult(m, {w, s:null, note:'Walkover', outcome:'walkover', by:view.me, ts:Date.now(), names:namesIn(m), ev:(findEvent(m.eventId) || {}).name, txt:resultText(m, w) + ' (walkover)'});
+      view.modal = null; view.sm = null; toast(fixed ? 'Result corrected.' : 'Result saved.'); settleBets() }) },
   reviewscore(el){
     if (!canScore()) return toast('Only directors enter scores here.');
     syncEngine(); const m = findMatch(el.dataset.id); if (!m) return;
-    const raw = readScoreInputs(m), chk = checkScoreRows(raw);
-    view.sm = chk.err ? {id:m.id, mode:'edit', rows:raw, err:chk.err} : {id:m.id, mode:'review', rows:raw};
+    const loose = el.dataset.v === 'loose' && view.admin;
+    const raw = readScoreInputs(m), chk = checkScoreRows(raw, m, {loose});
+    view.sm = chk.err ? {id:m.id, mode:'edit', rows:raw, err:chk.err, fmt:chk.fmt} : {id:m.id, mode:'review', rows:raw, loose};
   },
   confirmwin(el){ syncEngine(); const m = findMatch(el.dataset.id); if (!m) return; const slot = el.dataset.v === 'A' ? 'team1' : el.dataset.v === 'B' ? 'team2' : el.dataset.v;
     return ask(`Record ${sideLabel(m, slot)} as the winner by retirement or walkover?\n\nNo set scores are saved with this result.`, {ok:'Record result'}).then(ok => { if (ok) return ACT.setwin(el) }) },
@@ -6714,13 +7202,15 @@ const ACT = {
     if (!canScore()) return toast('Only directors enter scores here.');
     syncEngine(); const m = findMatch(el.dataset.id); if (!m) return;
     const raw = view.sm && view.sm.id === m.id && view.sm.mode === 'review' && view.sm.rows ? view.sm.rows : readScoreInputs(m);
-    const chk = checkScoreRows(raw);
-    if (chk.err){ view.sm = {id:m.id, mode:'edit', rows:raw, err:chk.err}; return toast(chk.err) }
+    const loose = !!(view.sm && view.sm.id === m.id && view.sm.loose && view.admin);
+    const chk = checkScoreRows(raw, m, {loose});
+    if (chk.err){ view.sm = {id:m.id, mode:'edit', rows:raw, err:chk.err, fmt:chk.fmt}; return toast(chk.err) }
     const rows = chk.rows; let w = chk.w;
     if (m.sessionId != null) w = w === 'team1' ? 'A' : 'B';
     const s = m.proAm ? rows.map(r => ({t1:String(r[0] ?? 0), t2:String(r[1] ?? 0)})) : rows;
-    Store.set('m:' + m.id, {w, s, by:view.me, ts:Date.now(), names:namesIn(m), ev:(findEvent(m.eventId) || {}).name, txt:`${resultText(m, w)} ${scoreText(m) || formatScoreString(rows)}`.trim()});
-    view.modal = null; view.sm = null; toast('Score saved.'); settleBets();
+    const rec = {w, s, by:view.me, ts:Date.now(), names:namesIn(m), ev:(findEvent(m.eventId) || {}).name, txt:`${resultText(m, w)} ${rowsText(rows, w)}`.trim()}; if (loose) rec.override = true;
+    const fixed = writeResult(m, rec);
+    view.modal = null; view.sm = null; toast(fixed ? 'Result corrected.' : 'Score saved.'); settleBets();
     const ev = findEvent(m.eventId); Store.set('chat:' + uid(), {auto:true, text:`${ev.name}: ${sideLabel(m, w === 'A' ? 'team1' : w === 'B' ? 'team2' : w, true)} won ${scoreText(Object.assign({}, m)) || formatScoreString(rows)}`.slice(0, 140), ts:Date.now()});
   },
   setwin(el){ if (!canScore()) return toast('Only directors enter scores here.'); syncEngine(); const m = findMatch(el.dataset.id); Store.set('m:' + el.dataset.id, {w:el.dataset.v, s:null, note:'Walkover or retired', by:view.me, ts:Date.now(), names:m ? namesIn(m) : [], ev:m ? (findEvent(m.eventId) || {}).name : '', txt:m ? resultText(m, el.dataset.v) + ' (walkover or retired)' : ''}); view.modal = null; toast('Result saved.'); settleBets() },
@@ -6731,7 +7221,9 @@ const ACT = {
   closeprint(){ view.print = false },
   async copy(el){ try{ await navigator.clipboard.writeText(el.dataset.v); toast('Copied.') }catch(e){ ask(el.dataset.v, {info:true}) } },
   async shareinvite(){ try{ await navigator.share({title:tripTitle(), text:`Join code: ${TRIP.code}`, url:inviteLink()}) }catch(e){} },
-  async send(){ const t = (view.draft || '').trim(), img0 = view.chatImg; if (!t && !img0) return; view.draft = ''; view.chatImg = null; view.stick = true; render(); const img = img0 ? await saveImg(img0, 'jpg') : null; const ck = 'chat:' + uid(); Store.set(ck, {by:view.me, name:view.me === GUEST ? 'Spectator' : undefined, text:t, img, ts:Date.now(), reactions:{}}); if (img) Store.set('photo:' + uid(), {url:img, by:view.me, name:view.me === GUEST ? 'Spectator' : undefined, ts:Date.now(), caption:t, likes:[], chat:ck}) },
+  async send(){ const t = (view.draft || '').trim(), img0 = view.chatImg; if (!t && !img0) return; if (view.sending) return; view.chatErr = null; view.sending = img0 ? 'img' : 'text'; render(); let img = null;
+    try{ img = img0 ? await saveImg(img0, 'jpg') : null }catch(e){ view.sending = false; view.chatErr = "The photo didn't upload, so nothing was sent. Your message is still here."; return }
+    view.sending = false; view.draft = ''; view.chatImg = null; view.stick = true; const ck = 'chat:' + uid(); Store.set(ck, {by:view.me, name:view.me === GUEST ? 'Spectator' : undefined, text:t, img, ts:Date.now(), reactions:{}}); if (img) Store.set('photo:' + uid(), {url:img, by:view.me, name:view.me === GUEST ? 'Spectator' : undefined, ts:Date.now(), caption:t, likes:[], chat:ck}) },
   rmimg(){ view.chatImg = null },
   reactopen(el){ view.reactOpen = el.dataset.k },
   react(el){ const m = Store.get(el.dataset.k); if (!m) return; const rx = m.reactions || {}, e = el.dataset.e, arr = rx[e] || []; rx[e] = arr.includes(view.me) ? arr.filter(x => x !== view.me) : arr.concat(view.me); m.reactions = rx; Store.set(el.dataset.k, m); view.reactOpen = null },
@@ -6765,13 +7257,19 @@ const ACT = {
     if (((await ask(`Type the join code (${TRIP.code}) to confirm.`, {input:true, ok:'Delete', danger:true})) || '').trim().toUpperCase() !== TRIP.code) return toast('Not deleted.');
     try{ await Dir.remove(); toast('Tournament deleted.'); leaveTrip() }catch(e){ toast(e.message || "Couldn't delete it.") }
   },
-  stylepreset(el){ const c = cfg(); c.style = Object.assign({}, c.style || {}, {preset:el.dataset.v}); delete c.style.colors; Store.set('config', c); setTimeout(restyleLogos, 800) },
-  stylefont(el){ const c = cfg(); c.style = Object.assign({}, c.style || {}, {fonts:el.dataset.v}); Store.set('config', c) },
-  styleopt(el){ const c = cfg(); c.style = Object.assign({}, c.style || {}, {[el.dataset.f]:el.dataset.v}); Store.set('config', c) },
-  stylereset(){ const c = cfg(); c.style = Object.assign({}, c.style || {}); delete c.style.colors; Store.set('config', c); setTimeout(restyleLogos, 800) }
+  stylepreset(el){ styleEdit(s => { s.preset = el.dataset.v; delete s.colors }); setTimeout(restyleLogos, 300) },
+  stylefont(el){ styleEdit(s => { s.fonts = el.dataset.v }) },
+  styleopt(el){ styleEdit(s => { s[el.dataset.f] = el.dataset.v }) },
+  stylereset(){ styleEdit(s => { delete s.colors }); setTimeout(restyleLogos, 300) },
+  stylecourtside(){ styleEdit(s => { Object.keys(s).forEach(k => delete s[k]); Object.assign(s, {preset:'courtside', fonts:'bracketly', corners:'round', borders:'bold', density:'comfortable'}) }); setTimeout(restyleLogos, 300) },
+  stylecancel(){ view.styleDraft = null; setTimeout(restyleLogos, 300); toast('Preview cancelled. Nothing changed for players.') },
+  async styleapply(){ if (needAdmin() || !view.styleDraft) return; if (!await ask('Apply this look for everyone? Every phone and the TV screen switch to it.', {ok:'Apply look'})) return; const c = cfg(); c.style = JSON.parse(JSON.stringify(view.styleDraft)); view.styleDraft = null; Store.set('config', c); setTimeout(restyleLogos, 800); toast('Look applied.') }
 };
 
 const CHG = {
+  mvprev(){ view.mv = {id:view.matchId, slot:+(document.getElementById('mv-slot') || {}).value, court:+(document.getElementById('mv-court') || {}).value} },
+  pfilter(el){ view[el.dataset.f] = el.value },
+  sfilter(el){ view.sf = Object.assign({}, view.sf || {}, {[el.dataset.f]:el.value}) },
   async divfile(el){
     const f = el.files[0]; if (!f) return; view.divErr = null;
     try{
@@ -6812,7 +7310,7 @@ const CHG = {
   mcourt(el){ return CHG.mslot(el) },
   impcol(el){ const im = view.imp; if (!im) return; const i = +el.dataset.i, map = Object.assign({}, im.map); Object.keys(map).forEach(k => { if (map[k] === i) delete map[k] }); if (el.value) map[el.value] = i;
     const r = rowsToEntries(im.table, {hi:im.hi, map}); view.imp = Object.assign({}, im, {entries:r.entries, map, showCols:true}) },
-  async photoadd(el){ const fs = el.files; if (!fs || !fs.length) return; view.photoBusy = true; render(); try{ const n = await addPhotos(fs); toast(`Added ${n} photo${n === 1 ? '' : 's'}.`) } finally { view.photoBusy = false; el.value = '' } },
+  async photoadd(el){ const fs = el.files; if (!fs || !fs.length) return; view.photoBusy = true; render(); try{ const n = await addPhotos(fs); toast(`Added ${n} photo${n === 1 ? '' : 's'}.`) } catch(e){ view.photoErr = "Photos couldn't be added. Try again." } finally { view.photoBusy = false; el.value = '' } },
   pcaption(el){ const p = Store.get(el.dataset.k); if (p) Store.set(el.dataset.k, Object.assign({}, p, {caption:el.value.trim()})) },
   tmev(el){ view.tm = Object.assign({}, view.tm, tmRead(), {ev:el.value, evTouched:true}) },
   async welcomevideo(el){ const c = cfg(), v = parseVideo(el.value); if (el.value.trim() && !v) return toast('Use a YouTube, Vimeo or video file link.'); c.welcome = Object.assign({}, c.welcome || {}, {video:v ? Object.assign(v, {ver:uid(), title:'Welcome to ' + tripTitle()}) : null}); Store.set('config', c) },
@@ -6858,7 +7356,7 @@ const CHG = {
     if (el.dataset.p === 'cover'){ toast('Adding your photo…'); const u = await saveImg(await readImg(f, 1600, false), 'jpg'); const c = cfg(); c.cover = u; c.coverKeep = false; Store.set('config', c); return }
     toast('Fitting your logo to the theme…'); const u = await styledUpload(f, 'logo'); const c = cfg(), p = el.dataset.p; c[p] = u.styled; c[p + 'Orig'] = u.orig; c[p + 'Color'] = u.color; c[p + 'Keep'] = false; c.logoSig = u.sig; Store.set('config', c) },
   keep(el){ const c = cfg(); c[el.dataset.p + 'Keep'] = el.checked; Store.set('config', c) },
-  stylecolor(el){ const c = cfg(); c.style = Object.assign({}, c.style || {}); c.style.colors = Object.assign({}, c.style.colors || {}, {[el.dataset.f]:el.value}); Store.set('config', c); clearTimeout(onRemote._rs); onRemote._rs = setTimeout(restyleLogos, 1200) },
+  stylecolor(el){ styleEdit(s => { s.colors = Object.assign({}, s.colors || {}, {[el.dataset.f]:el.value}) }); clearTimeout(onRemote._rs); onRemote._rs = setTimeout(restyleLogos, 1200) },
   async chatimg(el){ const f = el.files[0]; if (!f) return; view.chatImg = await readImg(f, 1000, false); render() },
   async import(el){
     const f = el.files[0]; if (!f) return;
@@ -7036,7 +7534,7 @@ document.addEventListener('click', e => {
 function runChg(el, e){ const fn = CHG[el.dataset.chg]; if (!fn) return; let out; try{ out = fn(el, e) }catch(err){ console.error(err); toast(err.message || String(err)) } render(); if (out && out.then) out.then(render, err => { console.error(err); toast(err.message || String(err)); render() }) }
 document.addEventListener('click', e => { const f = e.target.closest && e.target.closest('input[type=file][data-chg]'); if (f && !f._direct){ f._direct = true; f.addEventListener('change', ev => runChg(f, ev)) } }, true);
 document.addEventListener('change', e => { const el = e.target.closest('[data-chg]'); if (!el || el._direct) return; const fn = CHG[el.dataset.chg]; if (fn){ let out; try{ out = fn(el, e) }catch(err){ console.error(err); toast(err.message || String(err)) } render(); if (out && out.then) out.then(render, err => { console.error(err); toast(err.message || String(err)); render() }) } });
-document.addEventListener('input', e => { const id = e.target.id; if (id === 'divpaste') view.divPaste = e.target.value; if (/^qa-\d$/.test(id)){ if (!view.qa || view.qa.ev !== e.target.dataset.ev) view.qa = {ev:e.target.dataset.ev}; view.qa[id] = e.target.value } if (id === 'announce') view.annDraft = e.target.value; if (id === 'chatDraft') view.draft = e.target.value; if (id === 'pin') view.pin = e.target.value; if (id === 'paste') view.paste = e.target.value; if (id === 'cev-name') view.cevName = e.target.value; if (id === 'joincode') view.joinCode = e.target.value; if (id === 'whoq' || id === 'plq'){ view.q = e.target.value; render() } if (id === 'divq'){ view.dq = e.target.value; render() } { const sc = /^sc-(\d+)-(\d)$/.exec(id || ''); if (sc && view.modal === 'match'){ const m = findMatch(view.matchId); if (m){ if (!view.sm || view.sm.id !== m.id || !view.sm.rows) view.sm = {id:m.id, mode:'edit', rows:readScoreInputs(m)}; const v = e.target.value, x = v === '' ? null : parseInt(v, 10); (view.sm.rows[+sc[1]] = view.sm.rows[+sc[1]] || [null, null])[+sc[2]] = isNaN(x) ? null : x; view.sm.err = null } } } if (id === 'eq'){ view.eq = e.target.value; render() } });
+document.addEventListener('input', e => { const id = e.target.id; if (id === 'divpaste') view.divPaste = e.target.value; if (/^qa-\d$/.test(id)){ if (!view.qa || view.qa.ev !== e.target.dataset.ev) view.qa = {ev:e.target.dataset.ev}; view.qa[id] = e.target.value } if (id === 'announce') view.annDraft = e.target.value; if (id === 'chatDraft') view.draft = e.target.value; if (id === 'pin') view.pin = e.target.value; if (id === 'paste') view.paste = e.target.value; if (id === 'cev-name') view.cevName = e.target.value; if (id === 'joincode') view.joinCode = e.target.value; if (id === 'whoq' || id === 'plq'){ view.q = e.target.value; render() } if (id === 'divq'){ view.dq = e.target.value; render() } { const sc = /^sc-(\d+)-(\d)$/.exec(id || ''); if (sc && view.modal === 'match'){ const m = findMatch(view.matchId); if (m){ if (!view.sm || view.sm.id !== m.id || !view.sm.rows) view.sm = {id:m.id, mode:'edit', rows:readScoreInputs(m)}; const v = e.target.value, x = v === '' ? null : parseInt(v, 10); const was = decidedEarly(m, view.sm.rows); (view.sm.rows[+sc[1]] = view.sm.rows[+sc[1]] || [null, null])[+sc[2]] = isNaN(x) ? null : x; view.sm.err = null; if (view.sm.mode === 'edit' && +sc[1] < 2 && was !== decidedEarly(m, view.sm.rows)){ if (!was) view.sm.rows[2] = [null, null]; render() } } } } if (id === 'eq'){ view.eq = e.target.value; render() } });
 document.addEventListener('toggle', e => { const d = e.target; if (d && d.tagName === 'DETAILS' && d.dataset && d.dataset.k){ view.open = view.open || {}; view.open[d.dataset.k] = d.open } }, true);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && (view.modal || view.ask)){ if (view.ask) ACT.askno(); else view.modal = null; render(); return }
@@ -7060,6 +7558,7 @@ function onRemote(key){
 
 /* ---------- Start ---------- */
 (async () => {
+  { const q0 = new URLSearchParams(location.search), h0 = (location.hash.match(/t=([A-Za-z0-9]+)/) || [])[1]; const c0 = q0.get('join') || h0; if (c0) view.resolving = String(c0).toUpperCase().slice(0, 8) }
   render();
   await Dir.init();
   view.myTrips = null; render();
@@ -7069,8 +7568,10 @@ function onRemote(key){
   if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', e => { const t = TABMAP[(e.data || {}).tab]; if (t && TRIP){ view.tab = t; view.modal = null; view.screen = 'app'; render() } });
   const code = qs.get('join') || hash || (view.tv ? null : LS.get('bkt-last', null));
   if (code && Dir.ready && !Dir.err){
+    view.resolving = String(code).toUpperCase().slice(0, 8); render();
     try{ await enterTrip(await Dir.join(code), {tv:view.tv}) }catch(e){ console.warn('open', e); view.joinCode = code; view.joinErr = qs.get('join') ? (e.message || String(e)).replace(/trip/gi, 'tournament') : null; view.tv = false; view.signup = false; LS.del('bkt-last'); render() }
   }
+  view.resolving = null; render();
   if (TRIP && wantTab){ view.tab = wantTab; render() }
   if (!TRIP) Dir.mine().then(l => { view.myTrips = l; render() }).catch(() => {});
   if ('serviceWorker' in navigator && location.protocol === 'https:' && !window.claude && window.top === window.self){
