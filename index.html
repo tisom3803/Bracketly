@@ -3584,6 +3584,31 @@ function getKnownMatchPlayers(match) {
   }
   return [...out];
 }
+// Where each match's winner and loser go next: {win: {feederId: match}, lose: {feederId: {m, req}}}
+function outcomeDests() {
+  const win = {}, lose = {};
+  for (const ev of state.events) for (const m of ev.matches) {
+    (m.feedsFrom || []).forEach(f => { if (typeof f === 'string') win[f] = m });
+    (m.feedsFromLosers || []).forEach(f => { const d = decodeLoserFeeder(f); if (d && d.matchId) lose[d.matchId] = { m, req: d.requireSlot } });
+  }
+  return { win, lose };
+}
+// Players who are certain to be in match m at slot s because m and the OTHER result path of one
+// of its feeders (winner's side vs consolation) both sit at s: win or lose, they play at s.
+// slotOf(match) gives the slot to compare against (defaults to match.slotIdx).
+function sureViaBothPaths(m, s, dests, slotOf = x => x.slotIdx) {
+  const out = new Set();
+  for (const fid of feederIds(m)) {
+    const f = findMatch(fid); if (!f) continue;
+    const w = dests.win[fid], l = dests.lose[fid];
+    if (!w || !l || w === l) continue;
+    const other = w === m ? l.m : l.m === m ? w : null;
+    if (!other || slotOf(other) !== s) continue;
+    if (l.req) { const t = findTeam(f[l.req + 'Id']); if (t) t.players.forEach(p => out.add(p)) }
+    else getKnownMatchPlayers(f).forEach(p => out.add(p));
+  }
+  return [...out];
+}
 function detectConflicts() {
   // For each (slot, player), record which matches and which event each appears in.
   // Two matches in the SAME event with overlapping potential players don't actually
@@ -3591,7 +3616,10 @@ function detectConflicts() {
   // the winners side and the cons side at the same time, can't be in R1 and SF
   // simultaneously, etc.). We only flag cross-event conflicts, which represent real
   // double-bookings of a player.
-  const slotPlayerMatches = {};
+  // Each conflict carries sure:true when the player WILL be in two events at that time
+  // whatever the results (named in both, or both result paths of a match land there),
+  // and sure:false when it only happens if results go a certain way.
+  const slotPlayerMatches = {}, sure = {}, dests = outcomeDests();
   for (const ev of state.events) {
     for (const m of ev.matches) {
       const slot = m.slotIdx;
@@ -3602,6 +3630,8 @@ function detectConflicts() {
         slotPlayerMatches[slot][p] = slotPlayerMatches[slot][p] || [];
         slotPlayerMatches[slot][p].push({ id: m.id, eventId: ev.id });
       }
+      const sp = sure[slot] = sure[slot] || {};
+      [...getKnownMatchPlayers(m), ...sureViaBothPaths(m, slot, dests)].forEach(p => (sp[p] = sp[p] || new Set()).add(ev.id));
     }
   }
   const conflicts = [];
@@ -3611,10 +3641,22 @@ function detectConflicts() {
       // Distinct events at this slot for this player
       const events = new Set(entries.map(e => e.eventId));
       if (events.size <= 1) continue; // all same event — bracket flow excludes overlap
-      conflicts.push({ slotIdx: parseInt(slotIdx), player, matchIds: entries.map(e => e.id) });
+      const se = (sure[slotIdx] || {})[player];
+      conflicts.push({ slotIdx: parseInt(slotIdx), player, matchIds: entries.map(e => e.id), sure: !!se && se.size > 1 });
     }
   }
   return conflicts;
+}
+// One list for the Time clashes box: definite double-bookings first, no repeats.
+function clashList() {
+  const seen = new Map();
+  const add = c => { const k = c.slotIdx + '|' + c.player, was = seen.get(k); if (!was) seen.set(k, c); else if (c.sure && !was.sure) seen.set(k, c) };
+  try { doubleBooked().forEach(c => add(Object.assign({}, c, { sure: true }))) } catch (e) {}
+  try { detectConflicts().forEach(add) } catch (e) {}
+  return [...seen.values()].sort((a, b) => (b.sure - a.sure) || (a.slotIdx - b.slotIdx));
+}
+function clashItem(c) {
+  return `<div class="mi" style="cursor:default"><span>${esc(c.player)}: ${esc(TIME_SLOTS[c.slotIdx] ? TIME_SLOTS[c.slotIdx].join(' ') : '')}${c.sure ? ' (booked twice)' : ' (only if results go a certain way)'}</span></div>`;
 }
 function conflictedMatchIds() {
   const ids = new Set();
@@ -4079,8 +4121,10 @@ function buildSchedule(evs){
     // Same rule as Bracketly's conflict check: a player can't be in two different events in one slot
     // and nobody already known to be in a match can be in a second match at the same time (round robins)
     const kp = new Map(), knownOf = m => { if (!kp.has(m.id)) kp.set(m.id, getKnownMatchPlayers(m)); return kp.get(m.id) }, known = {};
-    const place = (m, s) => { m.slotIdx = s; delete m._unscheduled; count[s] = (count[s] || 0) + 1; const w = who[s] = who[s] || new Map(); playersOf(m).forEach(p => { if (!w.has(p)) w.set(p, new Set()); w.get(p).add(m.eventId) }); const k = known[s] = known[s] || new Set(); knownOf(m).forEach(p => k.add(p)) };
-    const clashAt = (m, s) => { const w = who[s], k = known[s]; return (!!k && knownOf(m).some(p => k.has(p))) || (!!w && playersOf(m).some(p => w.has(p) && [...w.get(p)].some(e => e !== m.eventId))) };
+    // sureOf: players certain to be in m at s, counting "win or lose they play at s" (both result paths of a feeder placed at s)
+    const dests = outcomeDests(), placedAt = new Map(), sureOf = (m, s) => { const extra = sureViaBothPaths(m, s, dests, x => x === m ? s : placedAt.get(x.id)); return extra.length ? [...new Set([...knownOf(m), ...extra])] : knownOf(m) };
+    const place = (m, s) => { m.slotIdx = s; placedAt.set(m.id, s); delete m._unscheduled; count[s] = (count[s] || 0) + 1; const w = who[s] = who[s] || new Map(); playersOf(m).forEach(p => { if (!w.has(p)) w.set(p, new Set()); w.get(p).add(m.eventId) }); const k = known[s] = known[s] || new Set(); sureOf(m, s).forEach(p => k.add(p)) };
+    const clashAt = (m, s) => { const w = who[s], k = known[s]; return (!!k && sureOf(m, s).some(p => k.has(p))) || (!!w && playersOf(m).some(p => w.has(p) && [...w.get(p)].some(e => e !== m.eventId))) };
     // depth = longest chain of feeders, so earlier rounds settle first
     const depth = new Map(), dep = m => { if (depth.has(m.id)) return depth.get(m.id); depth.set(m.id, 0); const d = Math.max(-1, ...feederIds(m).map(id => byId.get(id)).filter(Boolean).map(dep)) + 1; depth.set(m.id, d); return d };
     all.forEach(dep);
@@ -4110,7 +4154,7 @@ function buildSchedule(evs){
     const placeAll = (asap, soft) => { for (const m of order){
       if (fixed.has(m.id) || gkey.has(m.id)) continue;
       const after = Math.max(-1, ...feederIds(m).map(id => byId.get(id)).filter(f => f && typeof f.slotIdx === 'number').map(f => f.slotIdx));
-      const ok = s => (count[s] || 0) < courts && (soft ? !(known[s] && knownOf(m).some(p => known[s].has(p))) : !clashAt(m, s));
+      const ok = s => (count[s] || 0) < courts && (soft ? !(known[s] && sureOf(m, s).some(p => known[s].has(p))) : !clashAt(m, s));
       const wantLast = rules.finalsOnLastDay && ROUND_FINALS_RULE.includes(m.round);
       if (!asap && typeof m.slotIdx === 'number' && m.slotIdx > after && ok(m.slotIdx)){ place(m, m.slotIdx); continue }
       let s = -1;
@@ -4123,14 +4167,14 @@ function buildSchedule(evs){
     placeAll(false);
     if (order.some(m => !fixed.has(m.id) && !gkey.has(m.id) && typeof m.slotIdx !== 'number')){
       // Didn't all fit with the engine's spread-out times: pack everything as early as it can go.
-      Object.keys(count).forEach(k => delete count[k]); Object.keys(who).forEach(k => delete who[k]); Object.keys(known).forEach(k => delete known[k]);
+      Object.keys(count).forEach(k => delete count[k]); Object.keys(who).forEach(k => delete who[k]); Object.keys(known).forEach(k => delete known[k]); placedAt.clear();
       order.forEach(m => { if (fixed.has(m.id)) place(m, m.slotIdx); else m.slotIdx = undefined });
       Object.keys(chainEnd).forEach(k => delete chainEnd[k]); placeGroups();
       placeAll(true, false);
     }
     if (order.some(m => !fixed.has(m.id) && !gkey.has(m.id) && typeof m.slotIdx !== 'number')){
       // Still short: same packing, but a clash that only happens if certain players keep winning is allowed
-      Object.keys(count).forEach(k => delete count[k]); Object.keys(who).forEach(k => delete who[k]); Object.keys(known).forEach(k => delete known[k]);
+      Object.keys(count).forEach(k => delete count[k]); Object.keys(who).forEach(k => delete who[k]); Object.keys(known).forEach(k => delete known[k]); placedAt.clear();
       order.forEach(m => { if (fixed.has(m.id)) place(m, m.slotIdx); else m.slotIdx = undefined });
       Object.keys(chainEnd).forEach(k => delete chainEnd[k]); placeGroups();
       placeAll(true, true);
@@ -4139,7 +4183,7 @@ function buildSchedule(evs){
     // (definite double-bookings are never allowed). The checklist calls these out.
     order.filter(m => !fixed.has(m.id) && !gkey.has(m.id) && typeof m.slotIdx !== 'number').forEach(m => {
       const after = Math.max(-1, ...feederIds(m).map(id => byId.get(id)).filter(f => f && typeof f.slotIdx === 'number').map(f => f.slotIdx));
-      for (let i = after + 1; i < TIME_SLOTS.length; i++){ const k = known[i]; if ((count[i] || 0) < courts && !(k && knownOf(m).some(p => k.has(p)))){ place(m, i); break } }
+      for (let i = after + 1; i < TIME_SLOTS.length; i++){ const k = known[i]; if ((count[i] || 0) < courts && !(k && sureOf(m, i).some(p => k.has(p)))){ place(m, i); break } }
     });
     // courts: keep fixed ones, put finals on the finals courts when set, otherwise lowest free court
     const used = {}; all.forEach(m => { if (typeof m.slotIdx === 'number' && m.court) (used[m.slotIdx] = used[m.slotIdx] || new Set()).add(m.court) });
@@ -6232,7 +6276,7 @@ function wzBracket(){
 function wzSchedule(){
   syncEngine();
   const evs = state.events, cap = TIME_SLOTS.length * state.tournamentCourts, total = evs.reduce((s, e) => s + (e.matches.length || estMatches(e)), 0);
-  const uns = evs.flatMap(e => e.matches).filter(m => typeof m.slotIdx !== 'number'), conf = (() => { try{ return [...doubleBooked(), ...detectConflicts()] }catch(e){ return [] } })();
+  const uns = evs.flatMap(e => e.matches).filter(m => typeof m.slotIdx !== 'number'), conf = clashList();
   const undrawn = evs.filter(e => !isDrawn(e) && e.kind !== 'clubcup' && entryCount(e) >= 2);
   const cur = evs.find(e => e.id === view.ev && isDrawn(e)) || evs.find(isDrawn) || null;
   return `<h2 style="margin-top:4px">Schedule</h2>
@@ -6245,7 +6289,7 @@ function wzSchedule(){
   ${cur ? `<div class="row" style="justify-content:space-between;margin:6px 0"><span class="small muted">${cur.matches.length} matches${hasResults(cur) ? ' · in play' : ''}</span><button class="btn ${cur.published ? 'alt' : ''} sm" data-act="publish" data-id="${cur.id}">${cur.published ? 'Unpublish' : 'Publish'}</button></div>
     ${cur.kind === 'clubcup' ? `<div class="card adm"><b>Session times</b>${(cur.clubCup.sessions || []).map(se => { const ms = cur.matches.filter(m => m.sessionId === se.id); return ms.length ? groupStart(ms, esc(se.label)) : '' }).join('')}</div>` : roundTimes(cur)}` : ''}
   ${uns.length ? `<p class="warn">${uns.length} match${uns.length === 1 ? '' : 'es'} didn't fit. Add courts or hours, then rebuild the schedule.</p>` : ''}
-  ${conf.length ? `<div class="missing"><div class="mh2"><b>Time clashes</b></div>${conf.slice(0, 12).map(c => `<div class="mi" style="cursor:default"><span>${esc(c.player)}: ${esc(TIME_SLOTS[c.slotIdx] ? TIME_SLOTS[c.slotIdx].join(' ') : '')}${c.matchIds ? ' (booked twice)' : ' (only if they keep winning)'}</span></div>`).join('')}<p class="small muted" style="margin:6px 0 0">Tap a match in the grid below to move it, or add time on Courts & times.</p></div>` : ''}
+  ${conf.length ? `<div class="missing"><div class="mh2"><b>Time clashes</b></div>${conf.slice(0, 12).map(clashItem).join('')}${conf.length > 12 ? `<p class="small muted" style="margin:4px 0 0">and ${conf.length - 12} more</p>` : ''}<p class="small muted" style="margin:6px 0 0">Tap a match in the grid below to move it, or add time on Courts & times.</p></div>` : ''}
   ${schedGrid()}`;
 }
 
@@ -6494,7 +6538,7 @@ function clubCupEntries(ev){
 function wzDraws(){
   syncEngine();
   const evs = state.events, cap = TIME_SLOTS.length * state.tournamentCourts, total = evs.reduce((s, e) => s + (e.matches.length || estMatches(e)), 0);
-  const uns = evs.flatMap(e => e.matches).filter(m => typeof m.slotIdx !== 'number'), conf = (() => { try{ return [...doubleBooked(), ...detectConflicts()] }catch(e){ return [] } })();
+  const uns = evs.flatMap(e => e.matches).filter(m => typeof m.slotIdx !== 'number'), conf = clashList();
   const cur = evs.find(e => e.id === view.ev) || null;
   return `<h2 style="margin-top:4px">Draws & schedule</h2>
   <div class="fits ${total > cap ? 'bad' : ''}"><b>${total} matches · room for about ${cap}</b><span>${total > cap ? 'Add a court, a day, or longer hours on step 2, or shorten match length.' : 'Fits in your courts and hours.'}</span></div>
@@ -6506,7 +6550,7 @@ function wzDraws(){
   ${evs.some(isDrawn) && evs.some(e => isDrawn(e) && !e.published) ? `<button class="btn" data-act="publishall">Publish all draws</button>` : ''}
   ${cur ? `<h3>${esc(cur.name)}</h3>${cur.kind === 'clubcup' ? lineupEditor(cur) : roundTimes(cur)}${cur.matches.length ? eventDraw(cur) : ''}` : ''}
   ${uns.length ? `<p class="warn">${uns.length} match${uns.length === 1 ? '' : 'es'} didn't fit. Add courts or hours, then rebuild the schedule.</p>` : ''}
-  ${conf.length ? `<div class="missing"><div class="mh2"><b>Time clashes</b></div>${conf.slice(0, 12).map(c => `<div class="mi" style="cursor:default"><span>${esc(c.player)}: ${esc(TIME_SLOTS[c.slotIdx] ? TIME_SLOTS[c.slotIdx].join(' ') : '')}${c.matchIds ? ' (booked twice)' : ' (only if they keep winning)'}</span></div>`).join('')}<p class="small muted" style="margin:6px 0 0">Tap a match in the grid below to move it, or add time on step 2.</p></div>` : ''}
+  ${conf.length ? `<div class="missing"><div class="mh2"><b>Time clashes</b></div>${conf.slice(0, 12).map(clashItem).join('')}${conf.length > 12 ? `<p class="small muted" style="margin:4px 0 0">and ${conf.length - 12} more</p>` : ''}<p class="small muted" style="margin:6px 0 0">Tap a match in the grid below to move it, or add time on step 2.</p></div>` : ''}
   ${schedGrid()}`;
 }
 function lineupEditor(ev){
