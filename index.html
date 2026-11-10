@@ -1817,6 +1817,32 @@ nav.tabs.bk-nav .badge{position:absolute;top:4px;left:calc(50% + 6px);margin:0}
 .v6-vt{min-height:44px;padding:0 12px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--g1);font:600 13px/1 var(--fb);display:inline-flex;align-items:center;gap:6px;margin-bottom:2px;white-space:nowrap}
 .v6-vt.on{border-color:var(--au);background:rgba(213,179,106,.2);color:var(--g1)}.v6-vt.on svg{color:var(--success)}
 .v6-vs{font:500 12.5px/1.2 var(--fb);color:var(--muted);display:inline-flex;align-items:center;gap:4px;min-height:44px;white-space:nowrap}.v6-vs svg{color:var(--success)}
+
+/* v2.7.1: each bracket section (main/consolation, winners/losers/grand final, pools/playoff) on its own page */
+.ph h1 .psec-sec{display:block;font:600 15px/1.2 var(--fd);color:var(--g2,#104C39);margin-top:4px;letter-spacing:0}
+@page{size:letter landscape;margin:8mm}
+@media print{
+  @page{size:letter landscape;margin:8mm}
+  html,body,#app,#scroller{height:auto!important;overflow:visible!important;background:#fff!important}
+  .noprint,#toast,.bk-nav,.tabs{display:none!important}
+  .printpage{background:#fff}
+  .psec{border:0!important;box-shadow:none!important;margin:0!important;padding:0!important;border-radius:0!important;break-inside:auto!important;page-break-inside:auto!important;break-after:page;page-break-after:always}
+  .psec:last-child{break-after:auto;page-break-after:auto}
+  .psec .ph{border-bottom-color:#111;padding-bottom:6px;margin-bottom:6px;gap:10px}
+  .psec .ph h1{font-size:22px}
+  .ph h1 .psec-sec{color:#111;font-size:14px;margin-top:2px}
+  .psec > p.small{margin:0 0 4px}
+  .mcode-key{margin:4px 0 6px}
+  .printpage{min-height:0!important;height:auto!important}
+  .bracket.pr{overflow:visible!important;flex-wrap:nowrap!important;width:100%;max-width:100%;gap:6px;padding:0;align-items:flex-start;height:auto!important}
+  .bracket.pr .bcol{flex:1 1 0;min-width:0;height:auto!important}
+  .bracket.pr .bh{font-size:11px;margin-bottom:4px}
+  .bracket.pr .bms{gap:3px;flex:none!important;justify-content:flex-start!important;height:auto!important}
+  .bracket.pr .bm{break-inside:avoid;page-break-inside:avoid;font-size:10px;padding:3px 5px}
+  .bracket.pr .bm .bf{margin-top:1px;font-size:9px}
+  .bracket.pr .bm .bf:empty{display:none;margin:0}
+  .mcode-key{break-inside:avoid;page-break-inside:avoid}
+}
 </style>
 </head>
 <body>
@@ -6935,11 +6961,63 @@ function signupView(){
 }
 
 /* ---------- Print ---------- */
+function printHead(ev, sectionTitle){
+  return `<header class="ph">${crest(40)}<div><b>${esc(tripTitle())}</b><span>${esc(tsub())}</span></div><h1>${esc(ev.name)}${sectionTitle ? `<span class="psec-sec">${esc(sectionTitle)}</span>` : ''}</h1></header><p class="small">${eventSummary(ev)}</p>`;
+}
+function printEventPages(ev){
+  const fmt = ev.format || '';
+  if (isLadder(ev)) return `<section class="psec">${printHead(ev, 'Standings')}${eventDraw(ev, true)}</section>`;
+  const isElim = /elim/.test(fmt) || ev.matches.some(m => { const s = sectionOf(m.round); return s && s !== 'main' && (m.poolIdx == null || m.isPlayoff) });
+  if (fmt === 'multi_pool'){
+    const pools = [...new Set(ev.matches.filter(m => m.poolIdx != null && !m.isPlayoff).map(m => m.poolIdx))].sort((a, b) => a - b);
+    const po = ev.matches.filter(m => m.isPlayoff);
+    const poolPage = `<section class="psec">${printHead(ev, 'Pools')}${pools.map(p => `<h2 class="bk-h2">Pool ${String.fromCharCode(65 + p)}</h2>${rrView(ev, p, true)}`).join('')}</section>`;
+    const playoffPage = po.length ? `<section class="psec">${printHead(ev, 'Playoff')}${codeKey(ev)}${bracketCols(po, true)}</section>` : '';
+    return poolPage + playoffPage;
+  }
+  if (isElim){
+    const secs = {}; ev.matches.filter(m => m.poolIdx == null || m.isPlayoff).forEach(m => { const s = sectionOf(m.round); (secs[s] = secs[s] || []).push(m) });
+    const order = ['main', 'w', 'l', 'gf', 'c'].filter(s => secs[s]);
+    return order.map(s => `<section class="psec">${printHead(ev, SECTION_TITLES[s])}${codeKey(ev)}${bracketCols(secs[s], true)}</section>`).join('');
+  }
+  return `<section class="psec">${printHead(ev)}${eventDraw(ev, true)}</section>`;
+}
+function fitPrintBrackets(){
+  const printing = document.documentElement.classList.contains('printing');
+  const mm = 96 / 25.4;
+  // Fit the shorter of letter and A4 landscape so a 32-draw stays on one sheet
+  const pageW = Math.min(11 * 96, 297 / 25.4 * 96) - 16 * mm;
+  const pageH = Math.min(8.5 * 96, 210 / 25.4 * 96) - 16 * mm - 16;
+  document.querySelectorAll('.printpage .psec').forEach(sec => {
+    const br = sec.querySelector('.bracket.pr');
+    sec.style.zoom = '';
+    if (br){ br.style.transform = ''; br.style.width = ''; br.style.marginBottom = '' }
+    if (!printing){
+      if (!br) return;
+      const availW = (sec.clientWidth || br.clientWidth);
+      if (availW && br.scrollWidth > availW + 2){
+        const s = Math.max(0.4, Math.min(1, availW / br.scrollWidth));
+        br.style.transformOrigin = 'top left';
+        br.style.transform = 'scale(' + s + ')';
+        br.style.width = (100 / s) + '%';
+        br.style.marginBottom = ((s - 1) * br.offsetHeight) + 'px';
+      }
+      return;
+    }
+    const needW = Math.max(sec.scrollWidth, br ? br.scrollWidth : 0);
+    const needH = sec.scrollHeight;
+    let s = 1;
+    if (needW > pageW + 2) s = Math.min(s, pageW / needW);
+    if (needH > pageH - 2) s = Math.min(s, (pageH - 2) / needH);
+    s = Math.max(0.4, Math.min(1, s));
+    if (s < 0.995) sec.style.zoom = String(s);
+  });
+}
 function printView(){
   syncEngine();
   const evs = (view.printEv ? state.events.filter(e => e.id === view.printEv) : visibleEvents()).filter(hasPlayEv);
   return `<div class="printpage"><div class="noprint row" style="padding:12px"><button class="btn" data-act="doprint">Print</button><button class="btn alt" data-act="closeprint">Back</button></div>
-  ${evs.map(ev => `<section class="psec"><header class="ph">${crest(40)}<div><b>${esc(tripTitle())}</b><span>${esc(tsub())}</span></div><h1>${esc(ev.name)}</h1></header><p class="small">${eventSummary(ev)}</p>${eventDraw(ev, true)}</section>`).join('') || '<p style="padding:20px">Nothing drawn yet.</p>'}</div>`;
+  ${evs.map(printEventPages).join('') || '<p style="padding:20px">Nothing drawn yet.</p>'}</div>`;
 }
 
 
@@ -8119,7 +8197,7 @@ function drawInner(){
     return;
   }
   syncEngine();
-  if (view.print){ app.innerHTML = `<div id="scroller">${printView()}</div>`; return }
+  if (view.print){ app.innerHTML = `<div id="scroller">${printView()}</div>`; requestAnimationFrame(fitPrintBrackets); return }
   if (view.tv){ app.innerHTML = `<div id="scroller">${tvView()}</div>`; return }
   if (view.signup){ app.innerHTML = `<div id="scroller">${signupView()}</div>` + modal(); restoreFocus(fid, sel); return }
   if (view.screen === 'wizard'){ app.innerHTML = wizardView() + modal(); finishDraw(keep, fid, sel); return }
@@ -8572,7 +8650,7 @@ const ACT = {
   setlive(el){ const r = resOf(el.dataset.id) || {}; if (r.w) return; syncEngine(); const m = findMatch(el.dataset.id); if (r.live) Store.del('m:' + el.dataset.id); else Store.set('m:' + el.dataset.id, {live:true, by:view.me, ts:Date.now(), names:m ? namesIn(m) : [], ev:m ? (findEvent(m.eventId) || {}).name : '', txt:m ? `${sideLabel(m, 'team1', true)} vs ${sideLabel(m, 'team2', true)}, ${courtName(m.court)}` : ''}); view.modal = null },
   async clearres(el){ if (!await ask('Clear this result? Later matches that depend on it go back to TBD, and bets on it reopen.')) return; Store.del('m:' + el.dataset.id); view.modal = null; settleBets() },
   print(el){ view.print = true; view.printEv = el.dataset.v || null },
-  doprint(){ window.print() },
+  doprint(){ fitPrintBrackets(); window.print() },
   closeprint(){ view.print = false },
   async copy(el){ try{ await navigator.clipboard.writeText(el.dataset.v); toast('Copied.') }catch(e){ ask(el.dataset.v, {info:true}) } },
   async shareinvite(){ try{ await navigator.share({title:tripTitle(), text:`Join code: ${TRIP.code}`, url:inviteLink()}) }catch(e){} },
@@ -9298,7 +9376,7 @@ function lRulesTxt(ev){ const R = lrules(ev); return `Challenge up to ${R.range}
 function ladderView(ev, print){
   ensureCards();
   if (!ladderStarted(ev)) return `<p class="bk-empty">${view.admin ? 'This ladder hasn\'t started. Set the starting order and start it on the Brackets step.' : "The ladder hasn't started yet."}</p>${view.admin ? `<button class="btn" data-act="gobracket" data-id="${esc(ev.id)}">Set up the ladder</button>` : ''}`;
-  if (print) return `<p class="small">${esc(lRulesTxt(ev))}</p>${lStanding(ev, true)}`;
+  if (print) return `<p class="small">As of ${esc(ldate(Date.now()))}${ladderClosed(ev) ? ' · season closed' : ''} · ${esc(lRulesTxt(ev))}</p>${lStanding(ev, true)}`;
   const me = lMine(ev), mine = lMyOpen(ev), R = lrules(ev), L = ev.ladder || {};
   const season = [R.seasonStart && 'From ' + ldate(new Date(R.seasonStart + 'T12:00').getTime()), R.seasonEnd && 'to ' + ldate(new Date(R.seasonEnd + 'T12:00').getTime())].filter(Boolean).join(' ');
   return `<div class="v6-lhead"><p>${ladderClosed(ev) ? '<span class="st neutral">Season closed</span> ' : ''}${esc(season || 'Season-long ladder')}</p><p class="bk-meta">${esc(lRulesTxt(ev))}</p>
@@ -9617,6 +9695,8 @@ setTimeout(lSweep, 4000);
   setInterval(() => { if (document.hidden || !TRIP || Store.mode !== 'live' || Dir.mode !== 'supabase') return; const live = Store.rt === 'SUBSCRIBED'; Store._pollN = (Store._pollN || 0) + 1; if (!live || Store._pollN % 3 === 0) Store.connect() }, 20000);
   setInterval(() => { try{ checkReminders() }catch(e){} }, 60000);
   setInterval(() => { if (TRIP && !view.modal && !view.ask && view.screen === 'app' && (view.tv || ['today', 'courts'].includes(view.tab)) && !(document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName))) render() }, view.tv ? 5000 : 30000);
+  window.addEventListener('beforeprint', () => { document.documentElement.classList.add('printing'); fitPrintBrackets() });
+  window.addEventListener('afterprint', () => { document.documentElement.classList.remove('printing'); fitPrintBrackets() });
 })();
 
 </script>
