@@ -1898,6 +1898,73 @@ nav.tabs.bk-nav .badge{position:absolute;top:4px;left:calc(50% + 6px);margin:0}
   .bracket.pr .bm .bf:empty{display:none;margin:0}
   .mcode-key{break-inside:avoid;page-break-inside:avoid}
 }
+
+/* ===== v3.0.0: status, match day, recap, slim header, name search, schedule ===== */
+.v3-badge.prog{background:var(--iv);color:var(--g1);border:1.5px solid var(--au)}
+.v3-tcard-top .v3-badge.prog{background:rgba(247,245,236,.94)}
+.v3-badge.await{background:#F3EBD6;color:#6E5521;border:1px dashed #C9A85B}
+.v3-top{transition:padding .22s var(--ease)}
+.v3-top .v3-tagline{max-height:24px;transition:opacity .18s var(--ease),max-height .22s var(--ease),margin .22s var(--ease)}
+header.top.bk-top.v3-top.slim{padding-bottom:6px}
+.v3-top.slim .v3-tagline{opacity:0;max-height:0;margin:0}
+.v3-top.slim .v3-logo,.v3-top.slim.tall .v3-logo{width:34px;height:34px;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.v3-brand{display:flex;align-items:center;gap:0;min-width:0}
+.v6-top-t{display:block;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:700 16px/1.2 var(--fd);color:var(--iv);transition:max-width .25s var(--ease),opacity .2s var(--ease),margin .25s var(--ease)}
+.v3-top.slim .v6-top-t{max-width:min(46vw,360px);opacity:1;margin-left:10px}
+.v6-hme{display:inline-grid;place-items:center;padding:0;border-radius:50%;border:2px solid var(--au);background:transparent;line-height:0;margin-left:2px}
+.v6-hme .v4-av{box-shadow:none}
+@media (prefers-reduced-motion: reduce){.v3-top,.v3-top .v3-tagline,.v6-top-t,.v3-logo{transition:none!important}}
+.v6-md{margin:0 0 14px;padding:14px 14px 10px;border-radius:var(--rad);background:linear-gradient(180deg,var(--g2),var(--g1));color:var(--iv);box-shadow:var(--shadow)}
+.v6-md-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.v6-md-eye{margin:0;font:700 11.5px/1.2 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--au2);display:flex;align-items:center;gap:6px}
+.v6-md-all{background:none;border:0;color:var(--iv);font:600 13px/1 var(--fb);padding:6px 0;opacity:.9}
+.v6-md-h{margin:10px 0 6px;font:700 24px/1.15 var(--fd);color:var(--iv)}
+.v6-md-h.sub{font-size:17px;margin-top:14px;color:var(--au2)}
+.v6-md-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.v6-md-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:10px 12px;border-radius:14px;background:var(--iv);color:var(--ink);border:0;min-height:64px}
+.v6-md-row.now{box-shadow:inset 4px 0 0 var(--au)}
+.v6-md-where{flex:0 0 86px;display:flex;flex-direction:column;gap:3px;padding-right:10px;border-right:1.5px solid var(--au)}
+.v6-md-where b{font:700 15px/1.15 var(--fb);color:var(--g1);overflow-wrap:anywhere}
+.v6-md-where small{display:flex;align-items:center;gap:5px;font:600 12.5px/1.2 var(--fb);color:var(--muted)}
+.v6-md-row.now .v6-md-where small{color:#1C5E3F}
+.v6-md-teams{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.v6-md-vs{font:600 15px/1.3 var(--fb);overflow-wrap:anywhere}.v6-md-vs i{font-style:normal;font-weight:500;color:var(--muted)}
+.v6-md-teams small{font:500 12.5px/1.3 var(--fb);color:var(--muted)}
+.v6-md-row .chev{color:var(--muted);font-size:22px}
+.v6-md-none{margin:4px 0 6px;color:rgba(247,245,236,.85)}
+.v6-md-more{background:none;border:0;color:var(--au2);font:600 13px/1 var(--fb);padding:8px 0 2px}
+.v6-recap{margin:18px 0 4px}
+.v6-recap-sum{margin:6px 0 12px;color:var(--muted);font:500 15px/1.4 var(--fb)}
+.v6-recap-acts{display:flex;gap:10px;flex-wrap:wrap}
+.v6-recap-acts .bk-btn{display:inline-flex;align-items:center;gap:8px;width:auto;flex:1 1 150px;justify-content:center}
+.v6-recap-acts .bk-btn svg{width:18px;height:18px}
+.v6-champs{display:flex;flex-direction:column;gap:10px}
+.v6-champ{display:flex;align-items:center;gap:14px;padding:14px;border-radius:var(--rad-c);background:var(--iv);border:1px solid var(--bd);box-shadow:var(--shadow)}
+.v6-champ-ic{flex:0 0 46px;height:46px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(180deg,var(--au2),var(--au));color:var(--g3)}
+.v6-champ-ic svg{width:24px;height:24px}
+.v6-champ-b{flex:1;min-width:0}
+.v6-champ-ev{margin:0;font:700 11.5px/1.2 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:#9C7A2C}
+.v6-champ-w{margin:3px 0 2px;font:700 19px/1.2 var(--fd);color:var(--g1);overflow-wrap:anywhere}
+.v6-champ-f{margin:0;font:500 13.5px/1.35 var(--fb);color:var(--muted)}.v6-champ-f b{font-weight:600;color:var(--ink)}.v6-champ-f span{margin-left:6px;font-variant-numeric:tabular-nums}
+.v6-champ-go{flex:0 0 auto;background:none;border:0;color:var(--muted);font-size:24px;padding:4px 6px}
+.v6-whoq{position:sticky;top:-18px;z-index:2;background:inherit;padding:2px 0 8px}
+.v6-whoq .bk-input{margin:0}
+.v6-whoq-n{margin:0 0 8px}
+.v6-who button{display:flex;align-items:center;gap:10px;min-height:48px}
+.v6-who button .v4-av{flex:0 0 auto}
+.v6-sacts{flex-wrap:wrap}
+.v6-now{display:inline-flex;align-items:center;gap:6px;background:var(--g1);color:var(--iv);border-color:var(--g1)}
+.v6-chip[aria-pressed="true"]{background:var(--g1);color:var(--iv);border-color:var(--g1)}
+.v6-sg-hint{margin:6px 0 2px}
+.v6-sgdone{margin:12px 0 0;border:1px solid var(--bd);border-radius:12px;background:var(--iv)}
+.v6-sgdone > summary{list-style:none;display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;min-height:48px}
+.v6-sgdone > summary::-webkit-details-marker{display:none}
+.v6-sgdone > summary b{font:700 15px/1.2 var(--fb);color:var(--g1);min-width:72px}
+.v6-sgdone > summary span{flex:1;font:500 14px/1.3 var(--fb);color:var(--muted)}
+.v6-sgdone-t::after{content:"Show";font:600 13px/1 var(--fb);color:#9C7A2C}
+.v6-sgdone[open] .v6-sgdone-t::after{content:"Hide"}
+.v6-sgdone-b{padding:0 10px 10px}
+@media (max-width:389px){.v3-sechead .v3-h2{font-size:22px}.v3-sechead .v3-link{flex-shrink:0}}
 </style>
 </head>
 <body>
@@ -1910,7 +1977,7 @@ nav.tabs.bk-nav .badge{position:absolute;top:4px;left:calc(50% + 6px);margin:0}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '2.9.1';
+const APP_VERSION = '3.0.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -1942,14 +2009,16 @@ const Dir = {
       this.mode = 'supabase';
       try{
         if (!window.supabase) await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js');
-        this.sb = window.supabase.createClient(SUPA_URL, SUPA_KEY, {auth:{persistSession:true, autoRefreshToken:true, storageKey:'bkt-auth', flowType:'pkce', detectSessionInUrl:true}});
+        this.sb = window.supabase.createClient(SUPA_URL, SUPA_KEY, {auth:{persistSession:true, autoRefreshToken:true, storageKey:'bkt-auth', flowType:'pkce', detectSessionInUrl:true}, global:{fetch:(u, o) => this.fetchGate(u, o)}});
         // v7: back from Google/Apple the session arrives as ?code= in the address bar; tidy it away after
         const q = new URLSearchParams(location.search);
         if (q.get('error_description') || q.get('error')) this.oauthErr = q.get('error_description') || q.get('error');
         const {data} = await this.sb.auth.getSession();
         if (q.get('code') || this.oauthErr){ try{ ['code', 'error', 'error_code', 'error_description'].forEach(k => q.delete(k)); history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash) }catch(e){} }
         if (data.session && typeof this.deadSession === 'function' && await this.deadSession()) data.session = null;
-        if (!data.session){ const {error} = await this.sb.auth.signInAnonymously(); if (error) throw error }
+        /* v3.0: no anonymous sign-in just for looking. It happens on the first thing that needs one (join, create, pick a name, any save). */
+        this.hasSession = !!data.session;
+        this.sb.auth.onAuthStateChange((ev, ss) => { this.hasSession = !!ss });
         this.ready = true;
       }catch(e){ this.err = (e && e.message) || String(e); console.warn('supabase init', e) }
       return;
@@ -1966,6 +2035,28 @@ const Dir = {
       }catch(e){ console.warn('claude db', e) }
     }
     this.mode = 'local'; this.ready = true;
+  },
+  /* Every database/storage request passes through here. Without a session, "my tournaments" lists are simply empty, an invite
+     preview is public, and anything else (join, create, reads that need membership, saves) first starts the device's anonymous session. */
+  async fetchGate(url, opts){
+    const u = typeof url === 'string' ? url : (url && url.url) || String(url);
+    if (!this.hasSession && /\/(rest|storage|functions)\/v1\//.test(u)){
+      if (/\/rest\/v1\/rpc\/(my_trips_meta|my_trips|my_invites)(\?|$)/.test(u)) return new Response('[]', {status:200, headers:{'Content-Type':'application/json'}});
+      if (!/\/rest\/v1\/rpc\/peek_invite(\?|$)/.test(u)){
+        const tok = await this.ensureSession();
+        if (tok){ const h = new Headers((opts && opts.headers) || {}); h.set('Authorization', 'Bearer ' + tok); opts = Object.assign({}, opts, {headers:h}) }
+      }
+    }
+    return fetch(url, opts);
+  },
+  ensureSession(){
+    if (this.mode !== 'supabase' || !this.sb || this.hasSession) return Promise.resolve(null);
+    if (!this._ens) this._ens = this.sb.auth.signInAnonymously().then(({data, error}) => {
+      this._ens = null; if (error) throw error; this.hasSession = true;
+      setTimeout(() => { try{ refreshAccount().then(render, () => {}) }catch(e){} }, 0);
+      return (data && data.session && data.session.access_token) || null;
+    }, e => { this._ens = null; throw e });
+    return this._ens;
   },
   label(){ return this.mode === 'supabase' ? 'Live (Supabase)' : this.mode === 'claude' ? 'Live (Claude)' : 'This device only' },
   // ---- trips ----
@@ -5947,11 +6038,13 @@ function header(){
   const dir = view.tab === 'admin', home = view.tab === 'today', un = unreadCount();
   const bell = `<button class="hbtn v3-ring" data-act="alerts" aria-label="Notifications${un ? `, ${un} unread chat message${un === 1 ? '' : 's'}` : ''}">${ICON.bell}${un ? '<i class="v3-dot" aria-hidden="true"></i>' : ''}</button>`;
   const more = `<button class="hbtn more v3-ring" data-act="tab" data-v="more" aria-label="More">${ICON.more}</button>`;
-  return `<header class="top bk-top v3-top ${home ? 'tall' : ''}">
+  const me = !dir && view.me && view.me !== GUEST && P(view.me) ? view.me : null;
+  const meBtn = me ? `<button class="v6-hme" data-act="openplayer" data-id="${esc(me)}" aria-label="Your player card: ${esc(pname(me))}">${avatar(me, 34)}</button>` : '';
+  return `<header class="top bk-top v3-top ${home ? 'tall' : ''} ${view.slim ? 'slim' : ''}">
     ${hdrImg()}
     <div class="v3-top-row">
-      ${dir ? '<span class="v3-top-side"></span>' : `<span class="v3-top-side">${bell}</span>`}
-      <button class="bk-brand v3-brand" data-act="tab" data-v="today" aria-label="Bracketly home for ${esc(tripTitle())}"><img class="logo brandmark v3-logo" src="${BRAND_HERO}" width="${home ? 92 : 46}" height="${home ? 92 : 46}" alt=""></button>
+      ${dir ? '<span class="v3-top-side"></span>' : `<span class="v3-top-side">${bell}${meBtn}</span>`}
+      <button class="bk-brand v3-brand" data-act="tab" data-v="today" aria-label="Bracketly home for ${esc(tripTitle())}"><img class="logo brandmark v3-logo" src="${BRAND_HERO}" width="${home ? 92 : 46}" height="${home ? 92 : 46}" alt=""><span class="v6-top-t" aria-hidden="true">${esc(tripTitle())}</span></button>
       <span class="v3-top-side end">${syncPill()}${dir ? `<button class="bk-hpill" data-act="tab" data-v="today">Return to tournament</button>` : more}</span>
     </div>
     ${home ? '<p class="v3-tagline" aria-hidden="true"><i></i>Tennis. Pickleball. Together.<i></i></p>' : ''}
@@ -5967,7 +6060,23 @@ function tripStatus(c){
   if (today >= a) return {k:'live', label:'Live event'};
   return {k:'upcoming', label:'Upcoming'};
 }
-const v3Badge = st => `<span class="v3-badge ${st.k}">${st.k === 'live' ? '<i class="st-dot" aria-hidden="true"></i>' : ''}${esc(st.label)}</span>`;
+const v3Badge = st => `<span class="v3-badge ${st.k}">${st.k === 'live' && st.live !== 0 ? '<i class="st-dot" aria-hidden="true"></i>' : ''}${esc(st.label)}</span>`;
+/* v3.0: what the tournament is doing, from match state first and the calendar second */
+function tourPhase(){
+  const c = cfg() || {}, d = tripStatus(c);
+  const evs = state.events.filter(e => (e.published || view.admin) && hasPlayEv(e));
+  const ms = evs.flatMap(e => e.matches || []);
+  const done = ms.filter(m => state.results[m.id] && resOf(m.id)).length, live = liveNow().length;
+  const decided = evs.length > 0 && evs.every(e => !isLadder(e) && champion(e) != null);
+  const tk = dayKey(isoDay(new Date())), playDay = ms.some(m => !state.results[m.id] && TIME_SLOTS[m.slotIdx] && TIME_SLOTS[m.slotIdx][0] === tk);
+  const b = {done, live, evs, playDay, total:ms.length};
+  if (decided || d.k === 'done') return Object.assign(b, {k:'done', label:'Completed', live:0});
+  if (live) return Object.assign(b, {k:'live', label:'Live now'});
+  if (playDay || (d.k === 'live' && evs.length)) return Object.assign(b, {k:'live', label:'Match day'});
+  if (d.k === 'live') return Object.assign(b, {k:'live', label:'Tournament weekend'});
+  if (done) return Object.assign(b, {k:'prog', label:'In progress'});
+  return Object.assign(b, {k:'upcoming', label:'Upcoming'});
+}
 function v3SecHead(title, id, link){ return `<div class="v3-sechead"><h2 class="v3-h2" id="${id}">${esc(title)}</h2>${link || ''}</div>` }
 /* v5: your player card + your next match, in the Home spot that used to be "Your next match" */
 function meCard(me, m, mine, pre){
@@ -5998,14 +6107,15 @@ function meCard(me, m, mine, pre){
   </section>`;
 }
 function cardStrip(){
-  const c = cfg() || {}, live = liveNow().length, nc = (c.courts || []).length || (typeof courtCount === 'function' ? courtCount() : 0);
-  const courtsSub = live ? `${live} on court now` : nc ? `${nc} court${nc === 1 ? '' : 's'}, live` : 'Live board';
+  const c = cfg() || {}, live = liveNow().length, nc = (c.courts || []).length || (typeof courtCount === 'function' ? courtCount() : 0), ph = tourPhase();
+  const ncs = nc ? `${nc} court${nc === 1 ? '' : 's'}` : '';
+  const courtsSub = live ? `${live} on court now` : ph.k === 'done' ? (ncs || 'Court board') : ph.k === 'upcoming' ? (ncs || 'Court board') : ncs ? `${ncs}, live board` : 'Live board';
   const infoSub = 'Venue & rules';
   const cell = (v, icon, label, sub, hot) => `<button class="v5-strip-i ${hot ? 'hot' : ''}" data-act="tab" data-v="${v}"><span class="v5-strip-ic" aria-hidden="true">${ICON[icon]}</span><span class="v5-strip-t"><b>${label}</b><small>${hot ? '<i class="st-dot" aria-hidden="true"></i>' : ''}${esc(sub)}</small></span><span class="chev" aria-hidden="true">›</span></button>`;
   return `<nav class="v5-strip" aria-label="Courts and tournament information">${cell('courts', 'courts', 'Courts', courtsSub, live > 0)}${cell('info', 'info', 'Info', infoSub)}</nav>`;
 }
 function tournamentCard(){
-  const c = cfg() || {}, cover = pic(c, 'cover'), st = tripStatus(c), np = players().length;
+  const c = cfg() || {}, cover = pic(c, 'cover'), st = tourPhase(), np = players().length;
   const tile = (v, label, icon) => `<button class="v3-tile" data-act="tab" data-v="${v}">${ICON[icon]}<span>${label}</span></button>`;
   return `<article class="v3-tcard" aria-labelledby="tc-h">
     <div class="v3-tcard-ph">${cover ? `<img src="${cover}" alt="" loading="lazy">` : `<img src="${IMG_HERO}" srcset="${imgSet('court-hero')}" sizes="(min-width:740px) 700px, 100vw" alt="" loading="lazy" decoding="async">`}
@@ -6042,7 +6152,7 @@ function v3Match(m){
   const ev = findEvent(m.eventId) || {}, st = matchStatus(m), t = slotParts(m), s = statusInfo(m);
   const when = t ? `${t.dayShort}, ${t.time} · ${courtName(m.court)}` : 'Time to be set';
   const sc = st === 'done' ? scoreText(m) : '';
-  const badge = st === 'live' ? '<span class="v3-badge live sm"><i class="st-dot" aria-hidden="true"></i>On court</span>' : st === 'now' ? '<span class="v3-badge live sm"><i class="st-dot" aria-hidden="true"></i>Now</span>' : st === 'done' ? `<span class="v3-badge done sm">Final${sc ? ' ' + esc(sc) : ''}</span>` : st === 'late' && bothKnown(m) ? '<span class="v3-badge late sm">Delayed</span>' : '';
+  const badge = st === 'live' ? '<span class="v3-badge live sm"><i class="st-dot" aria-hidden="true"></i>On court</span>' : st === 'now' ? '<span class="v3-badge live sm"><i class="st-dot" aria-hidden="true"></i>Now</span>' : st === 'done' ? `<span class="v3-badge done sm">Final${sc ? ' ' + esc(sc) : ''}</span>` : st === 'late' && bothKnown(m) ? '<span class="v3-badge late sm">Delayed</span>' : !bothKnown(m) && st !== 'bye' ? '<span class="v3-badge await sm">Awaiting result</span>' : '';
   return `<button class="v3-mrow" data-act="openmatch" data-id="${esc(m.id)}" aria-label="${esc(matchAria(m, [ev.name, roundName(m)].filter(Boolean).join(' · '), when, s))}">
     <span class="v3-mrow-ic">${ICON.rackets}</span>
     <span class="v3-mrow-b"><b>${esc(when)}</b><small>${mcodeBadge(m)}${esc([ev.name, roundBase(m)].filter(Boolean).join(' · '))}</small>
@@ -6076,9 +6186,10 @@ function body(){
   return homeView();
 }
 function nameGrid(){
-  const q = normName(view.q), pl = players().filter(p => !q || normName(p.name).includes(q)).sort((a,b) => a.name.localeCompare(b.name));
-  return `${players().length > 12 ? `<label class="sr" for="whoq">Search your name</label><input id="whoq" class="bk-input" type="search" style="margin-bottom:10px" placeholder="Search your name" value="${esc(view.q)}" autocomplete="off">` : ''}
-  ${pl.length ? `<div class="who-grid">${pl.map(p => `<button style="--c:${p.id === view.me ? 'var(--gold)' : 'var(--bd)'}" data-act="pickme" data-id="${p.id}" ${p.id === view.me ? 'aria-current="true"' : ''}>${esc(p.name)}</button>`).join('')}</div>` : `<p class="muted small">${players().length ? 'No one by that name.' : 'No players yet. The director adds them in setup.'}</p>`}`;
+  const all = players(), q = normName(view.q), pl = all.filter(p => !q || normName(p.name).includes(q)).sort((a,b) => a.name.localeCompare(b.name)), av = brand().cards.show !== false;
+  if (av && view.cards === undefined && TRIP){ view.cards = null; setTimeout(loadCards, 0) }
+  return `${all.length > 6 ? `<div class="v6-whoq"><label class="sr" for="whoq">Search your name</label><input id="whoq" class="bk-input" type="search" placeholder="Search your name" value="${esc(view.q || '')}" autocomplete="off" autocapitalize="words" enterkeyhint="search"></div>${q ? `<p class="bk-hint v6-whoq-n" role="status">${pl.length ? `${pl.length} of ${all.length} players` : ''}</p>` : ''}` : ''}
+  ${pl.length ? `<div class="who-grid v6-who">${pl.map(p => `<button style="--c:${p.id === view.me ? 'var(--gold)' : 'var(--bd)'}" data-act="pickme" data-id="${p.id}" ${p.id === view.me ? 'aria-current="true"' : ''}>${av ? avatar(p.id, 30) : ''}<span>${esc(p.name)}</span></button>`).join('')}</div>` : `<p class="muted small">${all.length ? `No one named “${esc(view.q)}”. Check the spelling, or ask the director to add you.` : 'No players yet. The director adds them in setup.'}</p>`}`;
 }
 function gate(){
   return `<div class="gate"><main class="gate-in">
@@ -6250,6 +6361,8 @@ function homeView(){
   const profile = me ? `<button class="bk-btn alt" data-act="openplayer" data-id="${esc(me)}">View your player profile</button>` : (players().length ? `<button class="bk-btn" data-act="who">Find your player profile</button>` : '');
   const startLine = start ? `${esc(dayLabel(isoDay(start)))} · First ball at ${esc(clock(start))}${future ? ` · ${esc(startsIn(start))}` : ''}` : esc(datesLabel());
   try{ Dir.note(TRIP, c) }catch(e){}
+  const ph = tourPhase();
+  if (ph.k === 'done') return recapView(ph);
   if (!pub){
     return `${tournamentCard()}
     <section aria-labelledby="home-h"><p class="bk-eyebrow">Tournament weekend</p><h2 class="v3-h2" id="home-h">See you courtside.</h2><p class="bk-meta">${startLine}</p></section>
@@ -6264,8 +6377,11 @@ function homeView(){
   const live = liveNow();
   const todayKey = dayKey(isoDay(new Date())), playDay = TIME_SLOTS.some(s => s[0] === todayKey);
   const today = playDay ? allMatches(true).filter(m => TIME_SLOTS[m.slotIdx] && TIME_SLOTS[m.slotIdx][0] === todayKey && !state.results[m.id] && !['live', 'now'].includes(matchStatus(m))).sort((a, b) => a.slotIdx - b.slotIdx || (a.court || 0) - (b.court || 0)) : upNext(6);
-  const shown = today.slice(0, 8);
-  const title = playDay ? 'Today' : future && state.events.some(e => e.published && hasPlayEv(e)) ? 'Draws are out.' : 'Tournament home';
+  const matchDay = live.length > 0 || ph.playDay;
+  const upN = matchDay ? today.slice(0, live.length ? 3 : 4) : [], upIds = new Set(upN.map(m => m.id));
+  const shown = today.filter(m => !upIds.has(m.id)).slice(0, 8);
+  const title = ph.k === 'upcoming' ? 'Draws are out.' : ph.label;
+  const metaTail = ph.k === 'upcoming' ? startLine : ph.k === 'prog' ? `${ph.done} of ${ph.total} results in · ${esc(datesLabel())}` : esc(datesLabel());
   const nt = nextMine && slotParts(nextMine);
   const nextHtml = me && me !== GUEST && P(me) && brand().cards.show !== false ? meCard(me, nextMine, mine) : nextMine ? `<section class="bk-feature" aria-labelledby="next-h"><p class="bk-eyebrow" id="next-h">Your next match</p>
       <p class="bk-next-when">${nt ? `${esc(nt.time)}<span>${esc(nt.day)}</span>` : 'Time to be set'}</p>
@@ -6273,18 +6389,82 @@ function homeView(){
       <p>${esc(sideLabel(nextMine, 'team1'))} vs ${esc(sideLabel(nextMine, 'team2'))}</p>
       <button class="bk-btn light" data-act="openmatch" data-id="${esc(nextMine.id)}">Match details</button></section>`
     : (me && mine.length ? `<p class="bk-note ok">You have no more matches scheduled.</p>` : '');
+  const pickAlert = !me && players().length ? `<button class="bk-alert" data-act="who"><span>Pick your name to see your matches first.</span><span class="act">Pick</span></button>` : '';
+  const listHead = matchDay ? 'Later Today' : playDay ? "Today's Matches" : 'Upcoming Matches';
+  const listHtml = `<section aria-labelledby="today-h">${v3SecHead(listHead, 'today-h', '<button class="v3-link" data-act="tab" data-v="schedule">View Schedule <span aria-hidden="true">→</span></button>')}
+    ${shown.length ? `<div class="v3-mlist">${shown.map(v3Match).join('')}</div>` : `<p class="bk-empty">${matchDay || playDay ? 'Nothing else scheduled today.' : 'No upcoming matches are scheduled.'}</p>`}</section>`;
+  if (matchDay) return `${matchDayPanel(live, upN)}
+  ${nextHtml}${pickAlert}${betAlert}
+  ${tournamentCard()}
+  ${v3Scoreboard()}
+  <p class="bk-meta v3-homemeta" id="home-h"><b>${esc(title)}</b> · ${metaTail}</p>
+  ${ladderHomeHtml()}
+  ${listHtml}
+  ${galleryStrip()}${infoSections({welcome:true})}
+  ${photoStrip()}${sponsorsHtml()}${installHint()}`;
   return `${tournamentCard()}
   ${v3Scoreboard()}
-  <p class="bk-meta v3-homemeta" id="home-h"><b>${esc(title)}</b> · ${future ? startLine : esc(datesLabel())}</p>
+  <p class="bk-meta v3-homemeta" id="home-h"><b>${esc(title)}</b> · ${metaTail}</p>
   ${nextHtml}
   ${ladderHomeHtml()}
   ${betAlert}
-  ${!me && players().length ? `<button class="bk-alert" data-act="who"><span>Pick your name to see your matches first.</span><span class="act">Pick</span></button>` : ''}
-  ${live.length ? `<section aria-labelledby="live-h">${v3SecHead('On Court Now', 'live-h')}<div class="v3-mlist">${live.map(v3Match).join('')}</div></section>` : ''}
-  <section aria-labelledby="today-h">${v3SecHead(playDay ? "Today's Matches" : 'Upcoming Matches', 'today-h', '<button class="v3-link" data-act="tab" data-v="schedule">View Schedule <span aria-hidden="true">→</span></button>')}
-    ${shown.length ? `<div class="v3-mlist">${shown.map(v3Match).join('')}</div>` : `<p class="bk-empty">${playDay ? 'No more matches scheduled today.' : 'No upcoming matches are scheduled.'}</p>`}</section>
+  ${pickAlert}
+  ${listHtml}
   ${galleryStrip()}${infoSections({welcome:true})}
   ${photoStrip()}${sponsorsHtml()}${installHint()}`;
+}
+/* ---------- v3.0: match-day lead, champions recap ---------- */
+function mdRow(m, kind){
+  const t = slotParts(m), ev = findEvent(m.eventId) || {}, st = matchStatus(m), wait = !bothKnown(m);
+  const when = kind === 'now' ? (st === 'live' ? 'On court' : 'Due now') : (t ? t.time : 'Time to be set');
+  return `<li><button class="v6-md-row ${kind}" data-act="openmatch" data-id="${esc(m.id)}" aria-label="${esc(matchAria(m, [ev.name, roundName(m)].filter(Boolean).join(' · '), `${courtName(m.court)}, ${when}`, statusInfo(m)))}">
+    <span class="v6-md-where"><b>${esc(courtName(m.court))}</b><small>${kind === 'now' ? '<i class="st-dot" aria-hidden="true"></i>' : ''}${esc(when)}</small></span>
+    <span class="v6-md-teams"><span class="v6-md-vs">${esc(sideLabel(m, 'team1', true))} <i>vs</i> ${esc(sideLabel(m, 'team2', true))}</span><small>${mcodeBadge(m)}${esc([ev.name, roundBase(m)].filter(Boolean).join(' · '))}</small>${wait ? '<span class="v3-badge await sm">Awaiting result</span>' : ''}</span>
+    <span class="chev" aria-hidden="true">›</span></button></li>`;
+}
+function matchDayPanel(live, next){
+  const d = new Date().toLocaleDateString('en-US', {weekday:'long', month:'short', day:'numeric'});
+  return `<section class="v6-md" aria-labelledby="md-h">
+    <div class="v6-md-top"><p class="v6-md-eye">${live.length ? '<i class="st-dot" aria-hidden="true"></i>Live · ' : 'Match day · '}${esc(d)}</p>
+      <button class="v6-md-all" data-act="tab" data-v="courts">All courts <span aria-hidden="true">→</span></button></div>
+    ${live.length ? `<h2 class="v6-md-h" id="md-h">Now on court</h2><ul class="v6-md-list">${live.slice(0, 4).map(m => mdRow(m, 'now')).join('')}</ul>${live.length > 4 ? `<button class="v6-md-more" data-act="tab" data-v="courts">+ ${live.length - 4} more on court</button>` : ''}` : ''}
+    <h2 class="v6-md-h ${live.length ? 'sub' : ''}" ${live.length ? '' : 'id="md-h"'}>Up next</h2>
+    ${next.length ? `<ul class="v6-md-list">${next.map(m => mdRow(m, 'next')).join('')}</ul>` : '<p class="v6-md-none">Nothing else scheduled today.</p>'}
+  </section>`;
+}
+const teamNm = t => t ? (t.name || (t.players || []).join(' / ')) : '';
+/* Champion and finalist for one division, once it's decided */
+function podium(ev){
+  const ch = champion(ev); if (ch == null) return null;
+  if (ev.format === 'club_cup'){ const cc = ev.clubCup || {}, t = getClubCupTotals(ev), A = ch === 'A'; return {champ:A ? cc.teamAName : cc.teamBName, fin:A ? cc.teamBName : cc.teamAName, score:`${fmtPts(A ? t.sideA : t.sideB)}–${fmtPts(A ? t.sideB : t.sideA)}`, cup:true} }
+  if (ev.format === 'round_robin'){ const st = rrStandings(ev, ev.matches); return {champ:teamNm(st[0] && st[0].team), fin:teamNm(st[1] && st[1].team), score:st[0] ? `${st[0].W}–${st[0].L}` : '', rr:true} }
+  const fin = ev.format === 'pro_am' ? ev.matches.filter(m => m.proAm && m.proAm.isFinal && state.results[m.id]).pop()
+    : ev.matches.filter(m => (m.round === 'F' || /^GF/.test(m.round)) && sectionOf(m.round) !== 'c' && state.results[m.id]).pop();
+  if (!fin || !winnerSlot(fin)) return {champ:teamNm(findTeam(ch))};
+  const w = winnerSlot(fin), l = w === 'team1' ? 'team2' : 'team1';
+  return {champ:sideLabel(fin, w), fin:sideLabel(fin, l), score:scoreText(fin), mid:fin.id};
+}
+function champCard(x){
+  const p = x.p, fin = p.fin ? `<p class="v6-champ-f">${p.rr ? 'Runner-up' : p.cup ? 'Over' : 'Finalist'} <b>${esc(p.fin)}</b>${p.score ? `<span>${p.rr ? esc(p.score) + ' record' : esc(p.score)}</span>` : ''}</p>` : '';
+  return `<article class="v6-champ"><span class="v6-champ-ic" aria-hidden="true">${ICON.trophy}</span><div class="v6-champ-b"><p class="v6-champ-ev">${esc(x.e.name)}</p><p class="v6-champ-w">${esc(p.champ)}</p>${fin}</div>${p.mid ? `<button class="v6-champ-go" data-act="openmatch" data-id="${esc(p.mid)}" aria-label="${esc(x.e.name)} final">›</button>` : ''}</article>`;
+}
+function recapLines(){ return tourPhase().evs.map(e => { const p = podium(e); if (!p || !p.champ) return ''; return `${e.name}: ${p.champ}${p.fin ? (p.rr ? ` (runner-up ${p.fin})` : ` def. ${p.fin}${p.score ? ', ' + p.score : ''}`) : ''}` }).filter(Boolean) }
+function recapView(ph){
+  const c = cfg() || {}, pods = ph.evs.map(e => ({e, p:podium(e)})), won = pods.filter(x => x.p && x.p.champ), open = pods.filter(x => !x.p && !isLadder(x.e));
+  const finals = won.filter(x => x.p.mid).map(x => findMatch(x.p.mid)).filter(Boolean), nPh = photos().length, np = players().length;
+  const sum = [np ? `${np} player${np === 1 ? '' : 's'}` : '', ph.done ? `${ph.done} match${ph.done === 1 ? '' : 'es'} played` : '', won.length ? `${won.length} champion${won.length === 1 ? '' : 's'}` : ''].filter(Boolean).join(' · ');
+  return `${tournamentCard()}
+  <section class="v6-recap" aria-labelledby="home-h">
+    <p class="bk-eyebrow">Final results · ${esc(datesLabel())}</p>
+    <h2 class="v3-h2" id="home-h">${won.length ? 'Champions crowned.' : "That's a wrap."}</h2>
+    <p class="v6-recap-sum">${esc(sum || 'Thanks for playing.')}</p>
+    <div class="v6-recap-acts"><button class="bk-btn" data-act="shareresults">${ICON.share}<span>Share results</span></button><button class="bk-btn alt" data-act="recapphotos">${ICON.cam}<span>Photo wall${nPh ? ` · ${nPh}` : ''}</span></button></div>
+  </section>
+  ${won.length ? `<section aria-labelledby="ch-h">${v3SecHead('Champions', 'ch-h')}<div class="v6-champs">${won.map(champCard).join('')}</div></section>` : ''}
+  ${open.length ? `<p class="bk-note">${open.length === pods.length && !ph.done ? 'Final results weren’t recorded in Bracketly for this tournament.' : `Still to be recorded: ${esc(open.map(x => x.e.name).join(', '))}.`}</p>` : ''}
+  ${(() => { const list = finals.length ? finals : recentResults(6); return list.length ? `<section aria-labelledby="fr-h">${v3SecHead(finals.length ? 'Final Results' : 'Latest Results', 'fr-h', '<button class="v3-link" data-act="tab" data-v="draws">All draws <span aria-hidden="true">→</span></button>')}<div class="v3-mlist">${list.map(v3Match).join('')}</div></section>` : '' })()}
+  ${v3Scoreboard()}
+  ${galleryStrip()}${photoStrip()}${infoSections({welcome:false})}${sponsorsHtml()}`;
 }
 function weekendList(){
   const items = weekendItems(); if (!items.length) return '';
@@ -6396,14 +6576,29 @@ function scheduleView(){
   const uns = allMatches(true).filter(m => !TIME_SLOTS[m.slotIdx] && !state.results[m.id]).length;
   const extra = x => `<div class="agx"><span class="st neutral">Club event</span><b>${esc(x.title)}</b>${x.place ? `<span>${placeLink(x.place)}</span>` : ''}${x.notes ? `<span>${esc(x.notes)}</span>` : ''}</div>`;
   const filtered = sf.ev || sf.court || sf.mine;
+  /* v3.0: "now" is the first time slot still in play today; time slots where every match is final fold into one line */
+  const nowT = Date.now(), slotLen = ((cfg() || {}).slotMinutes || 90) * 60000, isToday = dayK === todayKey;
+  const fin = it => !!(it.m && state.results[it.m.id]), played = it => fin(it) && bothKnown(it.m);
+  const folds = g => g.items.length > 0 && g.items.every(fin) && g.items.some(played); // a slot of only auto-advanced byes is not "all final"
+  const nowIdx = isToday ? groups.findIndex(g => g.items.some(it => it.m && !state.results[it.m.id] && (['live', 'now'].includes(matchStatus(it.m, nowT)) || (slotDate(it.m.slotIdx) && slotDate(it.m.slotIdx).getTime() + slotLen > nowT)))) : -1;
+  const gHtml = (g, i) => {
+    const lbl = esc(g.t === '99:99' ? 'Time to be set' : fmtClock(g.t)), idA = i === nowIdx ? ' id="sg-now"' : '';
+    if (folds(g)){
+      const k = 'sg-' + dayK + '-' + g.t, n = g.items.length;
+      return `<details class="v6-sgdone" data-k="${esc(k)}"${idA} ${isOpen(k) ? 'open' : ''}><summary><b>${lbl}</b><span>${n} match${n === 1 ? '' : 'es'} · all final</span><span class="v6-sgdone-t" aria-hidden="true"></span></summary><div class="v6-sgdone-b">${g.items.map(it => matchRow(it.m, {noTime:true})).join('')}</div></details>`;
+    }
+    return `<h2 class="bk-group"${idA}>${lbl}${i === nowIdx ? ' <span class="v3-badge live sm"><i class="st-dot" aria-hidden="true"></i>Now</span>' : ''}</h2>${g.items.map(it => it.m ? matchRow(it.m, {noTime:true}) : extra(it.x)).join('')}`;
+  };
+  const doneSlots = groups.filter(folds).length;
   return `${pageHead('Schedule')}
   ${days.length > 1 ? `<div class="seg2 days" role="group" aria-label="Day">${days.map(d => `<button data-act="day" data-v="${esc(d.day)}" aria-pressed="${d.day === dayK}">${esc(d.day.split(',')[0])}<small>${esc(d.day.split(',').slice(1).join(',').trim())}</small></button>`).join('')}</div>` : `<p class="bk-meta">${esc(dayK || '')}</p>`}
   <div class="bk-filters">
     <label><span>Event</span><select data-chg="sfilter" data-f="ev">${opt('', 'All events', sf.ev)}${pubEvs.map(e => opt(e.id, e.name, sf.ev)).join('')}</select></label>
     ${courts.length > 1 ? `<label><span>Court</span><select data-chg="sfilter" data-f="court">${opt('', 'All courts', sf.court)}${courts.map((c, i) => opt(i + 1, courtName(i + 1), sf.court)).join('')}</select></label>` : ''}
   </div>
-  <div class="bk-actions">${myN ? `<button class="btn alt" data-act="sfmine" aria-pressed="${!!sf.mine}">${sf.mine ? '✓ ' : ''}My matches only</button>` : ''}<button class="btn alt" data-act="sgrid" aria-pressed="${!!grid}">${grid ? 'Agenda view' : 'Grid view'}</button>${filtered ? '<button class="btn alt" data-act="sfclear">Clear filters</button>' : ''}</div>
-  ${grid ? schedGridView(dayK, ms) : groups.length ? groups.map(g => `<h2 class="bk-group">${esc(g.t === '99:99' ? 'Time to be set' : fmtClock(g.t))}</h2>${g.items.map(it => it.m ? matchRow(it.m, {noTime:true}) : extra(it.x)).join('')}`).join('') : `<p class="bk-empty">${filtered ? 'No matches match these filters on this day.' : 'No matches scheduled this day.'}</p>`}
+  <div class="bk-actions v6-sacts">${nowIdx >= 0 && !grid ? '<button class="btn v6-now" data-act="sjumpnow"><i class="st-dot" aria-hidden="true"></i>Jump to now</button>' : ''}${myN ? `<button class="btn alt v6-chip" data-act="sfmine" aria-pressed="${!!sf.mine}">${sf.mine ? '✓ ' : ''}My matches</button>` : ''}<button class="btn alt" data-act="sgrid" aria-pressed="${!!grid}">${grid ? 'Agenda view' : 'Grid view'}</button>${filtered ? '<button class="btn alt" data-act="sfclear">Clear filters</button>' : ''}</div>
+  ${!grid && doneSlots ? `<p class="bk-hint v6-sg-hint">${doneSlots} finished time slot${doneSlots === 1 ? ' is' : 's are'} folded up. Tap one to see its scores.</p>` : ''}
+  ${grid ? schedGridView(dayK, ms) : groups.length ? groups.map(gHtml).join('') : `<p class="bk-empty">${filtered ? (sf.mine ? 'You have no matches on this day.' : 'No matches match these filters on this day.') : 'No matches scheduled this day.'}</p>`}
   ${uns ? `<p class="bk-note warn">${uns} match${uns === 1 ? '' : 'es'} still waiting for a time.</p>` : ''}
   ${weekendList()}`;
 }
@@ -8274,6 +8469,7 @@ function drawInner(){
   const old = document.getElementById('scroller'), keep = old && !view.resetScroll ? old.scrollTop : 0;
   const navK = [TRIP && TRIP.id, view.screen, view.tab, view.ev, view.dws, view.ctab, view.me, view.wz && view.wz.step, view.cz, view.tv, view.print, view.signup].join('|');
   const isNav = view.resetScroll || navK !== drawInner._nav; drawInner._nav = navK;
+  if (isNav) view.slim = false;
   app.classList.toggle('nofade', !isNav);
   const oSheet = document.querySelector('#app .modal .sheet'), sheetKeep = oSheet && view.modal && view.modal === drawInner._modal ? oSheet.scrollTop : 0; drawInner._modal = view.modal;
   drawInner._sheetKeep = sheetKeep;
@@ -8677,6 +8873,14 @@ const ACT = {
   day(el){ view.day = el.dataset.v },
   cfilter(el){ view.cf = el.dataset.v },
   sfmine(){ view.sf = Object.assign({}, view.sf || {}); view.sf.mine = !view.sf.mine },
+  sjumpnow(){ requestAnimationFrame(() => requestAnimationFrame(() => { const el = document.getElementById('sg-now'), sc = document.getElementById('scroller'); if (!el || !sc) return; const top = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - 10; sc.scrollTo({top:Math.max(0, top), behavior:matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}) })) },
+  recapphotos(){ view.tab = 'chat'; view.ctab = 'photos'; view.modal = null; view.resetScroll = true },
+  async shareresults(){
+    const lines = recapLines(), url = inviteLink(), title = `${tripTitle()}: final results`;
+    const text = [title, ...lines].join('\n');
+    if (navigator.share){ try{ await navigator.share({title, text, url}); return }catch(e){ if (e && e.name === 'AbortError') return } }
+    try{ await navigator.clipboard.writeText(text + '\n' + url); toast('Results and link copied. Paste them anywhere.') }catch(e){ ask(text + '\n' + url, {info:true}) }
+  },
   sfclear(){ view.sf = {} },
   sgrid(){ view.sgrid = !view.sgrid },
   who(){ view.modal = 'who'; view.q = '' },
@@ -9063,6 +9267,14 @@ function runChg(el, e){ const fn = CHG[el.dataset.chg]; if (!fn) return; let out
 document.addEventListener('click', e => { const f = e.target.closest && e.target.closest('input[type=file][data-chg]'); if (f && !f._direct){ f._direct = true; f.addEventListener('change', ev => runChg(f, ev)) } }, true);
 document.addEventListener('change', e => { const el = e.target.closest('[data-chg]'); if (!el || el._direct) return; const fn = CHG[el.dataset.chg]; if (fn){ let out; try{ out = fn(el, e) }catch(err){ console.error(err); toast(err.message || String(err)) } render(); if (out && out.then) out.then(render, err => { console.error(err); toast(err.message || String(err)); render() }) } });
 document.addEventListener('input', e => { const id = e.target.id; if (id === 'divpaste') view.divPaste = e.target.value; if (/^qa-\d$/.test(id)){ if (!view.qa || view.qa.ev !== e.target.dataset.ev) view.qa = {ev:e.target.dataset.ev}; view.qa[id] = e.target.value } if (id === 'announce') view.annDraft = e.target.value; if (id === 'chatDraft') view.draft = e.target.value; if (id === 'pin') view.pin = e.target.value; if (id === 'paste') view.paste = e.target.value; if (id === 'cev-name') view.cevName = e.target.value; if (id === 'joincode') view.joinCode = e.target.value; if (id === 'whoq' || id === 'plq'){ view.q = e.target.value; render() } if (id === 'divq'){ view.dq = e.target.value; render() } { const sc = /^sc-(\d+)-(\d)$/.exec(id || ''); if (sc && view.modal === 'match'){ const m = findMatch(view.matchId); if (m){ if (!view.sm || view.sm.id !== m.id || !view.sm.rows) view.sm = {id:m.id, mode:'edit', rows:readScoreInputs(m)}; const v = e.target.value, x = v === '' ? null : parseInt(v, 10); const was = decidedEarly(m, view.sm.rows); (view.sm.rows[+sc[1]] = view.sm.rows[+sc[1]] || [null, null])[+sc[2]] = isNaN(x) ? null : x; view.sm.err = null; if (view.sm.mode === 'edit' && +sc[1] < 2 && was !== decidedEarly(m, view.sm.rows)){ if (!was) view.sm.rows[2] = [null, null]; render() } } } } if (id === 'eq'){ view.eq = e.target.value; render() } });
+/* v3.0: the tournament header folds into a slim bar once you scroll (class toggle only, no redraw) */
+document.addEventListener('scroll', e => {
+  const sc = e.target; if (!sc || sc.id !== 'scroller') return;
+  const h = sc.parentNode && sc.parentNode.querySelector(':scope > header.v3-top'); if (!h) return;
+  const y = sc.scrollTop, room = sc.scrollHeight - sc.clientHeight;
+  const on = view.slim ? y > 8 : (y > 64 && room > 200);
+  if (on !== !!view.slim){ view.slim = on; h.classList.toggle('slim', on) }
+}, {capture:true, passive:true});
 document.addEventListener('toggle', e => { const d = e.target; if (d && d.tagName === 'DETAILS' && d.dataset && d.dataset.k){ view.open = view.open || {}; view.open[d.dataset.k] = d.open } }, true);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && (view.modal || view.ask)){ if (view.ask) ACT.askno(); else view.modal = null; render(); return }
@@ -9821,13 +10033,13 @@ Object.assign(Dir, {
     if (error) throw new Error(/invalid/i.test(error.message) ? "That email and password don't match." : error.message);
     return {moved:await this.claimMerge(merge)};
   },
-  async signOut(){ await this.sb.auth.signOut().catch(() => {}); LS.set('bkt-tourneys', []); LS.del('bkt-last'); const {error} = await this.sb.auth.signInAnonymously(); if (error) throw error },
+  async signOut(){ await this.sb.auth.signOut().catch(() => {}); this.hasSession = false; LS.set('bkt-tourneys', []); LS.del('bkt-last') },
   async getProfile(){ const u = await this.me(); if (!u || u.anon) return null; const {data} = await this.sb.from('profiles').select('*').eq('user_id', u.id).maybeSingle(); return data || {user_id:u.id} },
   async saveProfile(p){ const u = await this.me(); if (!u || u.anon) throw new Error('Sign in first.');
     const t = (v, n) => { v = String(v == null ? '' : v).trim().slice(0, n); return v || null };
     const row = {user_id:u.id, name:t(p.name, 80), usta:t(String(p.usta || '').replace(/\D/g, ''), 20), ntrp:t(p.ntrp, 8), ntrp_type:t(p.ntrp_type, 4), updated_at:new Date().toISOString()};
     const {error} = await this.sb.from('profiles').upsert(row); if (error) throw error; return row },
-  async deleteAccount(){ const {error} = await this.sb.rpc('delete_my_account'); if (error) throw error; await this.sb.auth.signOut({scope:'local'}).catch(() => {}); LS.set('bkt-tourneys', []); LS.del('bkt-last'); await this.sb.auth.signInAnonymously() },
+  async deleteAccount(){ const {error} = await this.sb.rpc('delete_my_account'); if (error) throw error; await this.sb.auth.signOut({scope:'local'}).catch(() => {}); this.hasSession = false; LS.set('bkt-tourneys', []); LS.del('bkt-last') },
   // take it off your own list; it stays for everyone else
   async leave(id){
     if (this.mode === 'supabase'){ const {error} = await this.sb.rpc('leave_trip', {p_trip:id}); if (error) throw new Error("Couldn't remove it right now. Try again in a bit.") }
