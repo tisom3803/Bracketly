@@ -1734,6 +1734,89 @@ nav.tabs.bk-nav .badge{position:absolute;top:4px;left:calc(50% + 6px);margin:0}
 .tvrow .mcode{height:24px;min-width:32px;font-size:14px}
 .tvrow span .mcode{height:20px;font-size:12px}
 @media print{ .mcode.hi{background:#fff!important;color:#000!important;border-color:#000!important} .mcode.lo{border-style:dashed!important;color:#000!important} }
+/* ===== v6: challenge ladder + USTA / ratings ===== */
+.v6-lhead{margin:4px 0 14px}.v6-lhead p{margin:0 0 4px}.v6-lhead .bk-actions{margin-top:10px}
+.v6-lad{list-style:none;margin:0 0 18px;padding:0;border:1px solid var(--bd);border-radius:var(--rad);background:var(--card);overflow:hidden;box-shadow:var(--shadow)}
+.v6-lrow{display:flex;align-items:center;gap:10px;padding:10px 12px;border-top:1px solid var(--bd);min-height:64px}
+.v6-lrow:first-child{border-top:0}
+.v6-lrow.v6-me{background:linear-gradient(90deg,rgba(213,179,106,.22),rgba(213,179,106,.04));box-shadow:inset 3px 0 0 var(--au)}
+.v6-lrow.away .v6-who{opacity:.6}
+.v6-rk{flex:0 0 34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 17px/1 var(--fd);color:var(--g1);background:var(--iv2);border:1px solid var(--bd)}
+.v6-lrow:nth-child(1) .v6-rk{background:linear-gradient(180deg,var(--au2),var(--au));border-color:var(--au);color:var(--g3)}
+.v6-lrow:nth-child(2) .v6-rk,.v6-lrow:nth-child(3) .v6-rk{border-color:var(--au)}
+.v6-who{flex:1 1 auto;min-width:0;display:flex;align-items:center;gap:0;background:none;border:0;padding:0;text-align:left;color:inherit;min-height:44px;cursor:pointer}
+.v6-who .v4-av{margin-right:10px}
+.v6-avs{display:flex;margin-right:10px}.v6-avs .v4-av{margin-right:-8px}.v6-avs .v4-av:last-child{margin-right:0}
+.v6-nm{min-width:0;display:flex;flex-direction:column}
+.v6-nm b{font:700 16px/1.2 var(--fb);color:var(--g1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v6-nm small{font:500 13px/1.3 var(--fb);color:var(--muted);margin-top:2px}
+.v6-mv{font-style:normal;font-weight:700;margin-left:4px}.v6-mv.up{color:var(--success)}.v6-mv.dn{color:var(--danger)}
+.v6-act{flex:0 0 auto;display:flex;align-items:center}
+.v6-chal{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--au);background:linear-gradient(180deg,var(--au2),var(--au));color:var(--g3);font:700 14px/1 var(--fb);cursor:pointer}
+.v6-you{font:700 12px/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.v6-mine{margin-bottom:14px}
+.v6-chl{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:10px}
+.v6-chc{padding:14px;border-radius:var(--rad);border:1px solid var(--bd);background:var(--card);box-shadow:var(--shadow)}
+.v6-chc.hot{border-color:var(--au);box-shadow:0 0 0 2px rgba(213,179,106,.35),var(--shadow)}
+.v6-chc-h{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 6px;font:600 13px/1.2 var(--fb);color:var(--muted)}
+.v6-chc-t{margin:0 0 4px;font:400 15px/1.45 var(--fb)}
+.v6-chc .bk-actions{margin-top:8px}
+.v6-res{list-style:none;margin:0;padding:0;border:1px solid var(--bd);border-radius:var(--rad);background:var(--card);overflow:hidden}
+.v6-res li+li{border-top:1px solid var(--bd)}
+.v6-res button{display:flex;flex-direction:column;gap:2px;width:100%;text-align:left;background:none;border:0;padding:10px 14px;min-height:52px;color:inherit;font:400 15px/1.35 var(--fb);cursor:pointer}
+.v6-res small{color:var(--muted);font-size:13px}
+.v6-sheet .v6-sides{display:flex;align-items:center;gap:10px;margin:12px 0}
+.v6-side{flex:1 1 0;min-width:0;display:flex;align-items:center;padding:10px;border-radius:var(--rad-c);background:var(--iv2);border:1px solid var(--bd)}
+.v6-side > span:last-child{display:flex;flex-direction:column;min-width:0}.v6-side small{font:700 11px/1 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+.v6-side b{font:700 15px/1.25 var(--fb);color:var(--g1);overflow-wrap:anywhere}.v6-side .bk-meta{font-size:12.5px;margin:2px 0 0}
+.v6-vs{font:700 14px/1 var(--fd);color:var(--muted)}
+.v6-acts{display:grid;gap:8px;margin:12px 0}.v6-acts .bk-btn{margin:0}
+.v6-when{display:flex;gap:8px;align-items:center;margin:6px 0}.v6-when svg{width:18px;height:18px}
+.v6-times{list-style:none;margin:8px 0;padding:0;display:grid;gap:6px}
+.v6-times li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 12px;border-radius:var(--rad-c);border:1px solid var(--bd);background:var(--card)}
+.v6-times small{color:var(--muted)}
+.v6-propose{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}.v6-propose label{font:600 14px/1.3 var(--fb);color:var(--g1)}
+@media (min-width:520px){ .v6-propose{grid-template-columns:1fr 1fr auto;align-items:end}.v6-propose label{grid-column:1/-1} }
+.v6-dir{border-top:1px dashed var(--au);padding-top:10px}
+.v6-rules{display:grid;gap:0;padding:4px 14px}
+.v6-rf{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--bd)}.v6-rf:first-child{border-top:0}
+.v6-rf > span{display:flex;flex-direction:column;min-width:0}.v6-rf small{color:var(--muted);font-size:13px;margin-top:2px}
+.v6-rf input,.v6-rf select{flex:0 0 auto;width:auto;max-width:60%;margin:0}.v6-rf input[type=number]{width:80px;text-align:center}
+.v6-rlist{margin:8px 0 14px;padding-left:20px;display:grid;gap:8px;font:400 15px/1.5 var(--fb)}
+.v6-ord{list-style:none;margin:8px 0 14px;padding:0;display:grid;gap:6px}
+.v6-ord li{display:flex;align-items:center;gap:6px;padding:6px 8px;border-radius:var(--rad-c);border:1px solid var(--bd);background:var(--card)}
+.v6-ord li > b{flex:0 0 28px;text-align:center;font:700 16px/1 var(--fd);color:var(--g1)}.v6-ord li > span{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v6-ord button{flex:0 0 auto;min-width:40px;min-height:40px;border-radius:10px;border:1px solid var(--bd);background:var(--iv2);color:var(--g1);font:600 14px/1 var(--fb)}
+.v6-ord button:disabled{opacity:.35}.v6-ord .v6-aw.on{background:var(--warn-bg);border-color:var(--au);color:var(--warn-ink)}.v6-ord .v6-rm{color:var(--danger)}
+.v6-off{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px}.v6-off li{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.v6-home{margin:0 0 16px}
+.v6-home-top{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;border-radius:var(--rad);border:1px solid var(--au);background:radial-gradient(120% 120% at 0 0,var(--g2),var(--g1) 60%,var(--g3));color:var(--iv);text-align:left;cursor:pointer;margin-bottom:10px}
+.v6-home-rk{flex:0 0 64px;height:64px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(247,245,236,.08);box-shadow:0 0 0 2px var(--au)}
+.v6-home-rk small{font:700 10px/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--au2)}.v6-home-rk b{font:700 26px/1 var(--fd);color:var(--iv);margin-top:2px}
+.v6-home-t{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}.v6-home-t small{color:var(--au2);font:600 12px/1.2 var(--fb);letter-spacing:.1em;text-transform:uppercase}
+.v6-home-t b{font:700 19px/1.2 var(--fd)}.v6-home-t span{font-size:13.5px;opacity:.85}
+.v6-home-top .chev{color:var(--au2)}
+.v6-pl-l{display:flex;align-items:center;gap:10px;margin:4px 0 10px}.v6-pl-l b{font:700 26px/1 var(--fd);color:var(--g1)}.v6-pl-l span{color:var(--muted)}.v6-pl-l .v6-chal{margin-left:auto}
+.v6-ptab{width:100%;border-collapse:collapse}.v6-ptab tr{break-inside:avoid;page-break-inside:avoid}.v6-ptab thead{display:table-header-group}.v6-ptab th,.v6-ptab td{padding:6px 8px;border-bottom:1px solid #ccc;text-align:left}
+.tv .v6-lad{background:transparent;border-color:rgba(213,179,106,.35)}.tv .v6-lrow{border-color:rgba(213,179,106,.2)}.tv .v6-nm b{color:inherit}
+/* ratings on cards */
+.v6-rts{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:12px 0 0}
+.v6-rt{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;font:500 13px/1 var(--fb);background:rgba(247,245,236,.1);border:1px solid rgba(247,245,236,.35);color:var(--iv)}
+.v6-rt b{font-weight:700;letter-spacing:.06em}.v6-rt small{font-size:11px;opacity:.75}
+.v6-rt.ver{border-color:var(--au);background:rgba(213,179,106,.18)}
+.v6-chk{display:inline-flex;width:15px;height:15px;color:var(--au2)}.v6-chk svg,.v6-vt svg,.v6-vs svg{width:15px;height:15px}
+.v6-usta{display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0 0;position:relative}
+.v6-usta-n{font:500 14px/1.3 var(--fb)}.v6-usta-n .bk-inline{margin-left:6px;color:var(--au2)}
+.v6-usta .bk-hint{color:rgba(247,245,236,.7);font-size:12.5px;max-width:40ch}
+.v4-pcard .v6-usta .btn.alt{background:transparent;color:var(--iv);border-color:rgba(247,245,236,.55)}
+.v6-cardlad{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:10px 0 0}.v6-cardlad span{font:700 12px/1 var(--fb);padding:7px 10px;border-radius:999px;background:linear-gradient(180deg,var(--au2),var(--au));color:var(--g3)}
+.bk-sheet:not(.v4-sheet) > .v6-rts .v6-rt{background:var(--iv2);color:var(--g1);border-color:var(--bd)}
+.v6-ce-h{margin:18px 0 4px;font:700 16px/1.2 var(--fd);color:var(--g1);display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}.v6-ce-h .bk-inline{font:500 13px/1 var(--fb)}
+.v6-cgrid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 10px;align-items:end}
+.v6-cf{min-width:0}.v6-cf label{margin-top:10px}.v6-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:6px}.v6-2 .bk-input{margin:0}
+.v6-vt{min-height:44px;padding:0 12px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--g1);font:600 13px/1 var(--fb);display:inline-flex;align-items:center;gap:6px;margin-bottom:2px;white-space:nowrap}
+.v6-vt.on{border-color:var(--au);background:rgba(213,179,106,.2);color:var(--g1)}.v6-vt.on svg{color:var(--success)}
+.v6-vs{font:500 12.5px/1.2 var(--fb);color:var(--muted);display:inline-flex;align-items:center;gap:4px;min-height:44px;white-space:nowrap}.v6-vs svg{color:var(--success)}
 </style>
 </head>
 <body>
@@ -1746,7 +1829,7 @@ nav.tabs.bk-nav .badge{position:absolute;top:4px;left:calc(50% + 6px);margin:0}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '2.7.0';
+const APP_VERSION = '2.8.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -2331,6 +2414,7 @@ const FORMAT_LABELS = {
   'multi_pool': 'Pool play → Playoff',
   'pro_am': 'Pro-Am (flights + rotations)',
   'club_cup': 'Club Cup (team vs team)',
+  'challenge_ladder': 'Challenge ladder',
 };
 const FORMAT_DESCRIPTIONS = {
   'tbd': 'Decide once signups are in — common when you don\'t know yet how many teams you\'ll get.',
@@ -2341,6 +2425,7 @@ const FORMAT_DESCRIPTIONS = {
   'multi_pool': 'Round robin pools → top finishers advance to single-elim playoff bracket.',
   'pro_am': 'Teams of 4 (Pro/A/B/C) play in flights with rotating partnerships. 16-game pro-sets, games-won scoring.',
   'club_cup': 'Two clubs face off across TD-defined sessions (singles/doubles/mixed). Running points total — first to a configurable threshold wins.',
+  'challenge_ladder': 'Season-long ladder. Players challenge up to 3 spots above; win and you move up. Not on the weekend schedule.',
 };
 
 /* ============================================================
@@ -4294,7 +4379,7 @@ const KINDS = {
   clubcup: {label:'Club Cup', size:0}
 };
 const BRACKET_FORMATS = ['single_elim', 'single_elim_cons', 'double_elim', 'round_robin', 'multi_pool'];
-const formatsFor = ev => ev.kind === 'proam' ? ['pro_am'] : ev.kind === 'clubcup' ? ['club_cup'] : BRACKET_FORMATS;
+const formatsFor = ev => ev.kind === 'proam' ? ['pro_am'] : ev.kind === 'clubcup' ? ['club_cup'] : [...BRACKET_FORMATS, 'challenge_ladder'];
 const QUICK = [
   {label:"Men's 3.5",   ev:{kind:'doubles', gender:'M', level:3.5, format:'single_elim_cons'}},
   {label:"Women's 4.0", ev:{kind:'doubles', gender:'F', level:4.0, format:'single_elim_cons'}},
@@ -4397,8 +4482,8 @@ function normEvent(ev){
   ev.order = ev.order || []; ev.scoring = ev.scoring || {}; ev.scoringOverride = ev.scoring;
   return ev;
 }
-const hasResults = ev => (ev.matches || []).some(m => resOf(m.id));
-const isDrawn = ev => (ev.matches || []).length > 0;
+const hasResults = ev => isLadder(ev) ? lChallenges(ev).length > 0 : (ev.matches || []).some(m => resOf(m.id));
+const isDrawn = ev => (ev.matches || []).length > 0 || ladderStarted(ev);
 
 /* Who can play in an event. Returns '' if fine, or the reason they don't fit. */
 function fitIssue(ev, p){
@@ -4635,6 +4720,7 @@ function myMatches(pid){
 /* ---------- Draws and the schedule ---------- */
 function drawEvent(ev){
   normEvent(ev);
+  if (isLadder(ev)) return ladderStart(ev);
   if (hasResults(ev)) throw new Error(`${ev.name} already has scores. Clear them before redrawing.`);
   if (ev.kind === 'clubcup'){ syncClubCupRosters(ev); return ev }
   ev.teams = teamsOf(ev);
@@ -5024,6 +5110,7 @@ function poolOptions(n){
   return (_poolCache[n] = out);
 }
 function estMatches(ev, n){
+  if (isLadder(ev)) return 0;
   n = n == null ? teamsOf(ev).length : n;
   if (ev.kind === 'clubcup') return (ev.matches || []).length;
   if (n < 2) return 0;
@@ -5078,6 +5165,7 @@ function missing(){
     const badL = (ev.entrants || []).filter(id => fitIssue(ev, P(id))), bad = badL.length; if (bad) add('players', `${ev.name}: ${bad} entr${bad === 1 ? 'y' : 'ies'} outside the event's rules`, badL.map(id => ({t:`${pname(id)}: ${fitIssue(ev, P(id))}`, go})));
     const badP = (ev.pairs || []).filter(t => pairIssue(ev, t)), badPairs = badP.length; if (badPairs) add('players', `${ev.name}: ${badPairs} team${badPairs === 1 ? '' : 's'} over the cap or mismatched`, badP.map(t => ({t:`${t.filter(Boolean).map(pname).join(' / ')}: ${pairIssue(ev, t)}`, go})));
     if (ev.kind === 'proam' && n % 4) add('players', `Pro-Am needs teams in multiples of 4 for flights (has ${n})`, [{t:`${ev.name}: add ${4 - n % 4} or remove ${n % 4}`, go}]);
+    if (isLadder(ev)){ ladderTodo(ev, add, unpub); continue }
     if (!isDrawn(ev)) add('bracket', `${ev.name}: not drawn yet`, [{t:`Draw ${ev.name}`, go:{step:'bracket', ev:ev.id}}]);
     else if (!ev.published) unpub.push(ev);
   }
@@ -5161,6 +5249,8 @@ const COLS = [
   ['first', /^(first|first name|fname|given name|player ?1? first( name)?)$/], ['last', /^(last|last name|lname|surname|family name|player ?1? last( name)?)$/],
   ['teamrating', /(team|combined|pair).*(rating|ntrp|dupr|level)|^(team|combined) (rating|total)$/],
   ['name', /^(name|names|player|players|player name|full name|participant|player ?1|p1|player ?1 name|entrant|competitor|team|teams|team name|pair|doubles team|entry|man|men|male|gentleman|his|husband)( name|'s name)?$/],
+  ['usta', /^(usta|usta ?(no|num|number|id|member|membership)( ?(no|number|id))?|usta member)\s*$/], ['ntrp', /^(ntrp|ntrp rating|ntrp level|usta ntrp|usta rating ntrp)\s*$/],
+  ['wtn_d', /^(wtn ?(doubles|dbls|d)|doubles wtn|wtn \(doubles\))\s*$/], ['wtn_s', /^(wtn|wtn ?(singles|sgls|s)|singles wtn|wtn \(singles\))\s*$/], ['utr', /^(utr|utr rating|utr singles)\s*$/],
   ['rating', /^(player ?1 )?(rating|ntrp|dupr|utr|usta|level|skill|rtg|ability|grade|class|tier)\b|\b(rating|ntrp|dupr|utr|level|skill)( level| rating)?$|^(ntrp|usta|dupr|utr|skill|playing|self|club) (rating|level)/],
   ['gender', /^(gender|sex|m\/f|m or f|male\/female|m\/f\/x)$/],
   ['email', /mail/], ['phone', /phone|cell|mobile/], ['club', /^(club|home club|facility)$/],
@@ -5217,8 +5307,8 @@ function rowsToEntries(table, override){
     if (!pname2 && /\s\/\s|\s&\s/.test(name)){ const [x, y] = name.split(/\s\/\s|\s&\s/); name = x; pname2 = y }
     name = name.replace(/\s+/g, ' ').trim(); pname2 = pname2.replace(/\s+/g, ' ').trim();
     if (!name || /^(total|name|player)$/i.test(name)) continue;
-    const lv = parseLevel(get(r, 'rating'));
-    const a = {name, rating:lv.rating ?? null, tier:lv.tier || '', gender:parseGender(get(r, 'gender')) || sexOf(hdr('name') || hdr('first')), email:get(r, 'email'), phone:get(r, 'phone'), club:get(r, 'club')};
+    const lv = parseLevel(get(r, 'rating') || get(r, 'ntrp') || (map.rating == null && map.ntrp == null ? get(r, 'utr') : ''));
+    const a = {name, rating:lv.rating ?? null, tier:lv.tier || '', gender:parseGender(get(r, 'gender')) || sexOf(hdr('name') || hdr('first')), email:get(r, 'email'), phone:get(r, 'phone'), club:get(r, 'club'), card:cardFromRow(k => get(r, k))};
     const e = {a, events:get(r, 'event') ? get(r, 'event').split(/\s*[,;|\n]\s*|\s+\+\s+/).filter(Boolean) : []};
     if (pname2){
       const lv2 = parseLevel(get(r, 'p2rating'));
@@ -5232,7 +5322,7 @@ function rowsToEntries(table, override){
   }
   return {entries, map, header:hi >= 0 ? rows[hi] : rows[0].map((_, i) => 'Column ' + (i + 1)), hi, table:rows};
 }
-const COL_ROLES = [['', 'Ignore'], ['name', 'Name'], ['first', 'First name'], ['last', 'Last name'], ['rating', 'Rating / level (or Pro, A, B, C)'], ['gender', 'M/F'],
+const COL_ROLES = [['', 'Ignore'], ['name', 'Name'], ['first', 'First name'], ['last', 'Last name'], ['rating', 'Rating / level (or Pro, A, B, C)'], ['usta', 'USTA #'], ['ntrp', 'NTRP (card)'], ['wtn_s', 'WTN singles'], ['wtn_d', 'WTN doubles'], ['utr', 'UTR'], ['gender', 'M/F'],
   ['p2name', 'Partner'], ['p2first', 'Partner first'], ['p2last', 'Partner last'], ['p2rating', 'Partner rating / level'], ['p2gender', 'Partner M/F'], ['teamrating', 'Team rating'],
   ['event', 'Event / division'], ['club', 'Club'], ['email', 'Email'], ['phone', 'Phone'], ['p2email', 'Partner email'], ['p2phone', 'Partner phone']];
 
@@ -6067,7 +6157,7 @@ function homeView(){
   syncEngine();
   const c = cfg() || {}, cover = pic(c, 'cover'), me = view.me && view.me !== GUEST ? view.me : null;
   const pend = me && betsOn() ? bets().filter(b => betNeedsMe(b, me)).length : 0;
-  const pub = state.events.some(e => (e.published || view.admin) && e.matches.length);
+  const pub = state.events.some(e => (e.published || view.admin) && hasPlayEv(e));
   const start = firstBall(), future = !!start && start.getTime() > Date.now();
   const coverHtml = cover ? `<img class="bk-cover" src="${cover}" alt="">` : '';
   const betAlert = pend ? `<button class="bk-alert" data-act="tab" data-v="bets"><span>${pend} friendly ${pend === 1 ? 'bet is' : 'bets are'} waiting on you</span><span class="act">Review</span></button>` : '';
@@ -6089,7 +6179,7 @@ function homeView(){
   const todayKey = dayKey(isoDay(new Date())), playDay = TIME_SLOTS.some(s => s[0] === todayKey);
   const today = playDay ? allMatches(true).filter(m => TIME_SLOTS[m.slotIdx] && TIME_SLOTS[m.slotIdx][0] === todayKey && !state.results[m.id] && !['live', 'now'].includes(matchStatus(m))).sort((a, b) => a.slotIdx - b.slotIdx || (a.court || 0) - (b.court || 0)) : upNext(6);
   const shown = today.slice(0, 8);
-  const title = playDay ? 'Today' : future && state.events.some(e => e.published && e.matches.length) ? 'Draws are out.' : 'Tournament home';
+  const title = playDay ? 'Today' : future && state.events.some(e => e.published && hasPlayEv(e)) ? 'Draws are out.' : 'Tournament home';
   const nt = nextMine && slotParts(nextMine);
   const nextHtml = me && me !== GUEST && P(me) && brand().cards.show !== false ? meCard(me, nextMine, mine) : nextMine ? `<section class="bk-feature" aria-labelledby="next-h"><p class="bk-eyebrow" id="next-h">Your next match</p>
       <p class="bk-next-when">${nt ? `${esc(nt.time)}<span>${esc(nt.day)}</span>` : 'Time to be set'}</p>
@@ -6101,6 +6191,7 @@ function homeView(){
   ${v3Scoreboard()}
   <p class="bk-meta v3-homemeta" id="home-h"><b>${esc(title)}</b> · ${future ? startLine : esc(datesLabel())}</p>
   ${nextHtml}
+  ${ladderHomeHtml()}
   ${betAlert}
   ${!me && players().length ? `<button class="bk-alert" data-act="who"><span>Pick your name to see your matches first.</span><span class="act">Pick</span></button>` : ''}
   ${live.length ? `<section aria-labelledby="live-h">${v3SecHead('On Court Now', 'live-h')}<div class="v3-mlist">${live.map(v3Match).join('')}</div></section>` : ''}
@@ -6440,6 +6531,7 @@ function eventSummary(ev){
   return `${n} ${ev.kind === 'singles' || ev.kind === 'clubcup' ? 'players' : 'teams'} · ${esc(FORMAT_LABELS[ev.format] || '')}${ev.format === 'pro_am' ? ' · games won' : ' · ' + esc((SCORING_FORMATS[(ev.scoring || {}).main] || {}).shortLabel || '')}`;
 }
 function eventDraw(ev, print){
+  if (isLadder(ev)) return ladderView(ev, print);
   if (!ev.matches.length) return '<p class="bk-empty">Not drawn yet.</p>';
   if (ev.format === 'round_robin') return rrView(ev, null, print);
   if (ev.format === 'multi_pool') return poolsView(ev, print);
@@ -6534,6 +6626,9 @@ function modal(){
     <p style="margin-top:16px" class="row"><button class="btn alt" data-act="pickme" data-id="${GUEST}">Just watching</button><button class="btn alt" data-act="closemodal">Close</button><button class="btn alt" data-act="leavetrip">All tournaments</button></p></div></div>`;
   if (view.modal === 'invite') return `<div class="modal" data-act="closemodal"><div class="sheet" data-stop="1">${shareCards()}<p><button class="btn alt" data-act="closemodal">Close</button></p></div></div>`;
   if (view.modal === 'match') return matchSheet();
+  if (view.modal === 'lch') return lchSheet();
+  if (view.modal === 'lrules') return lrulesSheet();
+  if (view.modal === 'lman') return lmanSheet();
   if (view.modal === 'player') return playerSheet();
   if (view.modal === 'cardedit') return cardEditSheet();
   if (view.modal === 'clubs') return clubSheet();
@@ -6718,7 +6813,7 @@ function matchSheet(){
   syncEngine();
   const m = findMatch(view.matchId); if (!m) return '';
   const ev = findEvent(m.eventId) || {}, r = resOf(m.id) || {}, w = winnerSlot(m), cc = m.sessionId != null;
-  const known = bothKnown(m), st = matchStatus(m), can = canScore() && known && st !== 'bye';
+  const known = bothKnown(m), st = matchStatus(m), can = canScoreM(m) && known && st !== 'bye';
   const sr = scoreRowsFor(m);
   const sm = view.sm && view.sm.id === m.id ? view.sm : null;
   const mode = can && sm && sm.mode !== 'view' ? sm.mode : (can && !w && !sm ? 'edit' : 'view');
@@ -6842,7 +6937,7 @@ function signupView(){
 /* ---------- Print ---------- */
 function printView(){
   syncEngine();
-  const evs = (view.printEv ? state.events.filter(e => e.id === view.printEv) : visibleEvents()).filter(e => e.matches.length);
+  const evs = (view.printEv ? state.events.filter(e => e.id === view.printEv) : visibleEvents()).filter(hasPlayEv);
   return `<div class="printpage"><div class="noprint row" style="padding:12px"><button class="btn" data-act="doprint">Print</button><button class="btn alt" data-act="closeprint">Back</button></div>
   ${evs.map(ev => `<section class="psec"><header class="ph">${crest(40)}<div><b>${esc(tripTitle())}</b><span>${esc(tsub())}</span></div><h1>${esc(ev.name)}</h1></header><p class="small">${eventSummary(ev)}</p>${eventDraw(ev, true)}</section>`).join('') || '<p style="padding:20px">Nothing drawn yet.</p>'}</div>`;
 }
@@ -7040,6 +7135,7 @@ function wzEvents(){
     <div class="seg kindseg" style="margin-top:6px">${KIND_SEG.map(([k, l]) => `<button class="${ev.kind === k ? 'on' : ''}" data-act="evkind" data-id="${ev.id}" data-v="${k}" ${isDrawn(ev) && ev.kind !== k ? 'disabled' : ''}>${l}</button>`).join('')}</div>
     ${['doubles', 'singles'].includes(ev.kind) ? `<div class="grid2"><div><label class="small muted">Who</label>${sel(`data-chg="evv" data-id="${ev.id}" data-f="gender"`, [['', 'Anyone'], ['M', 'Men'], ['F', 'Women']], ev.gender)}</div><div><label class="small muted">Level</label>${levelSelectFor(ev.kind, `data-chg="evv" data-id="${ev.id}" data-f="level"`, ev.level)}</div></div>`
       : ev.kind === 'mixed' || ev.kind === 'proam' ? `<label class="small muted">Combined level</label>${levelSelectFor(ev.kind, `data-chg="evv" data-id="${ev.id}" data-f="cap"`, ev.cap)}` : ''}
+    ${isTennis() && ev.kind !== 'clubcup' && ev.kind !== 'proam' ? `<label class="aswitch v6-req"><span><b>Require verified NTRP</b><small>Entries without a director-verified NTRP on their card show in To do.</small></span><input type="checkbox" role="switch" data-chg="evreqntrp" data-id="${ev.id}" ${ev.reqVerNtrp ? 'checked' : ''}><i aria-hidden="true"></i></label>` : ''}
     <div class="row" style="justify-content:space-between;margin-top:8px"><span class="small muted">${entryNoun(ev, n)} entered${isDrawn(ev) ? ' · drawn' : ''}</span><button class="btn sm" data-act="goplayers" data-id="${ev.id}">${n ? 'Players' : 'Add players'} →</button></div>
   </div>` }).join('') || '<p class="muted small">No events yet. Add a division above.</p>'}`;
 }
@@ -7151,7 +7247,7 @@ function previewHtml(ev){
   try{ return eventDraw(copy) } finally { state.events = prev }
 }
 function drawStale(ev){
-  if (!isDrawn(ev) || ev.kind === 'clubcup') return false;
+  if (!isDrawn(ev) || ev.kind === 'clubcup' || isLadder(ev)) return false;
   const now = teamsOf(ev).map(t => t.id + ':' + t.seed).join(','), was = (ev.teams || []).map(t => t.id + ':' + t.seed).join(',');
   return now !== was;
 }
@@ -7165,9 +7261,10 @@ function wzBracket(){
   if (n < 2) return head + `<div class="empty-state"><p>${esc(ev.name)} needs at least 2 ${ev.kind === 'singles' ? 'players' : 'teams'} first.</p><button class="btn" data-act="goplayers" data-id="${ev.id}">Add players</button></div>`;
   const rec = recommendFormat(ev, n), fmtNow = ev.autoFormat && !isDrawn(ev) && BRACKET_FORMATS.includes(ev.format) ? rec : ev.format, sc = ev.scoring || {}, scs = Object.entries(SCORING_FORMATS).filter(([k, v]) => v.sport === (cfg().sport || 'tennis'));
   const teams = teamsOf(ev), size = KINDS[ev.kind].size;
+  if (isLadder(ev)) return head + wzLadder(ev, `<div class="fmtcards">${formatsFor(ev).map(f => `<button class="${fmtNow === f ? 'on' : ''}" data-act="evfmt" data-id="${ev.id}" data-v="${f}" ${locked ? 'disabled' : ''}><b>${esc(FORMAT_LABELS[f])}</b><span>${esc(FORMAT_DESCRIPTIONS[f])}</span><span class="fmn">${f === 'challenge_ladder' ? 'Season-long' : estMatches(Object.assign({}, ev, {format:f}), n) + ' matches'}</span></button>`).join('')}</div>`);
   return head + `
   <h3>1. Format <span class="small muted" style="text-transform:none;letter-spacing:0">${entryNoun(ev, n)}</span></h3>
-  <div class="fmtcards">${formatsFor(ev).map(f => `<button class="${fmtNow === f ? 'on' : ''}" data-act="evfmt" data-id="${ev.id}" data-v="${f}" ${locked ? 'disabled' : ''}>${f === rec ? '<em class="rec">Recommended</em>' : ''}<b>${esc(FORMAT_LABELS[f])}</b><span>${esc(FORMAT_DESCRIPTIONS[f])}</span><span class="fmn">${estMatches(Object.assign({}, ev, {format:f}), n)} matches</span></button>`).join('')}</div>
+  <div class="fmtcards">${formatsFor(ev).map(f => `<button class="${fmtNow === f ? 'on' : ''}" data-act="evfmt" data-id="${ev.id}" data-v="${f}" ${locked ? 'disabled' : ''}>${f === rec ? '<em class="rec">Recommended</em>' : ''}<b>${esc(FORMAT_LABELS[f])}</b><span>${esc(FORMAT_DESCRIPTIONS[f])}</span><span class="fmn">${f === 'challenge_ladder' ? 'Season-long' : estMatches(Object.assign({}, ev, {format:f}), n) + ' matches'}</span></button>`).join('')}</div>
   ${fmtNow === 'multi_pool' ? (() => { const opts = poolOptions(n), pc = ev.poolConfig || {}; return opts.length ? `<label class="small muted">Pools</label>${sel(`data-chg="evpool" data-id="${ev.id}"`, opts.map(o => [o.poolSize + 'x' + o.advancePerPool, o.label]), opts.some(o => o.poolSize === pc.poolSize && o.advancePerPool === pc.advancePerPool) ? pc.poolSize + 'x' + pc.advancePerPool : opts[0].poolSize + 'x' + opts[0].advancePerPool)}` : `<p class="warn">Pools need at least 6 teams. Use a round robin.</p>` })() : ''}
   ${ev.autoFormat && !isDrawn(ev) ? `<p class="wnote" style="margin-top:4px">Using the recommended format for ${entryNoun(ev, n)}. Tap another to choose it instead.</p>` : ''}
   ${fmtNow !== 'pro_am' ? `<div class="grid2"><div><label class="small muted">Scoring</label>${sel(`data-chg="evscore" data-id="${ev.id}" data-f="main"`, scs.map(([k, v]) => [k, v.label]), sc.main)}</div>${fmtNow === 'single_elim_cons' ? `<div><label class="small muted">Consolation scoring</label>${sel(`data-chg="evscore" data-id="${ev.id}" data-f="consolation"`, scs.map(([k, v]) => [k, v.label]), sc.consolation)}</div>` : '<div></div>'}</div>` : ''}
@@ -7200,7 +7297,7 @@ function wzSchedule(){
   ${evs.some(isDrawn) ? `<div class="row" style="margin:10px 0"><button class="btn gold" data-act="resched">${uns.length ? 'Fit everything into the schedule' : 'Rebuild the schedule'}</button>${evs.some(e => isDrawn(e) && !e.published) ? '<button class="btn" data-act="publishall">Publish all draws</button>' : ''}</div>
   <p class="wnote">Times you set by hand (📌) and finished matches stay put when you rebuild.</p>` : ''}
   ${evs.filter(isDrawn).length ? `<div class="rtabs">${evs.filter(isDrawn).map(e => `<button class="rtab ${cur && e.id === cur.id ? 'on' : ''}" data-act="ev" data-v="${e.id}"><b>${esc(e.name)}</b><span>${e.published ? 'Published' : 'Not published'}</span></button>`).join('')}</div>` : ''}
-  ${cur ? `<div class="row" style="justify-content:space-between;margin:6px 0"><span class="small muted">${cur.matches.length} matches${hasResults(cur) ? ' · in play' : ''}</span><button class="btn ${cur.published ? 'alt' : ''} sm" data-act="publish" data-id="${cur.id}">${cur.published ? 'Unpublish' : 'Publish'}</button></div>
+  ${cur ? `<div class="row" style="justify-content:space-between;margin:6px 0"><span class="small muted">${isLadder(cur) ? 'Season-long ladder' : cur.matches.length + ' matches'}${hasResults(cur) ? ' · in play' : ''}</span><button class="btn ${cur.published ? 'alt' : ''} sm" data-act="publish" data-id="${cur.id}">${cur.published ? 'Unpublish' : 'Publish'}</button></div>
     ${cur.kind === 'clubcup' ? `<div class="card adm"><b>Session times</b>${(cur.clubCup.sessions || []).map(se => { const ms = cur.matches.filter(m => m.sessionId === se.id); return ms.length ? groupStart(ms, esc(se.label)) : '' }).join('')}</div>` : roundTimes(cur)}` : ''}
   ${uns.length ? `<p class="warn">${uns.length} match${uns.length === 1 ? '' : 'es'} didn't fit. Add courts or hours, then rebuild the schedule.</p>` : ''}
   ${conf.length ? `<div class="missing"><div class="mh2"><b>Time clashes</b></div>${conf.slice(0, 12).map(clashItem).join('')}${conf.length > 12 ? `<p class="small muted" style="margin:4px 0 0">and ${conf.length - 12} more</p>` : ''}<div class="row" style="margin:8px 0 0;gap:6px"><button type="button" class="btn sm" data-act="autofix">Fix clashes automatically</button></div><p class="small muted" style="margin:6px 0 0">The app moves matches without scores to clear clashes when you draw or rebuild. ${conf.length && used >= cap * 0.85 ? `Your courts and hours are nearly full (${used} matches, room for ${cap}), so some clashes may have nowhere to go. Adding a court or more hours on Courts & times gives the app room to clear them.` : 'Tap a match in the grid below to move it yourself.'}</p></div>` : ''}
@@ -7418,7 +7515,7 @@ function wzEventsOld(){
       <div><label class="small muted">Who</label><select id="cev-gender"><option value="">Anyone</option><option value="M">Men</option><option value="F">Women</option></select></div>
       <div><label class="small muted">Level or cap</label><input id="cev-level" inputmode="decimal" placeholder="None"></div>
     </div>
-    <label class="small muted">Format</label><select id="cev-format">${[...BRACKET_FORMATS, 'pro_am', 'club_cup'].map(f => `<option value="${f}">${esc(FORMAT_LABELS[f])}</option>`).join('')}</select>
+    <label class="small muted">Format</label><select id="cev-format">${[...BRACKET_FORMATS, 'challenge_ladder', 'pro_am', 'club_cup'].map(f => `<option value="${f}">${esc(FORMAT_LABELS[f])}</option>`).join('')}</select>
     <p class="wnote">For mixed and Pro-Am the number is a combined cap (like 7.0). For others it's the highest rating allowed. Leave it blank for open play.</p>
     <button class="btn sm" data-act="customev">Add event</button></div></details>
   ${evs.map(ev => { normEvent(ev); const locked = hasResults(ev); const sc = ev.scoring || {}, scs = Object.entries(SCORING_FORMATS).filter(([k, v]) => v.sport === (cfg().sport || 'tennis'));
@@ -7495,7 +7592,7 @@ function wzDraws(){
   ${evs.some(e => e.matches.some(m => m._lost)) ? `<div class="missing"><div class="mh2"><b>The hours changed after the schedule was built</b></div><p class="small" style="margin:4px 0 8px">Some matches were set for times that no longer exist. Rebuilding keeps finished matches where they are.</p><button class="btn sm" data-act="resched">Rebuild schedule</button></div>` : ''}
   <div class="row" style="margin:10px 0"><button class="btn gold" data-act="drawall">${evs.some(isDrawn) ? 'Redraw the rest & rebuild schedule' : 'Make all draws & the schedule'}</button>${evs.some(isDrawn) ? '<button class="btn alt" data-act="resched">Rebuild schedule only</button>' : ''}</div>
   <p class="wnote">Events with scores keep their draw. Matches that are finished or on court keep their time.</p>
-  ${evs.map(ev => `<div class="card evrow"><div><b>${esc(ev.name)}</b><span class="small muted">${eventSummary(ev)}</span><span class="small">${isDrawn(ev) ? `${ev.matches.length} matches${ev.published ? ' · <b>published</b>' : ' · not published'}${hasResults(ev) ? ' · in play' : ''}` : 'Not drawn'}</span></div>
+  ${evs.map(ev => `<div class="card evrow"><div><b>${esc(ev.name)}</b><span class="small muted">${eventSummary(ev)}</span><span class="small">${isDrawn(ev) ? `${isLadder(ev) ? 'Ladder started' : ev.matches.length + ' matches'}${ev.published ? ' · <b>published</b>' : ' · not published'}${hasResults(ev) ? ' · in play' : ''}` : 'Not drawn'}</span></div>
     <div class="row">${ev.kind === 'clubcup' ? `<button class="btn alt sm" data-act="ev" data-v="${ev.id}">Lineup</button>` : `<button class="btn alt sm" data-act="drawone" data-id="${ev.id}" ${hasResults(ev) ? 'disabled' : ''}>${isDrawn(ev) ? 'Redraw' : 'Draw'}</button>`}${isDrawn(ev) ? `<button class="btn alt sm" data-act="ev" data-v="${ev.id}">Preview</button><button class="btn ${ev.published ? 'alt' : ''} sm" data-act="publish" data-id="${ev.id}">${ev.published ? 'Unpublish' : 'Publish'}</button>` : ''}</div></div>`).join('')}
   ${evs.some(isDrawn) && evs.some(e => isDrawn(e) && !e.published) ? `<button class="btn" data-act="publishall">Publish all draws</button>` : ''}
   ${cur ? `<h3>${esc(cur.name)}</h3>${cur.kind === 'clubcup' ? lineupEditor(cur) : roundTimes(cur)}${cur.matches.length ? eventDraw(cur) : ''}` : ''}
@@ -7577,7 +7674,7 @@ function adminView(){
     <button class="bk-btn alt" data-act="tab" data-v="today">Return to the tournament</button>`;
   syncEngine();
   const c = cfg() || {}, sec = view.dws || 'run';
-  const evs = state.events, pub = evs.filter(e => e.published && e.matches.length).length, drawn = evs.filter(e => e.matches.length).length;
+  const evs = state.events, pub = evs.filter(e => e.published && hasPlayEv(e)).length, drawn = evs.filter(hasPlayEv).length;
   const ms = allMatches(false), done = ms.filter(m => state.results[m.id] && resOf(m.id)).length, live = ms.filter(m => matchStatus(m) === 'live').length;
   const conf = clashList().filter(c => c.sure).length;
   const tabs = [['run', 'Run tournament'], ['setup', 'Setup'], ['perm', 'Permissions'], ['data', 'Data']];
@@ -7720,7 +7817,7 @@ function shareCards(){
 /* ---------- TV: distance-readable, bounded ---------- */
 function tvView(){
   syncEngine();
-  const tiles = courtBoard(), rec = recentResults(4), nxt = upNext(4), evs = visibleEvents().filter(e => e.published && e.matches.length);
+  const tiles = courtBoard(), rec = recentResults(4), nxt = upNext(4), evs = visibleEvents().filter(e => e.published && hasPlayEv(e));
   const ph = brand().gallery.map(g => ({url:g.url, caption:g.cap || tripTitle()})).concat(photos()).slice(0, 8), slides = evs.length + 1 + (ph.length ? 1 : 0);
   const k = Math.floor(Date.now() / 25000) % slides, ev = k > 0 && k <= evs.length ? evs[k - 1] : null, showPhotos = ph.length && k === slides - 1 && k > 0;
   const now = new Date();
@@ -8160,7 +8257,7 @@ const ACT = {
     let format = g('cev-format') || 'single_elim_cons';
     if (!name) return toast('Give the event a name.');
     if (lv && parseRating(lv) === null) return toast('Level is a number like 3.5, or leave it blank.');
-    if (kind === 'proam') format = 'pro_am'; else if (kind === 'clubcup') format = 'club_cup'; else if (!BRACKET_FORMATS.includes(format)) format = 'single_elim_cons';
+    if (kind === 'proam') format = 'pro_am'; else if (kind === 'clubcup') format = 'club_cup'; else if (!BRACKET_FORMATS.includes(format) && format !== 'challenge_ladder') format = 'single_elim_cons';
     const t = {name, kind, gender:kind === 'mixed' ? 'X' : (['doubles', 'singles'].includes(kind) ? gender : ''), format};
     if (lv){ if (kind === 'mixed' || kind === 'proam') t.cap = parseRating(lv); else t.level = parseRating(lv) }
     const evs = evsCopy(), ev = newEvent(t); evs.push(ev); saveEvents(evs); view.ev = ev.id; view.cevOpen = false; view.cevName = ''; toast(`${name} added.`);
@@ -8234,10 +8331,10 @@ const ACT = {
     let unrated = 0;
     [cc.aIds || [], cc.bIds || []].forEach(ids => { const s = ids.slice().sort((x, y) => r(y) - r(x)), q = Math.ceil(s.length / 4); s.forEach((id, i) => { if (r(id) < 0) unrated++; t[id] = CC_TIERS[Math.min(3, Math.floor(i / Math.max(1, q)))][0] }) });
     toast(`Pro/A/B/C set from ratings${unrated ? `; ${unrated} unrated player${unrated === 1 ? '' : 's'} went to the bottom` : ''}. Tap any to change.`) }) },
-  drawone(el){ if (needAdmin()) return; try{ withEvent(el.dataset.id, (ev, evs) => { drawEvent(ev); buildSchedule(evs); toast(`${ev.name} drawn.${autoTxt()}`) }); view.ev = el.dataset.id }catch(e){ toast(e.message) } },
+  drawone(el){ if (needAdmin()) return; try{ withEvent(el.dataset.id, (ev, evs) => { drawEvent(ev); if (isLadder(ev)) return toast(`${ev.name} ladder started. Publish it so players can see it and challenge.`); buildSchedule(evs); toast(`${ev.name} drawn.${autoTxt()}`) }); view.ev = el.dataset.id }catch(e){ toast(e.message) } },
   async drawall(){
     if (needAdmin()) return;
-    const evs = evsCopy(), redo = evs.filter(e => !hasResults(e) && e.kind !== 'clubcup' && teamsOf(e).length >= 2);
+    const evs = evsCopy(), redo = evs.filter(e => !hasResults(e) && e.kind !== 'clubcup' && !isLadder(e) && teamsOf(e).length >= 2);
     if (evs.some(isDrawn) && !await ask(`Redraw ${redo.length} event${redo.length === 1 ? '' : 's'} without scores and rebuild the schedule? Events with scores keep their draw.`)) return;
     const fails = []; redo.forEach(e => { try{ drawEvent(e) }catch(err){ fails.push(err.message) } }); if (fails.length) toast(fails[0]); evs.filter(e => e.kind === 'clubcup').forEach(syncClubCupRosters);
     buildSchedule(evs); saveEvents(evs);
@@ -8350,7 +8447,7 @@ const ACT = {
     else applyImport(ents, {eventId:ev.id});
     view.paste = ''; toast(`Added ${ents.length} ${ev.kind === 'singles' || ev.kind === 'clubcup' ? 'player' : 'team'}${ents.length === 1 ? '' : 's'} to ${ev.name}.`);
   },
-  undraw(el){ withEvent(el.dataset.id, ev => { if (hasResults(ev)) return; ev.matches = []; ev.teams = []; ev.published = false }); toast('Draw undone. Change entries or seeds, then lock it in again.') },
+  undraw(el){ withEvent(el.dataset.id, ev => { if (hasResults(ev)) return; if (ev.ladder){ ev.ladder.started = null; ev.ladder.seed = null } ev.matches = []; ev.teams = []; ev.published = false }); toast('Draw undone. Change entries or seeds, then lock it in again.') },
   /* welcome page */
   introdone(el, e){ if (e && e.target.closest('[data-stop]') && el.classList.contains('modal')) return; const v = welcome().video; if (v) LS.set(TK('intro'), v.ver); view.introForce = false },
   playintro(){ LS.del(TK('intro')) },
@@ -8427,7 +8524,7 @@ const ACT = {
     if (chk.err) { view.sm.rows = rows; view.sm.err = chk.err; return }
     view.sm = {id:m.id, mode:'retreview', rows, ret:view.sm.ret} },
   saveret(el){
-    if (!canScore()) return toast('Only directors enter scores here.');
+    if (!canScoreM(findMatch(el.dataset.id))) return toast('Only the two players or a director can enter this score.');
     syncEngine(); const m = findMatch(el.dataset.id), sm = view.sm; if (!m || !sm || !sm.ret) return;
     const part = (checkPartialRows(sm.rows).rows || []), ws = sm.ret === 'team1' ? 'team2' : 'team1', w = ccW(m, ws);
     const s = !part.length ? null : m.proAm ? part.map(r => ({t1:String(r[0] ?? 0), t2:String(r[1] ?? 0)})) : part;
@@ -8436,13 +8533,13 @@ const ACT = {
     view.modal = null; view.sm = null; toast(fixed ? 'Result corrected.' : 'Result saved.'); settleBets();
   },
   savewo(el){
-    if (!canScore()) return toast('Only directors enter scores here.');
+    if (!canScoreM(findMatch(el.dataset.id), 'wo')) return toast('Only directors record walkovers here.');
     syncEngine(); const m = findMatch(el.dataset.id); if (!m) return; const slot = el.dataset.v, w = ccW(m, slot);
     return ask(`Record a walkover: ${sideLabel(m, slot)} advances?\n\nNo score is saved with this result.`, {ok:'Record walkover'}).then(ok => { if (!ok) return;
       const fixed = writeResult(m, {w, s:null, note:'Walkover', outcome:'walkover', by:view.me, ts:Date.now(), names:namesIn(m), ev:(findEvent(m.eventId) || {}).name, txt:resultText(m, w) + ' (walkover)'});
       view.modal = null; view.sm = null; toast(fixed ? 'Result corrected.' : 'Result saved.'); settleBets() }) },
   reviewscore(el){
-    if (!canScore()) return toast('Only directors enter scores here.');
+    if (!canScoreM(findMatch(el.dataset.id))) return toast('Only the two players or a director can enter this score.');
     syncEngine(); const m = findMatch(el.dataset.id); if (!m) return;
     const loose = el.dataset.v === 'loose' && view.admin;
     const raw = readScoreInputs(m), chk = checkScoreRows(raw, m, {loose});
@@ -8457,7 +8554,7 @@ const ACT = {
   dtree(el){ view.dtree = view.dtree === el.dataset.ev ? null : el.dataset.ev },
   openplayer(el){ view.pid = el.dataset.id; view.modal = 'player' },
   savescore(el){
-    if (!canScore()) return toast('Only directors enter scores here.');
+    if (!canScoreM(findMatch(el.dataset.id))) return toast('Only the two players or a director can enter this score.');
     syncEngine(); const m = findMatch(el.dataset.id); if (!m) return;
     const raw = view.sm && view.sm.id === m.id && view.sm.mode === 'review' && view.sm.rows ? view.sm.rows : readScoreInputs(m);
     const loose = !!(view.sm && view.sm.id === m.id && view.sm.loose && view.admin);
@@ -8469,9 +8566,9 @@ const ACT = {
     const rec = {w, s, by:view.me, ts:Date.now(), names:namesIn(m), ev:(findEvent(m.eventId) || {}).name, txt:`${resultText(m, w)} ${rowsText(rows, w)}`.trim()}; if (loose) rec.override = true;
     const fixed = writeResult(m, rec);
     view.modal = null; view.sm = null; toast(fixed ? 'Result corrected.' : 'Score saved.'); settleBets();
-    const ev = findEvent(m.eventId); Store.set('chat:' + uid(), {auto:true, text:`${ev.name}: ${sideLabel(m, w === 'A' ? 'team1' : w === 'B' ? 'team2' : w, true)} won ${scoreText(Object.assign({}, m)) || formatScoreString(rows)}`.slice(0, 140), ts:Date.now()});
+    const ev = findEvent(m.eventId); if (!m.ladder) Store.set('chat:' + uid(), {auto:true, text:`${ev.name}: ${sideLabel(m, w === 'A' ? 'team1' : w === 'B' ? 'team2' : w, true)} won ${scoreText(Object.assign({}, m)) || formatScoreString(rows)}`.slice(0, 140), ts:Date.now()});
   },
-  setwin(el){ if (!canScore()) return toast('Only directors enter scores here.'); syncEngine(); const m = findMatch(el.dataset.id); Store.set('m:' + el.dataset.id, {w:el.dataset.v, s:null, note:'Walkover or retired', by:view.me, ts:Date.now(), names:m ? namesIn(m) : [], ev:m ? (findEvent(m.eventId) || {}).name : '', txt:m ? resultText(m, el.dataset.v) + ' (walkover or retired)' : ''}); view.modal = null; toast('Result saved.'); settleBets() },
+  setwin(el){ if (!canScore() || (findMatch(el.dataset.id) || {}).ladder) return toast('Only directors enter scores here.'); syncEngine(); const m = findMatch(el.dataset.id); Store.set('m:' + el.dataset.id, {w:el.dataset.v, s:null, note:'Walkover or retired', by:view.me, ts:Date.now(), names:m ? namesIn(m) : [], ev:m ? (findEvent(m.eventId) || {}).name : '', txt:m ? resultText(m, el.dataset.v) + ' (walkover or retired)' : ''}); view.modal = null; toast('Result saved.'); settleBets() },
   setlive(el){ const r = resOf(el.dataset.id) || {}; if (r.w) return; syncEngine(); const m = findMatch(el.dataset.id); if (r.live) Store.del('m:' + el.dataset.id); else Store.set('m:' + el.dataset.id, {live:true, by:view.me, ts:Date.now(), names:m ? namesIn(m) : [], ev:m ? (findEvent(m.eventId) || {}).name : '', txt:m ? `${sideLabel(m, 'team1', true)} vs ${sideLabel(m, 'team2', true)}, ${courtName(m.court)}` : ''}); view.modal = null },
   async clearres(el){ if (!await ask('Clear this result? Later matches that depend on it go back to TBD, and bets on it reopen.')) return; Store.del('m:' + el.dataset.id); view.modal = null; settleBets() },
   print(el){ view.print = true; view.printEv = el.dataset.v || null },
@@ -8603,7 +8700,7 @@ const CHG = {
     if (f === 'level' || f === 'cap'){ v = v.trim() === '' ? null : parseRating(v) }
     const autoName = ev.name === eventName(ev);
     ev[f] = v;
-    if (f === 'kind'){ if (v === 'proam') ev.format = 'pro_am'; else if (v === 'clubcup'){ ev.format = 'club_cup'; ev.clubCup = ev.clubCup || newEvent({kind:'clubcup'}).clubCup } else if (!BRACKET_FORMATS.includes(ev.format)) ev.format = 'single_elim_cons'; if (v === 'mixed') ev.gender = 'X'; else if (ev.gender === 'X') ev.gender = ''; ev.pairs = []; ev.matches = [] }
+    if (f === 'kind'){ if (v === 'proam') ev.format = 'pro_am'; else if (v === 'clubcup'){ ev.format = 'club_cup'; ev.clubCup = ev.clubCup || newEvent({kind:'clubcup'}).clubCup } else if (!BRACKET_FORMATS.includes(ev.format) && ev.format !== 'challenge_ladder') ev.format = 'single_elim_cons'; if (v === 'mixed') ev.gender = 'X'; else if (ev.gender === 'X') ev.gender = ''; ev.pairs = []; ev.matches = [] }
     if (autoName && f !== 'name') ev.name = eventName(ev) }) },
   evpool(el){ withEvent(el.dataset.id, ev => { const [a, b] = el.value.split('x').map(Number); ev.poolConfig = {poolSize:a, advancePerPool:b}; ev.matches = []; ev.published = false }) },
   evscore(el){ withEvent(el.dataset.id, ev => { ev.scoring = Object.assign({}, ev.scoring, {[el.dataset.f]:el.value}); ev.scoringOverride = ev.scoring }) },
@@ -8903,6 +9000,597 @@ Object.assign(CHG, {
 });
 
 /* ---------- Start ---------- */
+/* ================= v6: Challenge ladder (season-long; never fed into the weekend scheduler) =================
+   Where things live:
+   - Rules, starting order, director moves (log), Away list and season close sit on the event (director-only 'events' key).
+   - Each challenge is its own document lc:<eventId>:<challengeId>, so the two players can update it.
+   - Ranks are never stored. They're replayed from the starting order + director moves + counted results, in time order,
+     so reversing a result fixes everything after it. Counted results are also written as m:<matchId> for history, TV and cards.
+   - Ladder events keep ev.matches empty, so the scheduler, clash checker, codes and draw code never see them. */
+var DAY = 86400000;
+var LADDER_DEFAULT = {range:3, move:'leapfrog', respondDays:5, playDays:14, cooldownDays:14, maxOut:1, maxIn:1, confirmDays:3, inactivity:false, inactDays:21, autoWalkover:false, declineForfeit:false, seasonStart:'', seasonEnd:''};
+var L_OPEN = ['pending', 'postponed', 'accepted', 'reported', 'disputed', 'overdue'];
+var L_FINAL = ['done', 'walkover', 'forfeit', 'autowo'];
+var L_STATE = {pending:{cls:'warn', label:'Waiting for a reply'}, postponed:{cls:'warn', label:'Postponed'}, accepted:{cls:'live', label:'Accepted · to play'}, overdue:{cls:'warn', label:'Past the play-by date'},
+  reported:{cls:'warn', label:'Score to confirm'}, disputed:{cls:'warn', label:'Score disputed'}, done:{cls:'ok', label:'Final'}, walkover:{cls:'ok', label:'Walkover'}, forfeit:{cls:'ok', label:'Declined · forfeit'},
+  autowo:{cls:'ok', label:'No reply · walkover'}, declined:{cls:'neutral', label:'Declined'}, expired:{cls:'warn', label:'No reply by the deadline'}, cancelled:{cls:'neutral', label:'Cancelled'}, reversed:{cls:'neutral', label:'Reversed by the director'}};
+function isLadder(ev){ return !!ev && ev.format === 'challenge_ladder' }
+function ladderStarted(ev){ return isLadder(ev) && !!((ev.ladder || {}).started) }
+function ladderClosed(ev){ return !!((ev && ev.ladder) || {}).closed }
+function hasPlayEv(e){ return (e.matches || []).length > 0 || ladderStarted(e) }
+function lrules(ev){ return Object.assign({}, LADDER_DEFAULT, ((ev && ev.ladder) || {}).rules || {}) }
+function lChallenges(ev){ return ev ? Store.keys('lc:' + ev.id + ':').map(k => Store.get(k)).filter(c => c && c.id && c.created).sort((a, b) => a.created.at - b.created.at) : [] }
+const lcKey = c => `lc:${c.ev}:${c.id}`;
+const lPids = id => String(id || '').replace(/^T/, '').split('.').filter(Boolean);
+const lMid = (evId, cid) => `${evId}-LC-${cid}`;
+let LVER = 0;
+{ const s = Store.set, d = Store.del; Store.set = function(k, v){ LVER++; return s.call(this, k, v) }; Store.del = function(k){ LVER++; return d.call(this, k) } }
+const _lmemo = new Map();
+function lmemo(key, fn){ const k = key + '|' + LVER + '|' + Math.floor(Date.now() / 60000); if (_lmemo.has(k)) return _lmemo.get(k); if (_lmemo.size > 300) _lmemo.clear(); const v = fn(); _lmemo.set(k, v); return v }
+function lEntries(ev){ return lmemo('ent:' + ev.id + ':' + JSON.stringify([ev.entrants, ev.pairs, ev.kind]), () => { const m = new Map(); teamsOf(ev).forEach(t => m.set(t.id, t)); return m }) }
+function lName(ev, id, short){ const ids = lPids(id); if (!ids.length) return '?'; return ids.map(p => short ? pname(p).split(' ').slice(-1)[0] : pname(p)).join(' / ') }
+function lMine(ev){ const me = view.me && view.me !== GUEST ? view.me : null; if (!me || !ev) return null; for (const [id, t] of lEntries(ev)) if (t.pids.includes(me)) return id; return null }
+const lAway = (ev, id) => !!((((ev && ev.ladder) || {}).away || {})[id]);
+const lRespondBy = (c, ev) => c.postponed ? c.postponed.until : c.created.at + lrules(ev).respondDays * DAY;
+const lPlayBy = (c, ev) => c.accepted ? c.accepted.at + lrules(ev).playDays * DAY : null;
+function lState(c, ev, now){
+  now = now || Date.now(); const R = lrules(ev);
+  if (c.reversed) return 'reversed';
+  if (c.cancelled) return 'cancelled';
+  if (c.walkover) return 'walkover';
+  if (c.confirmed) return 'done';
+  if (c.report) return c.disputed ? 'disputed' : now >= c.report.at + R.confirmDays * DAY ? 'done' : 'reported';
+  if (c.declined) return R.declineForfeit ? 'forfeit' : 'declined';
+  if (c.accepted) return now > lPlayBy(c, ev) ? 'overdue' : 'accepted';
+  if (now > lRespondBy(c, ev)) return R.autoWalkover ? 'autowo' : 'expired';
+  return c.postponed ? 'postponed' : 'pending';
+}
+/* The result that counts: winner slot ('team1' = challenger, 'team2' = defender) and when it counted */
+function lOutcome(c, ev){
+  const st = lState(c, ev), R = lrules(ev);
+  if (st === 'done') return {w:c.report.w, s:c.report.s || null, at:c.confirmed ? c.confirmed.at : c.report.at + R.confirmDays * DAY, how:c.confirmed ? (c.confirmed.dir ? 'director' : 'confirmed') : 'auto', outcome:c.report.outcome || '', retired:c.report.retired || null};
+  if (st === 'walkover') return {w:c.walkover.w, s:null, at:c.walkover.at, how:'walkover', outcome:'walkover'};
+  if (st === 'forfeit') return {w:'team1', s:null, at:c.declined.at, how:'forfeit', outcome:'walkover'};
+  if (st === 'autowo') return {w:'team1', s:null, at:lRespondBy(c, ev), how:'autowo', outcome:'walkover'};
+  return null;
+}
+/* Replay the ladder up to a time (default now) */
+function lReplay(ev, upto){
+  return lmemo('rp:' + ev.id + ':' + (upto || 'now') + ':' + JSON.stringify(ev.ladder || {}).length, () => {
+    const L = ev.ladder || {}, cur = new Set(lEntries(ev).keys()), R = lrules(ev);
+    let ranks = (L.seed || []).filter(id => cur.has(id));
+    const steps = [];
+    (L.log || []).forEach(o => { if (!upto || o.t <= upto) steps.push({t:o.t, op:o}) });
+    lChallenges(ev).forEach(c => { const o = lOutcome(c, ev); if (o && (!upto || o.at <= upto)) steps.push({t:o.at, c, o}) });
+    steps.sort((a, b) => a.t - b.t || (a.op ? -1 : 1));
+    const moves = {}, rec = {}, last = {}, hist = {};
+    const R0 = id => rec[id] || (rec[id] = {w:0, l:0});
+    for (const s of steps){
+      if (s.op){ const o = s.op;
+        if (o.type === 'set') ranks = o.ranks.filter(id => cur.has(id)).concat(ranks.filter(id => !o.ranks.includes(id)));
+        else if (o.type === 'add'){ if (!ranks.includes(o.id) && cur.has(o.id)) ranks.splice(o.at != null ? Math.min(o.at, ranks.length) : ranks.length, 0, o.id) }
+        else if (o.type === 'remove') ranks = ranks.filter(x => x !== o.id);
+        else if (o.type === 'drop'){ const i = ranks.indexOf(o.id); if (i >= 0){ ranks.splice(i, 1); ranks.splice(Math.min(ranks.length, i + (o.n || 1)), 0, o.id) } }
+        continue;
+      }
+      const {c, o} = s, ia = ranks.indexOf(c.a), ib = ranks.indexOf(c.b), before = {a:ia + 1, b:ib + 1};
+      if (ia >= 0 && ib >= 0 && o.w === 'team1' && ia > ib){
+        if (R.move === 'swap'){ ranks[ia] = c.b; ranks[ib] = c.a }
+        else { ranks.splice(ia, 1); ranks.splice(ib, 0, c.a) }
+      }
+      const win = o.w === 'team1' ? c.a : c.b, lose = o.w === 'team1' ? c.b : c.a;
+      R0(win).w++; R0(lose).l++; last[c.a] = last[c.b] = o.at;
+      moves[c.id] = {before, after:{a:ranks.indexOf(c.a) + 1, b:ranks.indexOf(c.b) + 1}, o};
+      [c.a, c.b].forEach(id => (hist[id] = hist[id] || []).push(c.id));
+    }
+    return {ranks, moves, rec, last, hist, off:[...cur].filter(id => !ranks.includes(id))};
+  });
+}
+const lRank = (ev, id) => lReplay(ev).ranks.indexOf(id) + 1;
+function lOpenOf(ev, id){ const ch = lChallenges(ev).filter(c => L_OPEN.includes(lState(c, ev))); return {out:ch.filter(c => c.a === id), inc:ch.filter(c => c.b === id), any:ch.filter(c => c.a === id || c.b === id)} }
+const ldate = ts => ts ? new Date(ts).toLocaleDateString('en-US', {weekday:'short', month:'short', day:'numeric'}) : '';
+const ldt = iso => { if (!iso) return ''; const d = new Date(iso); return isNaN(d) ? iso : d.toLocaleString('en-US', {weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit'}) };
+/* '' if a can challenge b, otherwise the reason (shown to the player) */
+function lCanChallenge(ev, a, b){
+  if (!ladderStarted(ev)) return "The ladder hasn't started yet.";
+  if (ladderClosed(ev)) return 'The season is closed.';
+  const R = lrules(ev), today = isoDay(new Date());
+  if (R.seasonStart && today < R.seasonStart) return `Challenges open ${ldate(new Date(R.seasonStart + 'T12:00').getTime())}.`;
+  if (R.seasonEnd && today > R.seasonEnd) return 'The season has ended.';
+  if (!a) return 'Pick your name first.';
+  if (a === b) return "That's you.";
+  const {ranks} = lReplay(ev), ia = ranks.indexOf(a), ib = ranks.indexOf(b);
+  if (ia < 0) return "You're not on the ladder yet.";
+  if (ib < 0) return "They're not on the ladder.";
+  if (ib > ia) return 'You can only challenge players above you.';
+  if (lAway(ev, a)) return "You're marked Away. Ask the director to bring you back.";
+  if (lAway(ev, b)) return `${lName(ev, b, true)} is Away.`;
+  const above = ranks.slice(0, ia).filter(id => !lAway(ev, id)).reverse(), pos = above.indexOf(b);
+  if (pos < 0 || pos >= R.range) return `You can challenge up to ${R.range} place${R.range === 1 ? '' : 's'} above you.`;
+  const oa = lOpenOf(ev, a), ob = lOpenOf(ev, b);
+  if (oa.any.some(c => c.a === b || c.b === b)) return 'You already have a challenge with them.';
+  if (oa.out.length >= R.maxOut) return R.maxOut === 1 ? 'You already have a challenge out. Finish it first.' : `You already have ${R.maxOut} challenges out.`;
+  if (ob.inc.length >= R.maxIn) return `${lName(ev, b, true)} already has a challenge to answer.`;
+  const lastMet = lChallenges(ev).filter(c => (c.a === a && c.b === b) || (c.a === b && c.b === a)).map(c => { const o = lOutcome(c, ev); return o ? o.at : lState(c, ev) === 'declined' ? c.declined.at : 0 }).sort((x, y) => y - x)[0];
+  if (lastMet && Date.now() - lastMet < R.cooldownDays * DAY) return `You met recently. You can challenge them again from ${ldate(lastMet + R.cooldownDays * DAY)}.`;
+  return '';
+}
+const lRole = (ev, c) => { const me = lMine(ev); return me && me === c.a ? 'a' : me && me === c.b ? 'b' : null };
+function lFind(evId, cid){ const v = Store.get(`lc:${evId}:${cid}`); return v ? JSON.parse(JSON.stringify(v)) : null }
+function lSave(c){ c.v = (c.v || 0) + 1; Store.set(lcKey(c), c) }
+const lLog = (c, what) => { c.log = (c.log || []).concat([{t:Date.now(), by:view.me || null, dir:!!view.admin && lRole(findEvent(c.ev), c) == null, what}]).slice(-30) };
+/* A challenge as a match object so the existing score entry, match sheet, history and TV can use it.
+   Not in ev.matches, so the scheduler and clash checker never see it. */
+function lMatch(ev, c){
+  return {id:lMid(ev.id, c.id), eventId:ev.id, round:'LAD', label:'Ladder challenge', ladder:true, cid:c.id, la:c.a, lb:c.b,
+    sideAPlayers:lPids(c.a).map(pname), sideBPlayers:lPids(c.b).map(pname), feedsFrom:[], feedsFromLosers:[], when:c.when || '', court:null};
+}
+function lBuildMatches(){
+  const out = [];
+  (state.events || []).filter(isLadder).forEach(ev => lChallenges(ev).forEach(c => { const st = lState(c, ev); if (['accepted', 'overdue', 'reported', 'disputed', ...L_FINAL].includes(st) || resOf(lMid(ev.id, c.id))) out.push(lMatch(ev, c)) }));
+  return out;
+}
+/* Who may report or correct a ladder score from the match sheet */
+function lCanReport(m){
+  const ev = findEvent(m.eventId), c = ev && lFind(ev.id, m.cid); if (!c) return false;
+  const st = lState(c, ev);
+  if (view.admin) return !['cancelled', 'reversed', 'pending', 'postponed', 'declined', 'expired'].includes(st);
+  return ['accepted', 'overdue', 'reported', 'disputed'].includes(st) && !!lRole(ev, c);
+}
+function canScoreM(m, what){ if (m && m.ladder) return what === 'wo' ? !!view.admin && lCanReport(m) : lCanReport(m); return canScore() }
+/* Score entry on a ladder match: players file a report the other side confirms; a director's entry counts straight away. */
+function ladderReport(m, rec){
+  const ev = findEvent(m.eventId), c = ev && lFind(ev.id, m.cid); if (!c) return false;
+  const had = !!(c.report || c.walkover);
+  const rep = {w:rec.w, s:rec.s || null, note:rec.note || '', outcome:rec.outcome || '', retired:rec.retired || null, by:view.me || null, at:Date.now()};
+  const role = lRole(ev, c);
+  if (rec.outcome === 'walkover' && view.admin){ c.walkover = {w:rec.w, at:Date.now(), by:view.me || null}; lLog(c, `Walkover to ${lName(ev, rec.w === 'team1' ? c.a : c.b)}`) }
+  else {
+    c.report = rep; c.disputed = null; c.confirmed = null;
+    if (view.admin && !role){ c.confirmed = {at:Date.now(), by:view.me || null, dir:true}; lLog(c, 'Director entered the score') }
+    else lLog(c, 'Score reported');
+  }
+  lSave(c); lSyncM(ev, c);
+  const other = role === 'a' ? c.b : c.a, auto = ldate(rep.at + lrules(ev).confirmDays * DAY);
+  setTimeout(() => { view.modal = 'lch'; view.lch = {ev:ev.id, id:c.id}; toast(c.confirmed || c.walkover ? 'Result saved. Ranks updated.' : `Sent to ${lName(ev, other, true)} to confirm. Counts automatically ${auto} if they don't.`); render() }, 0);
+  return had;
+}
+/* Mirror a counted result into m:<matchId> (and remove it if the result no longer counts) */
+function lSyncM(ev, c){
+  const mid = lMid(ev.id, c.id), cur = resOf(mid), o = lOutcome(c, ev);
+  const canW = view.admin || canScore();
+  if (!o){ if (cur && cur.ladder && view.admin) Store.del('m:' + mid); return }
+  const sig = [o.w, JSON.stringify(o.s || null), o.at].join('|');
+  if (cur && cur.lsig === sig) return;
+  if (!canW) return;   // open scoring is off: a director's device writes it
+  const m = lMatch(ev, c), wn = o.w === 'team1' ? c.a : c.b, ln = o.w === 'team1' ? c.b : c.a;
+  Store.set('m:' + mid, {w:o.w, s:o.s, by:(c.report && c.report.by) || (c.walkover && c.walkover.by) || null, ts:o.at, names:namesIn(m), ev:ev.name, ladder:c.id, lsig:sig,
+    note:o.outcome === 'walkover' ? 'Walkover' : o.retired ? `${lName(ev, o.retired === 'team1' ? c.a : c.b, true)} retired` : '', outcome:o.outcome, retired:o.retired || undefined,
+    txt:`${lName(ev, wn, true)} d. ${lName(ev, ln, true)}${o.s ? ' ' + rowsText(o.s, o.w) : o.outcome === 'walkover' ? ' (walkover)' : ''}`});
+}
+/* Background upkeep: mirror results, and (director device, rule on) inactivity drops */
+function lSweep(){
+  if (!TRIP || !cfg()) return;
+  try{
+    syncEngine();
+    state.events.filter(isLadder).forEach(ev => {
+      lChallenges(ev).forEach(c => lSyncM(ev, c));
+      if (view.admin && lrules(ev).inactivity && ladderStarted(ev) && !ladderClosed(ev)){ const due = lInactiveDue(ev); if (due.length) lApplyDrops(ev.id, due, true) }
+    });
+  }catch(e){ console.warn('ladder sweep', e) }
+}
+/* Inactivity: no counted match for inactDays (from the later of season start or their last match), drop 1 place a week
+   after that, unless they're Away or have a challenge open. Applied by a director (automatically when the rule is on). */
+function lInactiveDue(ev){
+  const R = lrules(ev), L = ev.ladder || {}, rp = lReplay(ev), now = Date.now(), out = [];
+  rp.ranks.forEach((id, i) => {
+    if (i === rp.ranks.length - 1 || lAway(ev, id) || lOpenOf(ev, id).any.length) return;
+    const lastOp = Math.max(0, ...(L.log || []).filter(o => o.type === 'drop' && o.id === id).map(o => o.t));
+    const since = Math.max(L.started || 0, rp.last[id] || 0, (L.log || []).filter(o => o.type === 'away-off' && o.id === id).map(o => o.t).pop() || 0);
+    const idle = now - since - R.inactDays * DAY; if (idle < 0) return;
+    const owed = Math.floor(idle / (7 * DAY)) + 1, paid = (L.log || []).filter(o => o.type === 'drop' && o.id === id && o.t > since).length;
+    if (owed > paid && now - lastOp > 6 * DAY) out.push(id);
+  });
+  return out;
+}
+function lApplyDrops(evId, ids, quiet){ withEvent(evId, ev => { const L = ev.ladder = ev.ladder || {}; L.log = (L.log || []).concat(ids.map(id => ({t:Date.now(), type:'drop', id, n:1, why:'inactive'}))) }); if (!quiet) toast(`Dropped ${ids.length} inactive ${ids.length === 1 ? 'player' : 'players'} one place.`) }
+function ladderStart(ev){
+  normEvent(ev);
+  if (ladderStarted(ev)) return ev;
+  ev.teams = teamsOf(ev); ev.matches = [];
+  const L = ev.ladder = ev.ladder || {}; L.rules = L.rules || {}; L.seed = ev.teams.map(t => t.id); L.started = Date.now(); L.log = L.log || []; L.away = L.away || {};
+  return ev;
+}
+
+/* ---------- USTA # and ratings on player cards (players enter their own; a director can verify) ---------- */
+var USTA_SEARCH = 'https://www.usta.com/en/home/play/player-search.html';
+var NTRP_TYPES = [['', 'Type'], ['C', 'C · Computer'], ['S', 'S · Self-rated'], ['A', 'A · Appeal'], ['T', 'T · Tournament'], ['M', 'M · Mixed'], ['D', 'D · Dynamic']];
+var RATING_KEYS = [['ntrp', 'NTRP'], ['wtn_s', 'WTN singles'], ['wtn_d', 'WTN doubles'], ['utr', 'UTR']];
+const numOrNull = (v, lo, hi, dp) => { const n = parseFloat(String(v ?? '').replace(',', '.')); if (!isFinite(n) || n < lo || n > hi) return null; const f = Math.pow(10, dp); return Math.round(n * f) / f };
+function cleanRatings(d){
+  return {usta:String(d.usta || '').replace(/\D/g, '').slice(0, 15) || null, ntrp:numOrNull(d.ntrp, 1, 7, 1), ntrp_type:/^[CSATMD]$/.test(String(d.ntrp_type || '').toUpperCase()) ? String(d.ntrp_type).toUpperCase() : null,
+    wtn_s:numOrNull(d.wtn_s, 1, 40, 1), wtn_d:numOrNull(d.wtn_d, 1, 40, 1), utr:numOrNull(d.utr, 1, 16.5, 2)};
+}
+const isVer = (c, k) => !!(c && c.verified && c.verified[k] && c[k] != null);
+function ratingChips(pid, opts){
+  opts = opts || {}; if (brand().cards.rating === false && !view.admin) return '';
+  const c = cardOf(pid), out = [];
+  RATING_KEYS.forEach(([k, l]) => { if (c[k] == null || c[k] === '') return; const v = isVer(c, k), val = k === 'ntrp' ? Number(c[k]).toFixed(1) + (c.ntrp_type || '') : String(c[k]);
+    out.push(`<span class="v6-rt ${v ? 'ver' : ''}" title="${v ? `Verified by a director${c.verified[k].at ? ' on ' + ldate(Date.parse(c.verified[k].at) || c.verified[k].at) : ''}` : 'Self-reported'}"><b>${esc(l)}</b> ${esc(val)}${v ? `<i class="v6-chk" aria-label="verified">${CHK_SVG}</i>` : `<small>self-reported</small>`}</span>`) });
+  if (!out.length && !opts.usta) return '';
+  return `<p class="v6-rts">${out.join('')}</p>`;
+}
+var CHK_SVG = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.5 8.3l2.2 2.2 4.8-4.8" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function ustaBlock(pid){
+  const c = cardOf(pid), mine = view.me === pid;
+  if (!isTennis() || (!c.usta && !mine && !view.admin)) return '';
+  return `<div class="v6-usta">${c.usta && (mine || view.admin) ? `<span class="v6-usta-n">USTA # <b>${esc(c.usta)}</b><button class="bk-inline" data-act="copy" data-v="${esc(c.usta)}">Copy</button></span>` : ''}
+    <a class="btn alt sm" href="${USTA_SEARCH}" target="_blank" rel="noopener noreferrer">View USTA profile <span aria-hidden="true">↗</span></a>
+    <span class="bk-hint">Opens USTA Player Search in a new tab. Search by name${c.usta ? ' or USTA #' : ''}. Bracketly doesn't read USTA's site.</span></div>`;
+}
+/* NTRP on the card, when there is one, also drives the level checks */
+function ntrpIssue(ev, p){
+  if (!p || !isTennis() || ev.kind === 'clubcup' || ev.kind === 'proam') return '';
+  const c = cardOf(p.id), n = c.ntrp != null && c.ntrp !== '' ? Number(c.ntrp) : null;
+  if (ev.reqVerNtrp && !(n != null && isVer(c, 'ntrp'))) return n != null ? 'NTRP not verified yet' : 'No verified NTRP';
+  if (n != null && ev.level && n > ev.level + 1e-9) return `NTRP ${n.toFixed(1)} on their card is above ${fmtLevel(ev.level)}`;
+  if (n != null && ev.kind === 'mixed' && ev.cap && n > ev.cap) return `NTRP ${n.toFixed(1)} on their card is above the ${fmtLevel(ev.cap)} cap`;
+  return '';
+}
+function ntrpPairIssue(ev, pids){
+  if (!isTennis() || !ev.cap || pids.length !== 2) return '';
+  const ns = pids.map(id => { const c = cardOf(id); return c.ntrp != null && c.ntrp !== '' ? Number(c.ntrp) : null });
+  if (ns.every(n => n != null) && ns[0] + ns[1] > ev.cap + 1e-9) return `Combined NTRP ${(ns[0] + ns[1]).toFixed(1)} on their cards is over the ${fmtLevel(ev.cap)} cap`;
+  return '';
+}
+function ensureCards(){ if (view.cards === undefined && TRIP){ view.cards = null; setTimeout(loadCards, 0) } }
+
+/* ---------- Ladder UI ---------- */
+function lRatingTxt(ev, id){
+  const ids = lPids(id); if (brand().cards.rating === false) return '';
+  const one = pid => { const c = cardOf(pid), p = P(pid) || {}; return c.ntrp != null && c.ntrp !== '' ? Number(c.ntrp).toFixed(1) + (isVer(c, 'ntrp') ? '✓' : '') : p.rating != null && p.rating !== '' ? (isTennis() ? fmtLevel(p.rating) : fmtRating(p.rating)) : '' };
+  const v = ids.map(one).filter(Boolean); if (!v.length) return '';
+  return (isTennis() ? 'NTRP ' : sport().rating + ' ') + v.join(' + ');
+}
+function lStanding(ev, print){
+  const rp = lReplay(ev), me = lMine(ev), wk = lReplay(ev, Math.floor((Date.now() - 7 * DAY) / 3600000) * 3600000);
+  if (!rp.ranks.length) return '<p class="bk-empty">No one is on the ladder yet.</p>';
+  if (print) return `<table class="v6-ptab"><thead><tr><th>#</th><th>${ev.kind === 'singles' ? 'Player' : 'Team'}</th><th>W–L</th></tr></thead><tbody>${rp.ranks.map((id, i) => { const r = rp.rec[id] || {w:0, l:0}; return `<tr><td>${i + 1}</td><td>${esc(lName(ev, id))}${lAway(ev, id) ? ' (Away)' : ''}</td><td>${r.w}–${r.l}</td></tr>` }).join('')}</tbody></table>`;
+  return `<ol class="v6-lad" aria-label="${esc(ev.name)} standings">${rp.ranks.map((id, i) => {
+    const r = rp.rec[id] || {w:0, l:0}, pids = lPids(id), away = lAway(ev, id), open = lOpenOf(ev, id).any, why = me && me !== id ? lCanChallenge(ev, me, id) : 'x';
+    const was = wk.ranks.indexOf(id), mv = was < 0 ? 0 : was - i;
+    const meta = [lRatingTxt(ev, id), `${r.w}–${r.l}`].filter(Boolean).join(' · ');
+    const act = me === id ? '<span class="v6-you">You</span>' : !why ? `<button class="v6-chal" data-act="lchal" data-ev="${esc(ev.id)}" data-id="${esc(id)}" aria-label="Challenge ${esc(lName(ev, id))}, rank ${i + 1}">Challenge</button>`
+      : away ? '<span class="st neutral">Away</span>' : open.length ? '<span class="st warn">In a challenge</span>' : '';
+    return `<li class="v6-lrow ${me === id ? 'v6-me' : ''} ${away ? 'away' : ''}"><span class="v6-rk" aria-label="Rank ${i + 1}">${i + 1}</span>
+      <button class="v6-who" data-act="openplayer" data-id="${esc(pids[0])}">${pids.length > 1 ? `<span class="v6-avs">${pids.slice(0, 2).map(p => avatar(p, 34)).join('')}</span>` : avatar(pids[0], 40)}<span class="v6-nm"><b>${esc(lName(ev, id))}</b><small>${esc(meta)}${mv ? ` <i class="v6-mv ${mv > 0 ? 'up' : 'dn'}" aria-label="${mv > 0 ? 'up' : 'down'} ${Math.abs(mv)} this week">${mv > 0 ? '▲' : '▼'}${Math.abs(mv)}</i>` : ''}</small></span></button>
+      <span class="v6-act">${act}</span></li>` }).join('')}</ol>`;
+}
+function lChCard(ev, c){
+  const st = lState(c, ev), role = lRole(ev, c), R = lrules(ev), rp = lReplay(ev);
+  const opp = role === 'a' ? c.b : c.a, oppN = lName(ev, opp), rk = id => rp.ranks.indexOf(id) + 1;
+  let line = '', btns = '';
+  const open = `<button class="btn alt sm" data-act="lopen" data-ev="${esc(ev.id)}" data-id="${esc(c.id)}">Details</button>`;
+  if (st === 'pending' || st === 'postponed'){
+    if (role === 'b'){ line = `<b>${esc(oppN)}</b> (#${rk(opp)}) challenged you. Reply by ${ldate(lRespondBy(c, ev))}.`; btns = `<button class="btn sm" data-act="laccept" data-ev="${esc(ev.id)}" data-id="${esc(c.id)}">Accept</button><button class="btn alt sm" data-act="ldecline" data-ev="${esc(ev.id)}" data-id="${esc(c.id)}">Decline</button>${open}` }
+    else { line = `Waiting for <b>${esc(oppN)}</b> (#${rk(opp)}) to reply by ${ldate(lRespondBy(c, ev))}.`; btns = open }
+  } else if (st === 'accepted' || st === 'overdue'){
+    line = `Play <b>${esc(oppN)}</b>${c.when ? ` · ${esc(ldt(c.when))}` : ''} · ${st === 'overdue' ? 'play-by date passed' : 'play by ' + ldate(lPlayBy(c, ev))}.`;
+    btns = `<button class="btn sm" data-act="lreport" data-ev="${esc(ev.id)}" data-id="${esc(c.id)}">Report score</button>${open}`;
+  } else if (st === 'reported'){
+    const mineRep = c.report.by && lPids(role === 'a' ? c.a : c.b).includes(c.report.by);
+    line = mineRep ? `Waiting for <b>${esc(oppN)}</b> to confirm ${esc(lScoreTxt(ev, c))}. Counts automatically ${ldate(c.report.at + R.confirmDays * DAY)}.` : `<b>${esc(oppN)}</b> reported ${esc(lScoreTxt(ev, c))}. Is that right?`;
+    btns = mineRep ? open : `<button class="btn sm" data-act="lconfirm" data-ev="${esc(ev.id)}" data-id="${esc(c.id)}">Confirm</button><button class="btn alt sm" data-act="ldispute" data-ev="${esc(ev.id)}" data-id="${esc(c.id)}">Something's wrong</button>`;
+  } else if (st === 'disputed'){ line = `The score is disputed. The director will sort it out.`; btns = open }
+  return `<li class="v6-chc ${role === 'b' && (st === 'pending' || st === 'postponed') || st === 'reported' && !(c.report.by && lPids(role === 'a' ? c.a : c.b).includes(c.report.by)) ? 'hot' : ''}"><p class="v6-chc-h">${stChip(L_STATE[st])}<span>${role === 'a' ? 'You challenged' : 'Challenged you'}</span></p><p class="v6-chc-t">${line}</p><div class="bk-actions">${btns}</div></li>`;
+}
+function lScoreTxt(ev, c){ const r = c.report; if (!r) return ''; const w = r.w === 'team1' ? c.a : c.b, l = r.w === 'team1' ? c.b : c.a; return `${lName(ev, w, true)} d. ${lName(ev, l, true)}${r.s ? ' ' + rowsText(r.s, r.w) : r.outcome === 'retired' ? ' (retired)' : ''}` }
+function lMyOpen(ev){ const me = lMine(ev); return me ? lChallenges(ev).filter(c => (c.a === me || c.b === me) && L_OPEN.includes(lState(c, ev))) : [] }
+function lNeedsMe(ev){ return lMyOpen(ev).filter(c => { const st = lState(c, ev), role = lRole(ev, c); return (role === 'b' && (st === 'pending' || st === 'postponed')) || (st === 'reported' && !(c.report.by && lPids(role === 'a' ? c.a : c.b).includes(c.report.by))) || st === 'accepted' || st === 'overdue' }) }
+function lResults(ev, n, who){
+  const rp = lReplay(ev), list = lChallenges(ev).map(c => ({c, o:lOutcome(c, ev)})).filter(x => x.o && (!who || x.c.a === who || x.c.b === who)).sort((a, b) => b.o.at - a.o.at).slice(0, n || 6);
+  if (!list.length) return '';
+  return `<ul class="v6-res">${list.map(({c, o}) => { const w = o.w === 'team1' ? c.a : c.b, l = o.w === 'team1' ? c.b : c.a, mv = rp.moves[c.id];
+    const moved = mv && o.w === 'team1' && mv.after.a < mv.before.a ? `${lName(ev, c.a, true)} up to #${mv.after.a}` : 'No change';
+    return `<li><button data-act="lopen" data-ev="${esc(ev.id)}" data-id="${esc(c.id)}"><span><b>${esc(lName(ev, w, true))}</b> d. ${esc(lName(ev, l, true))} ${o.s ? esc(rowsText(o.s, o.w)) : o.how === 'walkover' || o.how === 'autowo' || o.how === 'forfeit' ? '<i>walkover</i>' : ''}</span><small>${esc(ldate(o.at))} · ${esc(moved)}${o.how === 'auto' ? ' · auto-confirmed' : ''}</small></button></li>` }).join('')}</ul>`;
+}
+function lRulesTxt(ev){ const R = lrules(ev); return `Challenge up to ${R.range} above · ${R.move === 'swap' ? 'winner swaps places' : 'winner takes their place'} · reply in ${R.respondDays} days · play in ${R.playDays}` }
+function ladderView(ev, print){
+  ensureCards();
+  if (!ladderStarted(ev)) return `<p class="bk-empty">${view.admin ? 'This ladder hasn\'t started. Set the starting order and start it on the Brackets step.' : "The ladder hasn't started yet."}</p>${view.admin ? `<button class="btn" data-act="gobracket" data-id="${esc(ev.id)}">Set up the ladder</button>` : ''}`;
+  if (print) return `<p class="small">${esc(lRulesTxt(ev))}</p>${lStanding(ev, true)}`;
+  const me = lMine(ev), mine = lMyOpen(ev), R = lrules(ev), L = ev.ladder || {};
+  const season = [R.seasonStart && 'From ' + ldate(new Date(R.seasonStart + 'T12:00').getTime()), R.seasonEnd && 'to ' + ldate(new Date(R.seasonEnd + 'T12:00').getTime())].filter(Boolean).join(' ');
+  return `<div class="v6-lhead"><p>${ladderClosed(ev) ? '<span class="st neutral">Season closed</span> ' : ''}${esc(season || 'Season-long ladder')}</p><p class="bk-meta">${esc(lRulesTxt(ev))}</p>
+    <div class="bk-actions"><button class="btn alt sm" data-act="lrules" data-ev="${esc(ev.id)}">${view.admin ? 'Rules & settings' : 'Ladder rules'}</button>${view.admin ? `<button class="btn alt sm" data-act="lman" data-ev="${esc(ev.id)}">Manage ladder</button>` : ''}</div></div>
+    ${me ? `<section class="v6-mine" aria-labelledby="lm-h"><h2 class="bk-h2" id="lm-h">My challenges</h2>${mine.length ? `<ul class="v6-chl">${mine.map(c => lChCard(ev, c)).join('')}</ul>` : `<p class="bk-hint">${lRank(ev, me) ? `You're #${lRank(ev, me)}. ${lRank(ev, me) === 1 ? 'Defend your spot.' : `Tap Challenge next to someone up to ${R.range} above you.`}` : "You're not on this ladder."}</p>`}</section>` : `<p class="bk-hint">Pick your name to challenge someone.</p>`}
+    <section aria-labelledby="ls-h"><h2 class="bk-h2" id="ls-h">Standings</h2>${lStanding(ev)}</section>
+    ${(() => { const r = lResults(ev, 6); return r ? `<section aria-labelledby="lr-h"><h2 class="bk-h2" id="lr-h">Recent results</h2>${r}</section>` : '' })()}
+    ${ladderClosed(ev) && L.final ? `<p class="bk-note ok">Final standings saved ${esc(ldate(L.closed.at))}.</p>` : ''}`;
+}
+/* Challenge detail */
+function lchSheet(){
+  const v = view.lch || {}, ev = findEvent(v.ev), c = ev && lFind(ev.id, v.id); if (!c) return '';
+  const st = lState(c, ev), role = lRole(ev, c), R = lrules(ev), rp = lReplay(ev), mv = rp.moves[c.id], id = `data-ev="${esc(ev.id)}" data-id="${esc(c.id)}"`;
+  const side = (eid, lab, rank) => `<div class="v6-side">${avatar(lPids(eid)[0], 48)}<span><small>${lab}</small><b>${esc(lName(ev, eid))}</b><span class="bk-meta">${rank ? `#${rank} when challenged` : ''}${lRank(ev, eid) ? ` · now #${lRank(ev, eid)}` : ''}</span></span></div>`;
+  const rep = c.report ? `<p class="bk-note ${st === 'disputed' ? 'warn' : 'ok'}">${esc(lScoreTxt(ev, c))}${c.report.by ? ` · reported by ${esc(pname(c.report.by))}` : ''} ${esc(ldate(c.report.at))}${c.confirmed ? ` · confirmed${c.confirmed.dir ? ' by the director' : ''}` : st === 'done' ? ' · auto-confirmed' : ''}</p>` : '';
+  let acts = '';
+  if ((st === 'pending' || st === 'postponed') && role === 'b') acts = `<button class="bk-btn" data-act="laccept" ${id}>Accept</button><div class="bk-actions"><button class="btn alt" data-act="ldecline" ${id}>Decline</button>${!c.postponed ? `<button class="btn alt" data-act="lpostpone" ${id}>Postpone a few days</button>` : ''}</div>${R.declineForfeit ? '<p class="bk-rules">Declining counts as a loss on this ladder.</p>' : ''}`;
+  if ((st === 'pending' || st === 'postponed') && role === 'a') acts = `<button class="btn alt" data-act="lwithdraw" ${id}>Withdraw challenge</button>`;
+  if (['accepted', 'overdue'].includes(st) && role) acts = `<button class="bk-btn" data-act="lreport" ${id}>Report score</button>`;
+  if (st === 'reported' && role && !(c.report.by && lPids(role === 'a' ? c.a : c.b).includes(c.report.by))) acts = `<button class="bk-btn" data-act="lconfirm" ${id}>Confirm score</button><button class="bk-btn alt" data-act="ldispute" ${id}>Something's wrong</button>`;
+  if ((st === 'reported' || st === 'disputed') && role) acts += `<button class="btn alt" data-act="lreport" ${id}>Correct the score</button>`;
+  const times = ['pending', 'postponed', 'accepted', 'overdue'].includes(st) && (role || view.admin) ? `<section class="bk-sec"><h3 class="bk-h2">When and where</h3>
+    ${c.when ? `<p class="v6-when">${ICON.today}<b>${esc(ldt(c.when))}</b>${c.where ? ' · ' + esc(c.where) : ''}</p>` : `<p class="bk-hint">${(c.times || []).length ? 'No time agreed yet. Pick one of these or suggest another.' : 'No time agreed yet. Suggest one or two; the other side picks.'}</p>`}
+    ${(c.times || []).length ? `<ul class="v6-times">${c.times.map((t, i) => `<li><span>${esc(ldt(t.at))}${t.where ? ' · ' + esc(t.where) : ''} <small>from ${esc(firstName(t.by))}</small></span>${c.when === t.at ? '<span class="st ok">Agreed</span>' : t.by !== view.me ? `<button class="btn sm" data-act="lpick" ${id} data-i="${i}">Pick this</button>` : ''}</li>`).join('')}</ul>` : ''}
+    <div class="v6-propose"><label for="lc-time">Suggest a time</label><input id="lc-time" class="bk-input" type="datetime-local"><input id="lc-where" class="bk-input" maxlength="60" placeholder="Where (optional)"><button class="btn alt sm" data-act="lpropose" ${id}>Suggest</button></div></section>` : '';
+  const dir = view.admin ? `<section class="bk-sec v6-dir"><h3 class="bk-h2">Director</h3><div class="bk-actions">
+    ${['reported', 'disputed'].includes(st) ? `<button class="btn sm" data-act="ldirconfirm" ${id}>Confirm reported score</button>` : ''}
+    ${['pending', 'postponed', 'expired', 'accepted', 'overdue', 'disputed', 'declined'].includes(st) ? `<button class="btn alt sm" data-act="lwo" ${id} data-v="team1">Walkover to ${esc(lName(ev, c.a, true))}</button><button class="btn alt sm" data-act="lwo" ${id} data-v="team2">Walkover to ${esc(lName(ev, c.b, true))}</button>` : ''}
+    ${['accepted', 'overdue', 'disputed', 'reported', ...L_FINAL].includes(st) ? `<button class="btn alt sm" data-act="lreport" ${id}>${L_FINAL.includes(st) ? 'Correct the score' : 'Enter the score'}</button>` : ''}
+    ${L_FINAL.includes(st) ? `<button class="btn danger sm" data-act="lreverse" ${id}>Reverse result</button>` : st === 'reversed' ? `<button class="btn alt sm" data-act="lunreverse" ${id}>Restore result</button>` : !['cancelled'].includes(st) ? `<button class="btn alt sm" data-act="ldircancel" ${id}>Cancel challenge</button>` : ''}
+    </div><p class="bk-rules">Reversing takes the result off the ladder and replays the ranks without it. It's kept in the history.</p></section>` : '';
+  const dl = st === 'pending' || st === 'postponed' ? `Reply by ${ldate(lRespondBy(c, ev))}` : st === 'expired' ? `Reply was due ${ldate(lRespondBy(c, ev))}. ${R.autoWalkover ? '' : 'The director decides.'}` : ['accepted', 'overdue'].includes(st) ? `Play by ${ldate(lPlayBy(c, ev))}` : st === 'reported' ? `Counts automatically ${ldate(c.report.at + R.confirmDays * DAY)} unless disputed` : '';
+  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet v6-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="lch-h">
+    <div class="sh-top"><p class="bk-eyebrow">${esc(ev.name)} · Ladder challenge</p><button class="hclose" data-act="closemodal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+    <h2 class="sh-h" id="lch-h">${esc(lName(ev, c.a, true))} vs ${esc(lName(ev, c.b, true))}</h2>
+    <p>${stChip(L_STATE[st])}${dl ? ` <span class="bk-meta">${esc(dl)}</span>` : ''}</p>
+    <div class="v6-sides">${side(c.a, 'Challenger', c.aRank)}<span class="v6-vs">vs</span>${side(c.b, 'Defending', c.bRank)}</div>
+    ${rep}${mv && L_FINAL.includes(st) ? `<p class="bk-meta">${mv.after.a < mv.before.a ? `${esc(lName(ev, c.a, true))} moved from #${mv.before.a} to #${mv.after.a}.` : 'Ranks stayed the same.'}</p>` : ''}
+    ${c.disputed ? `<p class="bk-note warn">Disputed by ${esc(pname(c.disputed.by))}${c.disputed.note ? `: "${esc(c.disputed.note)}"` : ''}</p>` : ''}
+    ${acts ? `<div class="v6-acts">${acts}</div>` : ''}
+    ${times}${dir}
+    ${(c.log || []).length ? disc('lclog-' + c.id, `History (${c.log.length})`, `<ol class="bk-hist">${c.log.slice().reverse().map(x => `<li><b>${esc(x.what)}</b><span>${x.by ? esc(pname(x.by)) : x.dir ? 'Director' : ''} · ${esc(ldate(x.t))} ${esc(timeLabel(x.t))}</span></li>`).join('')}</ol>`) : ''}
+  </div></div>`;
+}
+/* Rules: read-only for players, a form for directors */
+function lrulesSheet(){
+  const ev = findEvent((view.lrul || {}).ev); if (!ev) return ''; const R = lrules(ev), adm = view.admin, eid = esc(ev.id);
+  const num = (f, lab, min, max, sub) => `<label class="v6-rf"><span><b>${lab}</b>${sub ? `<small>${sub}</small>` : ''}</span><input type="number" inputmode="numeric" min="${min}" max="${max}" class="bk-input" data-chg="lrule" data-ev="${eid}" data-f="${f}" value="${esc(R[f])}"></label>`;
+  const sw = (f, lab, sub) => `<label class="aswitch"><span><b>${lab}</b><small>${sub}</small></span><input type="checkbox" role="switch" data-chg="lrule" data-ev="${eid}" data-f="${f}" ${R[f] ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
+  const scs = Object.entries(SCORING_FORMATS).filter(([k, v]) => v.sport === ((cfg() || {}).sport || 'tennis'));
+  const body = adm ? `
+    <h3 class="v3-h3">Challenges</h3><div class="v3-card v6-rules">
+    ${num('range', 'Challenge range', 1, 10, 'How many places above you can challenge. Away players are skipped.')}
+    <label class="v6-rf"><span><b>When the challenger wins</b></span>${sel(`data-chg="lrule" data-ev="${eid}" data-f="move" class="bk-input"`, [['leapfrog', 'Takes their place (others move down one)'], ['swap', 'Swaps places']], R.move)}</label>
+    ${num('respondDays', 'Days to reply', 1, 30, 'Accept, decline or postpone.')}
+    ${num('playDays', 'Days to play after accepting', 1, 60)}
+    ${num('cooldownDays', 'Rematch wait (days)', 0, 90, 'Before the same two can meet again.')}
+    ${num('maxOut', 'Open challenges out, per player', 1, 5)}${num('maxIn', 'Open challenges to answer, per player', 1, 5)}
+    ${num('confirmDays', 'Days to confirm a score', 1, 14, 'After that it counts automatically.')}
+    </div><h3 class="v3-h3">Deadlines and inactivity</h3><div class="v3-card">
+    ${sw('autoWalkover', 'Automatic walkover', 'No reply by the deadline counts as a win for the challenger. Off: you decide each one.')}
+    ${sw('declineForfeit', 'Declining counts as a loss', 'Off: a decline just ends the challenge.')}
+    ${sw('inactivity', 'Drop inactive players', `No match for ${R.inactDays} days: down one place a week, unless Away or a challenge is open.`)}
+    ${R.inactivity ? num('inactDays', 'Days before drops start', 7, 90) : ''}
+    </div><h3 class="v3-h3">Season and scoring</h3><div class="v3-card v6-rules">
+    <label class="v6-rf"><span><b>Season starts</b></span><input type="date" class="bk-input" data-chg="lrule" data-ev="${eid}" data-f="seasonStart" value="${esc(R.seasonStart)}"></label>
+    <label class="v6-rf"><span><b>Season ends</b></span><input type="date" class="bk-input" data-chg="lrule" data-ev="${eid}" data-f="seasonEnd" value="${esc(R.seasonEnd)}"></label>
+    <label class="v6-rf"><span><b>Match format</b></span>${sel(`data-chg="evscore" data-id="${eid}" data-f="main" class="bk-input"`, scs.map(([k, v]) => [k, v.label]), (ev.scoring || {}).main)}</label></div>`
+  : `<ul class="v6-rlist"><li>You can challenge anyone up to <b>${R.range}</b> place${R.range === 1 ? '' : 's'} above you. Away players are skipped.</li><li>Win as the challenger and you ${R.move === 'swap' ? 'swap places' : 'take their place; everyone between moves down one'}. Lose and nothing changes.</li>
+    <li>Reply within <b>${R.respondDays} days</b>${R.autoWalkover ? ', or it counts as a walkover' : ''}. Play within <b>${R.playDays} days</b> of accepting.</li><li>One player reports the score, the other confirms. It counts automatically after ${R.confirmDays} days.</li>
+    <li>Wait <b>${R.cooldownDays} days</b> before challenging the same player again. ${R.maxOut === 1 ? 'One open challenge out' : R.maxOut + ' open challenges out'} and ${R.maxIn === 1 ? 'one to answer' : R.maxIn + ' to answer'} at a time.</li>
+    ${R.declineForfeit ? '<li>Declining a challenge counts as a loss.</li>' : ''}${R.inactivity ? `<li>No match for ${R.inactDays} days drops you one place a week, unless you're Away or have a challenge open.</li>` : ''}
+    <li>Matches: ${esc((SCORING_FORMATS[(ev.scoring || {}).main] || {}).label || 'the tournament format')}.</li></ul>`;
+  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet v6-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="lru-h">
+    <div class="sh-top"><p class="bk-eyebrow">${esc(ev.name)}</p><button class="hclose" data-act="closemodal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+    <h2 class="sh-h" id="lru-h">${adm ? 'Ladder rules & settings' : 'Ladder rules'}</h2>${body}<button class="bk-btn alt" data-act="closemodal">Done</button></div></div>`;
+}
+/* Director: order, players, Away, needs attention, season */
+function lmanSheet(){
+  const ev = findEvent((view.lman || {}).ev); if (!ev || !view.admin) return ''; const eid = esc(ev.id), rp = lReplay(ev), tab = view.lmanTab || 'order';
+  const tabs = `<div class="seg2" role="group" aria-label="Manage">${[['order', 'Order'], ['attn', `Needs you (${lAttention(ev).length})`], ['season', 'Season']].map(([k, l]) => `<button data-act="lmantab" data-v="${k}" aria-pressed="${tab === k}">${l}</button>`).join('')}</div>`;
+  let body = '';
+  if (tab === 'order') body = `<p class="bk-hint">Move anyone with the arrows. Tap Away for injuries or holidays: they can't be challenged and are skipped when counting range.</p>
+    <ol class="v6-ord">${rp.ranks.map((id, i) => `<li><b>${i + 1}</b><span>${esc(lName(ev, id))}</span><button data-act="lmv" data-ev="${eid}" data-id="${esc(id)}" data-v="-1" aria-label="Move ${esc(lName(ev, id))} up" ${i === 0 ? 'disabled' : ''}>▲</button><button data-act="lmv" data-ev="${eid}" data-id="${esc(id)}" data-v="1" aria-label="Move ${esc(lName(ev, id))} down" ${i === rp.ranks.length - 1 ? 'disabled' : ''}>▼</button><button class="v6-aw ${lAway(ev, id) ? 'on' : ''}" data-act="laway" data-ev="${eid}" data-id="${esc(id)}" aria-pressed="${lAway(ev, id)}">Away</button><button class="v6-rm" data-act="lrm" data-ev="${eid}" data-id="${esc(id)}" aria-label="Take ${esc(lName(ev, id))} off the ladder">×</button></li>`).join('')}</ol>
+    ${rp.off.length ? `<h3 class="v3-h3">Entered but not on the ladder (${rp.off.length})</h3><ul class="v6-off">${rp.off.map(id => `<li><span>${esc(lName(ev, id))}</span><button class="btn sm" data-act="ladd" data-ev="${eid}" data-id="${esc(id)}">Add at the bottom</button></li>`).join('')}</ul>` : ''}
+    <button class="btn alt sm" data-act="goplayers" data-id="${eid}">Add players to ${esc(ev.name)}</button>`;
+  if (tab === 'attn'){ const a = lAttention(ev); const due = lrules(ev).inactivity ? [] : lInactiveDue(ev);
+    body = a.length ? `<ul class="v6-chl">${a.map(({c, why}) => `<li class="v6-chc hot"><p class="v6-chc-h">${stChip(L_STATE[lState(c, ev)])}<span>${esc(lName(ev, c.a, true))} vs ${esc(lName(ev, c.b, true))}</span></p><p class="v6-chc-t">${esc(why)}</p><div class="bk-actions"><button class="btn sm" data-act="lopen" data-ev="${eid}" data-id="${esc(c.id)}">Open</button></div></li>`).join('')}</ul>` : '<p class="bk-note ok">Nothing needs you right now.</p>';
+    if (due.length) body += `<h3 class="v3-h3">Inactive (${due.length})</h3><p class="bk-hint">${due.map(id => esc(lName(ev, id))).join(', ')}: no match in ${lrules(ev).inactDays}+ days.</p><button class="btn alt sm" data-act="ldrops" data-ev="${eid}">Drop them one place</button>`;
+  }
+  if (tab === 'season'){ const L = ev.ladder || {};
+    body = ladderClosed(ev) ? `<p class="bk-note ok">Season closed ${esc(ldate(L.closed.at))}. Final standings are saved and challenges are off.</p><button class="btn alt" data-act="lreopen" data-ev="${eid}">Reopen the season</button>`
+      : `<p class="bk-hint">Closing saves the final standings and stops new challenges. Open challenges stay as they are so you can settle them.</p><button class="btn danger" data-act="lclose" data-ev="${eid}">Close the season</button>`;
+    body += `<p class="bk-meta" style="margin-top:12px">Started ${esc(ldate(L.started))} · ${lChallenges(ev).length} challenges · ${Object.keys(lReplay(ev).moves).length} results</p>`;
+  }
+  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet v6-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="lman-h">
+    <div class="sh-top"><p class="bk-eyebrow">${esc(ev.name)}</p><button class="hclose" data-act="closemodal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+    <h2 class="sh-h" id="lman-h">Manage ladder</h2>${tabs}${body}</div></div>`;
+}
+function lAttention(ev){
+  const out = [];
+  lChallenges(ev).forEach(c => { const st = lState(c, ev);
+    if (st === 'expired') out.push({c, why:`${lName(ev, c.b, true)} didn't reply by ${ldate(lRespondBy(c, ev))}. Record a walkover or cancel.`});
+    else if (st === 'disputed') out.push({c, why:`Score disputed by ${pname(c.disputed.by)}.`});
+    else if (st === 'overdue') out.push({c, why:`Accepted but not played by ${ldate(lPlayBy(c, ev))}.`});
+  });
+  return out;
+}
+/* Wizard "Brackets" step for a ladder */
+function wzLadder(ev, fmtCards){
+  const teams = teamsOf(ev), started = ladderStarted(ev), eid = esc(ev.id), R = lrules(ev);
+  return `<h3>1. Format</h3>${fmtCards}
+  <h3>2. Rules</h3><div class="card adm"><p class="small" style="margin:0">${esc(lRulesTxt(ev))}${R.seasonStart || R.seasonEnd ? ` · season ${esc([R.seasonStart, R.seasonEnd].filter(Boolean).join(' to '))}` : ''}</p><button class="btn alt sm" style="margin-top:8px" data-act="lrules" data-ev="${eid}">Edit rules, season & scoring</button></div>
+  ${started ? `<h3>3. The ladder</h3><div class="okbox">Started ${esc(ldate(ev.ladder.started))}${ev.published ? ' and published' : ''}. ${lChallenges(ev).length} challenge${lChallenges(ev).length === 1 ? '' : 's'} so far.</div>
+    ${(() => { const a = lAttention(ev); return a.length ? `<div class="missing"><div class="mh2"><b>${a.length} challenge${a.length === 1 ? ' needs' : 's need'} you</b></div><button class="btn sm" data-act="lman" data-ev="${eid}" data-tab="attn">Review</button></div>` : '' })()}
+    <div class="row" style="margin-top:8px"><button class="btn" data-act="lman" data-ev="${eid}">Manage order, Away & season</button>${ev.published ? '' : `<button class="btn gold" data-act="publish" data-id="${eid}">Publish the ladder</button>`}${lChallenges(ev).length ? '' : `<button class="btn alt" data-act="undraw" data-id="${eid}">Undo start</button>`}</div>`
+  : `<h3>3. Starting order</h3>
+    <div class="seg">${[['rating', 'By rating'], ['hand', 'Set by hand']].map(([k, l]) => `<button class="${ev.seeding === k ? 'on' : ''}" data-act="evset" data-id="${eid}" data-f="seeding" data-v="${k}">${l}</button>`).join('')}</div>
+    <ol class="seeds">${teams.map((t, i) => `<li><b>${i + 1}</b><span>${esc(t.players.join(' / '))}</span><i>${t.rated ? fmtRating(t.rating) : 'unrated'}</i>${ev.seeding === 'hand' ? `<button data-act="seedmv" data-ev="${eid}" data-id="${t.id}" data-v="-1" aria-label="Move up">▲</button><button data-act="seedmv" data-ev="${eid}" data-id="${t.id}" data-v="1" aria-label="Move down">▼</button>` : ''}</li>`).join('')}</ol>
+    <p class="wnote">#1 is the top of the ladder. Players added later go to the bottom. A ladder runs all season and isn't put on the weekend schedule.</p>
+    <button class="btn gold" style="width:100%;margin-top:10px" data-act="drawone" data-id="${eid}">Start the ladder with this order</button>`}`;
+}
+/* Home: your ladder spot and anything waiting on you */
+function ladderHomeHtml(){
+  const me = view.me && view.me !== GUEST ? view.me : null; if (!me) return '';
+  const evs = state.events.filter(e => ladderStarted(e) && (e.published || view.admin) && lMine(e));
+  if (!evs.length) return '';
+  return evs.map(ev => { const id = lMine(ev), rk = lRank(ev, id), need = lNeedsMe(ev), rec = lReplay(ev).rec[id] || {w:0, l:0}, c0 = need[0];
+    return `<section class="v6-home" aria-labelledby="lh-${esc(ev.id)}"><button class="v6-home-top" data-act="openev" data-id="${esc(ev.id)}"><span class="v6-home-rk"><small>Rank</small><b>${rk ? '#' + rk : '—'}</b></span><span class="v6-home-t"><small>${esc(ev.name)}</small><b id="lh-${esc(ev.id)}">${need.length ? `${need.length} challenge${need.length === 1 ? ' needs' : 's need'} you` : 'Your ladder'}</b><span>${rec.w}–${rec.l} this season</span></span>${CHEV}</button>
+      ${c0 ? `<ul class="v6-chl">${lChCard(ev, c0)}</ul>` : ''}</section>` }).join('');
+}
+/* Player sheet + card: ladder rank, record, recent */
+function ladderPlayerHtml(pid){
+  const evs = state.events.filter(e => ladderStarted(e) && (e.published || view.admin)).map(e => { for (const [id, t] of lEntries(e)) if (t.pids.includes(pid)) return {e, id}; return null }).filter(Boolean);
+  if (!evs.length) return '';
+  return evs.map(({e, id}) => { const rk = lRank(e, id), rec = lReplay(e).rec[id] || {w:0, l:0}, me = lMine(e), why = me && me !== id ? lCanChallenge(e, me, id) : 'x', r = lResults(e, 3, id);
+    return `<section class="bk-sec v6-pl"><h3 class="bk-h2">${esc(e.name)}</h3><p class="v6-pl-l"><b>${rk ? '#' + rk : 'Not ranked'}</b><span>${rec.w}–${rec.l}${lAway(e, id) ? ' · Away' : ''}</span>${!why ? `<button class="v6-chal" data-act="lchal" data-ev="${esc(e.id)}" data-id="${esc(id)}">Challenge</button>` : ''}</p>${r || '<p class="bk-hint">No ladder matches yet.</p>'}</section>` }).join('');
+}
+function ladderCardLine(pid){
+  const bits = state.events.filter(e => ladderStarted(e) && (e.published || view.admin)).map(e => { for (const [id, t] of lEntries(e)) if (t.pids.includes(pid)){ const rk = lRank(e, id), r = lReplay(e).rec[id] || {w:0, l:0}; return rk ? `${e.name} #${rk} · ${r.w}–${r.l}` : '' } return '' }).filter(Boolean);
+  return bits.length ? `<p class="v6-cardlad">${bits.map(b => `<span>${esc(b)}</span>`).join('')}</p>` : '';
+}
+/* Director To do */
+function ladderTodo(ev, add, unpub){
+  const n = teamsOf(ev).length, go = {step:'bracket', ev:ev.id};
+  if (n < 2){ add('players', `${ev.name}: needs at least 2 ${ev.kind === 'singles' ? 'players' : 'teams'}`, [{t:`${ev.name}: ${n} so far`, go:{step:'players', ev:ev.id}}]); return }
+  if (!ladderStarted(ev)){ add('bracket', `${ev.name}: ladder not started`, [{t:`Set the starting order and start ${ev.name}`, go}]); return }
+  if (!ev.published) unpub.push(ev);
+  const a = lAttention(ev); if (a.length) add('bracket', `${ev.name}: ${a.length} challenge${a.length === 1 ? ' needs' : 's need'} you`, a.map(({c, why}) => ({t:`${lName(ev, c.a, true)} vs ${lName(ev, c.b, true)}: ${why}`, go})));
+  const off = lReplay(ev).off; if (off.length) add('players', `${ev.name}: ${off.length} entered but not on the ladder`, off.map(id => ({t:lName(ev, id), go})));
+  const due = lrules(ev).inactivity ? [] : lInactiveDue(ev); if (due.length) add('bracket', `${ev.name}: ${due.length} inactive player${due.length === 1 ? '' : 's'}`, due.map(id => ({t:lName(ev, id), go})));
+}
+/* Alerts for challenges that arrive from other phones */
+function ladderSnap(){ const s = {}; (state.events || []).filter(isLadder).forEach(ev => lChallenges(ev).forEach(c => { s[ev.id + ':' + c.id] = lState(c, ev) + (c.report ? 'R' + c.report.at : '') + (c.when || '') })); return s }
+function ladderAlerts(before, after){
+  if (!before || !after || !before.lc || !after.lc) return;
+  (state.events || []).filter(isLadder).forEach(ev => { const me = lMine(ev); if (!me) return;
+    lChallenges(ev).forEach(c => { const k = ev.id + ':' + c.id, was = before.lc[k], now = after.lc[k]; if (was === now || (c.a !== me && c.b !== me)) return;
+      const st = lState(c, ev), opp = lName(ev, c.a === me ? c.b : c.a, true), tag = 'lc:' + c.id + ':' + st;
+      if (!was && c.b === me && st === 'pending') alertOut('mine', `${opp} challenged you on ${ev.name}. Reply by ${ldate(lRespondBy(c, ev))}.`, tag);
+      else if (st === 'accepted' && !/^accepted/.test(was || '') && c.a === me) alertOut('mine', `${opp} accepted your challenge. Pick a time.`, tag);
+      else if (st === 'declined' && c.a === me) alertOut('mine', `${opp} declined your challenge.`, tag);
+      else if (st === 'reported' && c.report && c.report.by !== me && !lPids(me).includes(c.report.by)) alertOut('mine', `${opp} reported ${lScoreTxt(ev, c)}. Confirm it on ${ev.name}.`, tag);
+      else if (L_FINAL.includes(st) && !L_FINAL.includes((was || '').replace(/R\d+.*/, ''))) alertOut('result', `Ladder result: ${lScoreTxt(ev, c) || 'walkover'} · you're #${lRank(ev, me)}`, tag);
+      else if (c.when && !(was || '').includes(c.when)) alertOut('remind', `Ladder match set: ${ldt(c.when)} vs ${opp}`, tag);
+    }) });
+}
+
+/* ---------- v6 glue: actions, wrappers, cards ---------- */
+function lCtx(el){ syncEngine(); const ev = findEvent(el.dataset.ev), c = ev && lFind(ev.id, el.dataset.id); return {ev, c} }
+function lDone(ev, c, msg){ lSave(c); lSyncM(ev, c); if (msg) toast(msg) }
+Object.assign(ACT, {
+  async lchal(el){
+    syncEngine(); const ev = findEvent(el.dataset.ev); if (!ev) return; const a = lMine(ev), b = el.dataset.id, why = lCanChallenge(ev, a, b);
+    if (why) return toast(why);
+    const R = lrules(ev), rb = lRank(ev, b);
+    if (!await ask(`Challenge ${lName(ev, b)} (#${rb})?\n\nThey have ${R.respondDays} days to reply. Win and you ${R.move === 'swap' ? 'swap places' : `move up to #${rb}`}.`, {ok:'Send challenge'})) return;
+    const c = {id:uid(), ev:ev.id, a, b, pids:[...lPids(a), ...lPids(b)], aRank:lRank(ev, a), bRank:rb, created:{at:Date.now(), by:view.me}, times:[], log:[]};
+    lLog(c, 'Challenge sent'); lSave(c);
+    view.modal = 'lch'; view.lch = {ev:ev.id, id:c.id}; toast(`Challenge sent. ${lName(ev, b, true)} gets an alert in the app.`);
+  },
+  lopen(el){ view.modal = 'lch'; view.lch = {ev:el.dataset.ev, id:el.dataset.id} },
+  laccept(el){ const {ev, c} = lCtx(el); if (!c || lRole(ev, c) !== 'b') return; c.accepted = {at:Date.now(), by:view.me}; lLog(c, 'Accepted'); lDone(ev, c, `Accepted. Play by ${ldate(lPlayBy(c, ev))}. Suggest a time below.`); view.modal = 'lch'; view.lch = {ev:ev.id, id:c.id} },
+  async ldecline(el){ const {ev, c} = lCtx(el); if (!c || lRole(ev, c) !== 'b') return; const R = lrules(ev);
+    if (!await ask(R.declineForfeit ? `Decline? On this ladder that counts as a loss, and ${lName(ev, c.a, true)} takes your place.` : `Decline ${lName(ev, c.a, true)}'s challenge?`, {ok:'Decline'})) return;
+    c.declined = {at:Date.now(), by:view.me}; lLog(c, 'Declined'); lDone(ev, c, 'Declined.') },
+  lpostpone(el){ const {ev, c} = lCtx(el); if (!c || lRole(ev, c) !== 'b' || c.postponed) return; c.postponed = {at:Date.now(), until:lRespondBy(c, ev) + 5 * DAY}; lLog(c, 'Postponed 5 days'); lDone(ev, c, `Postponed. Reply by ${ldate(c.postponed.until)}.`) },
+  async lwithdraw(el){ const {ev, c} = lCtx(el); if (!c || lRole(ev, c) !== 'a') return; if (!await ask('Withdraw this challenge?', {ok:'Withdraw'})) return; c.cancelled = {at:Date.now(), by:view.me}; lLog(c, 'Withdrawn'); lDone(ev, c, 'Challenge withdrawn.'); view.modal = null },
+  lpropose(el){ const {ev, c} = lCtx(el); if (!c || !(lRole(ev, c) || view.admin)) return; const t = (document.getElementById('lc-time') || {}).value, w = ((document.getElementById('lc-where') || {}).value || '').trim().slice(0, 60);
+    if (!t) return toast('Pick a day and time first.'); c.times = (c.times || []).filter(x => x.at !== t).concat([{at:t, where:w, by:view.me}]).slice(-6); lLog(c, 'Suggested ' + ldt(t)); lDone(ev, c, 'Suggested. They can pick it.') },
+  lpick(el){ const {ev, c} = lCtx(el); if (!c) return; const t = (c.times || [])[+el.dataset.i]; if (!t) return; c.when = t.at; c.where = t.where || ''; if (!c.accepted && lRole(ev, c) === 'b') c.accepted = {at:Date.now(), by:view.me}; lLog(c, 'Time agreed: ' + ldt(t.at)); lDone(ev, c, 'Time agreed.') },
+  lreport(el){ syncEngine(); state.ladderM = lBuildMatches(); const mid = lMid(el.dataset.ev, el.dataset.id); if (!findMatch(mid)) return toast('Accept the challenge first.'); view.matchId = mid; view.sm = null; view.modal = 'match' },
+  lconfirm(el){ const {ev, c} = lCtx(el); if (!c || !c.report || !lRole(ev, c)) return; c.confirmed = {at:Date.now(), by:view.me}; lLog(c, 'Score confirmed'); lDone(ev, c); toast(`Confirmed. Ranks updated: you're #${lRank(ev, lMine(ev))}.`) },
+  async ldispute(el){ const {ev, c} = lCtx(el); if (!c || !c.report || !lRole(ev, c)) return; const note = await ask("What's wrong with the score? The director sees this.", {input:true, ok:'Send to the director'}); if (note == null) return;
+    c.disputed = {at:Date.now(), by:view.me, note:String(note).slice(0, 200)}; lLog(c, 'Score disputed'); lDone(ev, c, 'Sent to the director. You can also correct the score.') },
+  ldirconfirm(el){ if (needAdmin()) return; const {ev, c} = lCtx(el); if (!c || !c.report) return; c.confirmed = {at:Date.now(), by:view.me || null, dir:true}; c.disputed = null; lLog(c, 'Director confirmed the score'); lDone(ev, c, 'Confirmed. Ranks updated.') },
+  async lwo(el){ if (needAdmin()) return; const {ev, c} = lCtx(el); if (!c) return; const w = el.dataset.v, wn = lName(ev, w === 'team1' ? c.a : c.b);
+    if (!await ask(`Record a walkover to ${wn}?\n\nNo score is saved. Ranks move as if ${wn} won.`, {ok:'Record walkover'})) return;
+    c.walkover = {w, at:Date.now(), by:view.me || null}; lLog(c, 'Walkover to ' + wn); lDone(ev, c, 'Walkover recorded. Ranks updated.') },
+  async lreverse(el){ if (needAdmin()) return; const {ev, c} = lCtx(el); if (!c) return; if (!await ask('Reverse this result? It comes off the ladder and the ranks are replayed without it.', {ok:'Reverse result'})) return; c.reversed = {at:Date.now(), by:view.me || null}; lLog(c, 'Reversed by the director'); lDone(ev, c, 'Result reversed. Ranks replayed.') },
+  lunreverse(el){ if (needAdmin()) return; const {ev, c} = lCtx(el); if (!c) return; c.reversed = null; lLog(c, 'Restored by the director'); lDone(ev, c, 'Result restored.') },
+  async ldircancel(el){ if (needAdmin()) return; const {ev, c} = lCtx(el); if (!c) return; if (!await ask('Cancel this challenge? Nothing changes on the ladder.', {ok:'Cancel challenge'})) return; c.cancelled = {at:Date.now(), by:view.me || null, dir:true}; lLog(c, 'Cancelled by the director'); lDone(ev, c, 'Challenge cancelled.') },
+  lrules(el){ view.modal = 'lrules'; view.lrul = {ev:el.dataset.ev} },
+  lman(el){ if (needAdmin()) return; view.modal = 'lman'; view.lman = {ev:el.dataset.ev}; view.lmanTab = el.dataset.tab || 'order' },
+  lmantab(el){ view.lmanTab = el.dataset.v },
+  lmv(el){ if (needAdmin()) return; withEvent(el.dataset.ev, ev => { const r = lReplay(ev).ranks.slice(), i = r.indexOf(el.dataset.id), j = i + +el.dataset.v; if (i < 0 || j < 0 || j >= r.length) return; [r[i], r[j]] = [r[j], r[i]]; const L = ev.ladder; L.log = (L.log || []).concat([{t:Date.now(), type:'set', ranks:r, by:view.me || null}]).slice(-500) }) },
+  laway(el){ if (needAdmin()) return; withEvent(el.dataset.ev, ev => { const L = ev.ladder, id = el.dataset.id; L.away = L.away || {}; if (L.away[id]){ delete L.away[id]; L.log = (L.log || []).concat([{t:Date.now(), type:'away-off', id}]) } else L.away[id] = {at:Date.now(), by:view.me || null} }) },
+  async lrm(el){ if (needAdmin()) return; const ev0 = findEvent(el.dataset.ev); if (!await ask(`Take ${lName(ev0, el.dataset.id)} off the ladder? Their results stay in the history. You can add them back at the bottom.`, {ok:'Take off'})) return; withEvent(el.dataset.ev, ev => { ev.ladder.log = (ev.ladder.log || []).concat([{t:Date.now(), type:'remove', id:el.dataset.id}]) }) },
+  ladd(el){ if (needAdmin()) return; withEvent(el.dataset.ev, ev => { ev.ladder.log = (ev.ladder.log || []).concat([{t:Date.now(), type:'add', id:el.dataset.id}]) }); toast('Added at the bottom.') },
+  ldrops(el){ if (needAdmin()) return; const ev = findEvent(el.dataset.ev); const due = lInactiveDue(ev); if (due.length) lApplyDrops(ev.id, due) },
+  async lclose(el){ if (needAdmin()) return; if (!await ask('Close the season? Final standings are saved and new challenges stop.', {ok:'Close season'})) return; withEvent(el.dataset.ev, ev => { ev.ladder.final = lReplay(ev).ranks.slice(); ev.ladder.closed = {at:Date.now(), by:view.me || null} }); toast('Season closed. Final standings saved.') },
+  lreopen(el){ if (needAdmin()) return; withEvent(el.dataset.ev, ev => { ev.ladder.closed = null }); toast('Season reopened.') },
+  ratver(el){ if (!view.admin) return; const d = cardRead(), k = el.dataset.v; d.verified = Object.assign({}, d.verified || {}); if (d.verified[k]) delete d.verified[k]; else d.verified[k] = {at:new Date().toISOString(), by:view.me || 'director'} },
+  ustahelp(){ ask('Your USTA number is on your USTA account (usta.com → My Account) and on your league or tournament registrations. Your NTRP rating and type are on the same page: C is a computer rating, S self-rated, A after an appeal.', {info:true}) }
+});
+Object.assign(CHG, {
+  lrule(el){ if (needAdmin()) return; withEvent(el.dataset.ev, ev => { const L = ev.ladder = ev.ladder || {}, f = el.dataset.f, R = L.rules = Object.assign({}, L.rules || {});
+    if (el.type === 'checkbox') R[f] = !!el.checked;
+    else if (el.type === 'number'){ const n = parseInt(el.value, 10), lim = {range:[1, 10], respondDays:[1, 30], playDays:[1, 60], cooldownDays:[0, 90], maxOut:[1, 5], maxIn:[1, 5], confirmDays:[1, 14], inactDays:[7, 90]}[f] || [0, 99]; if (isFinite(n)) R[f] = Math.max(lim[0], Math.min(lim[1], n)) }
+    else if (f === 'move') R[f] = el.value === 'swap' ? 'swap' : 'leapfrog';
+    else if (f === 'seasonStart' || f === 'seasonEnd') R[f] = /^\d{4}-\d{2}-\d{2}$/.test(el.value) ? el.value : '';
+  }) },
+  evreqntrp(el){ withEvent(el.dataset.id, ev => { ev.reqVerNtrp = !!el.checked }) }
+});
+/* --- wrappers --- */
+{ const _se = syncEngine; syncEngine = function(){ _se(); try{ state.ladderM = lBuildMatches() }catch(e){ state.ladderM = []; console.warn('ladder', e) } } }
+{ const _fm = findMatch; findMatch = function(id){ return _fm(id) || ((String(id).includes('-LC-') && (state.ladderM || []).find(m => m.id === id)) || null) } }
+{ const _wr = writeResult; writeResult = function(m, rec){ if (m && m.ladder) return ladderReport(m, rec); return _wr(m, rec) } }
+{ const _rr = recentResults; recentResults = function(n){ const lm = (state.ladderM || []).filter(m => { const e = findEvent(m.eventId); const r = resOf(m.id); return e && (e.published || view.admin) && r && r.w }); return _rr(50).concat(lm).sort((a, b) => (resOf(b.id).ts || 0) - (resOf(a.id).ts || 0)).slice(0, n || 6) } }
+{ const _ts = takeSnap; takeSnap = function(){ const s = _ts(); try{ s.lc = ladderSnap() }catch(e){} return s } }
+{ const _ca = checkAlerts; checkAlerts = function(key){ const before = snap; _ca(key); try{ if (ALERTS.mine) ladderAlerts(before, snap) }catch(e){ console.warn('ladder alerts', e) } } }
+{ const _fi = fitIssue; fitIssue = function(ev, p){ return _fi(ev, p) || ntrpIssue(ev, p) } }
+{ const _pi = pairIssue; pairIssue = function(ev, pids){ return _pi(ev, pids) || ntrpPairIssue(ev, pids) } }
+{ const _wf = whenFull; whenFull = function(m){ if (m && m.ladder){ const ev = findEvent(m.eventId), c = ev && lFind(ev.id, m.cid); return c && c.when ? ldt(c.when) + (c.where ? ' · ' + c.where : '') : 'Time agreed between players' } return _wf(m) } }
+{ const _ws = whenShort; whenShort = function(m){ if (m && m.ladder){ const r = resOf(m.id); return r && r.ts ? 'Ladder · ' + ldate(r.ts) : 'Ladder challenge' } return _ws(m) } }
+{ const _ms = matchSheet; matchSheet = function(){ const m = findMatch(view.matchId); let h = _ms(); if (!m || !m.ladder || !h) return h;
+    const ev = findEvent(m.eventId), c = ev && lFind(ev.id, m.cid);
+    h = h.replace(/<div class="bk-actions"><button class="btn alt" data-act="setlive"[^]*?<\/div>/g, '').replace(/<div class="bk-danger">[^]*?<\/div>/, '');
+    if (!view.admin) h = h.replace(/<button class="btn alt" data-act="scmode" data-id="[^"]*" data-v="wo">Walkover<\/button>/, '');
+    const note = c && c.report && lState(c, ev) !== 'done' ? `<p class="bk-note warn">Reported: ${esc(lScoreTxt(ev, c))}${lState(c, ev) === 'disputed' ? ' · disputed' : ' · waiting for confirmation'}. Saving a new score replaces the report.</p>` : '';
+    const who = view.admin && c && !lRole(ev, c) ? '<p class="bk-rules">A score you enter as director counts straight away.</p>' : `<p class="bk-rules">Your opponent confirms the score. It counts automatically after ${lrules(ev).confirmDays} days.</p>`;
+    return h.replace(/(<h2 class="sh-h" id="sheet-h">[^]*?<\/h2>)/, `$1${note}${who}`) } }
+{ const _pc = playerCardHtml; playerCardHtml = function(p){ let h = _pc(p); const add = ratingChips(p.id) + ustaBlock(p.id) + ladderCardLine(p.id); return add ? h.replace('<div class="v4-pcard-act">', add + '<div class="v4-pcard-act">') : h } }
+{ const _ps = playerSheet; playerSheet = function(){ let h = _ps(); if (!h) return h; const lp = ladderPlayerHtml(view.pid); if (brand().cards.show === false){ const add = ratingChips(view.pid) + ustaBlock(view.pid); if (add) h = h.replace(/(<p class="bk-meta">[^]*?<\/p>)/, `$1${add}`) } return lp ? h.replace('<section class="bk-sec"><h3 class="bk-h2">Next match</h3>', lp + '<section class="bk-sec"><h3 class="bk-h2">Next match</h3>') : h } }
+{ const _cr = cardRead; cardRead = function(){ const d = _cr(), g = id => { const el = document.getElementById(id); return el ? el.value.trim() : undefined }; [['usta', 'ce-usta'], ['ntrp', 'ce-ntrp'], ['ntrp_type', 'ce-ntrpt'], ['wtn_s', 'ce-wtns'], ['wtn_d', 'ce-wtnd'], ['utr', 'ce-utr']].forEach(([k, id]) => { const v = g(id); if (v !== undefined) d[k] = v }); return d } }
+{ const _ce = cardEditSheet; cardEditSheet = function(){ let h = _ce(); if (!h) return h; const pid = view.cardPid, d = view.cardDraft || {}, adm = !!view.admin, saved = cardOf(pid);
+    const f = (id, label, k, ph, mode, extra) => `<div class="v6-cf"><label for="${id}">${label}</label><input id="${id}" class="bk-input" inputmode="${mode}" value="${esc(d[k] ?? '')}" placeholder="${esc(ph)}" autocomplete="off" ${extra || ''}></div>`;
+    const ver = k => { const on = !!(d.verified || {})[k], changed = String(d[k] ?? '') !== String(saved[k] ?? '');
+      return adm ? `<button class="v6-vt ${on ? 'on' : ''}" data-act="ratver" data-v="${k}" aria-pressed="${on}" aria-label="Verified ${k.toUpperCase()}">${on ? CHK_SVG + ' Verified' : 'Mark verified'}</button>` : `<span class="v6-vs">${on && !changed ? CHK_SVG + ' Verified' : 'Self-reported'}</span>` };
+    const sec = !isTennis() ? `<h3 class="v6-ce-h">Ratings</h3><div class="v6-cgrid">${f('ce-utr', 'UTR', 'utr', '8.25', 'decimal')}${ver('utr')}</div>` : `<h3 class="v6-ce-h">USTA & ratings <button class="bk-inline" data-act="ustahelp">Where do I find these?</button></h3>
+    <div class="v6-cgrid">${f('ce-usta', 'USTA number', 'usta', '2011234567', 'numeric', 'maxlength="15" pattern="[0-9]*"')}<span class="v6-vs">${view.me === pid || adm ? 'Only you and directors see it' : ''}</span>
+    <div class="v6-cf v6-ntrp"><label for="ce-ntrp">NTRP</label><div class="v6-2"><input id="ce-ntrp" class="bk-input" inputmode="decimal" value="${esc(d.ntrp ?? '')}" placeholder="3.5" autocomplete="off"><select id="ce-ntrpt" class="bk-input" aria-label="NTRP type">${NTRP_TYPES.map(([k, l]) => `<option value="${k}" ${String(d.ntrp_type || '') === k ? 'selected' : ''}>${esc(l)}</option>`).join('')}</select></div></div>${ver('ntrp')}
+    ${f('ce-wtns', 'WTN singles', 'wtn_s', '24.3', 'decimal')}${ver('wtn_s')}${f('ce-wtnd', 'WTN doubles', 'wtn_d', '21.8', 'decimal')}${ver('wtn_d')}${f('ce-utr', 'UTR', 'utr', '6.50', 'decimal')}${ver('utr')}</div>
+    <p class="bk-hint">${adm ? 'Mark a rating verified after you check it on USTA or UTR. Changing a value clears its check.' : 'Ratings you enter show as self-reported until a director verifies them. Changing one clears its check.'} <a href="${USTA_SEARCH}" target="_blank" rel="noopener noreferrer">USTA Player Search ↗</a></p>`;
+    return h.replace(/<p class="bk-hint">Name and /, sec + '<p class="bk-hint">Name and ') } }
+/* Card save: ratings + verified (the server also enforces this) */
+{ const _sc = Dir.saveCard; Dir.saveCard = async function(pid, d){
+    const old = cardOf(pid), rt = cleanRatings(d), bad = [['ntrp', 'NTRP 1.0–7.0'], ['wtn_s', 'WTN 1–40'], ['wtn_d', 'WTN 1–40'], ['utr', 'UTR 1–16.5']].filter(([k]) => String(d[k] ?? '').trim() !== '' && rt[k] == null).map(x => x[1]);
+    if (bad.length) throw new Error('Check ' + bad.join(', ') + '.');
+    const same = (a, b) => String(a ?? '') === String(b ?? ''), ov = old.verified || {}, dv = d.verified || {};
+    const ver = {};
+    RATING_KEYS.forEach(([k]) => {
+      if (rt[k] == null) return;
+      if (view.admin){ const fresh = dv[k] && JSON.stringify(dv[k]) !== JSON.stringify(ov[k] || null); if (dv[k] && (fresh || same(rt[k], old[k]))) ver[k] = dv[k] }
+      else if (ov[k] && same(rt[k], old[k])) ver[k] = ov[k];
+    });
+    if (!view.admin && brand().cards.self === false) Object.assign(rt, {usta:old.usta ?? null, ntrp:old.ntrp ?? null, ntrp_type:old.ntrp_type ?? null, wtn_s:old.wtn_s ?? null, wtn_d:old.wtn_d ?? null, utr:old.utr ?? null});
+    const extra = Object.assign({}, rt, {verified:ver});
+    if (this.mode === 'supabase'){
+      const t = (v, n) => { v = String(v || '').trim().slice(0, n); return v || null };
+      const row = Object.assign({trip_id:TRIP.id, player_id:pid, photo:d.photo || null, bio:t(d.bio, 600), club:t(d.club, 120), hometown:t(d.hometown, 120), plays:t(d.plays, 60), updated_at:new Date().toISOString()}, extra);
+      const {data, error} = await this.sb.from('player_cards').upsert(row).select('player_id,photo,bio,club,hometown,plays,updated_at,usta,ntrp,ntrp_type,wtn_s,wtn_d,utr,verified').maybeSingle();
+      if (error) throw new Error(/row-level|policy|permission/i.test(error.message) ? 'Only this player (after picking their name) or a director can edit this card.' : error.message);
+      return data || row;
+    }
+    const row = await _sc.call(this, pid, d); Object.assign(row, extra); const all = LS.get('bkt-local-cards-' + TRIP.id, {}); all[pid] = row; LS.set('bkt-local-cards-' + TRIP.id, all); return row;
+  } }
+{ const _lc = Dir.loadCards; Dir.loadCards = async function(){ if (this.mode === 'supabase' && TRIP){ const {data, error} = await this.sb.from('player_cards').select('player_id,photo,bio,club,hometown,plays,updated_at,usta,ntrp,ntrp_type,wtn_s,wtn_d,utr,verified').eq('trip_id', TRIP.id); if (error){ console.warn('cards v6', error); return _lc.call(this) } const o = {}; (data || []).forEach(r => { o[r.player_id] = r }); return o } return _lc.call(this) } }
+/* CSV import: USTA #, NTRP, WTN and UTR go onto the player cards */
+{ const _ai = applyImport; applyImport = function(entries, opts){ const r = _ai(entries, opts); const withCard = []; (entries || []).forEach(e => [e.a, e.b].forEach(x => { if (x && x.card && Object.values(x.card).some(v => v != null && v !== '')) withCard.push(x) }));
+    if (withCard.length) (async () => { try{ if (!view.cards) view.cards = await Dir.loadCards() || {}; const pl = players(); let n = 0;
+      for (const x of withCard){ const p = findByName(x.name, pl); if (!p) continue; const old = cardOf(p.id), d = Object.assign({}, old, Object.fromEntries(Object.entries(x.card).filter(([k, v]) => v != null && v !== ''))); try{ const row = await Dir.saveCard(p.id, d); view.cards = Object.assign({}, view.cards || {}, {[p.id]:row}); n++ }catch(e){ console.warn('import card', p.name, e) } }
+      if (n) toast(`USTA # and ratings added to ${n} player card${n === 1 ? '' : 's'}.`); render() }catch(e){ console.warn('import cards', e) } })();
+    return r } }
+function cardFromRow(get){
+  const nt = String(get('ntrp') || '').trim(), m = /(\d(?:[.,]\d)?)\s*([CSATMD])?\b/i.exec(nt);
+  return {usta:String(get('usta') || '').replace(/\D/g, '') || null, ntrp:m ? m[1].replace(',', '.') : null, ntrp_type:m && m[2] ? m[2].toUpperCase() : null, wtn_s:get('wtn_s') || null, wtn_d:get('wtn_d') || null, utr:get('utr') || null};
+}
+/* Ladder upkeep */
+setInterval(() => { if (state.events && state.events.some(isLadder)) { lSweep(); render() } }, 60000);
+setTimeout(lSweep, 4000);
+
 (async () => {
   { const q0 = new URLSearchParams(location.search), h0 = (location.hash.match(/t=([A-Za-z0-9]+)/) || [])[1]; const c0 = q0.get('join') || h0; if (c0) view.resolving = String(c0).toUpperCase().slice(0, 8) }
   render();
