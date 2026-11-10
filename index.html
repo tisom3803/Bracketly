@@ -1669,6 +1669,71 @@ label.btn.disabled{opacity:.5;pointer-events:none}
 .tv .sponsors{background:rgba(247,245,236,.94);border-radius:16px;padding:10px 16px;margin-top:18px;color:var(--ink)}
 @media (min-width:760px){ .v4-pcard{padding:34px 28px 26px} .v4-gal-i{width:220px;height:160px} }
 @media (prefers-reduced-motion:reduce){ .v4-cztabs button,.v4-gal{scroll-behavior:auto} }
+
+/* ===== v5 home: one place per destination, full-width bar, player card panel ===== */
+html,body{background:var(--g3,#073625)!important}
+@media print{ html,body{background:#fff!important} }
+nav.tabs.bk-nav{display:flex!important;align-items:stretch;gap:4px;padding:6px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))!important;background:linear-gradient(180deg,var(--g1),var(--g3))!important}
+nav.tabs.bk-nav > button{flex:1 1 0;min-width:0;width:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:54px;padding:6px 2px!important;border-radius:14px;border:1.5px solid transparent;white-space:nowrap;position:relative}
+nav.tabs.bk-nav > button span:not(.badge){font-size:12px;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+nav.tabs.bk-nav > button[aria-current=page]{border-color:var(--au)!important;background:rgba(247,245,236,.08)!important}
+nav.tabs.bk-nav .badge{position:absolute;top:4px;left:calc(50% + 6px);margin:0}
+@media (min-width:760px){ nav.tabs.bk-nav{padding-left:max(16px,calc((100% - 760px)/2))!important;padding-right:max(16px,calc((100% - 760px)/2))!important} }
+@media (max-width:360px){ nav.tabs.bk-nav > button span:not(.badge){font-size:11px} nav.tabs.bk-nav > button svg{width:21px;height:21px} }
+.v5-strip{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--bd)}
+.v5-strip-i{display:flex;align-items:center;gap:10px;min-height:64px;padding:12px 12px 12px 16px;text-align:left;color:var(--g1);min-width:0}
+.v5-strip-i + .v5-strip-i{border-left:1px solid var(--bd)}
+.v5-strip-i:active{background:var(--iv2)}
+.v5-strip-ic{flex:0 0 36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--iv2);box-shadow:inset 0 0 0 1px var(--au)}
+.v5-strip-ic svg{width:18px;height:18px}
+.v5-strip-t{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.v5-strip-t b{font:700 15px/1.15 var(--fb)}
+.v5-strip-t small{font:500 12px/1.25 var(--fb);color:var(--muted);display:block;overflow-wrap:anywhere}.v5-strip-t small .st-dot{margin-right:5px;vertical-align:middle}
+.v5-strip-i.hot small{color:var(--success)}
+.v5-strip-i .chev{color:var(--au);font-size:20px}
+.v5-me{position:relative;margin:14px 0 6px;border-radius:20px;overflow:hidden;color:var(--iv);background:radial-gradient(120% 70% at 15% 0%,var(--g2),var(--g1) 55%,var(--g3));border:1px solid var(--au);box-shadow:0 10px 26px rgba(6,61,43,.22)}
+.v5-me::before{content:"";position:absolute;inset:7px;border:1px solid rgba(213,179,106,.4);border-radius:14px;pointer-events:none}
+.v5-me-top{position:relative;display:flex;align-items:center;gap:14px;width:100%;padding:20px 18px 10px;text-align:left;color:inherit}
+.v5-me-ph{flex:0 0 72px;width:72px;height:72px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:var(--iv);box-shadow:0 0 0 3px var(--g1),0 0 0 5px var(--au)}
+.v5-me-ph img{width:100%;height:100%;object-fit:cover}.v5-me-ph span{font:700 28px/1 var(--fd);color:var(--g1)}
+.v5-me-id{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
+.v5-me-id small{font:700 11px/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--au2)}
+.v5-me-id b{font:700 24px/1.12 var(--fd);color:var(--iv);overflow-wrap:anywhere}
+.v5-me-r{font:600 13px/1.3 var(--fb);color:rgba(247,245,236,.85)}
+.v5-me-top .chev{color:var(--au2);font-size:24px}
+.v5-me-ev{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0 18px 12px}
+.v5-me-ev span{font:600 12px/1 var(--fb);padding:6px 10px;border-radius:999px;background:rgba(247,245,236,.1);border:1px solid rgba(213,179,106,.5)}
+.v5-me-prompt{position:relative;display:flex;align-items:center;gap:12px;width:calc(100% - 36px);margin:0 18px 14px;padding:12px 14px;border-radius:14px;border:1px dashed var(--au);background:rgba(213,179,106,.12);color:var(--iv);text-align:left}
+.v5-me-prompt svg{width:22px;height:22px;color:var(--au2)}.v5-me-prompt > span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.v5-me-prompt b{font:700 15px/1.2 var(--fb)}.v5-me-prompt small{font:400 13px/1.35 var(--fb);color:rgba(247,245,236,.8)}
+.v5-me-prompt .chev{color:var(--au2)}
+.v5-me-next{position:relative;margin:0 7px 7px;padding:16px 14px 16px;border-top:1px solid rgba(213,179,106,.35);background:rgba(0,0,0,.12);border-radius:0 0 14px 14px}
+.v5-me-lbl{margin:0;font:700 11px/1 var(--fb);letter-spacing:.16em;text-transform:uppercase;color:var(--au2)}
+.v5-me-when{margin:8px 0 2px;font:700 38px/1 var(--fd);color:var(--iv)}.v5-me-when span{font:500 15px/1 var(--fb);margin-left:8px;color:rgba(247,245,236,.85)}
+.v5-me-where{margin:6px 0 10px;font:500 14px/1.35 var(--fb);color:rgba(247,245,236,.9)}.v5-me-where b{color:var(--iv)}
+.v5-me-vs{margin:0 0 14px;display:grid;gap:6px}.v5-me-vs div{display:grid;grid-template-columns:64px 1fr;gap:8px;align-items:baseline}
+.v5-me-vs dt{font:700 11px/1.2 var(--fb);letter-spacing:.12em;text-transform:uppercase;color:var(--au2)}.v5-me-vs dd{margin:0;font:600 15px/1.35 var(--fb);color:var(--iv)}
+.v5-me-btn{display:block;width:100%;min-height:48px;border-radius:14px;background:var(--iv);color:var(--g1);font:700 15px/1 var(--fb);box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.v5-me-btn:active{transform:translateY(1px)}
+.v5-me-none{margin:8px 0 2px;font:500 15px/1.4 var(--fb);color:rgba(247,245,236,.9)}
+@media (min-width:760px){ .v5-me{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)} .v5-me-top{grid-column:1;padding-bottom:6px} .v5-me-ev,.v5-me-prompt{grid-column:1} .v5-me-next{grid-column:2;grid-row:1 / span 3;margin:7px 7px 7px 0;border-top:0;border-left:1px solid rgba(213,179,106,.35);border-radius:0 14px 14px 0} }
+/* v5 match codes: main draw / winners = filled green, losers / consolation = gold outline */
+.mcode{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:20px;padding:0 6px;margin-right:7px;border-radius:6px;font:700 11.5px/1 var(--fb);letter-spacing:.02em;font-variant-numeric:tabular-nums;vertical-align:middle;white-space:nowrap;flex:none;box-sizing:border-box}
+.mcode.hi{background:var(--g1,#0B4A33);color:#F7F5EC;border:1.5px solid var(--g1,#0B4A33)}
+.mcode.lo{background:#FFFDF6;color:#5E4510;border:1.5px solid var(--au,#B8923A)}
+.mr-when{display:inline-flex;align-items:center}
+.v3-mrow-b small{display:flex;align-items:center;flex-wrap:wrap}
+.sgrid td button small:first-child{display:flex;align-items:center;flex-wrap:wrap;gap:0}
+.sh-top .bk-eyebrow{display:flex;align-items:center;flex-wrap:wrap}
+.bm .mcode.bmc{height:17px;min-width:22px;font-size:10.5px;margin:0 0 3px}
+.bh .mcode{height:18px;min-width:20px;margin-right:5px}
+.seg2.rounds .rl{display:inline-block;font:700 10.5px/1 var(--fb);opacity:.75;margin-right:5px}
+.mcode-key{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:10px 0 12px;font:500 12.5px/1.3 var(--fb);color:var(--muted)}
+.mcode-key > span{display:inline-flex;align-items:center}
+.mcode-key > span:first-child{font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.06em;font-size:11px}
+.tvrow .mcode{height:24px;min-width:32px;font-size:14px}
+.tvrow span .mcode{height:20px;font-size:12px}
+@media print{ .mcode.hi{background:#fff!important;color:#000!important;border-color:#000!important} .mcode.lo{border-style:dashed!important;color:#000!important} }
 </style>
 </head>
 <body>
@@ -1681,7 +1746,7 @@ label.btn.disabled{opacity:.5;pointer-events:none}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '2.6.0';
+const APP_VERSION = '2.7.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -4497,12 +4562,46 @@ function feederLabel(m, slot){
   const i = slot === 'team1' ? 0 : 1;
   const pf = m.feedsFromPool && m.feedsFromPool[slot]; if (pf) return `Pool ${String.fromCharCode(65 + pf.poolIdx)} #${pf.position}`;
   if (m.proAm && m.proAm.isFinal) return `Flight ${i + 1} winner`;
-  const lf = (m.feedsFromLosers || [])[i]; if (lf){ const d = decodeLoserFeeder(lf); const f = d && findMatch(d.matchId); return f ? `Loser of ${shortRound(f)}` : 'TBD' }
-  const wf = (m.feedsFrom || [])[i]; if (typeof wf === 'string'){ const f = findMatch(wf); return f ? `Winner of ${shortRound(f)}` : 'TBD' }
+  const lf = (m.feedsFromLosers || [])[i]; if (lf){ const d = decodeLoserFeeder(lf); const f = d && findMatch(d.matchId); return f ? `Loser of ${matchCode(f) || shortRound(f)}` : 'TBD' }
+  const wf = (m.feedsFrom || [])[i]; if (typeof wf === 'string'){ const f = findMatch(wf); return f ? `Winner of ${matchCode(f) || shortRound(f)}` : 'TBD' }
   return 'Bye';
 }
 function shortRound(m){ const n = (m.id.match(/-(\d+)$/) || [])[1]; return longLabel(m.round || '') + (n ? ' ' + n : '') }
-function roundName(m){
+/* Match codes (v5). One letter per bracket round, number = the match's place in that round (taken from its id).
+   Main draw / winners bracket go first (A = first round … last letter = final), then the losers bracket, the grand final,
+   and the consolation draw carry on up the alphabet, so a letter is always one round of one bracket and every code is
+   unique within its event. Built only from the bracket's structure, never stored, so codes don't change when a match
+   is moved to another time or court. Pools, round robin, Club Cup and Pro-Am have no feeders and get no code. */
+const CODE_SEC_ORDER = ['main', 'w', 'l', 'gf', 'c'], _mcodeCache = new WeakMap();
+const codable = m => m && !m.proAm && m.sessionId == null && !(m.poolIdx != null && !m.isPlayoff) && !/^RR/.test(m.round || '');
+function roundRank(r){
+  const b = String(r || '').replace(/^G(?=F$)/, '').replace(/^[WLC](?=R\d|QF$|SF$|F$)/, '');
+  const n = (b.match(/^R(\d+)$/) || [])[1];
+  return n ? +n : ({QF:90, SF:91, F:92})[b] || 50;
+}
+function codeMap(ev){
+  const ms = (ev && ev.matches) || [];
+  let c = _mcodeCache.get(ms); if (c && c.n === ms.length) return c;
+  c = {n:ms.length, map:{}, legend:[]};
+  if (ev && !['round_robin', 'pro_am', 'club_cup'].includes(ev.format)){
+    const rounds = [];
+    ms.forEach((m, i) => { if (!codable(m)) return; let r = rounds.find(x => x.r === m.round); if (!r){ r = {r:m.round, s:sectionOf(m.round), i, ms:[]}; rounds.push(r) } r.ms.push(m) });
+    rounds.sort((a, b) => CODE_SEC_ORDER.indexOf(a.s) - CODE_SEC_ORDER.indexOf(b.s) || roundRank(a.r) - roundRank(b.r) || a.i - b.i);
+    rounds.forEach((r, k) => { const L = k < 26 ? String.fromCharCode(65 + k) : 'Z' + (k - 25); r.ms.forEach((m, j) => { const n = (m.id.match(/-(\d+)$/) || [])[1]; c.map[m.id] = L + (n || j + 1) }); c.legend.push({L, r:r.r, s:r.s}) });
+  }
+  _mcodeCache.set(ms, c); return c;
+}
+function matchCode(m){ return m && m.eventId ? codeMap(findEvent(m.eventId)).map[m.id] || '' : '' }
+function roundLetter(ev, r){ const x = codeMap(ev).legend.find(l => l.r === r); return x ? x.L : '' }
+const codeSec = m => { const s = sectionOf(m.round || ''); return s === 'l' || s === 'c' ? 'lo' : 'hi' };
+function mcodeBadge(m, cls){ const c = matchCode(m); return c ? `<span class="mcode ${codeSec(m)}${cls ? ' ' + cls : ''}"><span class="sr">Match </span>${esc(c)}</span>` : '' }
+function codeKey(ev){
+  const lg = codeMap(ev).legend; if (!lg.length) return '';
+  const g = []; lg.forEach(l => { const last = g[g.length - 1]; if (last && last.s === l.s) last.b = l.L; else g.push({s:l.s, a:l.L, b:l.L}) });
+  return `<p class="mcode-key"><span>Match codes</span>${g.map(x => `<span><span class="mcode ${x.s === 'l' || x.s === 'c' ? 'lo' : 'hi'}">${x.a === x.b ? x.a : x.a + '–' + x.b}</span> ${esc(SECTION_TITLES[x.s])}</span>`).join('')}</p>`;
+}
+function roundName(m){ const b = roundBase(m), c = matchCode(m); return c ? `${c} · ${b}` : b }
+function roundBase(m){
   if (m.proAm) return m.proAm.isFinal ? `Final · ${proAmLineLabel(m.proAm.line)}` : `${m.proAm.flightName} · Rd ${m.proAm.round} · ${proAmLineLabel(m.proAm.line)}`;
   if (m.sessionId){ const ev = findEvent(m.eventId), s = ((ev.clubCup || {}).sessions || []).find(x => x.id === m.sessionId), lab = s ? s.label : 'Session', t = m.matchType || 'match'; if (m.label) return lab + ' · ' + m.label; if (m.line) return lab + ' · ' + proAmLineLabel(m.line); return new RegExp(t, 'i').test(lab) ? lab : lab + ' · ' + cap1(t) }
   if (m.poolIdx != null && !m.isPlayoff) return `Pool ${String.fromCharCode(65 + m.poolIdx)}`;
@@ -5694,6 +5793,41 @@ function tripStatus(c){
 }
 const v3Badge = st => `<span class="v3-badge ${st.k}">${st.k === 'live' ? '<i class="st-dot" aria-hidden="true"></i>' : ''}${esc(st.label)}</span>`;
 function v3SecHead(title, id, link){ return `<div class="v3-sechead"><h2 class="v3-h2" id="${id}">${esc(title)}</h2>${link || ''}</div>` }
+/* v5: your player card + your next match, in the Home spot that used to be "Your next match" */
+function meCard(me, m, mine, pre){
+  const p = P(me), c = cardOf(me), b = brand().cards, pe = eventsOfPlayer(me), my = pname(me);
+  const filled = !!(c.photo || c.bio || c.hometown || c.plays);
+  const rating = b.rating !== false && p.rating != null && p.rating !== '' ? `${sport().rating} ${fmtRating(p.rating)}` : '';
+  const meta = [rating, c.club || p.club].filter(Boolean);
+  let next = '';
+  if (m){
+    const t = slotParts(m), ev = findEvent(m.eventId) || {};
+    const s1 = sideNames(m, 'team1') || [], s2 = sideNames(m, 'team2') || [], mineSide = s1.includes(my) ? 'team1' : s2.includes(my) ? 'team2' : null;
+    const mates = mineSide ? (mineSide === 'team1' ? s1 : s2).filter(n => n !== my) : [];
+    const opp = mineSide ? sideLabel(m, mineSide === 'team1' ? 'team2' : 'team1') : `${sideLabel(m, 'team1')} vs ${sideLabel(m, 'team2')}`;
+    next = `<div class="v5-me-next"><p class="v5-me-lbl">Your next match</p>
+      <p class="v5-me-when">${t ? `${esc(t.time)}<span>${esc(t.day)}</span>` : 'Time to be set'}</p>
+      <p class="v5-me-where"><b>${esc(t ? courtName(m.court) : 'Court to be set')}</b> · ${esc([ev.name, roundName(m)].filter(Boolean).join(' · '))}</p>
+      <dl class="v5-me-vs">${mates.length ? `<div><dt>With</dt><dd>${esc(mates.join(' / '))}</dd></div>` : ''}<div><dt>${mineSide ? 'Against' : 'Match'}</dt><dd>${esc(opp)}</dd></div></dl>
+      <button class="v5-me-btn" data-act="openmatch" data-id="${esc(m.id)}">Match details</button></div>`;
+  } else next = `<div class="v5-me-next"><p class="v5-me-lbl">Your next match</p><p class="v5-me-none">${pre ? 'Shows here as soon as the draws are published.' : mine.length ? 'No more matches scheduled. Nice work out there.' : 'No matches scheduled yet. Check back once the draws include you.'}</p></div>`;
+  return `<section class="v5-me" aria-labelledby="me-h">
+    <button class="v5-me-top" data-act="openplayer" data-id="${esc(me)}" aria-label="Open your player card">
+      <span class="v5-me-ph">${c.photo ? `<img src="${esc(c.photo)}" alt="">` : `<span>${esc(initials(p.name))}</span>`}</span>
+      <span class="v5-me-id"><small>Your player card</small><b id="me-h">${esc(p.name)}</b>${meta.length ? `<span class="v5-me-r">${meta.map(esc).join(' · ')}</span>` : ''}</span>
+      <span class="chev" aria-hidden="true">›</span></button>
+    ${pe.length ? `<p class="v5-me-ev">${pe.map(e => `<span>${esc(e.name)}</span>`).join('')}</p>` : ''}
+    ${!filled && canEditCard(me) ? `<button class="v5-me-prompt" data-act="cardedit" data-id="${esc(me)}"><span aria-hidden="true">${ICON.cam || ''}</span><span><b>Complete your player card</b><small>Add a photo and a line about you so other players can find you.</small></span><span class="chev" aria-hidden="true">›</span></button>` : ''}
+    ${next}
+  </section>`;
+}
+function cardStrip(){
+  const c = cfg() || {}, live = liveNow().length, nc = (c.courts || []).length || (typeof courtCount === 'function' ? courtCount() : 0);
+  const courtsSub = live ? `${live} on court now` : nc ? `${nc} court${nc === 1 ? '' : 's'}, live` : 'Live board';
+  const infoSub = 'Venue & rules';
+  const cell = (v, icon, label, sub, hot) => `<button class="v5-strip-i ${hot ? 'hot' : ''}" data-act="tab" data-v="${v}"><span class="v5-strip-ic" aria-hidden="true">${ICON[icon]}</span><span class="v5-strip-t"><b>${label}</b><small>${hot ? '<i class="st-dot" aria-hidden="true"></i>' : ''}${esc(sub)}</small></span><span class="chev" aria-hidden="true">›</span></button>`;
+  return `<nav class="v5-strip" aria-label="Courts and tournament information">${cell('courts', 'courts', 'Courts', courtsSub, live > 0)}${cell('info', 'info', 'Info', infoSub)}</nav>`;
+}
 function tournamentCard(){
   const c = cfg() || {}, cover = pic(c, 'cover'), st = tripStatus(c), np = players().length;
   const tile = (v, label, icon) => `<button class="v3-tile" data-act="tab" data-v="${v}">${ICON[icon]}<span>${label}</span></button>`;
@@ -5705,7 +5839,7 @@ function tournamentCard(){
         ${c.club ? `<p class="v3-tcard-club">${esc(c.club)}</p>` : ''}
         <p class="v3-tcard-meta">${datesShort() ? `<span>${ICON.cal}${esc(datesShort())}</span>` : ''}${np ? `<span>${ICON.people}${np} Player${np === 1 ? '' : 's'}</span>` : ''}</p>
       </div></div>
-    <nav class="v3-tiles" aria-label="Tournament pages">${tile('draws', 'Draws', 'draws')}${tile('schedule', 'Schedule', 'schedule')}${tile('courts', 'Courts', 'courts')}${tile('info', 'Info', 'info')}</nav>
+    ${cardStrip()}
   </article>`;
 }
 /* Team cup standings for a Club Cup event, or a short tournament summary when there's no team scoring */
@@ -5735,19 +5869,20 @@ function v3Match(m){
   const badge = st === 'live' ? '<span class="v3-badge live sm"><i class="st-dot" aria-hidden="true"></i>On court</span>' : st === 'now' ? '<span class="v3-badge live sm"><i class="st-dot" aria-hidden="true"></i>Now</span>' : st === 'done' ? `<span class="v3-badge done sm">Final${sc ? ' ' + esc(sc) : ''}</span>` : st === 'late' && bothKnown(m) ? '<span class="v3-badge late sm">Delayed</span>' : '';
   return `<button class="v3-mrow" data-act="openmatch" data-id="${esc(m.id)}" aria-label="${esc(matchAria(m, [ev.name, roundName(m)].filter(Boolean).join(' · '), when, s))}">
     <span class="v3-mrow-ic">${ICON.rackets}</span>
-    <span class="v3-mrow-b"><b>${esc(when)}</b><small>${esc([ev.name, roundName(m)].filter(Boolean).join(' · '))}</small>
+    <span class="v3-mrow-b"><b>${esc(when)}</b><small>${mcodeBadge(m)}${esc([ev.name, roundBase(m)].filter(Boolean).join(' · '))}</small>
       <span class="v3-mrow-t">${esc(sideLabel(m, 'team1', true))} <i>vs</i> ${esc(sideLabel(m, 'team2', true))}</span>${badge ? `<span class="v3-mrow-st">${badge}</span>` : ''}</span>
     <span class="chev" aria-hidden="true">›</span></button>`;
 }
 /* v4 bar, as in the mockup: Home · Events · Players · More. Schedule, Courts and Info are one tap away on Home's tournament card (and under More). */
-const NAV_MAIN = ['today', 'draws', 'players'], NAV_HOME = ['today', 'schedule', 'courts', 'info'];
+/* v5: each destination lives in one place. Bar: Home · Draws · Schedule · Players · More. Courts and Info sit on Home's tournament card. */
+const NAV_MAIN = ['today', 'draws', 'schedule', 'players'], NAV_HOME = ['today', 'courts', 'info'];
 function tabbar(){
   const cur = NAV_HOME.includes(view.tab) ? 'today' : NAV_MAIN.includes(view.tab) ? view.tab : 'more';
   const un = unreadCount(), live = liveNow().length;
   const me = view.me && view.me !== GUEST ? view.me : null, pend = me && betsOn() ? bets().filter(b => betNeedsMe(b, me)).length : 0;
   const moreN = un + pend, moreAria = moreN ? `More, ${[un ? `${un} unread chat message${un === 1 ? '' : 's'}` : '', pend ? `${pend} bet${pend === 1 ? '' : 's'} waiting on you` : ''].filter(Boolean).join(', ')}` : '';
   const tb = (v, label, badge, aria) => `<button data-act="tab" data-v="${v}" ${cur === v ? 'aria-current="page"' : ''} ${aria ? `aria-label="${esc(aria)}"` : ''}>${ICON[v]}<span>${label}</span>${badge ? `<span class="badge" aria-hidden="true">${badge}</span>` : ''}</button>`;
-  return `<nav class="tabs bk-nav" aria-label="Tournament">${tb('today', 'Home', live, live ? `Home, ${live} on court now` : '')}${tb('draws', 'Events')}${tb('players', 'Players')}${tb('more', 'More', moreN, moreAria)}</nav>`;
+  return `<nav class="tabs bk-nav" aria-label="Tournament">${tb('today', 'Home', live, live ? `Home, ${live} on court now` : '')}${tb('draws', 'Draws')}${tb('schedule', 'Schedule')}${tb('players', 'Players')}${tb('more', 'More', moreN, moreAria)}</nav>`;
 }
 function body(){
   switch (view.tab){
@@ -5851,10 +5986,10 @@ function matchAria(m, ctx, when, s){
 function matchRow(m, opts){
   opts = opts || {};
   const ev = findEvent(m.eventId) || {}, s = statusInfo(m);
-  const ctx = opts.ctx != null ? opts.ctx : [opts.noEvent ? '' : ev.name, opts.noRound ? '' : roundName(m)].filter(Boolean).join(' · ');
+  const ctx = opts.ctx != null ? opts.ctx : [opts.noEvent ? '' : ev.name, opts.noRound ? '' : roundBase(m)].filter(Boolean).join(' · ');
   const when = opts.noTime ? (TIME_SLOTS[m.slotIdx] ? courtName(m.court) : 'Time to be set') : whenShort(m);
-  return `<button class="mr" data-act="openmatch" data-id="${esc(m.id)}" aria-label="${esc(matchAria(m, ctx, when, s))}">
-    <span class="mr-h"><span class="mr-when">${esc(when)}</span>${stChip(s)}</span>
+  return `<button class="mr" data-act="openmatch" data-id="${esc(m.id)}" aria-label="${esc(matchAria(m, [matchCode(m) ? 'Match ' + matchCode(m) : '', ctx].filter(Boolean).join(' · '), when, s))}">
+    <span class="mr-h"><span class="mr-when">${mcodeBadge(m)}${esc(when)}</span>${stChip(s)}</span>
     ${ctx ? `<span class="mr-ctx">${esc(ctx)}</span>` : ''}
     <span class="mr-teams">${teamRow(m, 'team1')}${teamRow(m, 'team2')}</span>
     ${s && s.note ? `<span class="mr-note">${esc(s.note)}</span>` : ''}
@@ -5943,7 +6078,7 @@ function homeView(){
     return `${tournamentCard()}
     <section aria-labelledby="home-h"><p class="bk-eyebrow">Tournament weekend</p><h2 class="v3-h2" id="home-h">See you courtside.</h2><p class="bk-meta">${startLine}</p></section>
     <section class="bk-feature" aria-labelledby="upd-h"><p class="bk-eyebrow">Tournament update</p><h2 id="upd-h">Draws are coming.</h2><p>Match times and opponents will appear here once the director publishes the draws.</p>${view.admin ? '<button class="bk-btn light" data-act="wzopen" data-v="basics">Open setup</button>' : ''}</section>
-    ${betAlert}${profile}
+    ${betAlert}${me && P(me) && brand().cards.show !== false ? meCard(me, null, [], true) : profile}
     ${glance()}
     ${galleryStrip()}${infoSections({welcome:true})}
     ${photoStrip()}${sponsorsHtml()}${installHint()}`;
@@ -5956,7 +6091,7 @@ function homeView(){
   const shown = today.slice(0, 8);
   const title = playDay ? 'Today' : future && state.events.some(e => e.published && e.matches.length) ? 'Draws are out.' : 'Tournament home';
   const nt = nextMine && slotParts(nextMine);
-  const nextHtml = nextMine ? `<section class="bk-feature" aria-labelledby="next-h"><p class="bk-eyebrow" id="next-h">Your next match</p>
+  const nextHtml = me && me !== GUEST && P(me) && brand().cards.show !== false ? meCard(me, nextMine, mine) : nextMine ? `<section class="bk-feature" aria-labelledby="next-h"><p class="bk-eyebrow" id="next-h">Your next match</p>
       <p class="bk-next-when">${nt ? `${esc(nt.time)}<span>${esc(nt.day)}</span>` : 'Time to be set'}</p>
       <p><b>${esc(nt ? courtName(nextMine.court) : 'Court to be set')}</b> · ${esc((findEvent(nextMine.eventId) || {}).name)} · ${esc(roundName(nextMine))}</p>
       <p>${esc(sideLabel(nextMine, 'team1'))} vs ${esc(sideLabel(nextMine, 'team2'))}</p>
@@ -6100,7 +6235,7 @@ function schedGridView(dayK, ms){
   const cs = [...new Set(ms.map(m => m.court))].sort((a, b) => a - b);
   if (!slots.length) return '<p class="bk-empty">No matches scheduled this day.</p>';
   return `<div class="bk-scrollx sgrid" tabindex="0" role="region" aria-label="Schedule grid, ${esc(dayK)}"><table><caption class="sr">Matches by time and court</caption><thead><tr><th scope="col">Time</th>${cs.map(c => `<th scope="col">${esc(courtName(c))}</th>`).join('')}</tr></thead><tbody>
-  ${slots.map(s => `<tr><th scope="row">${esc(TIME_SLOTS[s][1])}</th>${cs.map(c => { const m = ms.find(x => x.slotIdx === s && x.court === c); if (!m) return '<td class="empty"><span class="sr">No match</span></td>'; const si = statusInfo(m); return `<td><button data-act="openmatch" data-id="${esc(m.id)}"><small>${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundName(m))}</small><span>${esc(sideLabel(m, 'team1', true))}</span><span>${esc(sideLabel(m, 'team2', true))}</span>${si ? `<small>${esc(si.label)}</small>` : ''}</button></td>` }).join('')}</tr>`).join('')}
+  ${slots.map(s => `<tr><th scope="row">${esc(TIME_SLOTS[s][1])}</th>${cs.map(c => { const m = ms.find(x => x.slotIdx === s && x.court === c); if (!m) return '<td class="empty"><span class="sr">No match</span></td>'; const si = statusInfo(m); return `<td><button data-act="openmatch" data-id="${esc(m.id)}"><small>${mcodeBadge(m)}${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundBase(m))}</small><span>${esc(sideLabel(m, 'team1', true))}</span><span>${esc(sideLabel(m, 'team2', true))}</span>${si ? `<small>${esc(si.label)}</small>` : ''}</button></td>` }).join('')}</tr>`).join('')}
   </tbody></table></div>`;
 }
 /* Internal places (a court, "the clubhouse") map to the venue address; real addresses map to themselves. */
@@ -6202,12 +6337,9 @@ function moreView(){
   const grp = (title, rows) => `<section class="v3-group" aria-label="${esc(title)}"><h2 class="v3-glabel">${esc(title)}</h2><ul class="bk-rows v3-card">${rows}</ul></section>`;
   return `${pageHead('More')}<p class="bk-meta">Everything else for this tournament</p>
   ${grp('Tournament tools', [
-    irow('schedule', 'tab', 'schedule', 'Schedule', 'Every match by day, time and court'),
-    irow('courts', 'tab', 'courts', 'Courts', liveNow().length ? `${liveNow().length} on court now` : 'What is on each court'),
     irow('chat', 'tab', 'chat', 'Chat & photos', 'Tournament conversation and photo wall', un, un === 1 ? 'unread message' : 'unread messages'),
     irow('bell', 'alerts', '', 'Notifications', 'Choose what this device alerts you about'),
     irow('share', 'invite', '', 'Share', 'Player link, TV link and QR codes')].join(''))}
-  ${grp('Tournament information', irow('info', 'tab', 'info', 'Venue, rules & details', 'Arrival, food, dress code, awards, rules, rain plan and contacts'))}
   ${grp('Additional features', [
     betsOn() ? irow('bets', 'tab', 'bets', 'Friendly bets', 'Optional, turned on by the director', pend, pend === 1 ? 'bet waiting on you' : 'bets waiting on you') : '',
     irow('user', 'who', '', me ? `Viewing as ${pname(me)}` : 'Pick your name', me ? 'Switch player or continue as a spectator' : 'Personalizes this device. It does not verify identity.'),
@@ -6293,10 +6425,10 @@ function drawFormatLabel(e){ return e.format === 'club_cup' && /cup/i.test(e.nam
 function drawsView(){
   syncEngine();
   const evs = state.events;
-  if (!evs.length) return `${pageHead('Events')}<p class="bk-empty">No divisions have been set up yet.</p>`;
+  if (!evs.length) return `${pageHead('Draws')}<p class="bk-empty">No divisions have been set up yet.</p>`;
   const cur = evs.find(e => e.id === view.ev) || evs[0];
   const vis = cur.published || view.admin;
-  return `${pageHead('Events')}
+  return `${pageHead('Draws')}
   <button class="divsel" data-act="divpick" aria-haspopup="dialog"><span class="divsel-t"><span class="sr">Division: </span><b>${esc(cur.name)}</b><span>${esc(drawFormatLabel(cur))}${evs.length > 1 ? ` · ${evs.length} divisions` : ''}</span><span class="divsel-st">${stChip(drawStateChip(cur))}</span></span><span class="divsel-r"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg><span class="sr">Change division</span></span></button>
   ${vis ? `${cur.published ? '' : '<p class="bk-note warn">Not published. Only directors can see this draw.</p>'}
     <div class="draw-meta"><span class="bk-meta">${eventSummary(cur)}</span><button class="btn alt sm" data-act="print" data-v="${cur.id}">${ICON.print} Print</button></div>
@@ -6321,27 +6453,27 @@ const ROUND_TABS = {QF:'Quarters', SF:'Semis', F:'Final', CSF:'Cons semis', CF:'
 function roundsOf(ms){ const rounds = []; ms.forEach(m => { let r = rounds.find(x => x.r === m.round); if (!r){ r = {r:m.round, ms:[]}; rounds.push(r) } r.ms.push(m) }); return rounds }
 function bracketCols(ms, print){
   const rounds = roundsOf(ms);
-  return `<div class="bracket ${print ? 'pr' : ''}">${rounds.map(r => `<div class="bcol"><div class="bh">${esc(longLabel(r.r))}</div><div class="bms">${r.ms.map(m => bmatch(m, print)).join('')}</div></div>`).join('')}</div>`;
+  return `<div class="bracket ${print ? 'pr' : ''}">${rounds.map(r => `<div class="bcol"><div class="bh">${(l => l ? `<span class="mcode ${/^[LC]/.test(r.r) ? 'lo' : 'hi'}">${l}</span> ` : '')(roundLetter(findEvent(r.ms[0].eventId), r.r))}${esc(longLabel(r.r))}</div><div class="bms">${r.ms.map(m => bmatch(m, print)).join('')}</div></div>`).join('')}</div>`;
 }
 function bmatch(m, print){
   const st = matchStatus(m), t = TIME_SLOTS[m.slotIdx];
-  if (print) return `<div class="bm ${st}">${teamLine(m, 'team1')}${teamLine(m, 'team2')}<div class="bf">${st === 'done' ? esc(scoreText(m)) : st === 'bye' ? 'Bye' : st === 'live' || st === 'now' ? `<b>On ${esc(courtName(m.court))}</b>` : t ? `${esc(t[0].split(',')[0])} ${esc(t[1])} · ${esc(courtName(m.court))}` : ''}</div></div>`;
+  if (print) return `<div class="bm ${st}">${mcodeBadge(m, 'bmc')}${teamLine(m, 'team1')}${teamLine(m, 'team2')}<div class="bf">${st === 'done' ? esc(scoreText(m)) : st === 'bye' ? 'Bye' : st === 'live' || st === 'now' ? `<b>On ${esc(courtName(m.court))}</b>` : t ? `${esc(t[0].split(',')[0])} ${esc(t[1])} · ${esc(courtName(m.court))}` : ''}</div></div>`;
   return matchRow(m, {noEvent:true, noRound:true});
 }
 function elimView(ev, print){
   const secs = {}; ev.matches.filter(m => m.poolIdx == null || m.isPlayoff).forEach(m => { const s = sectionOf(m.round); (secs[s] = secs[s] || []).push(m) });
   const order = ['main', 'w', 'l', 'gf', 'c'].filter(s => secs[s]);
-  if (print) return order.map(s => `${order.length > 1 ? `<h3>${SECTION_TITLES[s]}</h3>` : ''}${bracketCols(secs[s], print)}`).join('');
+  if (print) return codeKey(ev) + order.map(s => `${order.length > 1 ? `<h3>${SECTION_TITLES[s]}</h3>` : ''}${bracketCols(secs[s], print)}`).join('');
   const key = view.dsec && view.dsec.ev === ev.id && secs[view.dsec.s] ? view.dsec.s : order[0];
   const ms = secs[key], rounds = roundsOf(ms), fmt = (getScoringFormat(ms[0]) || {}).label || '';
   const secTabs = order.length > 1 ? `<div class="seg2" role="group" aria-label="Bracket section">${order.map(s => `<button data-act="dsec" data-ev="${esc(ev.id)}" data-v="${s}" aria-pressed="${s === key}">${SECTION_TITLES[s]}</button>`).join('')}</div>` : '';
   const toggle = tree => `<button class="bk-link" data-act="dtree" data-ev="${esc(ev.id)}">${tree ? 'Show one round at a time' : 'View full bracket'} <span aria-hidden="true">→</span></button>`;
-  if (view.dtree === ev.id) return `${secTabs}<h2 class="bk-h2">${SECTION_TITLES[key]}</h2><div class="bk-scrollx" role="region" aria-label="${esc(SECTION_TITLES[key])}, full bracket. Scrolls sideways." tabindex="0">${bracketCols(ms)}</div>${fmt ? `<p class="bk-meta" style="margin-top:12px">${esc(fmt)}</p>` : ''}${toggle(true)}`;
+  if (view.dtree === ev.id) return `${secTabs}${codeKey(ev)}<h2 class="bk-h2">${SECTION_TITLES[key]}</h2><div class="bk-scrollx" role="region" aria-label="${esc(SECTION_TITLES[key])}, full bracket. Scrolls sideways." tabindex="0">${bracketCols(ms)}</div>${fmt ? `<p class="bk-meta" style="margin-top:12px">${esc(fmt)}</p>` : ''}${toggle(true)}`;
   const defR = (rounds.find(r => r.ms.some(m => !['done', 'bye'].includes(matchStatus(m)))) || rounds[rounds.length - 1]).r;
   const rk = view.dround && view.dround.ev === ev.id && view.dround.s === key && rounds.some(r => r.r === view.dround.r) ? view.dround.r : defR;
   const cur = rounds.find(r => r.r === rk);
-  return `${secTabs}
-  ${rounds.length > 1 ? `<div class="seg2 rounds" role="group" aria-label="Round">${rounds.map(r => `<button data-act="dround" data-ev="${esc(ev.id)}" data-s="${key}" data-v="${esc(r.r)}" aria-pressed="${r.r === rk}">${esc(ROUND_TABS[r.r] || longLabel(r.r))}</button>`).join('')}</div>` : ''}
+  return `${secTabs}${codeKey(ev)}
+  ${rounds.length > 1 ? `<div class="seg2 rounds" role="group" aria-label="Round">${rounds.map(r => `<button data-act="dround" data-ev="${esc(ev.id)}" data-s="${key}" data-v="${esc(r.r)}" aria-pressed="${r.r === rk}">${roundLetter(ev, r.r) ? `<span class="rl">${roundLetter(ev, r.r)}</span>` : ''}${esc(ROUND_TABS[r.r] || longLabel(r.r))}</button>`).join('')}</div>` : ''}
   <h2 class="bk-h2">${esc(longLabel(rk))}</h2>
   ${cur.ms.map(m => matchRow(m, {noEvent:true, noRound:true})).join('')}
   ${fmt ? `<p class="bk-meta" style="margin-top:12px">${esc(fmt)}</p>` : ''}
@@ -6594,7 +6726,7 @@ function matchSheet(){
   const title = {edit:w ? 'Correct score' : 'Enter score', review:'Review result', retire:'Record a retirement', retreview:'Review retirement', wo:'Record a walkover'}[mode] || 'Match details';
   const sessNote = cc ? (((ev.clubCup || {}).sessions || []).find(x => x.id === m.sessionId) || {}).notes : '';
   const id = esc(m.id);
-  const head = `<div class="sh-top"><p class="bk-eyebrow">${esc(ev.name || '')} · ${esc(roundName(m))}</p><button class="hclose" data-act="closemodal" aria-label="Close match details"><span aria-hidden="true">×</span></button></div>
+  const head = `<div class="sh-top"><p class="bk-eyebrow">${mcodeBadge(m)}${esc(ev.name || '')} · ${esc(roundBase(m))}</p><button class="hclose" data-act="closemodal" aria-label="Close match details"><span aria-hidden="true">×</span></button></div>
     <h2 class="sh-h" id="sheet-h">${title}</h2>
     <p class="bk-meta"><b>${esc(whenFull(m))}</b>${view.admin ? ` · <button class="bk-inline" data-act="movemenu" data-id="${id}">Move match</button>` : ''}</p>
     ${movedNote(m)}
@@ -7599,8 +7731,8 @@ function tvView(){
   return `<div class="tv tv2">${head}
     ${ev ? `<section class="tvdraw"><h2>${esc(ev.name)}</h2>${eventDraw(ev, true)}</section>` : `
     <section class="tvgrid"><div><h2>Courts</h2><div class="tvcourts">${tiles.slice(0, 6).map(t => { const st = t.cur ? matchStatus(t.cur) : ''; return `<div class="tvc2 ${t.cur ? 'busy' : ''}"><div class="tvc2-h"><b>${esc(courtName(t.c))}</b><span class="st ${t.cur ? 'live' : 'neutral'}">${t.cur ? (st === 'live' ? 'In progress' : 'Scheduled now') : 'No match in progress'}</span></div>${t.cur ? `<p class="tvc2-t">${vs(t.cur)}</p><p class="tvc2-s">${esc((findEvent(t.cur.eventId) || {}).name || '')}</p>` : ''}${t.nxt ? `<p class="tvc2-n">Next ${esc(at(t.nxt.slotIdx))} · ${vs(t.nxt)}</p>` : ''}</div>` }).join('')}${tiles.length > 6 ? `<p class="tvmore">+ ${tiles.length - 6} more courts on the app</p>` : ''}</div></div>
-    <div><h2>Up next</h2>${nxt.map(m => `<div class="tvrow"><b>${esc(at(m.slotIdx))} · ${esc(courtName(m.court))}</b><div>${vs(m)}</div><span>${esc((findEvent(m.eventId) || {}).name || '')}</span></div>`).join('') || '<p class="tvempty">Nothing else scheduled today.</p>'}</div>
-    <div><h2>Results</h2>${rec.map(m => { const w = winnerSlot(m); return `<div class="tvrow"><div><strong>${esc(sideLabel(m, w, true))}</strong> d. ${esc(sideLabel(m, w === 'team1' ? 'team2' : 'team1', true))}</div><b class="tvsc">${esc(scoreText(m) || (resOf(m.id) || {}).note || '')}</b><span>${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundName(m))}</span></div>` }).join('') || '<p class="tvempty">No results yet.</p>'}</div></section>`}
+    <div><h2>Up next</h2>${nxt.map(m => `<div class="tvrow"><b>${mcodeBadge(m)}${esc(at(m.slotIdx))} · ${esc(courtName(m.court))}</b><div>${vs(m)}</div><span>${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundBase(m))}</span></div>`).join('') || '<p class="tvempty">Nothing else scheduled today.</p>'}</div>
+    <div><h2>Results</h2>${rec.map(m => { const w = winnerSlot(m); return `<div class="tvrow"><div><strong>${esc(sideLabel(m, w, true))}</strong> d. ${esc(sideLabel(m, w === 'team1' ? 'team2' : 'team1', true))}</div><b class="tvsc">${esc(scoreText(m) || (resOf(m.id) || {}).note || '')}</b><span>${mcodeBadge(m)}${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundBase(m))}</span></div>` }).join('') || '<p class="tvempty">No results yet.</p>'}</div></section>`}
     ${sponsorsHtml()}
   </div>`;
 }
