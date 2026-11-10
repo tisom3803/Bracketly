@@ -14,6 +14,11 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <title>Bracketly</title>
+<script>/* v2.9.1: iOS home-screen app. WebKit reports 100dvh / innerHeight short by the status-bar inset there
+   (WebKit bug 313800), which left a dead band under the bottom tabs. Tag it before first paint so CSS can use 100vh. */
+(function(){ try{ var ios = /iP(hone|od|ad)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var sa = navigator.standalone === true || (window.matchMedia && matchMedia('(display-mode: standalone)').matches);
+  if (ios && sa) document.documentElement.classList.add('ios-sa') }catch(e){} })();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Manrope:wght@400;500;600;700&family=Big+Shoulders+Display:wght@600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#1B2B36;--ink2:#2B3F4D;--paper:#E8EBE3;--card:#F7F8F4;--line:#C9CFC3;--muted:#4A565C;--gold-ink:#7A5B12;--gold:#B8923A;--gold2:#DDBE6A;--A:#A3242C;--B:#1D3F73;--r:10px}
@@ -21,7 +26,11 @@
 :root{color-scheme:light only}
 html,body{margin:0;background:var(--paper)!important;color:var(--ink)!important;font:400 16px/1.45 var(--fb);-webkit-font-smoothing:antialiased}
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-#app{background:var(--paper);color:var(--ink);height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+#app{background:var(--paper);color:var(--ink);height:100vh;height:var(--app-h,100dvh);display:flex;flex-direction:column;overflow:hidden}
+/* iOS home-screen app: 100vh is the real screen there (100dvh is short by the status bar), so the shell, the page and sheets use it */
+html.ios-sa{--app-h:100vh}
+html.ios-sa,html.ios-sa body{height:var(--app-h)}
+html.ios-sa .modal{bottom:auto;height:var(--app-h)}
 #scroller{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 #app > header.top,#app > nav.tabs,#app > .composer{flex:0 0 auto}
 a{color:inherit}
@@ -1901,7 +1910,7 @@ nav.tabs.bk-nav .badge{position:absolute;top:4px;left:calc(50% + 6px);margin:0}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '2.9.0';
+const APP_VERSION = '2.9.1';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -10032,6 +10041,23 @@ document.addEventListener('keydown', e => {
   if (id === 'au-email') run(view.au && view.au.pw ? 'aupwgo' : 'ausend'); else if (id === 'au-pw') run('aupwgo'); else if (id === 'au-code') run('auverify');
 });
 
+/* v2.9.1: if iOS still reports the home-screen app shorter than the screen (cold start, resume), stretch the shell to the screen */
+(function iosShell(){
+  const root = document.documentElement; if (!root.classList.contains('ios-sa')) return;
+  const fit = () => {
+    try{
+      const a = document.activeElement; if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) return;   // keyboard up: leave it
+      const land = matchMedia('(orientation: landscape)').matches, sh = land ? Math.min(screen.width, screen.height) : Math.max(screen.width, screen.height);
+      root.style.removeProperty('--app-h');
+      const h = app.getBoundingClientRect().height;
+      if (sh && h && sh - h > 2 && sh - h < 140) root.style.setProperty('--app-h', sh + 'px');
+    }catch(e){}
+  };
+  fit(); addEventListener('load', fit); addEventListener('pageshow', fit); addEventListener('orientationchange', () => setTimeout(fit, 250));
+  if (window.visualViewport) visualViewport.addEventListener('resize', () => setTimeout(fit, 60));
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(fit, 60) });
+  document.addEventListener('focusout', () => setTimeout(fit, 120));
+})();
 (async () => {
   { const q0 = new URLSearchParams(location.search), h0 = (location.hash.match(/t=([A-Za-z0-9]+)/) || [])[1]; const c0 = q0.get('join') || h0; if (c0) view.resolving = String(c0).toUpperCase().slice(0, 8) }
   render();
