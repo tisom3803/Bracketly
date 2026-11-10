@@ -1470,6 +1470,52 @@ header.top.bk-top.v3-top,.v3-top{position:relative;overflow:hidden;display:block
 .st.live .st-dot,.st-dot{animation:v3pulse 1.8s ease-in-out infinite}
 @keyframes v3pulse{0%,100%{box-shadow:0 0 0 0 rgba(35,122,82,.45)}50%{box-shadow:0 0 0 5px rgba(35,122,82,0)}}
 #main > *{animation:v3fade .22s var(--ease) both}
+/* v7: only fade on a real navigation, never on a background redraw / tap (was the 'glitching' blink) */
+#app.nofade #main > *,#app.nofade .banner.seen{animation:none}
+.v7-eth{margin:6px 0 8px}
+.v7-etypes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+@media (min-width:760px){.v7-etypes{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.v7-etype{display:flex;flex-direction:column;gap:3px;text-align:left;padding:12px 12px;border-radius:12px;border:1.5px solid var(--line,#d9d3c4);background:var(--card,#fff);color:inherit;font:inherit;cursor:pointer;min-height:76px}
+.v7-etype b{font-size:15px}.v7-etype span{font-size:12.5px;line-height:1.35;opacity:.75}
+.v7-etype.on{border-color:var(--g1,#0B3D2E);box-shadow:inset 0 0 0 1.5px var(--g1,#0B3D2E);background:color-mix(in srgb,var(--g1,#0B3D2E) 7%,var(--card,#fff))}
+.v7-etype:focus-visible{outline:3px solid var(--au,#C9A227);outline-offset:2px}
+.evtypes.v7-one{grid-template-columns:1fr}
+/* v7 accounts + tournament list actions */
+.v7-acct{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(255,255,255,.75);background:rgba(0,0,0,.18);color:#fff;font:600 13.5px/1 Inter,system-ui,sans-serif;cursor:pointer;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.v7-acct.on{width:40px;height:40px;padding:0;background:var(--au,#C9A227);border-color:#fff;color:#1b1b1b;font-size:14px}
+.v7-acct:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.v3-top-side.end{display:flex;justify-content:flex-end;align-items:center}
+.v7-astrip{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:0 0 12px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--g1,#0B3D2E) 6%,transparent);border:1px solid color-mix(in srgb,var(--g1,#0B3D2E) 16%,transparent);font-size:13.5px;line-height:1.35}
+.v7-astrip span{min-width:0;overflow-wrap:anywhere}.v7-astrip .btn{flex:none}
+.swrow{position:relative;border-radius:16px;overflow:hidden;list-style:none}
+.swrow .swfront{position:relative;z-index:1;touch-action:pan-y;background:var(--paper,#f7f4ec);border-radius:16px}
+.swrow .swfront > .v3-ecard{margin:0}
+.swact{position:absolute;top:0;right:0;bottom:0;display:flex;border-radius:0 16px 16px 0;overflow:hidden}
+.swrow:not(.sw) .swact{visibility:hidden}
+.swbtn{border:0;color:#fff;font:600 14px Inter,system-ui,sans-serif;min-width:84px;padding:0 16px;cursor:pointer}
+.swbtn.rm{background:#5f6b66}.swbtn.del{background:#B42318}
+.v7-tmore{position:absolute;top:8px;right:8px;z-index:2;width:36px;height:36px;border-radius:50%;border:1px solid var(--line,#d9d3c4);background:var(--card,#fff);color:var(--ink,#1b1b1b);font:700 18px/1 Inter,system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 0 4px}
+.v7-tmore:focus-visible{outline:3px solid var(--au,#C9A227);outline-offset:2px}
+.v7-trow .v3-ecard-top{padding-right:40px}
+.bk-row.v7-danger b{color:#B42318}
+.v7-auth-in{max-width:520px;margin:0 auto;padding-top:18px}
+.v7-auth .v3-h1{margin:10px 0 6px}
+.v7-back{background:none;border:0;padding:6px 0;color:var(--g1,#0B3D2E);font:600 14px Inter,system-ui,sans-serif;cursor:pointer}
+.v7-acard{padding:16px;margin:12px 0}
+.v7-acard label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+.v7-acard label:first-child{margin-top:0}
+.v7-acard .bk-input{width:100%;box-sizing:border-box}
+.v7-code{letter-spacing:.4em;font-size:22px;text-align:center}
+.v7-links{text-align:center;margin:12px 0 0;font-size:13.5px}
+.v7-links button{background:none;border:0;padding:4px;color:var(--g1,#0B3D2E);text-decoration:underline;font:inherit;cursor:pointer}
+.v7-oauthbox{display:grid;gap:8px;margin:14px 0 4px}
+.v7-oauth{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;border-radius:12px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;border:1.5px solid var(--line,#d9d3c4);background:#fff;color:#1b1b1b}
+.v7-oauth.apple{background:#000;color:#fff;border-color:#000}
+.v7-or{display:flex;align-items:center;gap:10px;margin:12px 0 0;font-size:12.5px;opacity:.7}.v7-or::before,.v7-or::after{content:'';flex:1;height:1px;background:currentColor;opacity:.3}
+.v7-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}.v7-2.tight{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr)}
+.v7-acts{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 6px;padding-top:12px;border-top:1px dashed var(--line,#d9d3c4)}
+.v7-you{display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center;margin:0 0 12px;padding:12px;border-radius:12px;background:color-mix(in srgb,var(--au,#C9A227) 14%,transparent)}
+.v7-dz{margin-top:18px}
 @keyframes v3fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
 /* match cards (draws, schedule): gold court accent, bold winner */
@@ -1855,7 +1901,7 @@ nav.tabs.bk-nav .badge{position:absolute;top:4px;left:calc(50% + 6px);margin:0}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '2.8.0';
+const APP_VERSION = '2.9.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -1887,8 +1933,13 @@ const Dir = {
       this.mode = 'supabase';
       try{
         if (!window.supabase) await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js');
-        this.sb = window.supabase.createClient(SUPA_URL, SUPA_KEY, {auth:{persistSession:true, autoRefreshToken:true, storageKey:'bkt-auth'}});
+        this.sb = window.supabase.createClient(SUPA_URL, SUPA_KEY, {auth:{persistSession:true, autoRefreshToken:true, storageKey:'bkt-auth', flowType:'pkce', detectSessionInUrl:true}});
+        // v7: back from Google/Apple the session arrives as ?code= in the address bar; tidy it away after
+        const q = new URLSearchParams(location.search);
+        if (q.get('error_description') || q.get('error')) this.oauthErr = q.get('error_description') || q.get('error');
         const {data} = await this.sb.auth.getSession();
+        if (q.get('code') || this.oauthErr){ try{ ['code', 'error', 'error_code', 'error_description'].forEach(k => q.delete(k)); history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash) }catch(e){} }
+        if (data.session && typeof this.deadSession === 'function' && await this.deadSession()) data.session = null;
         if (!data.session){ const {error} = await this.sb.auth.signInAnonymously(); if (error) throw error }
         this.ready = true;
       }catch(e){ this.err = (e && e.message) || String(e); console.warn('supabase init', e) }
@@ -5740,7 +5791,7 @@ function alertOut(kind, text, tag, local){
 function bannersHtml(){
   const b = view.banners || []; if (!b.length) return '';
   const icon = {result:'🎾', remind:'⏱', draws:'📣', chat:'💬', bets:'$'};
-  return `<div class="banners" role="status" aria-live="polite">${b.map(x => `<button class="banner good" data-act="bannerx" data-id="${x.id}"><span class="bi">${icon[x.kind] || '•'}</span><span>${esc(x.text)}</span></button>`).join('')}</div>`;
+  return `<div class="banners" role="status" aria-live="polite">${b.map(x => `<button class="banner good${(bannersHtml._seen || (bannersHtml._seen = new Set())).has(x.id) ? ' seen' : (bannersHtml._seen.add(x.id), '')}" data-act="bannerx" data-id="${x.id}"><span class="bi">${icon[x.kind] || '•'}</span><span>${esc(x.text)}</span></button>`).join('')}</div>`;
 }
 /* Closed-app push (Supabase + VAPID key + the push Edge Function), same as Roundly */
 function b64u(b){ const pad = '='.repeat((4 - b.length % 4) % 4), raw = atob((b + pad).replace(/-/g, '+').replace(/_/g, '/')), out = new Uint8Array(raw.length); for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i); return out }
@@ -7177,7 +7228,10 @@ function wzBasics(){
   <h3>Director PIN</h3>
   <div class="card adm"><p class="small muted" style="margin-top:0">Anyone with the PIN can run setup and fix scores. Give it to co-directors only.</p>
     <div class="row" style="flex-wrap:nowrap"><input id="newpin" type="password" inputmode="numeric" autocomplete="new-password" placeholder="New PIN"><button class="btn alt sm" data-act="setpin">Change PIN</button></div></div>
-  <p class="wnote">Next: the events you're running. Logo, sponsors and the welcome page come at the end.</p>`;
+  <p class="wnote">Next: the events you're running. Logo, sponsors and the welcome page come at the end.</p>
+  <details class="bk-disc bk-dz v7-dz" data-k="wzdz" ${isOpen('wzdz') ? 'open' : ''}><summary>Delete this tournament</summary><div>
+    <p class="bk-note warn">Erases the draws, scores, schedule, chat, player cards and photos for everyone. You'll be asked to type the join code.</p>
+    <button class="btn danger" data-act="deltrip">Delete tournament</button></div></details>`;
 }
 
 /* ---------- Step 2: events ---------- */
@@ -7186,26 +7240,42 @@ function levelSelectFor(kind, attrs, cur){
   const opts = kind === 'mixed' || kind === 'proam' ? [['', 'Open'], ...TEAM_LEVELS.X.map(x => [String(x), 'Mixed ' + x.toFixed(1)])] : [['', 'Open'], ...TEAM_LEVELS.M.map(x => [String(x), x.toFixed(1)])];
   return sel(attrs, opts, cur == null ? '' : String(cur));
 }
+/* v7: what kind of event this is, chosen before divisions (Travis: "choose Club Cup or Pro-Am before selecting the divisions") */
+const ETYPES = [['divisions', 'Divisions', 'A bracket for each division, like Men\u2019s 3.5 Doubles.'], ['clubcup', 'Club Cup', 'Two clubs, a point per match, most points wins the cup.'], ['proam', 'Pro-Am', 'Teams of a Pro, an A, a B and a C.'], ['ladder', 'Challenge ladder', 'Players challenge the ones above them, over weeks.']];
+function etype(){
+  const c = cfg() || {}; if (ETYPES.some(t => t[0] === c.etype)) return c.etype;
+  const evs = events(); if (!evs.length) return 'divisions';
+  if (evs.every(e => e.kind === 'clubcup')) return 'clubcup';
+  if (evs.every(e => e.kind === 'proam')) return 'proam';
+  if (evs.every(e => isLadder(e))) return 'ladder';
+  return 'divisions';
+}
+const etypeTiles = (cur, act) => `<div class="v7-etypes" role="radiogroup" aria-label="Type of event">${ETYPES.map(([k, l, d]) => `<button class="v7-etype ${cur === k ? 'on' : ''}" role="radio" aria-checked="${cur === k}" data-act="${act}" data-v="${k}"><b>${l}</b><span>${d}</span></button>`).join('')}</div>`;
 function wzEvents(){
   const evs = events().map(normEvent), nd = Object.assign({kind:'doubles', gender:'M', level:'3.5'}, view.nd || {});
   if (nd.kind === 'mixed' && !TEAM_LEVELS.X.map(String).includes(nd.level) && nd.level !== '') nd.level = '7';
   if (nd.kind !== 'mixed' && TEAM_LEVELS.X.map(String).includes(nd.level)) nd.level = '3.5';
   const preview = eventName(Object.assign({kind:nd.kind, gender:nd.kind === 'mixed' ? 'X' : nd.gender}, nd.kind === 'mixed' ? {cap:nd.level ? +nd.level : null} : {level:nd.level ? +nd.level : null}));
+  const et = etype(), lad = et === 'ladder', hasCC = evs.some(e => e.kind === 'clubcup');
+  const kindSeg = `<div class="seg" style="margin-top:8px">${[['singles','Singles'],['doubles','Doubles'],...(lad ? [] : [['mixed','Mixed doubles']])].map(([k, l]) => `<button class="${nd.kind === k ? 'on' : ''}" data-act="ndset" data-f="kind" data-v="${k}">${l}</button>`).join('')}</div>`;
+  const special = et === 'clubcup' ? `<div class="card adm evbuild"><b>${hasCC ? 'Your Club Cup is set up' : 'Add the Club Cup'}</b><span class="small muted">${hasCC ? 'Name the two clubs and add each club\u2019s players on the Players step. You can add more than one cup.' : 'Two clubs, a point per match. You\u2019ll name the clubs and add players next.'}</span>
+      <button class="btn gold" style="width:100%;margin-top:10px" data-act="addspecial" data-v="clubcup">${hasCC ? 'Add another Club Cup' : 'Add the Club Cup'}</button></div>`
+    : et === 'proam' ? `<div class="card adm evbuild"><b>Add a Pro-Am</b><span class="small muted">Teams of four: a Pro, an A, a B and a C player, rotating partners each round. Add one per flight.</span>
+      <button class="btn gold" style="width:100%;margin-top:10px" data-act="addspecial" data-v="proam">Add ${evs.some(e => e.kind === 'proam') ? 'another ' : ''}Pro-Am</button></div>` : '';
   return `<h2 style="margin-top:4px">Events</h2>
-  ${divImportCard(!evs.length)}
-  <p class="wnote">Or add divisions one at a time: a division for each bracket, or a Club Cup or Pro-Am.</p>
-  <div class="evtypes">
-    <div class="card adm evbuild"><b>Add a division</b><span class="small muted">One bracket per division, like Men's 3.5 Doubles or Women's Singles.</span>
-      <div class="seg" style="margin-top:8px">${[['singles','Singles'],['doubles','Doubles'],['mixed','Mixed doubles']].map(([k, l]) => `<button class="${nd.kind === k ? 'on' : ''}" data-act="ndset" data-f="kind" data-v="${k}">${l}</button>`).join('')}</div>
+  <h3 class="v7-eth" id="et-h">What are you running?</h3>
+  ${etypeTiles(et, 'setetype')}
+  ${et === 'divisions' ? divImportCard(!evs.length) : ''}
+  ${special ? `<div class="evtypes v7-one">${special}</div>` : `
+  <p class="wnote">${lad ? 'Add a ladder for each group, like Men\u2019s Singles or Women\u2019s 3.5 Doubles.' : 'Or add divisions one at a time: one bracket per division.'}</p>
+  <div class="evtypes v7-one">
+    <div class="card adm evbuild"><b>${lad ? 'Add a ladder' : 'Add a division'}</b><span class="small muted">One bracket per division, like Men's 3.5 Doubles or Women's Singles.</span>
+      ${kindSeg}
       ${nd.kind !== 'mixed' ? `<div class="seg" style="margin-top:6px">${[['M','Men'],['F','Women'],['','Anyone']].map(([k, l]) => `<button class="${nd.gender === k ? 'on' : ''}" data-act="ndset" data-f="gender" data-v="${k}">${l}</button>`).join('')}</div>` : ''}
       <label class="small muted" style="margin-top:6px;display:block">${nd.kind === 'mixed' ? 'Combined level' : 'Level'}</label>
       ${isTennis() ? `<div class="seg lvls">${[['', 'Open'], ...(nd.kind === 'mixed' ? TEAM_LEVELS.X : TEAM_LEVELS.M).map(x => [String(x), (nd.kind === 'mixed' ? 'Mixed ' : '') + x.toFixed(1)])].map(([k, l]) => `<button class="${String(nd.level) === k ? 'on' : ''}" data-act="ndset" data-f="level" data-v="${k}">${l}</button>`).join('')}</div>` : `<input id="nd-level" inputmode="decimal" placeholder="Open" value="${esc(nd.level || '')}">`}
-      <button class="btn gold" style="width:100%;margin-top:10px" data-act="adddiv">Add ${esc(preview)}${nd.kind === 'singles' ? '' : nd.kind === 'mixed' ? '' : ' Doubles'}</button></div>
-    <div class="evother">
-      <button class="card adm evtype" data-act="addspecial" data-v="clubcup"><b>+ Club Cup</b><span class="small muted">Two clubs, a point per match, most points wins the cup.</span></button>
-      <button class="card adm evtype" data-act="addspecial" data-v="proam"><b>+ Pro-Am</b><span class="small muted">Teams of a Pro, an A, a B and a C, rotating partners.</span></button>
-    </div>
-  </div>
+      <button class="btn gold" style="width:100%;margin-top:10px" data-act="adddiv">Add ${esc(preview)}${nd.kind === 'singles' ? '' : nd.kind === 'mixed' ? '' : ' Doubles'}${lad ? ' ladder' : ''}</button></div>
+  </div>`}
   ${evs.length ? `<h3>Your events (${evs.length})</h3>` : ''}
   ${evs.map(ev => { const locked = hasResults(ev), n = entryCount(ev);
     return `<div class="card adm evc">
@@ -7215,7 +7285,7 @@ function wzEvents(){
       : ev.kind === 'mixed' || ev.kind === 'proam' ? `<label class="small muted">Combined level</label>${levelSelectFor(ev.kind, `data-chg="evv" data-id="${ev.id}" data-f="cap"`, ev.cap)}` : ''}
     ${isTennis() && ev.kind !== 'clubcup' && ev.kind !== 'proam' ? `<label class="aswitch v6-req"><span><b>Require verified NTRP</b><small>Entries without a director-verified NTRP on their card show in To do.</small></span><input type="checkbox" role="switch" data-chg="evreqntrp" data-id="${ev.id}" ${ev.reqVerNtrp ? 'checked' : ''}><i aria-hidden="true"></i></label>` : ''}
     <div class="row" style="justify-content:space-between;margin-top:8px"><span class="small muted">${entryNoun(ev, n)} entered${isDrawn(ev) ? ' · drawn' : ''}</span><button class="btn sm" data-act="goplayers" data-id="${ev.id}">${n ? 'Players' : 'Add players'} →</button></div>
-  </div>` }).join('') || '<p class="muted small">No events yet. Add a division above.</p>'}`;
+  </div>` }).join('') || `<p class="muted small">No events yet. ${et === 'clubcup' ? 'Add the Club Cup above.' : et === 'proam' ? 'Add a Pro-Am above.' : et === 'ladder' ? 'Add a ladder above.' : 'Add a division above.'}</p>`}`;
 }
 
 /* ---------- Step 3: players, entered straight into each event ---------- */
@@ -7454,6 +7524,7 @@ function wzCreate(){
   <div class="card form v3-form">
     <label for="nt-name">Tournament name</label><input id="nt-name" placeholder="Fall Member-Guest" value="${esc(d.name)}" maxlength="50">
     <label id="nt-sport-l">Sport</label><div class="v3-sports" role="group" aria-labelledby="nt-sport-l">${Object.entries(SPORTS).map(([k, s]) => `<button class="${d.sport === k ? 'on' : ''}" aria-pressed="${d.sport === k}" data-act="ntsport" data-v="${k}">${ICON.rackets}<b>${s.label}</b></button>`).join('')}</div>
+    <label id="nt-et-l">What are you running?</label>${etypeTiles(d.etype || 'divisions', 'ntetype')}
     <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px"><div><label for="nt-start">First day</label><input id="nt-start" type="date" value="${esc(d.start)}"></div><div><label for="nt-end">Last day</label><input id="nt-end" type="date" value="${esc(d.end)}"></div></div>
     <label for="nt-pin">Director PIN</label><input id="nt-pin" type="password" inputmode="numeric" autocomplete="new-password" placeholder="At least 4 characters" value="${esc(d.pin)}">
     <p class="wnote">The PIN unlocks setup on any phone. Players and fans never need it.</p>
@@ -7472,7 +7543,10 @@ function seedTournament(d){
     courts:[1,2,3,4].map(n => ({name:'Court ' + n})), slotMinutes:90, rules:{}, maxEvents:2, openScoring:true, signupsOpen:false, info:{rules:'', rain:'', contact:''}, sponsors:[], style:{preset:'court'}, created:Date.now()};
   if (sp === SPORTS.pickleball) c.slotMinutes = 60;
   syncDays(c);
-  Store.set('config', c); Store.set('players', []); Store.set('events', []);
+  c.etype = ETYPES.some(t => t[0] === d.etype) ? d.etype : 'divisions';
+  Store.set('config', c); Store.set('players', []);
+  const first = c.etype === 'clubcup' ? [newEvent({kind:'clubcup', format:'club_cup'})] : c.etype === 'proam' ? [newEvent({kind:'proam', format:'pro_am'})] : [];
+  Store.set('events', first);
 }
 
 /* ---------- Step 1: basics ---------- */
@@ -7920,10 +7994,10 @@ function landingView(){
   const seg = view.lseg || (view.invPeek ? 'invites' : cur.length ? 'mine' : 'invites'), invN = (view.myInv || []).filter(r => r.status === 'pending').length + (view.invPeek && !(view.myInv || []).some(r => r.code === view.invPeek.code) ? 1 : 0);
   const st = t => !t.start ? null : t.end && t.end < today ? {k:'done', label:'Completed'} : t.start <= today ? {k:'live', label:'Live event'} : {k:'upcoming', label:'Upcoming'};
   const fmtD = (a, b) => { if (!a) return ''; const p = x => { const [y, m, d] = x.split('-').map(Number); return new Date(y, m - 1, d) }, A = p(a), B = p(b || a), mo = d => d.toLocaleDateString('en-US', {month:'short'}); return +A === +B ? `${mo(A)} ${A.getDate()}` : mo(A) === mo(B) ? `${mo(A)} ${A.getDate()}–${B.getDate()}` : `${mo(A)} ${A.getDate()} – ${mo(B)} ${B.getDate()}` };
-  const card = (t, i) => { const s2 = st(t); return `<li><button class="v3-ecard ${i === 0 && seg === 'mine' ? 'feat' : ''}" data-act="opentrip" data-code="${esc(t.code)}">
+  const card = (t, i) => { const s2 = st(t); return `<li class="swrow v7-trow"><div class="swact"><button class="swbtn rm" data-act="mgremove" data-id="${esc(t.id)}">Remove</button>${t.role === 'admin' ? `<button class="swbtn del" data-act="mgdelete" data-id="${esc(t.id)}">Delete</button>` : ''}</div><div class="swfront"><button class="v3-ecard ${i === 0 && seg === 'mine' ? 'feat' : ''}" data-act="opentrip" data-code="${esc(t.code)}">
       ${i === 0 && seg === 'mine' ? `<span class="v3-ecard-ph">${t.cover ? `<img src="${esc(t.cover)}" alt="" loading="lazy" decoding="async">` : `<img src="${IMG_HERO}" srcset="${imgSet('court-hero')}" sizes="(min-width:740px) 700px, 100vw" alt="" loading="lazy" decoding="async">`}</span>` : ''}
       <span class="v3-ecard-b"><span class="v3-ecard-top">${s2 ? v3Badge(s2) : ''}</span><b>${esc(t.name)}</b>${t.club ? `<span class="v3-ecard-club">${esc(t.club)}</span>` : ''}
-      <span class="v3-ecard-meta">${t.start ? `<span>${ICON.cal}${esc(fmtD(t.start, t.end))}</span>` : ''}<span>Code ${esc(t.code)}${t.role === 'admin' ? ' · director on this device' : ''}</span></span></span>${CHEV}</button></li>` };
+      <span class="v3-ecard-meta">${t.start ? `<span>${ICON.cal}${esc(fmtD(t.start, t.end))}</span>` : ''}<span>Code ${esc(t.code)}${t.role === 'admin' ? (signedIn() ? ' · you direct this' : ' · director on this device') : ''}</span></span></span>${CHEV}</button><button class="v7-tmore" data-act="tmenu" data-id="${esc(t.id)}" aria-label="More for ${esc(t.name)}: remove or delete">⋯</button></div></li>` };
   const segBtn = (k, label, icon, n) => `<button data-act="lseg" data-v="${k}" aria-pressed="${seg === k}">${ICON[icon]}<span>${label}${n != null ? ` (${n})` : ''}</span></button>`;
   const join = `<section class="v3-card" aria-labelledby="join-h"><h2 class="v3-h3" id="join-h">Join with an invite code</h2><p class="bk-rules">Enter the code from the tournament director, or open the link they shared.</p>
     <label class="sr" for="joincode">Join code</label><div class="joinrow"><input id="joincode" class="bk-input codebox" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC123" value="${esc(view.joinCode || '')}"><button class="btn" data-act="join">Join</button></div>
@@ -7931,12 +8005,13 @@ function landingView(){
   const list = seg === 'invites' ? landingInvites() : (seg === 'past' ? past : cur).length ? `<ul class="v3-elist">${(seg === 'past' ? past : cur).map(card).join('')}</ul>` : `<p class="bk-empty">${seg === 'past' ? 'No past tournaments on this device yet.' : 'No tournaments on this device yet. Join one with a code, or start your own.'}</p>${seg === 'mine' ? join : ''}`;
   return `<div class="land2 v3-land">
   <header class="v3-top tall v3l" role="banner">${hdrImg()}
-    <div class="v3-top-row"><span class="v3-top-side"></span><img class="v3-logo" src="${BRAND_HERO}" alt="Bracketly. Tennis. Pickleball. Together." width="104" height="104"><span class="v3-top-side end"></span></div>
+    <div class="v3-top-row"><span class="v3-top-side"></span><img class="v3-logo" src="${BRAND_HERO}" alt="Bracketly. Tennis. Pickleball. Together." width="104" height="104"><span class="v3-top-side end">${acctBtn()}</span></div>
     <p class="v3-tagline" aria-hidden="true"><i></i>Tennis. Pickleball. Together.<i></i></p>
   </header>
   <div class="v3-land-in">
 <div class="v3-evhead"><h1 class="v3-h1 dark">Your Events</h1><button class="v3-goldbtn" data-act="newtrip">${ICON.plus}<span>New Event</span></button></div>
   <div class="v3-seg" role="group" aria-label="Show events">${segBtn('mine', 'My Events', 'cal', cur.length)}${segBtn('invites', 'Invites', 'people', invN || null)}${segBtn('past', 'Past', 'clock', past.length || null)}</div>
+  ${acctStrip()}
   ${Dir.err ? `<p class="bk-note err" role="alert"><b>Can't reach the server.</b> Joining and recent tournaments may not load. Details are under Diagnostics.</p>` : ''}
   ${list}
   <section class="bk-sec"><h2 class="v3-h2">Organizers</h2><ul class="bk-rows"><li><button class="bk-row" data-act="newtrip"><span><b>Run a tournament</b><span>Set up events, draws, courts and a schedule</span></span>${CHEV}</button></li>
@@ -8166,6 +8241,7 @@ let raf = 0;
 function render(){ if (raf) return; raf = requestAnimationFrame(() => { raf = 0; draw() }) }
 function draw(){
   drawInner();
+  if (drawInner._sheetKeep){ const ns = document.querySelector('#app .modal .sheet'); if (ns) ns.scrollTop = drawInner._sheetKeep }
   if (view.ask){ app.insertAdjacentHTML('beforeend', askHtml()); const i = document.getElementById('askin'); if (i && document.activeElement !== i) i.focus({preventScroll:true}) }
   try{ fillQRs() }catch(e){}
 }
@@ -8187,11 +8263,17 @@ function drawInner(){
   _typed = typed;
   if (view.qaFocus){ _typed = null; fid = '#' + view.qaFocus; sel = null; view.qaFocus = null }
   const old = document.getElementById('scroller'), keep = old && !view.resetScroll ? old.scrollTop : 0;
+  const navK = [TRIP && TRIP.id, view.screen, view.tab, view.ev, view.dws, view.ctab, view.me, view.wz && view.wz.step, view.cz, view.tv, view.print, view.signup].join('|');
+  const isNav = view.resetScroll || navK !== drawInner._nav; drawInner._nav = navK;
+  app.classList.toggle('nofade', !isNav);
+  const oSheet = document.querySelector('#app .modal .sheet'), sheetKeep = oSheet && view.modal && view.modal === drawInner._modal ? oSheet.scrollTop : 0; drawInner._modal = view.modal;
+  drawInner._sheetKeep = sheetKeep;
   view.resetScroll = false;
   app.classList.toggle('tvmode', !!(TRIP && view.tv));
   app.classList.toggle('v3home', view.tab === 'today' && view.screen !== 'wizard');
+  if (view.screen === 'auth'){ app.innerHTML = authView() + modal(); restoreFocus(fid, sel); return }
   if (!TRIP && view.screen === 'wizard'){ app.innerHTML = wizardView(); restoreFocus(fid, sel); return }
-  if (view.screen === 'land' || !TRIP){ app.innerHTML = landingView(); restoreFocus(fid, sel); return }
+  if (view.screen === 'land' || !TRIP){ app.innerHTML = landingView() + (view.modal === 'tmenu' ? tmenuSheet() : ''); restoreFocus(fid, sel); return }
   if (!cfg()){
     app.innerHTML = `<div class="land"><div class="land-in" style="text-align:center;padding-top:60px">${crestSvg(76)}<h2>${Store.lastErr ? "Can't reach the tournament" : 'Loading the tournament…'}</h2>${Store.lastErr ? `<p class="small muted">${esc(Store.lastErr)}</p>` : ''}<button class="btn alt sm" data-act="leavetrip">All tournaments</button></div></div>`;
     return;
@@ -8259,7 +8341,9 @@ const ACT = {
     try{ await enterTrip(await Dir.join(code)) }catch(e){ view.joinErr = (e.message || String(e)).replace(/trip/gi, 'tournament') }
   },
   async opentrip(el){ try{ await enterTrip(await Dir.join(el.dataset.code)) }catch(e){ toast("Couldn't open that tournament."); Dir.forget((Dir.known().find(x => x.code === el.dataset.code) || {}).id); view.myTrips = Dir.known() } },
-  newtrip(){ view.screen = 'wizard'; TRIP = null; view.wz = {step:'basics', draft:{name:'', sport:'tennis', start:'', end:'', pin:''}} },
+  newtrip(){ view.screen = 'wizard'; TRIP = null; view.wz = {step:'basics', draft:{name:'', sport:'tennis', start:'', end:'', pin:'', etype:'divisions'}} },
+  ntetype(el){ const g = id => (document.getElementById(id) || {}).value || ''; Object.assign(view.wz.draft, {name:g('nt-name'), start:g('nt-start'), end:g('nt-end'), pin:g('nt-pin'), etype:el.dataset.v}) },
+  setetype(el){ if (needAdmin()) return; const c = cfg(); c.etype = el.dataset.v; Store.set('config', c); if (el.dataset.v === 'ladder' && (view.nd || {}).kind === 'mixed') view.nd = Object.assign({}, view.nd, {kind:'doubles', level:'3.5'}) },
   ntsport(el){ const g = id => (document.getElementById(id) || {}).value || ''; Object.assign(view.wz.draft, {name:g('nt-name'), start:g('nt-start'), end:g('nt-end'), pin:g('nt-pin'), sport:el.dataset.v}) },
   async createtrip(){
     const g = id => (document.getElementById(id) || {}).value || '';
@@ -8468,11 +8552,12 @@ const ACT = {
   adddiv(){
     const nd = Object.assign({kind:'doubles', gender:'M', level:'3.5'}, view.nd || {}), raw = isTennis() ? nd.level : ((document.getElementById('nd-level') || {}).value || '').trim();
     const lv = raw === '' ? null : parseRating(raw);
-    const t = nd.kind === 'mixed' ? {kind:'mixed', gender:'X', cap:lv, format:'single_elim_cons'} : {kind:nd.kind, gender:nd.gender, level:lv, format:'single_elim_cons'};
+    const lad = etype() === 'ladder', kind = lad && nd.kind === 'mixed' ? 'doubles' : nd.kind;
+    const t = kind === 'mixed' ? {kind:'mixed', gender:'X', cap:lv, format:'single_elim_cons'} : {kind, gender:nd.gender, level:lv, format:lad ? 'challenge_ladder' : 'single_elim_cons'};
     const evs = evsCopy(), ev = newEvent(t);
     if (evs.some(e => e.name === ev.name)) ev.name += ' ' + (evs.filter(e => e.name.startsWith(ev.name)).length + 1);
-    ev.autoFormat = true;
-    evs.push(ev); saveEvents(evs); view.ev = ev.id; toast(`${ev.name} added. Add more, or go to Players.`);
+    ev.autoFormat = !lad; if (lad) ev.format = 'challenge_ladder';
+    evs.push(ev); saveEvents(evs); view.ev = ev.id; toast(`${ev.name}${lad ? ' ladder' : ''} added. Add more, or go to Players.`);
   },
   addspecial(el){ const evs = evsCopy(), ev = newEvent(el.dataset.v === 'clubcup' ? {kind:'clubcup', format:'club_cup'} : {kind:'proam', format:'pro_am'}); evs.push(ev); saveEvents(evs); view.ev = ev.id; toast(`${ev.name} added.`) },
   evkind(el){ return CHG.evv({dataset:{id:el.dataset.id, f:'kind'}, value:el.dataset.v}) },
@@ -9669,10 +9754,289 @@ function cardFromRow(get){
 setInterval(() => { if (state.events && state.events.some(isLadder)) { lSweep(); render() } }, 60000);
 setTimeout(lSweep, 4000);
 
+/* ================= v7 (2.9.0): accounts like Roundly, delete/remove from the list, media cleanup =================
+   Same model as Roundly: every device quietly gets its own anonymous sign-in (nothing to do, works as before).
+   Signing in is optional: email a 6-digit code (no password), Continue with Google / Apple once they're switched on
+   in Supabase + config.js, or a password for accounts that have one. Whatever this device was in (tournaments,
+   director role, picked name) moves into the account through a one-time merge token, so it follows you to any device. */
+const OAUTH = {google:!!CONF.GOOGLE_SIGNIN, apple:!!CONF.APPLE_SIGNIN};
+const oauthAny = () => OAUTH.google || OAUTH.apple;
+const PROV_NAME = {apple:'Apple', google:'Google', email:'email'};
+const G_LOGO = '<svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>';
+const APPLE_LOGO = '<svg width="16" height="18" viewBox="0 0 17 20" aria-hidden="true"><path fill="currentColor" d="M14.1 10.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9C3.6 4.7 2 5.7 1.1 7.3c-1.8 3.2-.5 7.9 1.3 10.5.9 1.3 1.9 2.7 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.7-1-2.7-4.2zM11.6 3c.7-.9 1.2-2 1.1-3.1-1 0-2.2.7-2.9 1.6-.6.7-1.2 1.9-1.1 3 1.1.1 2.2-.6 2.9-1.5z"/></svg>';
+const signedIn = () => !!(view.account && !view.account.anon);
+
+Object.assign(Dir, {
+  hasAccounts(){ return this.mode === 'supabase' && !!this.sb && this.ready && !this.err },
+  async me(){ if (!this.hasAccounts()) return null; const {data} = await this.sb.auth.getUser(); const u = data && data.user; if (!u) return null;
+    const prov = ((u.app_metadata || {}).provider) || 'email';
+    return {id:u.id, email:u.email || '', provider:prov, anon:!!u.is_anonymous || (!u.email && prov === 'email')} },
+  // a saved sign-in for a user Supabase no longer has (account deleted elsewhere): start fresh on this device
+  async deadSession(){ try{ const {data, error} = await this.sb.auth.getUser();
+      const gone = (error && (/not.?found|does not exist|sub claim/i.test(error.message || '') || [401, 403, 404].includes(error.status))) || (!error && !(data && data.user));
+      if (gone){ await this.sb.auth.signOut({scope:'local'}).catch(() => {}); return true } }catch(e){} return false },
+  async mergeToken(){ try{ const cur = await this.me(); if (cur && cur.anon){ const {data} = await this.sb.rpc('make_merge_token'); return data || null } }catch(e){} return null },
+  async claimMerge(tok){ if (!tok) return 0; try{ const {data} = await this.sb.rpc('claim_merge', {p_token:tok}); return data || 0 }catch(e){ return 0 } },
+  async oauth(provider){
+    if (!this.hasAccounts()) throw new Error('Sign-in works on the live version of Bracketly.');
+    const merge = await this.mergeToken();
+    LS.set('bkt-oauth', {provider, merge, at:Date.now()});
+    const {error} = await this.sb.auth.signInWithOAuth({provider, options:{redirectTo:location.origin + location.pathname, queryParams:provider === 'google' ? {prompt:'select_account'} : undefined}});
+    if (error){ LS.del('bkt-oauth'); throw new Error(/provider is not enabled|unsupported provider/i.test(error.message) ? `${PROV_NAME[provider]} sign-in isn't switched on yet. Use email for now.` : error.message) }
+    return {redirect:true};
+  },
+  // back from Google/Apple: move this device's tournaments into the account
+  async finishOAuth(){
+    const p = LS.get('bkt-oauth', null); if (!p) return null; LS.del('bkt-oauth');
+    if (Date.now() - (p.at || 0) > 2 * 3600e3) return null;
+    const u = await this.me(); if (!u || u.anon) return null;
+    this.oauthDone = {provider:p.provider, moved:await this.claimMerge(p.merge)}; return this.oauthDone;
+  },
+  async sendCode(email){
+    email = String(email || '').trim().toLowerCase(); if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) throw new Error('Enter a valid email address.');
+    const p0 = LS.get('bkt-pending', null), merge = (p0 && p0.email === email && p0.merge) || await this.mergeToken();
+    const {error} = await this.sb.auth.signInWithOtp({email, options:{shouldCreateUser:true}});
+    if (error) throw new Error(/rate|seconds|too many/i.test(error.message) ? 'Too many codes asked for. Wait a minute and try again.' : /signups? not allowed|disabled/i.test(error.message) ? "Email sign-in isn't switched on yet." : error.message);
+    this.pending = {email, merge}; LS.set('bkt-pending', this.pending);
+  },
+  async verifyCode(code){
+    const p = this.pending || LS.get('bkt-pending', null); if (!p) throw new Error('Ask for a code first.');
+    code = String(code || '').replace(/\D/g, ''); if (code.length < 6) throw new Error('Enter the 6-digit code from the email.');
+    const {error} = await this.sb.auth.verifyOtp({email:p.email, token:code, type:'email'});
+    if (error) throw new Error(/expired|invalid/i.test(error.message) ? "That code didn't work. Check it, or send a new one." : error.message);
+    const moved = await this.claimMerge(p.merge); this.pending = null; LS.del('bkt-pending'); return {moved};
+  },
+  async signInPassword(email, password){
+    const merge = await this.mergeToken();
+    const {error} = await this.sb.auth.signInWithPassword({email:String(email || '').trim(), password:String(password || '')});
+    if (error) throw new Error(/invalid/i.test(error.message) ? "That email and password don't match." : error.message);
+    return {moved:await this.claimMerge(merge)};
+  },
+  async signOut(){ await this.sb.auth.signOut().catch(() => {}); LS.set('bkt-tourneys', []); LS.del('bkt-last'); const {error} = await this.sb.auth.signInAnonymously(); if (error) throw error },
+  async getProfile(){ const u = await this.me(); if (!u || u.anon) return null; const {data} = await this.sb.from('profiles').select('*').eq('user_id', u.id).maybeSingle(); return data || {user_id:u.id} },
+  async saveProfile(p){ const u = await this.me(); if (!u || u.anon) throw new Error('Sign in first.');
+    const t = (v, n) => { v = String(v == null ? '' : v).trim().slice(0, n); return v || null };
+    const row = {user_id:u.id, name:t(p.name, 80), usta:t(String(p.usta || '').replace(/\D/g, ''), 20), ntrp:t(p.ntrp, 8), ntrp_type:t(p.ntrp_type, 4), updated_at:new Date().toISOString()};
+    const {error} = await this.sb.from('profiles').upsert(row); if (error) throw error; return row },
+  async deleteAccount(){ const {error} = await this.sb.rpc('delete_my_account'); if (error) throw error; await this.sb.auth.signOut({scope:'local'}).catch(() => {}); LS.set('bkt-tourneys', []); LS.del('bkt-last'); await this.sb.auth.signInAnonymously() },
+  // take it off your own list; it stays for everyone else
+  async leave(id){
+    if (this.mode === 'supabase'){ const {error} = await this.sb.rpc('leave_trip', {p_trip:id}); if (error) throw new Error("Couldn't remove it right now. Try again in a bit.") }
+    this.forget(id);
+  },
+  // photos and videos the tournament uploaded (directors only; Storage refuses anyone else)
+  async purgeMedia(id){
+    if (this.mode !== 'supabase' || !id) return 0; let n = 0;
+    for (const b of [MEDIA_BUCKET, BUCKET]){
+      const st = this.sb.storage.from(b), files = [];
+      const walk = async (pre, d) => { if (d > 3) return; const {data, error} = await st.list(pre, {limit:1000}); if (error || !data) return;
+        for (const x of data){ const path = pre + '/' + x.name; if (x.id == null) await walk(path, d + 1); else files.push(path) } };
+      try{ await walk(String(id), 0); for (let i = 0; i < files.length; i += 100){ const {data} = await st.remove(files.slice(i, i + 100)); n += (data || []).length } }catch(e){ console.warn('media cleanup', e) }
+    }
+    return n;
+  },
+  async removeById(id){
+    if (this.mode === 'supabase'){ await this.purgeMedia(id); const {data, error} = await this.sb.rpc('delete_trip', {p_trip:id}); if (error || !data) throw new Error((error && error.message) || 'Only a director can delete the tournament.') }
+    else if (this.mode === 'claude'){ await this.db.doc('trips/' + id).delete().catch(() => {}) }
+    else { const all = LS.get('bkt-local-tourneys', {}); delete all[id]; LS.set('bkt-local-tourneys', all); LS.del('bkt-local-kv-' + id) }
+    this.forget(id);
+  }
+});
+{ const _rm = Dir.remove; Dir.remove = async function(){ if (this.mode === 'supabase' && TRIP) await this.purgeMedia(TRIP.id); return _rm.call(this) } }
+
+async function refreshAccount(){
+  if (!Dir.hasAccounts()){ view.account = null; view.profile = null; return }
+  try{ view.account = await Dir.me(); view.profile = signedIn() ? await Dir.getProfile() : null }catch(e){ console.warn('account', e) }
+  render();
+}
+// After boot: finish a Google/Apple return, load who's signed in
+async function v7AfterInit(){
+  if (!Dir.hasAccounts()) return;
+  try{ if (Dir.oauthErr) toast("Sign-in didn't finish: " + Dir.oauthErr) }catch(e){}
+  const done = await Dir.finishOAuth().catch(() => null);
+  await refreshAccount();
+  if (done) toast(`Signed in with ${PROV_NAME[done.provider] || 'your account'}.${done.moved ? ` ${done.moved} tournament${done.moved === 1 ? '' : 's'} from this device saved to your account.` : ''}`);
+}
+
+/* ---------- the sign-in / account screen ---------- */
+const auBack = () => `<button class="v7-back" data-act="auclose" aria-label="Back">‹ ${TRIP ? 'Back to the tournament' : 'Back'}</button>`;
+function oauthButtons(f){
+  if (!oauthAny()) return '';
+  const b = [];
+  if (OAUTH.apple) b.push(`<button class="v7-oauth apple" data-act="auoauth" data-v="apple" ${f.busy ? 'disabled' : ''}>${APPLE_LOGO}<span>Continue with Apple</span></button>`);
+  if (OAUTH.google) b.push(`<button class="v7-oauth google" data-act="auoauth" data-v="google" ${f.busy ? 'disabled' : ''}>${G_LOGO}<span>Continue with Google</span></button>`);
+  return `<div class="v7-oauthbox">${b.join('')}</div><div class="v7-or"><span>or use email</span></div>`;
+}
+const NTRP_OPTS = ['', '2.5', '3.0', '3.5', '4.0', '4.5', '5.0', '5.5', '6.0', '6.5', '7.0'];
+function authView(){
+  const f = view.au = view.au || {step:'start'}, a = view.account, pr = view.profile || {};
+  const err = f.err ? `<p class="bk-note err" role="alert">${esc(f.err)}</p>` : '';
+  let body;
+  if (!Dir.hasAccounts()) body = `<h1 class="v3-h1 dark">Sign in</h1><p class="bk-rules">Accounts work on the live version of Bracketly (connected to the server). This copy keeps everything on this device.</p>`;
+  else if (signedIn()){
+    const ml = (view.myTrips || Dir.known()).length;
+    body = `<h1 class="v3-h1 dark">Your account</h1>
+      <p class="bk-rules">Signed in${PROV_NAME[a.provider] && a.provider !== 'email' ? ' with ' + PROV_NAME[a.provider] : ''} as <b>${esc(a.email || 'your account')}</b>. Your tournaments, director access and player name follow you to any phone or computer.</p>
+      <section class="v3-card v7-acard" aria-labelledby="pf-h"><h2 class="v3-h3" id="pf-h">Your player profile</h2>
+        <p class="bk-rules">Fills in your player card when you pick your name in a tournament.</p>
+        <label for="pf-name">Name</label><input id="pf-name" class="bk-input" autocomplete="name" maxlength="80" value="${esc(pr.name || '')}">
+        <div class="v7-2"><div><label for="pf-usta">USTA number</label><input id="pf-usta" class="bk-input" inputmode="numeric" maxlength="15" value="${esc(pr.usta || '')}"></div>
+          <div><label for="pf-ntrp">NTRP</label><div class="v7-2 tight"><select id="pf-ntrp" class="bk-input">${NTRP_OPTS.map(x => `<option value="${x}" ${String(pr.ntrp || '') === x ? 'selected' : ''}>${x || '—'}</option>`).join('')}</select>
+          <select id="pf-ntrpt" class="bk-input" aria-label="NTRP rating type">${[['', 'Type'], ['C', 'C'], ['S', 'S'], ['A', 'A'], ['T', 'T'], ['M', 'M'], ['D', 'D']].map(([k, l]) => `<option value="${k}" ${String(pr.ntrp_type || '') === k ? 'selected' : ''}>${l}</option>`).join('')}</select></div></div></div>
+        <button class="btn v3-primary" style="width:100%;margin-top:12px" data-act="pfsave" ${f.busy ? 'disabled' : ''}>Save profile</button></section>
+      <ul class="bk-rows v3-card"><li><button class="bk-row" data-act="aumine"><span><b>My tournaments</b><span>${ml} on your account</span></span>${CHEV}</button></li></ul>
+      <div class="v7-acts"><button class="btn alt" data-act="ausignout">Sign out</button><button class="btn danger" data-act="audelete">Delete my account</button></div>
+      <p class="bk-rules small">Deleting your account removes your profile and takes you out of your tournaments. The tournaments stay for everyone else.</p>`;
+  } else if (f.step === 'code') body = `<h1 class="v3-h1 dark">Check your email</h1>
+      <p class="bk-rules">We sent a 6-digit code to <b>${esc(f.email)}</b>. It can take a minute; check spam if it's not there.</p>
+      <section class="v3-card v7-acard"><label for="au-code">6-digit code</label>
+        <input id="au-code" class="bk-input codebox v7-code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="······" value="">
+        ${err}<button class="btn v3-primary" style="width:100%;margin-top:12px" data-act="auverify" ${f.busy ? 'disabled' : ''}>${f.busy ? 'Checking…' : 'Continue'}</button>
+        <p class="v7-links"><button data-act="ausend">Send a new code</button> · <button data-act="auback">Use a different email</button></p></section>`;
+  else body = `<h1 class="v3-h1 dark">Sign in or create an account</h1>
+      <p class="bk-rules">Keep your tournaments, director access and player card on any phone or computer. No password: we email you a 6-digit code. New here? The same code creates your account.</p>
+      ${oauthButtons(f)}
+      <section class="v3-card v7-acard"><label for="au-email">Email</label>
+        <input id="au-email" class="bk-input" type="email" inputmode="email" autocomplete="${f.pw ? 'username' : 'email'}" placeholder="you@example.com" value="${esc(f.email || '')}">
+        ${f.pw ? `<label for="au-pw">Password</label><input id="au-pw" class="bk-input" type="password" autocomplete="current-password">` : ''}
+        ${err}
+        ${f.pw ? `<button class="btn v3-primary" style="width:100%;margin-top:12px" data-act="aupwgo" ${f.busy ? 'disabled' : ''}>${f.busy ? 'Signing in…' : 'Sign in'}</button>
+          <p class="v7-links"><button data-act="aupw">Forgot it? Email me a code instead</button></p>`
+        : `<button class="btn v3-primary" style="width:100%;margin-top:12px" data-act="ausend" ${f.busy ? 'disabled' : ''}>${f.busy ? 'Sending…' : 'Email me a code'}</button>
+          <p class="v7-links"><button data-act="aupw">Have a password?</button></p>`}</section>
+      <p class="bk-rules small">Prefer not to? Bracketly works without an account on this device, like before. ${TRIP ? '' : '<button class="bk-link" data-act="auclose">Not now</button>'}</p>`;
+  return `<div class="land2 v3-land v7-auth"><div class="v3-land-in v7-auth-in">${auBack()}${body}</div></div>`;
+}
+const acctBtn = () => !Dir.hasAccounts() ? '' : signedIn()
+  ? `<button class="v7-acct on" data-act="acctopen" aria-label="Your account">${esc(initials((view.profile || {}).name || (view.account.email || '?').split('@')[0]))}</button>`
+  : `<button class="v7-acct" data-act="acctopen">Sign in</button>`;
+const acctStrip = () => !Dir.hasAccounts() ? '' : signedIn()
+  ? `<div class="v7-astrip"><span>Signed in as <b>${esc(view.account.email || 'your account')}</b></span><button class="btn alt sm" data-act="acctopen">Account</button></div>`
+  : `<div class="v7-astrip"><span>Sign in to keep your tournaments on any phone or computer.</span><button class="btn sm" data-act="acctopen">Sign in</button></div>`;
+
+/* ---------- a tournament row's menu: Remove from my list / Delete for everyone ---------- */
+const tFind = id => (view.myTrips || Dir.known()).find(t => t.id === id);
+function tmenuSheet(){
+  const t = tFind(view.tmenu); if (!t) return '';
+  return `<div class="modal" data-act="closemodal"><div class="sheet v7-tmenu" data-stop="1" role="dialog" aria-labelledby="tm-h">
+    <h2 id="tm-h" style="margin:0 0 2px">${esc(t.name)}</h2><p class="bk-rules" style="margin-top:0">Join code ${esc(t.code)}${t.role === 'admin' ? ' · you direct this one' : ''}</p>
+    <ul class="bk-rows v3-card">
+      <li><button class="bk-row" data-act="opentrip" data-code="${esc(t.code)}"><span><b>Open</b><span>Go to the tournament</span></span>${CHEV}</button></li>
+      <li><button class="bk-row" data-act="tmremove" data-id="${esc(t.id)}"><span><b>Remove from my list</b><span>It stays for everyone else. Rejoin any time with ${esc(t.code)}.</span></span>${CHEV}</button></li>
+      ${t.role === 'admin' ? `<li><button class="bk-row v7-danger" data-act="tmdelete" data-id="${esc(t.id)}"><span><b>Delete for everyone</b><span>Draws, scores, chat, player cards and photos are erased.</span></span>${CHEV}</button></li>` : ''}
+    </ul><p style="margin:12px 0 0"><button class="btn alt" data-act="closemodal">Close</button></p></div></div>`;
+}
+{ const _m = modal; modal = function(){ if (view.modal === 'tmenu') return tmenuSheet(); return _m() } }
+
+async function confirmDelete(name, code){
+  if (!await ask(`Delete "${name}" for everyone?\n\nIts draws, scores, schedule, chat, player cards and photos will be gone for every player. This can't be undone.`, {danger:true, ok:'Continue'})) return false;
+  const typed = ((await ask(`Type the join code (${code}) to confirm.`, {input:true, ok:'Delete', danger:true})) || '').trim().toUpperCase();
+  if (typed !== String(code).toUpperCase()){ toast('Not deleted.'); return false }
+  return true;
+}
+Object.assign(ACT, {
+  acctopen(){ view.au = {step:'start', back:{screen:view.screen, tab:view.tab}, email:(view.account && view.account.email) || (LS.get('bkt-pending', null) || {}).email || ''}; view.modal = null; view.screen = 'auth'; view.resetScroll = true; if (signedIn() && !view.profile) refreshAccount() },
+  auclose(){ const b = (view.au || {}).back || {}; view.au = null; view.screen = TRIP ? (b.screen && b.screen !== 'auth' ? b.screen : 'app') : 'land'; if (TRIP && b.tab) view.tab = b.tab; view.resetScroll = true; if (!TRIP) refreshLanding() },
+  aupw(){ const f = view.au; const el = document.getElementById('au-email'); if (el) f.email = el.value.trim(); f.pw = !f.pw; f.err = null },
+  auback(){ view.au = Object.assign({}, view.au, {step:'start', err:null}) },
+  async auoauth(el){ const f = view.au; f.err = null; f.busy = true; render();
+    try{ const r = await Dir.oauth(el.dataset.v); if (r && r.redirect) return }catch(e){ f.err = (e && e.message) || String(e) } f.busy = false; render() },
+  async ausend(){ const f = view.au; const el = document.getElementById('au-email'); if (el) f.email = el.value.trim(); f.err = null; f.busy = true; render();
+    try{ await Dir.sendCode(f.email); f.step = 'code'; setTimeout(() => { const i = document.getElementById('au-code'); i && i.focus() }, 60) }catch(e){ f.err = e.message } f.busy = false; render() },
+  async auverify(){ const f = view.au; f.err = null; f.busy = true; const code = (document.getElementById('au-code') || {}).value; render();
+    try{ const r = await Dir.verifyCode(code); await v7SignedIn(r.moved) }catch(e){ f.err = e.message } if (view.au) view.au.busy = false; render() },
+  async aupwgo(){ const f = view.au; const el = document.getElementById('au-email'); if (el) f.email = el.value.trim(); const pw = (document.getElementById('au-pw') || {}).value; f.err = null; f.busy = true; render();
+    try{ const r = await Dir.signInPassword(f.email, pw); await v7SignedIn(r.moved) }catch(e){ f.err = e.message } if (view.au) view.au.busy = false; render() },
+  async pfsave(){ const g = id => ((document.getElementById(id) || {}).value || '').trim();
+    try{ view.profile = Object.assign({}, view.profile || {}, await Dir.saveProfile({name:g('pf-name'), usta:g('pf-usta'), ntrp:g('pf-ntrp'), ntrp_type:g('pf-ntrpt')})); toast('Profile saved.') }catch(e){ toast(e.message || "Couldn't save.") } render() },
+  aumine(){ if (TRIP) leaveTrip(); view.au = null; view.screen = 'land'; view.lseg = 'mine'; view.resetScroll = true; refreshLanding() },
+  async ausignout(){ if (!await ask('Sign out on this device? Your tournaments stay in your account; sign in again to get them back.')) return;
+    try{ await Dir.signOut() }catch(e){ toast(e.message || "Couldn't sign out.") } view.account = null; view.profile = null; if (TRIP) leaveTrip(); view.myTrips = []; view.au = null; view.screen = 'land'; await refreshAccount(); refreshLanding(); toast('Signed out.') },
+  async audelete(){ if (!await ask("Delete your account? Your profile goes away and you're taken out of your tournaments. The tournaments stay for everyone else. This can't be undone.", {danger:true, ok:'Continue'})) return;
+    if (((await ask('Type DELETE to confirm.', {input:true, ok:'Delete account', danger:true})) || '').trim().toUpperCase() !== 'DELETE') return toast('Not deleted.');
+    try{ await Dir.deleteAccount(); view.account = null; view.profile = null; if (TRIP) leaveTrip(); view.myTrips = []; view.au = null; view.screen = 'land'; await refreshAccount(); refreshLanding(); toast('Account deleted.') }catch(e){ toast(e.message || "Couldn't delete the account.") } },
+  tmenu(el){ view.tmenu = el.dataset.id; view.modal = 'tmenu' },
+  async tmremove(el){ const t = tFind(el.dataset.id); if (!t) return;
+    if (!await ask(`Take "${t.name}" off your list?\n\nThe tournament stays as it is for everyone else, and you can get back in any time with its code, ${t.code}.${t.role === 'admin' ? ' To direct it again you would need the director PIN.' : ''}`)) return;
+    try{ await Dir.leave(t.id); view.myTrips = (view.myTrips || Dir.known()).filter(x => x.id !== t.id); view.modal = null; toast(`Removed ${t.name} from your list.`) }catch(e){ toast((e && e.message) || "Couldn't remove it.") } render() },
+  async tmdelete(el){ const t = tFind(el.dataset.id); if (!t) return; view.modal = null;
+    if (!await confirmDelete(t.name, t.code)) return;
+    try{ await Dir.removeById(t.id); view.myTrips = (view.myTrips || Dir.known()).filter(x => x.id !== t.id); toast(`Deleted ${t.name}.`) }catch(e){ toast((e && e.message) || "Couldn't delete it.") } render() }
+});
+ACT.mgremove = ACT.tmremove; ACT.mgdelete = ACT.tmdelete;
+ACT.deltrip = async function(){
+  if (!TRIP) return; if (!await confirmDelete(tripTitle(), TRIP.code)) return;
+  try{ await Dir.remove(); toast('Tournament deleted.'); leaveTrip() }catch(e){ toast(e.message || "Couldn't delete it.") }
+};
+async function v7SignedIn(moved){
+  await refreshAccount();
+  try{ view.myTrips = await Dir.mine() }catch(e){}
+  if (TRIP){ const t = (view.myTrips || []).find(x => x.id === TRIP.id); if (t && t.role === 'admin'){ TRIP.role = 'admin'; view.admin = true } }
+  view.au = Object.assign({}, view.au, {step:'start', err:null, busy:false});
+  toast(moved ? `Signed in. ${moved} tournament${moved === 1 ? '' : 's'} from this device saved to your account.` : 'Signed in.');
+  if (signedIn() && !(view.profile || {}).name) setTimeout(() => { const i = document.getElementById('pf-name'); i && i.focus() }, 80);
+}
+
+/* ---------- signed in: get your name back in a tournament, and fill your card from your profile ---------- */
+{ const _et = enterTrip; enterTrip = async function(t, opts){
+    const r = await _et(t, opts);
+    try{
+      if (signedIn() && TRIP && TRIP.id === t.id && !view.me){
+        const {data} = await Dir.sb.from('trip_members').select('player_id,role').eq('trip_id', TRIP.id).eq('user_id', view.account.id).maybeSingle();
+        if (data && data.player_id && P(data.player_id) && TRIP.id === t.id && !view.me){ view.me = data.player_id; LS.set(TK('me'), view.me); render() }
+      }
+    }catch(e){}
+    return r;
+  } }
+async function fillCardFromProfile(pid){
+  const pr = view.profile || {}; if (!signedIn() || !pr || !(pr.usta || pr.ntrp) || !TRIP || Dir.mode !== 'supabase') return;
+  const old = cardOf(pid), add = {};
+  if (pr.usta && !old.usta) add.usta = pr.usta;
+  if (pr.ntrp && (old.ntrp == null || old.ntrp === '')){ add.ntrp = pr.ntrp; if (pr.ntrp_type && !old.ntrp_type) add.ntrp_type = pr.ntrp_type }
+  if (!Object.keys(add).length || !canEditCard(pid)) return;
+  try{ await Dir.sb.rpc('set_my_player', {p_trip:TRIP.id, p_player:pid}); const row = await Dir.saveCard(pid, Object.assign({}, old, add)); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}); toast(`Added your ${[add.usta && 'USTA number', add.ntrp && 'NTRP'].filter(Boolean).join(' and ')} from your account to your player card.`); render() }catch(e){ console.warn('card from profile', e) }
+}
+{ const _pk = ACT.pickme; ACT.pickme = function(el){ const r = _pk.call(this, el); const pid = el.dataset.id; if (pid && pid !== GUEST) setTimeout(() => fillCardFromProfile(pid), 400); return r } }
+{ const _g = gate; gate = function(){ const h = _g(), nm = ((view.profile || {}).name || '').trim().toLowerCase(); if (!signedIn() || !nm) return h;
+    const p = players().find(x => String(x.name || '').trim().toLowerCase() === nm); if (!p) return h;
+    return h.replace('<div class="gate-top">', `<div class="v7-you"><span>Signed in as <b>${esc(view.account.email || '')}</b>. Is this you?</span><button class="btn" data-act="pickme" data-id="${esc(p.id)}">I'm ${esc(p.name)}</button></div><div class="gate-top">`) } }
+{ const _mv = moreView; moreView = function(){ const h = _mv(); if (!Dir.hasAccounts()) return h;
+    const row = `<li><button class="bk-row" data-act="acctopen"><span><b>${signedIn() ? 'Your account' : 'Sign in'}</b><span>${signedIn() ? esc(view.account.email || '') : 'Keep your tournaments on any phone or computer'}</span></span>${CHEV}</button></li>`;
+    return h.replace(/(<ul class="bk-rows v3-card">)(?![\s\S]*<ul class="bk-rows v3-card">)/, '$1' + row) } }
+
+/* ---------- swipe a tournament row left for Remove / Delete (as in Roundly); the ⋯ button does the same ---------- */
+(function swipeRows(){
+  let row = null, sx = 0, sy = 0, base = 0, dx = 0, mode = null, max = 0, eat = false;
+  const width = r => { const a = r.querySelector('.swact'); return a ? a.offsetWidth : 0 };
+  const put = (r, x, anim) => { const f = r.querySelector('.swfront'); if (!f) return; f.style.transition = anim ? 'transform .22s ease' : 'none'; f.style.transform = x ? `translateX(${x}px)` : ''; r.classList.toggle('sw', x < 0) };
+  const snap = (r, open) => { put(r, open ? -width(r) : 0, true); r.classList.toggle('open', open) };
+  const closeAll = keep => document.querySelectorAll('.swrow.open, .swrow.sw').forEach(r => { if (r !== keep) snap(r, false) });
+  const swallow = () => { eat = true; setTimeout(() => { eat = false }, 400) };
+  document.addEventListener('pointerdown', e => {
+    const f = e.target.closest && e.target.closest('.swfront');
+    if (!f){ if (!(e.target.closest && e.target.closest('.swact'))) closeAll(); return }
+    if (e.target.closest('.v7-tmore')) return;
+    row = f.closest('.swrow'); sx = e.clientX; sy = e.clientY; dx = 0; mode = null; max = width(row); base = row.classList.contains('open') ? -max : 0; closeAll(row);
+  }, {passive:true});
+  document.addEventListener('pointermove', e => {
+    if (!row) return; const mx = e.clientX - sx, my = e.clientY - sy;
+    if (!mode){ if (Math.abs(mx) > 8 && Math.abs(mx) > Math.abs(my) * 1.2) mode = 'x'; else if (Math.abs(my) > 8){ row = null; return } else return }
+    dx = mx; put(row, Math.min(0, Math.max(-max - 24, base + dx)), false);
+  }, {passive:true});
+  const end = () => { if (!row) return; if (mode === 'x'){ swallow(); snap(row, base + dx < -max / 2) } else if (row.classList.contains('open')){ swallow(); snap(row, false) } row = null };
+  document.addEventListener('pointerup', end); document.addEventListener('pointercancel', () => { if (row && mode === 'x') snap(row, base + dx < -max / 2); row = null });
+  document.addEventListener('click', e => { if (eat && e.target.closest && e.target.closest('.swfront')){ e.stopPropagation(); e.preventDefault() } }, true);
+})();
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return; const id = e.target && e.target.id, run = a => { e.preventDefault(); const out = ACT[a](); render(); if (out && out.then) out.then(render) };
+  if (id === 'au-email') run(view.au && view.au.pw ? 'aupwgo' : 'ausend'); else if (id === 'au-pw') run('aupwgo'); else if (id === 'au-code') run('auverify');
+});
+
 (async () => {
   { const q0 = new URLSearchParams(location.search), h0 = (location.hash.match(/t=([A-Za-z0-9]+)/) || [])[1]; const c0 = q0.get('join') || h0; if (c0) view.resolving = String(c0).toUpperCase().slice(0, 8) }
   render();
   await Dir.init();
+  try{ await v7AfterInit() }catch(e){ console.warn('account', e) }
   view.myTrips = null; render();
   const qs = new URLSearchParams(location.search), hash = (location.hash.match(/t=([A-Za-z0-9]+)/) || [])[1];
   view.tv = qs.get('tv') === '1'; view.signup = qs.get('signup') === '1';
@@ -9690,7 +10054,11 @@ setTimeout(lSweep, 4000);
   if (!TRIP) refreshLanding();
   if ('serviceWorker' in navigator && location.protocol === 'https:' && !window.claude && window.top === window.self){
     navigator.serviceWorker.register('sw.js').then(reg => { reg.update(); document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update() }) }).catch(() => {});
-    let reloaded = false; navigator.serviceWorker.addEventListener('controllerchange', () => { if (reloaded) return; reloaded = true; location.reload() });
+    /* v7: the first-ever install claims the page too, which used to force a reload a second after opening (the "glitch").
+       Only reload when an older version was already running, and never in the middle of typing, a sheet, or a prompt. */
+    let reloaded = false; const hadCtl = !!navigator.serviceWorker.controller;
+    const swReload = () => { if (reloaded) return; if (!document.hidden && (view.modal || view.ask || isTyping() || view.screen === 'wizard')){ clearTimeout(swReload._t); swReload._t = setTimeout(swReload, 4000); return } reloaded = true; location.reload() };
+    navigator.serviceWorker.addEventListener('controllerchange', () => { if (!hadCtl) return; swReload() });
   }
   setInterval(() => { if (document.hidden || !TRIP || Store.mode !== 'live' || Dir.mode !== 'supabase') return; const live = Store.rt === 'SUBSCRIBED'; Store._pollN = (Store._pollN || 0) + 1; if (!live || Store._pollN % 3 === 0) Store.connect() }, 20000);
   setInterval(() => { try{ checkReminders() }catch(e){} }, 60000);
