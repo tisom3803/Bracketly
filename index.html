@@ -788,6 +788,14 @@ header.top .hright{flex:0 0 auto}
 .missing .mh2{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.missing .mh2 b{color:var(--red)}
 .missing .mi{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%;text-align:left;padding:6px 0;border-top:1px solid var(--rule);font-size:14px;flex-wrap:wrap}
 .missing .mi i{font-style:normal;font-size:12px;color:var(--muted);white-space:nowrap}
+.missing .mi.clash{flex-wrap:nowrap;cursor:pointer;background:none;border-left:0;border-right:0;border-bottom:0;color:inherit;font:inherit;font-size:14px}
+.missing .mi.clash:focus-visible,.sgm:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.missing .mi.clash[aria-expanded="true"]{font-weight:600}
+.missing .mi.clash>span{flex:1;min-width:0}
+.clashd{padding:4px 0 10px;font-size:13px}.clashd>p{margin:0 0 6px}
+.clashd .clm{display:flex;flex-direction:column;gap:2px;padding:8px 10px;margin:6px 0 0;border:1px solid var(--rule);border-radius:var(--rad, 8px);background:var(--slot)}
+.clashd .clm em{font-style:normal;color:var(--muted)}.clashd .clm .row{margin-top:6px;gap:6px;flex-wrap:wrap}
+.sgm.hl{outline:3px solid var(--red);outline-offset:-3px;background:var(--slot)}
 .okbox{background:var(--card);border:2px solid var(--green);color:var(--green);padding:8px 10px;margin:10px 0;font-weight:700}
 .fits{background:var(--card);border:2px solid var(--green);padding:10px 12px;margin:8px 0}.fits b{display:block;font:700 20px/1.1 var(--fd)}.fits span{font-size:13px;color:var(--muted)}
 .fits.bad{border-color:var(--red)}.fits.bad b{color:var(--red)}
@@ -3655,8 +3663,31 @@ function clashList() {
   try { detectConflicts().forEach(add) } catch (e) {}
   return [...seen.values()].sort((a, b) => (b.sure - a.sure) || (a.slotIdx - b.slotIdx));
 }
+// How player p gets into match m: named in it, or by winning/losing an earlier match
+function clashWhy(m, p) {
+  if (getKnownMatchPlayers(m).includes(p)) return 'Named in this match';
+  for (let i = 0; i < 2; i++) {
+    const lf = decodeLoserFeeder((m.feedsFromLosers || [])[i]), lm = lf && findMatch(lf.matchId);
+    if (lm && getMatchPlayers(lm, true).includes(p)) return `Plays here if they lose ${roundName(lm)} (${sideLabel(lm, 'team1', true)} vs ${sideLabel(lm, 'team2', true)})`;
+    const wm = findMatch((m.feedsFrom || [])[i]);
+    if (wm && getMatchPlayers(wm, true).includes(p)) return `Plays here if they win ${roundName(wm)} (${sideLabel(wm, 'team1', true)} vs ${sideLabel(wm, 'team2', true)})`;
+  }
+  return 'Could reach this match';
+}
+function clashKey(c) { return c.slotIdx + '|' + c.player }
 function clashItem(c) {
-  return `<div class="mi" style="cursor:default"><span>${esc(c.player)}: ${esc(TIME_SLOTS[c.slotIdx] ? TIME_SLOTS[c.slotIdx].join(' ') : '')}${c.sure ? ' (booked twice)' : ' (only if results go a certain way)'}</span></div>`;
+  const k = clashKey(c), open = view.clashOpen === k, id = 'clx' + c.slotIdx + '-' + String(c.player).replace(/[^A-Za-z0-9]/g, '');
+  return `<button type="button" class="mi clash" data-act="clashx" data-v="${esc(k)}" aria-expanded="${open}" aria-controls="${id}"><span><b>${esc(c.player)}</b>: ${esc(TIME_SLOTS[c.slotIdx] ? TIME_SLOTS[c.slotIdx].join(' ') : '')}</span><i><span class="st ${c.sure ? 'warn' : 'neutral'}">${c.sure ? 'Booked twice' : 'Possible'}</span> ${open ? '▴' : '▾'}</i></button>${open ? clashDetail(c, id) : ''}`;
+}
+function clashDetail(c, id) {
+  const ms = (c.matchIds || []).map(findMatch).filter(Boolean), t = TIME_SLOTS[c.slotIdx];
+  const head = c.sure ? `${esc(c.player)} will be due on two courts at ${esc(t ? t.join(' ') : 'this time')}, whatever the results. Move one of these matches.`
+    : `${esc(c.player)} is only double-booked at ${esc(t ? t.join(' ') : 'this time')} if results go a certain way. You can leave it, or move a match to be safe.`;
+  return `<div class="clashd" id="${id}" role="region" aria-label="Clash details for ${esc(c.player)}"><p>${head}</p>
+    ${ms.map(m => { const ev = findEvent(m.eventId) || {}; return `<div class="clm"><b>${esc(ev.name || '')} · ${esc(roundName(m))}</b>
+      <span>${esc(sideLabel(m, 'team1'))} <em>vs</em> ${esc(sideLabel(m, 'team2'))}</span>
+      <span class="small muted">${esc(t ? t.join(' ') : '')} · ${esc(m.court ? courtName(m.court) : 'No court yet')} · ${esc(clashWhy(m, c.player))}</span>
+      <span class="row"><button type="button" class="btn alt sm" data-act="clashshow" data-id="${esc(m.id)}" data-v="${esc(clashKey(c))}">Show in grid</button><button type="button" class="btn sm" data-act="movemenu" data-id="${esc(m.id)}">Move this match</button></span></div>` }).join('')}</div>`;
 }
 function conflictedMatchIds() {
   const ids = new Set();
@@ -4309,9 +4340,9 @@ function missing(){
   const lost = state.events.flatMap(e => e.matches).filter(m => m._lost).length;
   if (lost) add('schedule', `Hours changed: ${lost} match${lost === 1 ? '' : 'es'} lost ${lost === 1 ? 'its' : 'their'} time. Rebuild the schedule.`);
   else if (uns) add('schedule', `${uns} match${uns === 1 ? " doesn't" : "es don't"} fit the schedule`);
-  const dbl = (() => { try{ return doubleBooked().length }catch(e){ return 0 } })(), maybe = (() => { try{ return detectConflicts().length }catch(e){ return 0 } })();
+  const cl = clashList(), dbl = cl.filter(c => c.sure).length, maybe = cl.length - dbl;
   if (dbl) add('schedule', `${dbl} player${dbl === 1 ? ' is' : 's are'} booked in two matches at once`);
-  if (maybe) add('schedule', `${maybe} possible clash${maybe === 1 ? '' : 'es'} if certain players keep winning`);
+  if (maybe) add('schedule', `${maybe} possible clash${maybe === 1 ? '' : 'es'} if results go a certain way`);
   const pend = signups().filter(s => !s.status).length; if (pend) add('players', `${pend} signup${pend === 1 ? '' : 's'} waiting for approval`);
   return out;
 }
@@ -6574,7 +6605,7 @@ function schedGrid(){
   return `<h3>Schedule</h3>${days.length > 1 ? `<div class="tdays">${days.map(d => `<button class="${d === dk ? 'on' : ''}" data-act="sday" data-v="${esc(d)}">${esc(d.split(',')[0])}<small>${esc(d.split(',').slice(1).join(',').trim())}</small></button>`).join('')}</div>` : ''}
   <p class="small muted">Tap a match to move it.</p>
   <div class="sgrid" style="--n:${n}"><div class="sgh"><span></span>${Array.from({length:n}, (_, i) => `<b>${esc(courtName(i + 1))}</b>`).join('')}</div>
-  ${TIME_SLOTS.map((s, i) => s[0] !== dk ? '' : `<div class="sgr"><span>${esc(s[1])}</span>${Array.from({length:n}, (_, c) => { const m = (by[i] || {})[c + 1]; return m ? `<button class="sgm" data-act="movemenu" data-id="${esc(m.id)}"><b>${m.pin ? '📌 ' : ''}${esc((findEvent(m.eventId) || {}).name)}</b>${esc(sideLabel(m,'team1',true))}<br>${esc(sideLabel(m,'team2',true))}</button>` : '<i></i>' }).join('')}</div>`).join('')}</div>`;
+  ${TIME_SLOTS.map((s, i) => s[0] !== dk ? '' : `<div class="sgr"><span>${esc(s[1])}</span>${Array.from({length:n}, (_, c) => { const m = (by[i] || {})[c + 1]; return m ? `<button class="sgm${view.hlMatch === m.id ? ' hl' : ''}" ${view.hlMatch === m.id ? 'aria-current="true"' : ''} data-act="movemenu" data-id="${esc(m.id)}"><b>${m.pin ? '📌 ' : ''}${esc((findEvent(m.eventId) || {}).name)}</b>${esc(sideLabel(m,'team1',true))}<br>${esc(sideLabel(m,'team2',true))}</button>` : '<i></i>' }).join('')}</div>`).join('')}</div>`;
 }
 
 /* Time and court controls shared by the lineup editor and the round list */
@@ -6629,7 +6660,7 @@ function adminView(){
   const c = cfg() || {}, sec = view.dws || 'run';
   const evs = state.events, pub = evs.filter(e => e.published && e.matches.length).length, drawn = evs.filter(e => e.matches.length).length;
   const ms = allMatches(false), done = ms.filter(m => state.results[m.id] && resOf(m.id)).length, live = ms.filter(m => matchStatus(m) === 'live').length;
-  const conf = (() => { try{ return detectConflicts().length + doubleBooked().length }catch(e){ return 0 } })();
+  const conf = clashList().filter(c => c.sure).length;
   const tabs = [['run', 'Run tournament'], ['setup', 'Setup'], ['perm', 'Permissions'], ['data', 'Data']];
   const row = (act, v, title, sub, extra) => `<li><button class="bk-row" data-act="${act}" ${v ? `data-v="${v}"` : ''}><span><b>${esc(title)}</b><span>${esc(sub)}</span></span>${extra || ''}${CHEV}</button></li>`;
   const stepSub = {basics:'Name, venue, dates, director PIN', events:'Divisions and their formats', players:'Entries, ratings and partners', bracket:'Draws, seeding and publication', courts:'Courts and session times', schedule:'Match times and court placement', welcome:'Welcome page, sponsors, club events', share:'Player, TV and signup links'};
@@ -7059,6 +7090,8 @@ const ACT = {
   publishall(){ const evs = evsCopy(); const n = evs.filter(e => isDrawn(e) && !e.published); n.forEach(e => e.published = true); saveEvents(evs); if (n.length) Store.set('chat:' + uid(), {auto:true, text:`Draws are out: ${n.map(e => e.name).join(', ')}.`, ts:Date.now()}) },
   sday(el){ view.sday = el.dataset.v },
   movemenu(el){ if (needAdmin()) return; view.matchId = el.dataset.id; view.modal = 'move'; view.mv = null },
+  clashx(el){ view.clashOpen = view.clashOpen === el.dataset.v ? null : el.dataset.v; const k = el.dataset.v; setTimeout(() => { const b = [...document.querySelectorAll('[data-act="clashx"]')].find(x => x.dataset.v === k); if (b) b.focus() }, 0) },
+  clashshow(el){ const m = findMatch(el.dataset.id); if (!m) return; view.clashOpen = el.dataset.v || view.clashOpen; view.hlMatch = m.id; if (TIME_SLOTS[m.slotIdx]) view.sday = TIME_SLOTS[m.slotIdx][0]; setTimeout(() => { const g = document.querySelector('.sgm.hl'); if (g){ g.scrollIntoView({block:'center', behavior:'smooth'}); g.focus({preventScroll:true}) } }, 0) },
   dws(el){ view.dws = el.dataset.v; view.resetScroll = true },
   async announceask(){ if (needAdmin()) return; const t = ((document.getElementById('announce') || {}).value || view.annDraft || '').trim(); if (!t) return toast('Write the announcement first.'); if (!await ask(`Send this announcement to everyone?\n\n"${t}"`, {ok:'Send announcement'})) return; Store.set('chat:' + uid(), {ann:true, by:view.me, text:t, ts:Date.now(), reactions:{}}); view.annDraft = ''; toast('Announcement sent.') },
   domove(el){ if (needAdmin()) return; const s = +(document.getElementById('mv-slot') || {}).value, c = +(document.getElementById('mv-court') || {}).value; const evs = evsCopy();
