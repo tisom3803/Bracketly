@@ -794,6 +794,11 @@ header.top .hright{flex:0 0 auto}
 .missing .mi.clash>span{flex:1;min-width:0}
 .clashd{padding:4px 0 10px;font-size:13px}.clashd>p{margin:0 0 6px}
 .clashd .clm{display:flex;flex-direction:column;gap:2px;padding:8px 10px;margin:6px 0 0;border:1px solid var(--rule);border-radius:var(--rad, 8px);background:var(--slot)}
+.todol{list-style:none;margin:4px 0 0;padding:0}.todol li{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 0;border-top:1px solid var(--rule);font-size:14px}.todol li:first-child{border-top:0}.todol li>span{flex:1;min-width:0}
+.tdwrap{position:relative}.tdwrap .bk-row{padding-right:120px}.tdwrap .tdchip{position:absolute;right:28px;top:50%;transform:translateY(-50%);cursor:pointer;background:var(--card)}
+.tdwrap .tdchip[aria-expanded="true"]{background:var(--warn-bg);color:var(--warn-ink);border-color:transparent}.tdwrap .tdchip:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
+.tdpanel{padding:2px 2px 12px}.tdpanel .tdg{padding:8px 10px;margin:6px 0 0;border:1px solid var(--rule);border-radius:var(--rad, 8px);background:var(--slot)}.tdpanel .tdg>b{display:block;font:600 15px/1.35 var(--fb)}
+.autonote .todol li{border-top-color:rgba(0,0,0,.08)}
 .clashd .clm em{font-style:normal;color:var(--muted)}.clashd .clm .row{margin-top:6px;gap:6px;flex-wrap:wrap}
 .sgm.hl{outline:3px solid var(--red);outline-offset:-3px;background:var(--slot)}
 .okbox{background:var(--card);border:2px solid var(--green);color:var(--green);padding:8px 10px;margin:10px 0;font-weight:700}
@@ -4136,7 +4141,8 @@ function syncClubCupRosters(ev){
    afterwards we make sure every match comes after the matches that feed it, find a slot
    for anything left over, and assign courts (live Bracketly left courts to the director). */
 function feederIds(m){ return [...(m.feedsFrom || []).filter(f => typeof f === 'string'), ...(m.feedsFromLosers || []).map(f => { const d = decodeLoserFeeder(f); return d && d.matchId }).filter(Boolean)] }
-function buildSchedule(evs){
+function buildSchedule(evs, opts){
+  opts = opts || {};
   syncEngine();
   const prev = state.events; state.events = evs.map(normEvent);
   try{
@@ -4228,7 +4234,19 @@ function buildSchedule(evs){
       if (c){ m.court = c; u.add(c) } else { m.slotIdx = undefined; m._unscheduled = true }
     });
     all.forEach(m => { delete m._depth });
-    stampSlotKeys(state.events);
+    // Then clear as many clashes as the courts and hours allow, without the director doing anything
+    buildSchedule.last = null;
+    if (opts.auto !== false){
+      const snap = new Map(all.map(m => [m.id, {when:typeof m.slotIdx === 'number' ? SLOT_KEYS[m.slotIdx] || null : null, court:m.court || null}]));
+      const before = clashCounts();
+      const fz = frozenFor(all); fixed.forEach(id => fz.add(id)); gkey.forEach((g, id) => fz.add(id));
+      const ar = improveSchedule(fz, {nowIdx:nowSlotIdx()});
+      const ids = new Set(ar.moved.map(m => m.id)); reassignCourts(ids);
+      stampSlotKeys(state.events);
+      buildSchedule.last = {before, after:null, moves:[...ids].map(id => byId.get(id)).filter(m => m && (snap.get(m.id).when !== (m.when || null) || snap.get(m.id).court !== (m.court || null))).map(m => ({id:m.id, from:snap.get(m.id), to:{when:m.when || null, court:m.court || null}}))};
+      buildSchedule.last.after = clashCounts();
+      if (opts.note !== false && typeof view !== 'undefined' && buildSchedule.last.moves.length) view.autoNote = {moves:buildSchedule.last.moves, after:buildSchedule.last.after, open:false};
+    } else stampSlotKeys(state.events);
   } finally { state.events = prev }
   return evs;
 }
@@ -4265,6 +4283,208 @@ function setMatchSlot(evs, id, slot, court){
   stampSlotKeys(evs);
 }
 
+/* ---------- Automatic clash fixing ----------
+   Local search on top of the greedy schedule: move single matches to a free court at
+   another time, or swap two matches' times, whenever that lowers the clash score
+   (definite double-bookings count far more than "possible if results go a certain way").
+   Never moves a match that has a score, is on court, is pinned (📌), belongs to a Pro-Am
+   round or Club Cup session block, or starts before now. Every match stays after the
+   matches that feed it and before the matches it feeds, and inside its round's day rules.
+   Works on state.events (slotIdx only); call reassignCourts afterwards. */
+const AUTO_W = {sure:1000, maybe:10};
+function clashCounts(){ const cl = clashList(), d = cl.filter(c => c.sure).length; return {definite:d, possible:cl.length - d} }
+function improveSchedule(frozenIds, opts){
+  opts = opts || {};
+  const all = state.events.flatMap(ev => ev.matches), byId = new Map(all.map(m => [m.id, m]));
+  const courts = state.tournamentCourts || 1, nowIdx = opts.nowIdx ?? -1;
+  const deps = new Map(); all.forEach(m => feederIds(m).forEach(f => { if (!deps.has(f)) deps.set(f, []); deps.get(f).push(m) }));
+  const dests = outcomeDests();
+  // Per-match facts that don't depend on time
+  const info = new Map();
+  all.forEach(m => {
+    const both = [];
+    for (const fid of feederIds(m)){
+      const f = byId.get(fid); if (!f) continue;
+      const w = dests.win[fid], l = dests.lose[fid]; if (!w || !l || w === l) continue;
+      const other = w === m ? l.m : l.m === m ? w : null; if (!other) continue;
+      let ps = []; if (l.req){ const t = findTeam(f[l.req + 'Id']); if (t) ps = t.players.slice() } else ps = getKnownMatchPlayers(f);
+      if (ps.length) both.push({other, ps});
+    }
+    info.set(m.id, {ev:m.eventId, pot:getMatchPlayers(m, true), known:getKnownMatchPlayers(m), both});
+  });
+  const at = {}; all.forEach(m => { if (typeof m.slotIdx === 'number') (at[m.slotIdx] = at[m.slotIdx] || []).push(m) });
+  const slotCost = s => {
+    const ms = at[s]; if (!ms || ms.length < 2) return 0;
+    const pot = new Map(), sure = new Map(), kn = new Map();
+    const addTo = (mp, p, e) => { let x = mp.get(p); if (!x) mp.set(p, x = new Set()); x.add(e) };
+    for (const m of ms){
+      const I = info.get(m.id);
+      I.pot.forEach(p => addTo(pot, p, I.ev));
+      I.known.forEach(p => { addTo(sure, p, I.ev); kn.set(p, (kn.get(p) || 0) + 1) });
+      I.both.forEach(b => { if (b.other.slotIdx === s) b.ps.forEach(p => addTo(sure, p, I.ev)) });
+    }
+    let c = 0;
+    for (const [p, n] of kn) if (n > 1) c += AUTO_W.sure;
+    for (const [p, evs] of pot){ if (evs.size < 2 || (kn.get(p) || 0) > 1) continue; c += (sure.get(p) || new Set()).size > 1 ? AUTO_W.sure : AUTO_W.maybe }
+    return c;
+  };
+  const cost = {}; let total = 0;
+  for (let s = 0; s < TIME_SLOTS.length; s++){ cost[s] = slotCost(s); total += cost[s] }
+  const start = total;
+  const movable = m => typeof m.slotIdx === 'number' && !frozenIds.has(m.id) && m.slotIdx > nowIdx;
+  const range = m => {
+    let lo = Math.max(nowIdx + 1, ...feederIds(m).map(id => byId.get(id)).filter(f => f && typeof f.slotIdx === 'number').map(f => f.slotIdx + 1), 0);
+    let hi = Math.min(TIME_SLOTS.length - 1, ...(deps.get(m.id) || []).filter(d => typeof d.slotIdx === 'number').map(d => d.slotIdx - 1));
+    const r = slotRangeForMatch(m);
+    if (r && m.slotIdx >= r.minIdx && m.slotIdx <= r.maxIdx){ lo = Math.max(lo, r.minIdx); hi = Math.min(hi, r.maxIdx) }
+    return [lo, hi];
+  };
+  const rm = (m, s) => { const a = at[s], i = a.indexOf(m); if (i >= 0) a.splice(i, 1) };
+  const put = (m, s) => { m.slotIdx = s; (at[s] = at[s] || []).push(m) };
+  // Try a move and return the change in total cost (move stays applied; caller undoes)
+  const tryMove = (m, t, o) => {
+    const s = m.slotIdx, before = cost[s] + cost[t];
+    rm(m, s); if (o){ rm(o, t); put(o, s) } put(m, t);
+    const cs = slotCost(s), ct = slotCost(t);
+    return {d:cs + ct - before, cs, ct};
+  };
+  const undo = (m, s, t, o) => { rm(m, t); if (o){ rm(o, s); put(o, t) } put(m, s) };
+  const origin = new Map(all.map(m => [m.id, m.slotIdx]));
+  const deadline = Date.now() + (opts.ms || 1500);
+  const climb = () => { let rounds = 0;
+  while (total > 0 && Date.now() < deadline && rounds++ < 400){
+    // Matches sitting in a slot with a clash; best single improving move or swap wins
+    const hot = []; for (let s = 0; s < TIME_SLOTS.length; s++) if (cost[s] > 0) (at[s] || []).forEach(m => { if (movable(m)) hot.push(m) });
+    let best = null;
+    for (const m of hot){
+      const s = m.slotIdx, [lo, hi] = range(m);
+      for (let t = lo; t <= hi; t++){
+        if (t === s) continue;
+        if ((at[t] || []).length < courts){
+          const r = tryMove(m, t, null); undo(m, s, t, null);
+          // tiny preference for small time changes so the schedule doesn't churn
+          const score = r.d * 1000 + Math.abs(t - s);
+          if (r.d < 0 && (!best || score < best.score)) best = {m, s, t, o:null, score};
+        }
+        for (const o of (at[t] || []).slice()){
+          if (!movable(o)) continue;
+          const [olo, ohi] = range(o); if (s < olo || s > ohi) continue;
+          if (feederIds(o).includes(m.id) || feederIds(m).includes(o.id)) continue;
+          const r = tryMove(m, t, o); undo(m, s, t, o);
+          const score = r.d * 1000 + Math.abs(t - s) * 2;
+          if (r.d < 0 && (!best || score < best.score)) best = {m, s, t, o, score};
+        }
+      }
+      if (Date.now() > deadline) break;
+    }
+    if (!best) break;
+    const r = tryMove(best.m, best.t, best.o); cost[best.s] = r.cs; cost[best.t] = r.ct; total += r.d;
+  } };
+  climb();
+  // Stuck above zero: shake things up (a few random legal moves around the clashes), climb again,
+  // keep the result only if it is better. Seeded so the same data gives the same schedule.
+  let seed = 12345; const rnd = n => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed % n };
+  const keepBest = () => new Map(all.map(m => [m.id, m.slotIdx]));
+  let bestTotal = total, bestMap = keepBest(), tries = 0;
+  const restore = mp => { Object.keys(at).forEach(k => delete at[k]); all.forEach(m => { m.slotIdx = mp.get(m.id); if (typeof m.slotIdx === 'number') (at[m.slotIdx] = at[m.slotIdx] || []).push(m) }); total = 0; for (let s = 0; s < TIME_SLOTS.length; s++){ cost[s] = slotCost(s); total += cost[s] } };
+  while (bestTotal > 0 && Date.now() < deadline && tries++ < (opts.kicks ?? 60)){
+    const hot = []; for (let s = 0; s < TIME_SLOTS.length; s++) if (cost[s] > 0) (at[s] || []).forEach(m => { if (movable(m)) hot.push(m) });
+    if (!hot.length) break;
+    for (let k = 0; k < 3; k++){
+      const m = hot[rnd(hot.length)], s = m.slotIdx, [lo, hi] = range(m); if (hi < lo) continue;
+      const t = lo + rnd(hi - lo + 1); if (t === s) continue;
+      if ((at[t] || []).length < courts){ const r = tryMove(m, t, null); cost[s] = r.cs; cost[t] = r.ct; total += r.d; continue }
+      const os = (at[t] || []).filter(o => movable(o) && !feederIds(o).includes(m.id) && !feederIds(m).includes(o.id) && (([a, b]) => s >= a && s <= b)(range(o)));
+      if (os.length){ const o = os[rnd(os.length)], r = tryMove(m, t, o); cost[s] = r.cs; cost[t] = r.ct; total += r.d }
+    }
+    climb();
+    if (total < bestTotal || (total === bestTotal && false)){ bestTotal = total; bestMap = keepBest() } else restore(bestMap);
+  }
+  if (total !== bestTotal) restore(bestMap);
+  // Put back any moved match whose old time works just as well, so fewer matches change
+  for (let pass = 0; pass < 3; pass++){ let back = 0;
+    for (const m of all){
+      const o = origin.get(m.id), s = m.slotIdx;
+      if (typeof o !== 'number' || o === s || !movable(m)) continue;
+      const [lo, hi] = range(m); if (o < lo || o > hi) continue;
+      if ((at[o] || []).length < courts){ const r = tryMove(m, o, null); if (r.d <= 0){ cost[s] = r.cs; cost[o] = r.ct; total += r.d; back++ } else undo(m, s, o, null); continue }
+      for (const x of (at[o] || []).slice()){
+        if (!movable(x) || origin.get(x.id) === o) continue;
+        const [xl, xh] = range(x); if (s < xl || s > xh || feederIds(x).includes(m.id) || feederIds(m).includes(x.id)) continue;
+        const r = tryMove(m, o, x); if (r.d <= 0){ cost[s] = r.cs; cost[o] = r.ct; total += r.d; back++; break } undo(m, s, o, x);
+      }
+    }
+    if (!back) break }
+  const moved = all.filter(m => origin.get(m.id) !== m.slotIdx);
+  return {moved, before:start, after:total};
+}
+/* Courts after the optimizer moved matches: anything that kept its time keeps its court; a moved
+   match takes a free court (finals onto the finals courts first, others off them if possible). */
+function reassignCourts(movedIds){
+  const all = state.events.flatMap(ev => ev.matches), courts = state.tournamentCourts || 1;
+  const rules = state.scheduleRules || defaultScheduleRules(), fc = rules.finalsCourts || [];
+  const used = {}; all.forEach(m => { if (typeof m.slotIdx === 'number' && m.court && !movedIds.has(m.id)) (used[m.slotIdx] = used[m.slotIdx] || new Set()).add(m.court) });
+  // a kept match can collide with another kept match only if data was already bad; leave it
+  all.filter(m => movedIds.has(m.id) && typeof m.slotIdx === 'number').sort((a, b) => ROUND_FINALS_RULE.includes(b.round) - ROUND_FINALS_RULE.includes(a.round)).forEach(m => {
+    const u = used[m.slotIdx] = used[m.slotIdx] || new Set(), fin = ROUND_FINALS_RULE.includes(m.round);
+    let c = fin ? fc.find(x => !u.has(x) && x <= courts) : null;
+    if (!c) for (let x = 1; x <= courts; x++) if (!u.has(x) && (!fc.includes(x) || fin || fc.length >= courts)){ c = x; break }
+    if (!c) for (let x = 1; x <= courts; x++) if (!u.has(x)){ c = x; break }
+    m.court = c || undefined; if (c) u.add(c);
+    // A final that landed off the finals courts trades courts with an unfinished non-final there
+    if (fin && fc.length && c && !fc.includes(c)){
+      const o = all.find(x => x !== m && x.slotIdx === m.slotIdx && fc.includes(x.court) && !ROUND_FINALS_RULE.includes(x.round) && !x.pinCourt && !resOf(x.id) && !state.results[x.id]);
+      if (o){ const oc = o.court; o.court = c; m.court = oc; movedIds.add(o.id) }
+    }
+  });
+}
+// The slot index that is already under way (matches at or before it are not moved)
+function nowSlotIdx(now){ now = now || Date.now(); let k = -1; for (let i = 0; i < TIME_SLOTS.length; i++){ const t = slotDate(i); if (t && t.getTime() <= now) k = i } return k }
+function frozenFor(all){
+  const fz = new Set();
+  all.forEach(m => { const r = resOf(m.id); if ((r && (r.w || r.live)) || state.results[m.id] || m.pin || m.proAm || m.sessionId) fz.add(m.id) });
+  return fz;
+}
+/* Fix clashes on a saved schedule without rebuilding it. Returns what moved, so it can be undone. */
+let lastAuto = null;
+function autoResolve(evs, opts){
+  syncEngine();
+  const prev = state.events; state.events = evs.map(normEvent);
+  try{
+    const at = new Map(SLOT_KEYS.map((k, i) => [k, i]));
+    const all = state.events.flatMap(e => e.matches);
+    all.forEach(m => { if (m.when && at.has(m.when)) m.slotIdx = at.get(m.when) });
+    const before = clashCounts(), snap = new Map(all.map(m => [m.id, {when:m.when || null, court:m.court || null}]));
+    const r = improveSchedule(frozenFor(all), Object.assign({nowIdx:nowSlotIdx()}, opts));
+    const ids = new Set(r.moved.map(m => m.id));
+    reassignCourts(ids);
+    stampSlotKeys(state.events);
+    const after = clashCounts();
+    const moves = all.filter(m => { const b = snap.get(m.id); return b.when !== (m.when || null) || b.court !== (m.court || null) }).map(m => ({id:m.id, from:snap.get(m.id), to:{when:m.when || null, court:m.court || null}}));
+    return {moves, before, after};
+  } finally { state.events = prev }
+}
+function countsOf(evs){
+  syncEngine(); const prev = state.events; state.events = evs.map(normEvent);
+  try{ const at = new Map(SLOT_KEYS.map((k, i) => [k, i])); state.events.forEach(e => e.matches.forEach(m => { if (m.when && at.has(m.when)) m.slotIdx = at.get(m.when) })); return clashCounts() } finally { state.events = prev }
+}
+/* After a director moves a match by hand: if that made new clashes, clear them by moving other unplayed matches */
+function autoAfterMove(evs){
+  syncEngine(); const base = clashCounts(), now = countsOf(evs);
+  if (now.definite <= base.definite && now.definite + now.possible <= base.definite + base.possible) return null;
+  const r = autoResolve(evs); if (!r.moves.length) return null;
+  view.autoNote = {moves:r.moves, after:r.after, open:false};
+  return r;
+}
+const autoTxt = () => { const a = buildSchedule.last; return a && a.moves.length ? ` Auto-adjusted ${a.moves.length} match${a.moves.length === 1 ? '' : 'es'} to avoid conflicts.` : '' };
+function undoAuto(evs, moves){
+  const by = new Map(evs.flatMap(e => e.matches).map(m => [m.id, m]));
+  if (!moves.every(x => { const m = by.get(x.id); return m && (m.when || null) === x.to.when && (m.court || null) === x.to.court })) return false;
+  syncEngine();
+  moves.forEach(x => { const m = by.get(x.id); if (x.from.when){ m.when = x.from.when; const i = SLOT_KEYS.indexOf(x.from.when); m.slotIdx = i >= 0 ? i : undefined } else { delete m.when; m.slotIdx = undefined } m.court = x.from.court || undefined });
+  return true;
+}
+
 /* Pool layouts the engine can actually build for n teams (it only supports some shapes). */
 const _poolCache = {};
 function poolOptions(n){
@@ -4298,7 +4518,10 @@ function capacity(){ syncEngine(); return TIME_SLOTS.length * state.tournamentCo
 /* ---------- What still needs doing ---------- */
 function missing(){
   const c = cfg() || {}, pl = players(), evs = events().map(normEvent), out = [];
-  const add = (step, text) => out.push({step, text});
+  // Each item can carry the exact things behind it (items) so "To do" can list them with a jump to fix each
+  const add = (step, text, items) => out.push({step, text, items:items || []});
+  const evOf = pid => evs.find(e => [...(e.entrants || []), ...(e.pairs || []).flat()].includes(pid));
+  const plItem = p => { const e = evOf(p.id); return {t:p.name + (e ? ' · ' + e.name : ''), go:{step:'players', ev:e && e.id}} };
   if (!c.name) add('basics', 'Give the tournament a name');
   if (!(c.days || []).length) add('basics', 'Pick the tournament dates');
   if (!(c.courts || []).length) add('courts', 'Add your courts');
@@ -4310,40 +4533,45 @@ function missing(){
   const needG = inEv(e => e.gender === 'M' || e.gender === 'F' || e.kind === 'mixed'), needR = inEv(e => e.level || e.cap);
   const byLevel = new Set(evs.flatMap(e => (e.pairs || []).filter(t => e.teamLv && e.teamLv[pairKey(t)] != null).flat()));
   const noRating = pl.filter(p => needR.has(p.id) && p.rating == null && !p.tier && !byLevel.has(p.id) && !(p.partnerId && p.teamRating != null)).length, noG = pl.filter(p => needG.has(p.id) && !p.gender).length;
-  if (noRating) add('players', `${noRating} player${noRating === 1 ? '' : 's'} missing a rating`);
-  if (noG) add('players', `${noG} player${noG === 1 ? '' : 's'} missing M/F`);
+  if (noRating) add('players', `${noRating} player${noRating === 1 ? '' : 's'} missing a rating`, pl.filter(p => needR.has(p.id) && p.rating == null && !p.tier && !byLevel.has(p.id) && !(p.partnerId && p.teamRating != null)).map(plItem));
+  if (noG) add('players', `${noG} player${noG === 1 ? '' : 's'} missing M/F`, pl.filter(p => needG.has(p.id) && !p.gender).map(plItem));
   if (!evs.length) add('events', 'Add at least one event');
+  const unpub = [];
   for (const ev of evs){
     const n = ev.kind === 'clubcup' ? ((ev.clubCup || {}).aIds || []).length : teamsOf(ev).length;
     if (ev.kind === 'clubcup'){
       const cc = ev.clubCup || {};
-      if (!(cc.aIds || []).length || !(cc.bIds || []).length) add('players', `${ev.name}: put players on both clubs`);
+      if (!(cc.aIds || []).length || !(cc.bIds || []).length) add('players', `${ev.name}: put players on both clubs`, [{t:ev.name, go:{step:'players', ev:ev.id}}]);
       else {
-        if (cc.by === 'tier'){ const noTier = [...(cc.aIds || []), ...(cc.bIds || [])].filter(id => !tierOf(cc, id)).length; if (noTier) add('players', `${ev.name}: ${noTier} player${noTier === 1 ? ' needs' : 's need'} Pro, A, B or C`) }
-        if (!ev.matches.length) add('bracket', `${ev.name}: set the lineup`);
+        if (cc.by === 'tier'){ const noTier = [...(cc.aIds || []), ...(cc.bIds || [])].filter(id => !tierOf(cc, id)).length; if (noTier) add('players', `${ev.name}: ${noTier} player${noTier === 1 ? ' needs' : 's need'} Pro, A, B or C`, [...(cc.aIds || []), ...(cc.bIds || [])].filter(id => !tierOf(cc, id)).map(id => ({t:pname(id), go:{step:'players', ev:ev.id}}))) }
+        if (!ev.matches.length) add('bracket', `${ev.name}: set the lineup`, [{t:ev.name, go:{step:'bracket', ev:ev.id}}]);
       }
       continue;
     }
-    if (n < 2) { add('players', `${ev.name}: needs at least 2 ${ev.kind === 'singles' ? 'players' : 'teams'}`); continue }
-    const up = ev.kind === 'singles' ? 0 : unpaired(ev).length; if (up) add('players', `${ev.name}: ${up} without a partner`);
-    const bad = (ev.entrants || []).filter(id => fitIssue(ev, P(id))).length; if (bad) add('players', `${ev.name}: ${bad} entr${bad === 1 ? 'y' : 'ies'} outside the event's rules`);
-    const badPairs = (ev.pairs || []).filter(t => pairIssue(ev, t)).length; if (badPairs) add('players', `${ev.name}: ${badPairs} team${badPairs === 1 ? '' : 's'} over the cap or mismatched`);
-    if (ev.kind === 'proam' && n % 4) add('players', `Pro-Am needs teams in multiples of 4 for flights (has ${n})`);
-    if (!isDrawn(ev)) add('bracket', `${ev.name}: not drawn yet`);
-    else if (!ev.published) add('schedule', `${ev.name}: drawn but not published`);
+    const go = {step:'players', ev:ev.id};
+    if (n < 2) { add('players', `${ev.name}: needs at least 2 ${ev.kind === 'singles' ? 'players' : 'teams'}`, [{t:`${ev.name}: ${n} so far`, go}]); continue }
+    const upL = ev.kind === 'singles' ? [] : unpaired(ev), up = upL.length; if (up) add('players', `${ev.name}: ${up} without a partner`, upL.map(x => ({t:(P(x) || {}).name || pname(x) || String(x), go})));
+    const badL = (ev.entrants || []).filter(id => fitIssue(ev, P(id))), bad = badL.length; if (bad) add('players', `${ev.name}: ${bad} entr${bad === 1 ? 'y' : 'ies'} outside the event's rules`, badL.map(id => ({t:`${pname(id)}: ${fitIssue(ev, P(id))}`, go})));
+    const badP = (ev.pairs || []).filter(t => pairIssue(ev, t)), badPairs = badP.length; if (badPairs) add('players', `${ev.name}: ${badPairs} team${badPairs === 1 ? '' : 's'} over the cap or mismatched`, badP.map(t => ({t:`${t.filter(Boolean).map(pname).join(' / ')}: ${pairIssue(ev, t)}`, go})));
+    if (ev.kind === 'proam' && n % 4) add('players', `Pro-Am needs teams in multiples of 4 for flights (has ${n})`, [{t:`${ev.name}: add ${4 - n % 4} or remove ${n % 4}`, go}]);
+    if (!isDrawn(ev)) add('bracket', `${ev.name}: not drawn yet`, [{t:`Draw ${ev.name}`, go:{step:'bracket', ev:ev.id}}]);
+    else if (!ev.published) unpub.push(ev);
   }
+  if (unpub.length) add('schedule', unpub.length === 1 ? `${unpub[0].name}: drawn but not published` : `${unpub.length} draws aren't published yet`, unpub.map(ev => ({t:`${ev.name}: publish so players can see it`, b:'Open', go:{step:'schedule', ev:ev.id}})));
   syncEngine();
   const uns = state.events.flatMap(e => e.matches).filter(m => m._unscheduled || (typeof m.slotIdx !== 'number' && isDrawn(state.events.find(e => e.id === m.eventId)))).length;
   const allM = state.events.flatMap(e => e.matches), byId = new Map(allM.map(m => [m.id, m]));
   const early = allM.filter(m => typeof m.slotIdx === 'number' && feederIds(m).some(f => { const x = byId.get(f); return x && typeof x.slotIdx === 'number' && x.slotIdx >= m.slotIdx }));
-  if (early.length) add('schedule', `${early.length} match${early.length === 1 ? ' is' : 'es are'} set before the match that feeds ${early.length === 1 ? 'it' : 'them'} (${roundName(early[0])}, ${(findEvent(early[0].eventId) || {}).name})`);
-  const lost = state.events.flatMap(e => e.matches).filter(m => m._lost).length;
-  if (lost) add('schedule', `Hours changed: ${lost} match${lost === 1 ? '' : 'es'} lost ${lost === 1 ? 'its' : 'their'} time. Rebuild the schedule.`);
-  else if (uns) add('schedule', `${uns} match${uns === 1 ? " doesn't" : "es don't"} fit the schedule`);
+  const mItem = m => ({t:`${(findEvent(m.eventId) || {}).name || ''} · ${roundName(m)}${TIME_SLOTS[m.slotIdx] ? ' · ' + TIME_SLOTS[m.slotIdx].join(' ') : ''}`, go:{step:'schedule', ev:m.eventId, mid:m.id}});
+  if (early.length) add('schedule', `${early.length} match${early.length === 1 ? ' is' : 'es are'} set before the match that feeds ${early.length === 1 ? 'it' : 'them'} (${roundName(early[0])}, ${(findEvent(early[0].eventId) || {}).name})`, early.map(mItem));
+  const lostL = state.events.flatMap(e => e.matches).filter(m => m._lost), lost = lostL.length;
+  if (lost) add('schedule', `Hours changed: ${lost} match${lost === 1 ? '' : 'es'} lost ${lost === 1 ? 'its' : 'their'} time. Rebuild the schedule.`, lostL.map(m => Object.assign(mItem(m), {t:`${(findEvent(m.eventId) || {}).name || ''} · ${roundName(m)} (was ${m.when || '?'})`})));
+  else if (uns) add('schedule', `${uns} match${uns === 1 ? " doesn't" : "es don't"} fit the schedule`, state.events.flatMap(e => e.matches).filter(m => m._unscheduled || (typeof m.slotIdx !== 'number' && isDrawn(state.events.find(e => e.id === m.eventId)))).map(mItem));
   const cl = clashList(), dbl = cl.filter(c => c.sure).length, maybe = cl.length - dbl;
-  if (dbl) add('schedule', `${dbl} player${dbl === 1 ? ' is' : 's are'} booked in two matches at once`);
-  if (maybe) add('schedule', `${maybe} possible clash${maybe === 1 ? '' : 'es'} if results go a certain way`);
-  const pend = signups().filter(s => !s.status).length; if (pend) add('players', `${pend} signup${pend === 1 ? '' : 's'} waiting for approval`);
+  const cItem = c => ({t:`${c.player} · ${TIME_SLOTS[c.slotIdx] ? TIME_SLOTS[c.slotIdx].join(' ') : ''} · ${[...new Set(c.matchIds.map(findMatch).filter(Boolean).map(m => (findEvent(m.eventId) || {}).name))].join(' & ')}`, go:{step:'schedule', clash:clashKey(c), mid:c.matchIds[0]}});
+  if (dbl) add('schedule', `${dbl} player${dbl === 1 ? ' is' : 's are'} booked in two matches at once`, cl.filter(c => c.sure).map(cItem));
+  if (maybe) add('schedule', `${maybe} possible clash${maybe === 1 ? '' : 'es'} if results go a certain way`, cl.filter(c => !c.sure).map(cItem));
+  const pendL = signups().filter(s => !s.status), pend = pendL.length; if (pend) add('players', `${pend} signup${pend === 1 ? '' : 's'} waiting for approval`, pendL.map(x => ({t:x.name + (x.partner ? ' / ' + x.partner : ''), go:{step:'players', roster:true}})));
   return out;
 }
 
@@ -6279,7 +6507,7 @@ function wzBracket(){
   const evs = state.events;
   if (!evs.length) return `<h2 style="margin-top:4px">Brackets</h2><p class="muted">Add an event first.</p>`;
   const ev = evs.find(e => e.id === view.ev) || evs[0], n = entryCount(ev), locked = hasResults(ev);
-  const head = `<h2 style="margin-top:4px">Brackets</h2>${evTabs(evs, ev, e => isDrawn(e) ? (e.published ? 'Published' : 'Drawn') : entryNoun(e, entryCount(e)))}`;
+  const head = `<h2 style="margin-top:4px">Brackets</h2>${autoNoteHtml()}${evTabs(evs, ev, e => isDrawn(e) ? (e.published ? 'Published' : 'Drawn') : entryNoun(e, entryCount(e)))}`;
   if (ev.kind === 'clubcup') return head + `<p class="wnote">Build the lineup: who plays whom in each session. Set session times here or on the Schedule step.</p>${lineupEditor(ev)}${ev.matches.length ? `<h3>How it looks</h3>${eventDraw(ev)}` : ''}`;
   if (n < 2) return head + `<div class="empty-state"><p>${esc(ev.name)} needs at least 2 ${ev.kind === 'singles' ? 'players' : 'teams'} first.</p><button class="btn" data-act="goplayers" data-id="${ev.id}">Add players</button></div>`;
   const rec = recommendFormat(ev, n), fmtNow = ev.autoFormat && !isDrawn(ev) && BRACKET_FORMATS.includes(ev.format) ? rec : ev.format, sc = ev.scoring || {}, scs = Object.entries(SCORING_FORMATS).filter(([k, v]) => v.sport === (cfg().sport || 'tennis'));
@@ -6310,7 +6538,9 @@ function wzSchedule(){
   const uns = evs.flatMap(e => e.matches).filter(m => typeof m.slotIdx !== 'number'), conf = clashList();
   const undrawn = evs.filter(e => !isDrawn(e) && e.kind !== 'clubcup' && entryCount(e) >= 2);
   const cur = evs.find(e => e.id === view.ev && isDrawn(e)) || evs.find(isDrawn) || null;
+  const used = evs.reduce((s, e) => s + e.matches.length, 0);
   return `<h2 style="margin-top:4px">Schedule</h2>
+  ${autoNoteHtml()}
   <div class="fits ${total > cap ? 'bad' : ''}"><b>${total} matches · room for about ${cap}</b><span>${total > cap ? 'Add a court, a day, or longer hours on Courts & times, or shorten match length.' : 'Fits in your courts and hours.'}</span></div>
   ${undrawn.length ? `<div class="missing"><div class="mh2"><b>Not drawn yet: ${undrawn.map(e => esc(e.name)).join(', ')}</b></div><div class="row" style="margin-top:6px"><button class="btn sm" data-act="wzstep" data-v="bracket">Go to Brackets</button><button class="btn alt sm" data-act="drawall">Draw them all now</button></div></div>` : ''}
   ${evs.some(e => e.matches.some(m => m._lost)) ? `<div class="missing"><div class="mh2"><b>The hours changed after the schedule was built</b></div><p class="small" style="margin:4px 0 8px">Some matches were set for times that no longer exist. Rebuilding keeps finished matches where they are.</p><button class="btn sm" data-act="resched">Rebuild schedule</button></div>` : ''}
@@ -6320,7 +6550,7 @@ function wzSchedule(){
   ${cur ? `<div class="row" style="justify-content:space-between;margin:6px 0"><span class="small muted">${cur.matches.length} matches${hasResults(cur) ? ' · in play' : ''}</span><button class="btn ${cur.published ? 'alt' : ''} sm" data-act="publish" data-id="${cur.id}">${cur.published ? 'Unpublish' : 'Publish'}</button></div>
     ${cur.kind === 'clubcup' ? `<div class="card adm"><b>Session times</b>${(cur.clubCup.sessions || []).map(se => { const ms = cur.matches.filter(m => m.sessionId === se.id); return ms.length ? groupStart(ms, esc(se.label)) : '' }).join('')}</div>` : roundTimes(cur)}` : ''}
   ${uns.length ? `<p class="warn">${uns.length} match${uns.length === 1 ? '' : 'es'} didn't fit. Add courts or hours, then rebuild the schedule.</p>` : ''}
-  ${conf.length ? `<div class="missing"><div class="mh2"><b>Time clashes</b></div>${conf.slice(0, 12).map(clashItem).join('')}${conf.length > 12 ? `<p class="small muted" style="margin:4px 0 0">and ${conf.length - 12} more</p>` : ''}<p class="small muted" style="margin:6px 0 0">Tap a match in the grid below to move it, or add time on Courts & times.</p></div>` : ''}
+  ${conf.length ? `<div class="missing"><div class="mh2"><b>Time clashes</b></div>${conf.slice(0, 12).map(clashItem).join('')}${conf.length > 12 ? `<p class="small muted" style="margin:4px 0 0">and ${conf.length - 12} more</p>` : ''}<div class="row" style="margin:8px 0 0;gap:6px"><button type="button" class="btn sm" data-act="autofix">Fix clashes automatically</button></div><p class="small muted" style="margin:6px 0 0">The app moves matches without scores to clear clashes when you draw or rebuild. ${conf.length && used >= cap * 0.85 ? `Your courts and hours are nearly full (${used} matches, room for ${cap}), so some clashes may have nowhere to go. Adding a court or more hours on Courts & times gives the app room to clear them.` : 'Tap a match in the grid below to move it yourself.'}</p></div>` : ''}
   ${schedGrid()}`;
 }
 
@@ -6333,7 +6563,41 @@ function missingCard(compact){
   const open = view.wz && view.wz.showMissing;
   const list = (compact && !open) ? ms.slice(0, 3) : ms;
   return `<div class="missing"><div class="mh2"><b>${compact && here ? 'To do on this step' : 'Still missing'} (${ms.length})</b>${compact && ms.length > 3 ? `<button class="small" data-act="togglemissing">${open ? 'Show less' : 'Show all'}</button>` : ''}</div>
-    ${list.map(x => `<button class="mi" data-act="wzstep" data-v="${x.step}"><span>${esc(x.text)}</span><i>${esc((WZ_STEPS.find(s => s[0] === x.step) || [])[1] || '')} ›</i></button>`).join('')}</div>`;
+    ${list.map(todoItem).join('')}</div>`;
+}
+/* One "To do" line: tap to see exactly what's behind it, each with a button that jumps to the fix */
+const todoKey = x => x.step + '|' + x.text.replace(/\d+/g, '#');
+const stepName = k => (WZ_STEPS.find(s => s[0] === k) || [])[1] || '';
+function todoGoAttrs(g){ g = g || {}; return `data-act="todogo" data-step="${esc(g.step || 'basics')}"${g.ev ? ` data-ev="${esc(g.ev)}"` : ''}${g.mid ? ` data-mid="${esc(g.mid)}"` : ''}${g.clash ? ` data-clash="${esc(g.clash)}"` : ''}${g.roster ? ' data-roster="1"' : ''}` }
+function todoList(x){
+  const its = x.items || [], max = 25;
+  if (!its.length) return `<div class="todol"><button type="button" class="btn sm" ${todoGoAttrs({step:x.step})}>Open ${esc(stepName(x.step))}</button></div>`;
+  return `<ul class="todol">${its.slice(0, max).map(it => `<li><span>${esc(it.t)}</span><button type="button" class="btn alt sm" ${todoGoAttrs(it.go || {step:x.step})}>${esc(it.b || (it.go && (it.go.mid || it.go.clash) ? 'Show' : 'Fix'))}</button></li>`).join('')}${its.length > max ? `<li class="muted"><span>and ${its.length - max} more on ${esc(stepName(x.step))}</span><button type="button" class="btn alt sm" ${todoGoAttrs({step:x.step})}>Open</button></li>` : ''}</ul>`;
+}
+function todoItem(x){
+  const k = todoKey(x), open = !!(view.todoOpen && view.todoOpen[k]), id = 'td-' + k.replace(/[^A-Za-z0-9]/g, '');
+  return `<button type="button" class="mi clash" data-act="todox" data-v="${esc(k)}" aria-expanded="${open}" aria-controls="${id}"><span>${esc(x.text)}</span><i>${esc(stepName(x.step))} ${open ? '▴' : '▾'}</i></button>${open ? `<div class="clashd" id="${id}">${todoList(x)}</div>` : ''}`;
+}
+/* Setup list: the "To do" chip opens everything left on that step */
+function setupRow(k, l, sub){
+  const done = stepDone(k), ms = missing().filter(x => x.step === k), open = view.todoStep === k, id = 'tds-' + k;
+  if (done) return `<li><button class="bk-row" data-act="wzopen" data-v="${k}"><span><b>${esc(l)}</b><span>${esc(sub)}</span></span><span class="st ok">Done</span>${CHEV}</button></li>`;
+  const n = ms.length;
+  const body = n ? ms.map(x => `<div class="tdg"><b>${esc(x.text)}</b>${todoList(x)}</div>`).join('')
+    : k === 'share' ? `<div class="tdg"><b>No draws are published yet</b><p class="small muted" style="margin:2px 0 6px">Players only see draws after you publish them.</p><div class="todol"><button type="button" class="btn sm" ${todoGoAttrs({step:'schedule'})}>Go to Schedule</button></div></div>` : `<div class="tdg"><div class="todol"><button type="button" class="btn sm" ${todoGoAttrs({step:k})}>Open ${esc(l)}</button></div></div>`;
+  return `<li class="tdrow"><div class="tdwrap"><button class="bk-row" data-act="wzopen" data-v="${k}"><span><b>${esc(l)}</b><span>${esc(sub)}</span></span>${CHEV}</button>
+    <button type="button" class="st neutral tdchip" data-act="todostep" data-v="${k}" aria-expanded="${open}" aria-controls="${id}" aria-label="To do on ${esc(l)}: ${n || 1} item${(n || 1) === 1 ? '' : 's'}. ${open ? 'Hide' : 'Show'} details">To do${n ? ' · ' + n : ''} ${open ? '▴' : '▾'}</button></div>
+    ${open ? `<div class="tdpanel" id="${id}" role="region" aria-label="What's left on ${esc(l)}">${body}</div>` : ''}</li>`;
+}
+/* "Auto-adjusted N matches" note, with what moved and an undo */
+function whenLabel(w, c){ const i = SLOT_KEYS.indexOf(w); return (i >= 0 && TIME_SLOTS[i] ? TIME_SLOTS[i].join(' ') : (w || 'no time')) + (c ? ' · ' + courtName(c) : '') }
+function autoNoteHtml(){
+  const a = view.autoNote; if (!a || !a.moves || !a.moves.length) return '';
+  const n = a.moves.length, left = a.after || {definite:0, possible:0}, open = !!a.open;
+  const leftTxt = left.definite ? `${left.definite} double booking${left.definite === 1 ? '' : 's'} couldn't be cleared: add a court or more hours.` : left.possible ? `${left.possible} possible clash${left.possible === 1 ? ' is' : 'es are'} left because the courts and hours are nearly full. Add a court or more hours to clear ${left.possible === 1 ? 'it' : 'them'}.` : 'No clashes left.';
+  return `<div class="bk-note ok autonote" role="status"><b>Auto-adjusted ${n} match${n === 1 ? '' : 'es'} to avoid conflicts.</b> ${esc(leftTxt)}
+    <div class="row" style="margin-top:6px;gap:6px"><button type="button" class="btn alt sm" data-act="autonotex" aria-expanded="${open}">${open ? 'Hide' : 'See'} what moved</button><button type="button" class="btn alt sm" data-act="autoundo">Undo</button><button type="button" class="small" data-act="autonoteclose">Dismiss</button></div>
+    ${open ? `<ul class="todol">${a.moves.map(x => { const m = findMatch(x.id); if (!m) return ''; return `<li><span><b>${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundName(m))}</b><br><span class="small muted">${esc(whenLabel(x.from.when, x.from.court))} → ${esc(whenLabel(x.to.when, x.to.court))}</span></span><button type="button" class="btn alt sm" ${todoGoAttrs({step:'schedule', mid:m.id})}>Show</button></li>` }).join('')}</ul>` : ''}</div>`;
 }
 function wizardView(){
   const wz = view.wz || {step:'basics'}, step = wz.step, i = WZ_STEPS.findIndex(s => s[0] === step), fresh = !TRIP;
@@ -6669,6 +6933,7 @@ function adminView(){
     <div class="bk-feature quiet"><p class="bk-eyebrow">Now</p>
       <dl class="dstats"><div><dt>Draws published</dt><dd>${pub} of ${drawn || evs.length}</dd></div><div><dt>Results in</dt><dd>${done} of ${ms.length}</dd></div><div><dt>Marked on court</dt><dd>${live}</dd></div></dl>
       ${conf ? `<p class="bk-note warn">${conf} scheduling conflict${conf === 1 ? '' : 's'}: a player is booked in two places at once. Review the schedule.</p>` : ''}</div>
+    ${autoNoteHtml()}
     ${missingCard(false)}
     <ul class="bk-rows">
       ${row('wzopen', 'schedule', 'Schedule and courts', 'Review times, move matches, check conflicts')}
@@ -6681,7 +6946,7 @@ function adminView(){
       <label class="sr" for="announce">Announcement text</label><textarea id="announce" class="bk-input" rows="3" placeholder="Rain delay: all 11:00 matches start at 11:30.">${esc(view.annDraft || '')}</textarea>
       <button class="bk-btn alt" data-act="announceask">Review and send…</button></section>`;
   else if (sec === 'setup') body = `<p class="bk-rules">Setup opens step by step. Changes save as you go and reach every phone.</p>
-    <ul class="bk-rows">${WZ_STEPS.map(([k, l]) => row('wzopen', k, l, stepSub[k] || '', stepDone(k) ? '<span class="st ok">Done</span>' : '<span class="st neutral">To do</span>')).join('')}
+    <ul class="bk-rows">${WZ_STEPS.map(([k, l]) => setupRow(k, l, stepSub[k] || '')).join('')}
       ${row('wzopen', 'style', 'Look', 'Colors, fonts and layout. Preview before applying.')}</ul>`;
   else if (sec === 'perm') body = `
     <section class="bk-sec"><h2 class="bk-h2">Who can enter scores</h2>
@@ -7074,7 +7339,7 @@ const ACT = {
     let unrated = 0;
     [cc.aIds || [], cc.bIds || []].forEach(ids => { const s = ids.slice().sort((x, y) => r(y) - r(x)), q = Math.ceil(s.length / 4); s.forEach((id, i) => { if (r(id) < 0) unrated++; t[id] = CC_TIERS[Math.min(3, Math.floor(i / Math.max(1, q)))][0] }) });
     toast(`Pro/A/B/C set from ratings${unrated ? `; ${unrated} unrated player${unrated === 1 ? '' : 's'} went to the bottom` : ''}. Tap any to change.`) }) },
-  drawone(el){ if (needAdmin()) return; try{ withEvent(el.dataset.id, (ev, evs) => { drawEvent(ev); buildSchedule(evs); toast(`${ev.name} drawn.`) }); view.ev = el.dataset.id }catch(e){ toast(e.message) } },
+  drawone(el){ if (needAdmin()) return; try{ withEvent(el.dataset.id, (ev, evs) => { drawEvent(ev); buildSchedule(evs); toast(`${ev.name} drawn.${autoTxt()}`) }); view.ev = el.dataset.id }catch(e){ toast(e.message) } },
   async drawall(){
     if (needAdmin()) return;
     const evs = evsCopy(), redo = evs.filter(e => !hasResults(e) && e.kind !== 'clubcup' && teamsOf(e).length >= 2);
@@ -7083,20 +7348,41 @@ const ACT = {
     buildSchedule(evs); saveEvents(evs);
     const uns = evs.flatMap(e => e.matches).filter(m => typeof m.slotIdx !== 'number').length;
     const dead = ((cfg() || {}).days || []).filter(d => d.on !== false && !daySlotCount(d)).map(d => dayLabel(d.date).split(',')[0]);
-    toast(uns ? `Drawn. ${uns} match${uns === 1 ? " doesn't" : "es don't"} fit${dead.length ? `: ${dead.join(' and ')} ${dead.length === 1 ? 'has' : 'have'} no match times. Check the hours on step 2.` : ' the schedule.'}` : `Drawn and scheduled: ${evs.reduce((s, e) => s + e.matches.length, 0)} matches.`);
+    toast(uns ? `Drawn. ${uns} match${uns === 1 ? " doesn't" : "es don't"} fit${dead.length ? `: ${dead.join(' and ')} ${dead.length === 1 ? 'has' : 'have'} no match times. Check the hours on step 2.` : ' the schedule.'}` : `Drawn and scheduled: ${evs.reduce((s, e) => s + e.matches.length, 0)} matches.${autoTxt()}`);
   },
-  resched(){ if (needAdmin()) return; const evs = evsCopy(); buildSchedule(evs); saveEvents(evs); toast('Schedule rebuilt.') },
+  resched(){ if (needAdmin()) return; const evs = evsCopy(); buildSchedule(evs); saveEvents(evs); toast('Schedule rebuilt.' + autoTxt()) },
   publish(el){ withEvent(el.dataset.id, ev => { ev.published = !ev.published; if (ev.published) Store.set('chat:' + uid(), {auto:true, text:`${ev.name} draw is out.`, ts:Date.now()}) }) },
   publishall(){ const evs = evsCopy(); const n = evs.filter(e => isDrawn(e) && !e.published); n.forEach(e => e.published = true); saveEvents(evs); if (n.length) Store.set('chat:' + uid(), {auto:true, text:`Draws are out: ${n.map(e => e.name).join(', ')}.`, ts:Date.now()}) },
   sday(el){ view.sday = el.dataset.v },
   movemenu(el){ if (needAdmin()) return; view.matchId = el.dataset.id; view.modal = 'move'; view.mv = null },
+  todox(el){ const k = el.dataset.v; view.todoOpen = Object.assign({}, view.todoOpen, {[k]:!(view.todoOpen || {})[k]}); setTimeout(() => { const b = [...document.querySelectorAll('[data-act="todox"]')].find(x => x.dataset.v === k); if (b) b.focus() }, 0) },
+  todostep(el){ const k = el.dataset.v; view.todoStep = view.todoStep === k ? null : k; setTimeout(() => { const b = document.querySelector(`[data-act="todostep"][data-v="${k}"]`); if (b) b.focus() }, 0) },
+  todogo(el){ if (needAdmin()) return; const d = el.dataset; try{ inferFromEvents() }catch(e){}
+    view.screen = 'wizard'; view.wz = {step:d.step || 'basics'}; view.modal = null; view.todoStep = null;
+    if (d.ev) view.ev = d.ev; if (d.roster) view.rosterOpen = true; if (d.clash) view.clashOpen = d.clash;
+    const m = d.mid && findMatch(d.mid);
+    if (m){ view.hlMatch = m.id; if (!d.ev) view.ev = m.eventId; if (TIME_SLOTS[m.slotIdx]) view.sday = TIME_SLOTS[m.slotIdx][0] }
+    view.resetScroll = !(m || d.clash);
+    if (m || d.clash) setTimeout(() => { const t = (d.clash && [...document.querySelectorAll('[data-act="clashx"]')].find(x => x.dataset.v === d.clash)) || document.querySelector('.sgm.hl'); if (t){ t.scrollIntoView({block:'center', behavior:'smooth'}); t.focus({preventScroll:true}) } }, 60) },
+  autonotex(){ if (view.autoNote) view.autoNote.open = !view.autoNote.open },
+  autonoteclose(){ view.autoNote = null },
+  autoundo(){ if (needAdmin()) return; const a = view.autoNote; if (!a) return; const evs = evsCopy();
+    const before = {}; evs.forEach(e => e.matches.forEach(m => { before[m.id] = {when:m.when || null, court:m.court || null} }));
+    if (!undoAuto(evs, a.moves)){ view.autoNote = null; return toast("The schedule changed since then, so that can't be undone.") }
+    stampMoved(evs, before); saveEvents(evs); view.autoNote = null; toast(`Put ${a.moves.length} match${a.moves.length === 1 ? '' : 'es'} back where ${a.moves.length === 1 ? 'it was' : 'they were'}.`) },
+  autofix(){ if (needAdmin()) return; const evs = evsCopy();
+    const before = {}; evs.forEach(e => e.matches.forEach(m => { before[m.id] = {when:m.when || null, court:m.court || null} }));
+    const r = autoResolve(evs), left = r.after.definite + r.after.possible;
+    if (!r.moves.length) return toast(left ? 'No better times are open. Add a court or more hours to clear the rest.' : 'No clashes to fix.');
+    stampMoved(evs, before); saveEvents(evs); view.autoNote = {moves:r.moves, after:r.after, open:false};
+    toast(`Moved ${r.moves.length} match${r.moves.length === 1 ? '' : 'es'}. ${left ? left + ' clash' + (left === 1 ? '' : 'es') + ' left.' : 'No clashes left.'}`) },
   clashx(el){ view.clashOpen = view.clashOpen === el.dataset.v ? null : el.dataset.v; const k = el.dataset.v; setTimeout(() => { const b = [...document.querySelectorAll('[data-act="clashx"]')].find(x => x.dataset.v === k); if (b) b.focus() }, 0) },
   clashshow(el){ const m = findMatch(el.dataset.id); if (!m) return; view.clashOpen = el.dataset.v || view.clashOpen; view.hlMatch = m.id; if (TIME_SLOTS[m.slotIdx]) view.sday = TIME_SLOTS[m.slotIdx][0]; setTimeout(() => { const g = document.querySelector('.sgm.hl'); if (g){ g.scrollIntoView({block:'center', behavior:'smooth'}); g.focus({preventScroll:true}) } }, 0) },
   dws(el){ view.dws = el.dataset.v; view.resetScroll = true },
   async announceask(){ if (needAdmin()) return; const t = ((document.getElementById('announce') || {}).value || view.annDraft || '').trim(); if (!t) return toast('Write the announcement first.'); if (!await ask(`Send this announcement to everyone?\n\n"${t}"`, {ok:'Send announcement'})) return; Store.set('chat:' + uid(), {ann:true, by:view.me, text:t, ts:Date.now(), reactions:{}}); view.annDraft = ''; toast('Announcement sent.') },
   domove(el){ if (needAdmin()) return; const s = +(document.getElementById('mv-slot') || {}).value, c = +(document.getElementById('mv-court') || {}).value; const evs = evsCopy();
     const before = {}; evs.forEach(e => e.matches.forEach(m => { before[m.id] = {when:m.when || null, court:m.court || null} }));
-    setMatchSlot(evs, el.dataset.id, s, c); stampMoved(evs, before); saveEvents(evs); view.modal = null; view.mv = null; toast('Moved and pinned. If a match was there, they swapped.') },
+    setMatchSlot(evs, el.dataset.id, s, c); const ar = autoAfterMove(evs); stampMoved(evs, before); saveEvents(evs); view.modal = null; view.mv = null; toast('Moved and pinned. If a match was there, they swapped.' + (ar ? ` The app moved ${ar.moves.length} other match${ar.moves.length === 1 ? '' : 'es'} to avoid new clashes.` : '')) },
   unpin(el){ if (needAdmin()) return; const evs = evsCopy(); const before = {}; evs.forEach(e => e.matches.forEach(m => { before[m.id] = {when:m.when || null, court:m.court || null} })); setMatchSlot(evs, el.dataset.id, ''); stampMoved(evs, before); saveEvents(evs); view.modal = null; view.mv = null; toast('The app will place this match again.') },
   rtopen(el){ view.rtOpen = view.rtOpen === el.dataset.id ? null : el.dataset.id },
   divread(){ const t = ((document.getElementById('divpaste') || {}).value || view.divPaste || ''); const dl = parseDivisionList(t); view.divErr = null;
@@ -7383,7 +7669,8 @@ const CHG = {
     // keep the court free if possible: when only the time changes, pick the first open court at that time
     let court = c; const all = evs.flatMap(e => e.matches); syncEngine();
     if (el.dataset.chg === 'mslot'){ const used = new Set(all.filter(o => o.id !== id && SLOT_KEYS.indexOf(o.when) === +sl).map(o => o.court)); if (used.has(court)){ for (let k = 1; k <= state.tournamentCourts; k++) if (!used.has(k)){ court = k; break } } }
-    setMatchSlot(evs, id, +sl, court); saveEvents(evs) },
+    const before = {}; evs.forEach(e => e.matches.forEach(m => { before[m.id] = {when:m.when || null, court:m.court || null} }));
+    setMatchSlot(evs, id, +sl, court); const ar = autoAfterMove(evs); if (ar) stampMoved(evs, before); saveEvents(evs); if (ar) toast(`Moved. The app moved ${ar.moves.length} other match${ar.moves.length === 1 ? '' : 'es'} to avoid new clashes.`) },
   mcourt(el){ return CHG.mslot(el) },
   impcol(el){ const im = view.imp; if (!im) return; const i = +el.dataset.i, map = Object.assign({}, im.map); Object.keys(map).forEach(k => { if (map[k] === i) delete map[k] }); if (el.value) map[el.value] = i;
     const r = rowsToEntries(im.table, {hi:im.hi, map}); view.imp = Object.assign({}, im, {entries:r.entries, map, showCols:true}) },
@@ -7545,7 +7832,7 @@ function buildSample(){
   for (let i = 0; i < 3; i++) add('s3', 'doubles', [lm[2*i], lm[2*i+1]], [am[2*i], am[2*i+1]]);
   syncClubCupRosters(ev);
   ev.published = true; ev.drawnAt = Date.now();
-  const evs = [ev]; buildSchedule(evs); saveEvents(evs);
+  const evs = [ev]; buildSchedule(evs, {note:false}); saveEvents(evs);
   // Saturday's women's doubles are finished: Lubbock takes two of three
   const s1 = ev.matches.filter(m => m.sessionId === 's1');
   [['A', [[6,4],[6,3]]], ['B', [[4,6],[7,5],[8,10]]], ['A', [[7,6],[6,4]]]].forEach(([w, sc], i) => {
@@ -7591,7 +7878,7 @@ function buildSampleClassic(){
   const x70 = newEvent(QUICK[2].ev); x70.format = 'double_elim'; x70.pairing = 'auto'; x70.entrants = [...byG('M').filter(p => p.rating <= 3.5).slice(-8), ...byG('F').filter(p => p.rating <= 3.5).slice(0, 8)].map(p => p.id); x70.pairs = autoPair(x70); evs.push(x70);
   const open = newEvent(QUICK[3].ev); open.name = 'Open'; open.format = 'multi_pool'; open.entrants = [...byG('M').slice(8, 20), ...byG('F').slice(8, 20)].map(p => p.id); open.pairs = autoPair(open); open.poolConfig = {poolSize:3, advancePerPool:1}; evs.push(open);
   saveEvents(evs);
-  const evc = evsCopy(); evc.forEach(drawEvent); buildSchedule(evc); evc.forEach(e => e.published = true); saveEvents(evc);
+  const evc = evsCopy(); evc.forEach(drawEvent); buildSchedule(evc, {note:false}); evc.forEach(e => e.published = true); saveEvents(evc);
   syncEngine();
   let n = 0; for (let pass = 0; pass < 2; pass++){ syncEngine(); allMatches(false).filter(m => TIME_SLOTS[m.slotIdx] && TIME_SLOTS[m.slotIdx][0] === dayKey(start)).forEach(m => { if (state.results[m.id] || !bothKnown(m)) return; const t1 = (n++ % 3) !== 0; Store.set('m:' + m.id, {w:t1 ? 'team1' : 'team2', s:[[t1 ? 6 : 4, t1 ? 4 : 6], [t1 ? 7 : 3, t1 ? 5 : 6]], by:GUEST, ts:Date.now() - n * 60000}) }) }
   Store.set('chat:' + uid(), {auto:true, text:'Welcome to the Sample Club Classic. Draws are out.', ts:Date.now()});
