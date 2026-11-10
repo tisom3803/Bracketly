@@ -1,0 +1,6 @@
+-- Applied to project pjbxaqaubdyjhqsfajqv on 2026-11-10 as migration "bracketly_v4_invites_cards_media".
+-- Additive only: new tables invites, invite_seen, player_cards; new functions new_invite_code, create_invite,
+-- revoke_invite, peek_invite, accept_invite, dismiss_invite, my_invites, my_trips_meta, can_edit_card;
+-- new public bucket bracketly-media (50 MB, image/jpeg|png|webp|gif, video/mp4|webm|quicktime) with insert policies
+-- (directors: brand/gallery/video/players folders; members: players folder). Existing objects untouched.
+-- The exact SQL is kept in the Supabase migration history.

@@ -1541,6 +1541,134 @@ nav.bk-nav :focus-visible{outline-color:var(--au2)}
 @media (min-width:760px){ .v3-top-row{max-width:1200px;margin-left:auto;margin-right:auto;width:100%} nav.tabs.bk-nav{padding-left:max(16px,calc((100% - 720px)/2)) !important;padding-right:max(16px,calc((100% - 720px)/2)) !important} }
 @media (min-width:1100px){ .wrap,.wz,.v3-land-in,.v3-evhead{max-width:1200px} .crows{grid-template-columns:repeat(3,1fr)} }
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
+.v4-plrows .bk-row > span:not(.v4-av):not(.chev),.v4-cardlist .bk-row > span:not(.v4-av):not(.chev){flex:1 1 auto;min-width:0;text-align:left}
+.v4-sheet label.btn{display:inline-flex;margin:0 6px 6px 0}.v4-ce-ph > div{min-width:0}
+.wz .themes button.on{outline:none!important}
+.tv2 .tvrow{background:rgba(247,245,236,.06)!important;border:1px solid rgba(213,179,106,.3)!important;border-radius:14px;padding:10px 14px!important;margin-bottom:10px}
+/* ===== v4: player cards, invites, customize, gallery + v3 language for director, wizard, print and TV ===== */
+.v4-av{--s:40px;flex:0 0 var(--s);width:var(--s);height:var(--s);border-radius:50%;display:inline-grid;place-items:center;overflow:hidden;background:var(--g1);color:var(--au2);font:700 calc(var(--s)*.38)/1 var(--fd);box-shadow:0 0 0 2px var(--card),0 0 0 3.5px var(--au);margin-right:12px}
+.v4-av img{width:100%;height:100%;object-fit:cover;display:block}
+.v4-plrows .bk-row{align-items:center}
+.v4-pcard{position:relative;text-align:center;margin:4px 0 18px;padding:26px 18px 20px;border-radius:20px;color:var(--iv);background:radial-gradient(120% 80% at 50% 0%,var(--g2),var(--g1) 55%,var(--g3));border:1px solid var(--au);box-shadow:0 10px 28px rgba(6,61,43,.25);overflow:hidden}
+.v4-pcard::before{content:"";position:absolute;inset:8px;border:1px solid rgba(213,179,106,.45);border-radius:14px;pointer-events:none}
+.v4-pcard-ph{width:132px;height:132px;margin:0 auto 14px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:var(--iv);box-shadow:0 0 0 4px var(--g1),0 0 0 7px var(--au)}
+.v4-pcard-ph img{width:100%;height:100%;object-fit:cover}.v4-pcard-ph span{font:700 48px/1 var(--fd);color:var(--g1)}
+.v4-pcard-n{font:700 28px/1.15 var(--fd);margin:0;color:var(--iv)}
+.v4-pcard-r{margin:6px 0 0;font:700 14px/1.2 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:var(--au2)}
+.v4-pcard-m{margin:8px 0 0;font:500 14px/1.4 var(--fb);color:rgba(247,245,236,.82)}
+.v4-pcard-bio{margin:14px auto 0;max-width:46ch;font:400 15px/1.55 var(--fb);color:var(--iv)}
+.v4-pcard-ev{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:14px 0 0}
+.v4-pcard-ev span{font:600 12px/1 var(--fb);padding:7px 10px;border-radius:999px;background:rgba(247,245,236,.1);border:1px solid rgba(213,179,106,.5);color:var(--iv)}
+.v4-pcard-act{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;position:relative}
+.v4-pcard .btn.alt{background:transparent;color:var(--iv);border-color:rgba(247,245,236,.55)}
+.v4-pcard .btn:not(.alt){background:linear-gradient(180deg,var(--au2),var(--au));color:var(--g3);border-color:var(--au)}
+.v4-pcard-hint{margin:12px 0 0;font:400 13px/1.4 var(--fb);color:rgba(247,245,236,.7)}
+.v4-pcard .v3-badge{vertical-align:middle}
+.v4-ce-ph{display:flex;gap:14px;align-items:center;margin:8px 0 14px}.v4-ce-ph .v4-av{margin:0}
+.v4-sheet label{display:block;margin:12px 0 6px;font:600 14px/1.3 var(--fb);color:var(--g1)}
+.v4-sheet .bk-actions{margin-top:16px}
+/* invites */
+.v4-form label,.v4-flabel{display:block;margin:12px 0 6px;font:600 14px/1.3 var(--fb);color:var(--g1)}
+.v4-form .seg2{margin:0}.v4-form .btn{margin-top:14px;width:100%}
+.v4-invnew{margin-top:12px}.v4-invnew small{display:block;margin-top:6px;word-break:break-all;opacity:.8}
+.v4-invlink{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.v4-invlink code{font:700 15px/1 var(--fm);letter-spacing:.12em;padding:10px 12px;border-radius:10px;background:var(--iv2);border:1px dashed var(--au);color:var(--g1)}
+.v4-invlist{list-style:none;margin:0;padding:0;display:grid;gap:10px}.v4-invlist li{padding:14px 16px}
+.v4-invrow{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.v4-invrow small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.v4-invcard{padding:18px}.v4-invcard.feat{border:1.5px solid var(--au);background:linear-gradient(180deg,#FFFDF7,var(--iv2))}
+.v4-invt{font:700 22px/1.2 var(--fd);color:var(--g1);margin:4px 0}.v4-invm{margin:0 0 10px;color:var(--muted);font-size:14px}
+.v4-invcard .bk-actions{margin-top:14px}
+/* customize */
+.v4-czh{margin-top:6px}
+.v4-cztabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:14px -2px 16px;padding:2px}
+.v4-cztabs::-webkit-scrollbar{display:none}
+.v4-cztabs button{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--g1);font:600 14px/1 var(--fb);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.v4-cztabs button svg{width:17px;height:17px}
+.v4-cztabs button[aria-selected=true]{background:var(--g1);color:var(--iv);border-color:var(--au)}
+.v4-czbody > h2:first-child{display:none}
+.v4-czbody .v3-h3{margin:22px 0 10px}
+.v4-hdrprev{position:relative;height:110px;border-radius:14px;overflow:hidden;background:var(--g1)}
+.v4-hdrprev img:first-child{width:100%;height:100%;object-fit:cover;opacity:.55}
+.v4-hdrprev::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,61,43,.35),rgba(7,54,37,.75))}
+.v4-hdrlogo{position:absolute;z-index:1;left:50%;top:50%;width:70px;height:70px;transform:translate(-50%,-50%)}
+.v4-galedit{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:10px}
+.v4-galedit li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:6px 12px;align-items:center}
+.v4-galedit img{grid-row:span 2;width:72px;height:72px;object-fit:cover;border-radius:12px}
+.v4-galbtns{display:flex;gap:6px}
+.v4-cardlist .bk-row{align-items:center}
+.v4-vidprev{margin:10px 0}.v4-vidprev .ivideo,.v4-vidprev .ivid{border-radius:14px;overflow:hidden}
+label.btn.disabled{opacity:.5;pointer-events:none}
+/* gallery */
+.v4-gal{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:2px 2px 8px;scrollbar-width:none}
+.v4-gal::-webkit-scrollbar{display:none}
+.v4-gal-i{flex:0 0 auto;width:160px;height:120px;border-radius:16px;overflow:hidden;scroll-snap-align:start;box-shadow:var(--shadow);border:1px solid var(--bd);padding:0}
+.v4-gal-i img{width:100%;height:100%;object-fit:cover;display:block}
+.v4-galsheet{padding:12px}.v4-galcap{margin:10px 2px 0;font:500 15px/1.4 var(--fb)}
+.v4-clubs{list-style:none;margin:12px 0 0;padding:0;counter-reset:c}
+.v4-clubs li{display:flex;justify-content:space-between;align-items:center;padding:12px 4px;border-bottom:1px solid var(--bd);font:600 16px/1.3 var(--fb);counter-increment:c}
+.v4-clubs li::before{content:counter(c);width:28px;color:var(--au);font:700 18px/1 var(--fd)}.v4-clubs li span{flex:1}.v4-clubs b{font:700 22px/1 var(--fd);color:var(--g1)}
+.v4-introbtns{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:12px}
+.modal.intro .sheet{border-radius:20px;border:1px solid var(--au)}
+/* ---- director workspace in the v3 language ---- */
+.dws .bk-eyebrow{color:#8A6A22;letter-spacing:.14em;text-transform:uppercase;font:700 12px/1.2 var(--fb)}
+.dws .bk-h2{font:700 22px/1.2 var(--fd);color:var(--g1)}
+.dws .bk-h2::after{content:"";display:block;width:36px;height:2px;margin-top:6px;background:linear-gradient(90deg,var(--au),var(--au2));border-radius:2px}
+.dws > .bk-rows,.dws .bk-sec > .bk-rows,.dws > ul.bk-rows{background:var(--card);border:1px solid var(--bd);border-radius:20px;box-shadow:var(--shadow);padding:0 16px;overflow:hidden}
+.dws .bk-rows > li:last-child .bk-row{border-bottom:0}
+.dws .bk-sec{background:var(--card);border:1px solid var(--bd);border-radius:20px;box-shadow:var(--shadow);padding:18px 16px;margin:16px 0}
+.dws .bk-sec.v4-inv{background:transparent;border:0;box-shadow:none;padding:0}
+.dws .bk-sec .bk-rows{box-shadow:none;border:0;padding:0}
+.dws .dws-tabs{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:5px;box-shadow:var(--shadow)}
+.dws .dws-tabs button[aria-pressed=true]{background:var(--g1);color:var(--iv)}
+.dws .bk-link{color:#8A6A22;font-weight:600}
+.dws details.bk-disc{background:var(--card);border:1px solid var(--bd);border-radius:20px;box-shadow:var(--shadow);margin:12px 0;padding:0 16px}
+.aswitch input:checked + i{background:var(--g1)!important}
+/* ---- setup wizard ---- */
+.wsteps button{border:1px solid var(--bd)!important;background:var(--card)!important;border-radius:999px!important;padding:9px 13px!important;font:600 12.5px/1 var(--fb)!important;color:var(--g1)!important;min-height:36px}
+.wsteps button.on{background:var(--g1)!important;color:var(--iv)!important;border-color:var(--au)!important}
+.wsteps button.ok::before{content:"✓ ";color:var(--success)}
+.wsteps button.on.ok::before{color:var(--au2)}
+.wz h2{font:700 28px/1.15 var(--fd);color:var(--g1)}
+.wz h2::after{content:"";display:block;width:44px;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--au),var(--au2));border-radius:2px}
+.wz h3{font:700 19px/1.25 var(--fd);color:var(--g1);margin:22px 0 10px}
+.wz .card.adm,.wz .card{background:var(--card);border:1px solid var(--bd)!important;border-radius:20px!important;box-shadow:var(--shadow);padding:16px}
+.wz .themes button{border-radius:16px!important;border:1px solid var(--bd)!important;background:var(--card)!important;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.wz .themes button.on{border:2px solid var(--au)!important;box-shadow:0 0 0 3px rgba(213,179,106,.25)}
+.wz .wnav{border-top:1px solid var(--bd);padding-top:16px;margin-top:24px}
+.wz .wnote{color:var(--muted)}
+.wz .seg{border-radius:12px;overflow:hidden}
+.wz .seg button.on{background:var(--g1)!important;color:var(--iv)!important}
+/* ---- print: ivory/green/gold on screen, clean on paper ---- */
+.printpage{background:var(--paper);color:var(--ink)}
+.printpage .noprint{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--g1),var(--g3));border-bottom:1px solid var(--au)}
+.printpage .noprint .btn.alt{background:transparent;color:var(--iv);border-color:rgba(247,245,236,.6)}
+.psec{background:#fff;border:1px solid var(--bd);border-radius:16px;margin:16px;padding:18px 20px;box-shadow:var(--shadow)}
+.psec .ph{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:2px solid var(--au);padding-bottom:10px;margin-bottom:10px}
+.psec .ph b{font:700 18px/1.2 var(--fd);color:var(--g1);display:block}.psec .ph span{color:var(--muted);font-size:13px}
+.psec .ph h1{margin:0 0 0 auto;font:700 26px/1.1 var(--fd);color:var(--g1)}
+@media print{ .printpage{background:#fff} .psec{border:0;box-shadow:none;margin:0 0 12px;padding:0;border-radius:0;break-inside:avoid-page} .psec .ph{border-bottom-color:#B8954A} }
+/* ---- TV mode ---- */
+.tv{background:radial-gradient(140% 90% at 50% -10%,var(--g2),var(--g1) 45%,var(--g3));color:var(--iv)}
+.tvh{background:transparent!important;border-bottom:1px solid rgba(213,179,106,.55);margin:-18px -24px 22px!important;padding:16px 28px!important;color:var(--iv)!important}
+.tvh h1{font:700 44px/1.05 var(--fd)!important;color:var(--iv)}.tvh span{color:var(--au2);opacity:1!important;letter-spacing:.06em}
+.tvh .logo{border-radius:50%;box-shadow:0 0 0 3px var(--au)}
+.tvclock{font:700 40px/1 var(--fb)!important;color:var(--au2)}
+.tv h2,.tv2 h2{font-family:var(--fd)!important;color:var(--iv)}
+.tv h2::after{content:"";display:block;width:54px;height:2px;margin-top:8px;background:linear-gradient(90deg,var(--au),var(--au2))}
+.tvc2{background:rgba(247,245,236,.06)!important;border:1px solid rgba(213,179,106,.35)!important;border-left:5px solid rgba(213,179,106,.35)!important;border-radius:18px!important;color:var(--iv)}
+.tvc2.busy{border-left-color:#3FBF7F!important;background:rgba(247,245,236,.1)!important}
+.tvc2-h b{font-family:var(--fd)!important;color:var(--iv)}.tvc2-s,.tvc2-n{color:rgba(247,245,236,.72)!important}
+.tv .st{background:rgba(247,245,236,.12);color:var(--iv);border-color:rgba(213,179,106,.5)}
+.tv .st.live{background:#237A52;color:#fff;border-color:#237A52}
+.tv2 .tvrow{border-bottom:1px solid rgba(213,179,106,.25)!important;background:transparent!important;color:var(--iv)}
+.tv2 .tvrow span{color:rgba(247,245,236,.68)!important}.tvsc{color:var(--au2)}
+.tv .tvempty{color:rgba(247,245,236,.7)}
+.tvdraw{background:var(--paper);color:var(--ink);border-radius:20px;padding:16px 20px}.tvdraw h2{color:var(--g1)!important}
+.tvphotos figure{border:1px solid rgba(213,179,106,.45)!important;border-radius:18px;overflow:hidden;background:rgba(0,0,0,.2)!important}
+.tvphotos figcaption{color:var(--iv)}
+.tv .sponsors{background:rgba(247,245,236,.94);border-radius:16px;padding:10px 16px;margin-top:18px;color:var(--ink)}
+@media (min-width:760px){ .v4-pcard{padding:34px 28px 26px} .v4-gal-i{width:220px;height:160px} }
+@media (prefers-reduced-motion:reduce){ .v4-cztabs button,.v4-gal{scroll-behavior:auto} }
 </style>
 </head>
 <body>
@@ -1553,7 +1681,7 @@ nav.bk-nav :focus-visible{outline-color:var(--au2)}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '2.5.4';
+const APP_VERSION = '2.6.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -1643,12 +1771,15 @@ const Dir = {
     if (Object.keys(add).every(k => x[k] === add[k])) return; Object.assign(x, add); LS.set('bkt-tourneys', l) },
   remember(t){ const all = this.known(), was = all.find(x => x.id === t.id) || {}, l = all.filter(x => x.id !== t.id); l.unshift({start:was.start, end:was.end, club:was.club, id:t.id, code:t.code, name:t.name, role:t.role, at:Date.now()}); LS.set('bkt-tourneys', l.slice(0, 30)) },
   forget(id){ LS.set('bkt-tourneys', this.known().filter(x => x.id !== id)) },
+  // Tournament list with dates, club and cover from each tournament's own config (server), not just this device
   async mine(){
+    const keep = l => { const k = this.known(); l.forEach(t => { const x = k.find(y => y.id === t.id); if (x){ x.start = t.start || x.start; x.end = t.end || x.end; x.club = t.club || x.club } }); LS.set('bkt-tourneys', k); return l };
     if (this.mode === 'supabase'){
-      const {data, error} = await this.sb.rpc('my_trips'); if (error) return this.known();
-      return (data || []).map(r => ({id:r.trip_id, code:r.join_code, name:r.name, role:r.role}));
+      let r = await this.sb.rpc('my_trips_meta');
+      if (r.error){ r = await this.sb.rpc('my_trips'); if (r.error) return this.known() }
+      return keep((r.data || []).map(x => ({id:x.trip_id, code:x.join_code, name:x.name, role:x.role, start:x.starts || '', end:x.ends || x.starts || '', club:x.club || '', sport:x.sport || '', cover:x.cover || ''})));
     }
-    return this.known();
+    return this.known().map(t => { const c = (LS.get('bkt-local-kv-' + t.id, {}) || {}).config; if (!c) return t; const ds = (c.days || []).filter(d => d.on !== false).map(d => d.date).sort(); return Object.assign({}, t, {start:ds[0] || c.start || t.start || '', end:ds[ds.length - 1] || c.end || t.end || '', club:c.club || t.club || '', cover:typeof c.cover === 'string' && !c.cover.startsWith('data:') ? c.cover : ''}) });
   },
   async claimAdmin(pin){
     if (this.mode === 'supabase'){ const {data, error} = await this.sb.rpc('claim_admin', {p_trip:TRIP.id, p_pin:pin}); if (error) throw error; if (data) TRIP.role = 'admin'; return !!data }
@@ -1692,6 +1823,72 @@ const Dir = {
     }
     if (this.mode === 'claude' && this.assets){ const r = await this.assets.upload(blob); return r.url }
     throw new Error('No file storage in this mode');
+  },
+  // ---- v4 media: brand photos, gallery, welcome video, player photos (bracketly-media bucket, 50 MB cap) ----
+  async uploadMedia(blob, ext, folder){
+    if (this.mode === 'supabase'){
+      const path = `${TRIP.id}/${folder}/${uid()}.${ext}`;
+      const {error} = await this.sb.storage.from(MEDIA_BUCKET).upload(path, blob, {contentType:blob.type, cacheControl:'31536000', upsert:false});
+      if (error) throw error;
+      return this.sb.storage.from(MEDIA_BUCKET).getPublicUrl(path).data.publicUrl;
+    }
+    if (this.mode === 'claude' && this.assets){ const r = await this.assets.upload(blob); return r.url }
+    return await fileURL(blob);
+  },
+  // ---- v4 player cards ----
+  async loadCards(){
+    if (!TRIP) return {};
+    if (this.mode === 'supabase'){ const {data, error} = await this.sb.from('player_cards').select('player_id,photo,bio,club,hometown,plays,updated_at').eq('trip_id', TRIP.id); if (error) throw error; const o = {}; (data || []).forEach(r => { o[r.player_id] = r }); return o }
+    return LS.get('bkt-local-cards-' + TRIP.id, {});
+  },
+  async saveCard(pid, d){
+    const t = (v, n) => { v = String(v || '').trim().slice(0, n); return v || null };
+    const row = {trip_id:TRIP.id, player_id:pid, photo:d.photo || null, bio:t(d.bio, 600), club:t(d.club, 120), hometown:t(d.hometown, 120), plays:t(d.plays, 60), updated_at:new Date().toISOString()};
+    if (this.mode === 'supabase'){ const {error} = await this.sb.from('player_cards').upsert(row); if (error) throw new Error(/row-level|policy|permission/i.test(error.message) ? 'Only this player (after picking their name) or a director can edit this card.' : error.message); return row }
+    const all = LS.get('bkt-local-cards-' + TRIP.id, {}); all[pid] = row; LS.set('bkt-local-cards-' + TRIP.id, all); return row;
+  },
+  // ---- v4 invites (single use; stored server-side; never emailed) ----
+  async createInvite(o){
+    if (this.mode === 'supabase'){ const {data, error} = await this.sb.rpc('create_invite', {p_trip:TRIP.id, p_role:o.role || 'player', p_player:o.player || null, p_name:o.name || null, p_email:o.email || null, p_note:o.note || null}); if (error) throw new Error(/director/i.test(error.message) ? 'Unlock director tools with the PIN first.' : error.message); return Array.isArray(data) ? data[0] : data }
+    const all = LS.get('bkt-local-invites', {}), code = makeInviteCode();
+    const row = {id:'i' + uid(), trip_id:TRIP.id, code, role:o.role || 'player', player_id:o.player || null, name:o.name || null, email:o.email ? o.email.toLowerCase() : null, status:'pending', created_at:new Date().toISOString(), expires_at:new Date(Date.now() + 60 * 864e5).toISOString()};
+    all[code] = row; LS.set('bkt-local-invites', all); return row;
+  },
+  async listInvites(){
+    if (this.mode === 'supabase'){ const {data, error} = await this.sb.from('invites').select('id,code,role,player_id,name,email,status,created_at,accepted_at,expires_at').eq('trip_id', TRIP.id).order('created_at', {ascending:false}); if (error) throw error; return (data || []).map(r => Object.assign(r, {status:r.status === 'pending' && r.expires_at && r.expires_at < new Date().toISOString() ? 'expired' : r.status})) }
+    return Object.values(LS.get('bkt-local-invites', {})).filter(r => r.trip_id === TRIP.id).sort((a, b) => b.created_at.localeCompare(a.created_at));
+  },
+  async revokeInvite(id){
+    if (this.mode === 'supabase'){ const {error} = await this.sb.rpc('revoke_invite', {p_id:id}); if (error) throw error; return }
+    const all = LS.get('bkt-local-invites', {}); Object.values(all).forEach(r => { if (r.id === id && r.status === 'pending') r.status = 'revoked' }); LS.set('bkt-local-invites', all);
+  },
+  _localTrip(r){ const t = LS.get('bkt-local-tourneys', {})[r.trip_id] || {}, c = (LS.get('bkt-local-kv-' + r.trip_id, {}) || {}).config || {}; return {trip_name:c.name || t.name, starts:c.start || '', ends:c.end || '', club:c.club || '', t} },
+  async peekInvite(code){
+    code = cleanInvite(code);
+    if (this.mode === 'supabase'){ const {data, error} = await this.sb.rpc('peek_invite', {p_code:code}); if (error) throw new Error(/No invite/i.test(error.message) ? 'No invite with that code.' : error.message); return Array.isArray(data) ? data[0] : data }
+    const r = LS.get('bkt-local-invites', {})[code]; if (!r) throw new Error('No invite with that code.');
+    const seen = LS.get('bkt-local-invite-seen', {}); if (!seen[code]){ seen[code] = new Date().toISOString(); LS.set('bkt-local-invite-seen', seen) }
+    const lt = this._localTrip(r); return {code, trip_id:r.trip_id, trip_name:lt.trip_name, role:r.role, name:r.name, status:r.status === 'accepted' && r.accepted_by === 'me' ? 'accepted-by-you' : r.status, starts:lt.starts, ends:lt.ends, club:lt.club, expired:r.expires_at < new Date().toISOString()};
+  },
+  async acceptInvite(code){
+    code = cleanInvite(code);
+    if (this.mode === 'supabase'){ const {data, error} = await this.sb.rpc('accept_invite', {p_code:code}); if (error) throw new Error(/No invite/i.test(error.message) ? 'No invite with that code.' : error.message); const r = Array.isArray(data) ? data[0] : data; return {id:r.trip_id, code:r.join_code, name:r.name, role:r.role, player:r.player_id} }
+    const all = LS.get('bkt-local-invites', {}), r = all[code]; if (!r) throw new Error('No invite with that code.');
+    if (r.status === 'revoked') throw new Error('This invite was cancelled by the director');
+    if (r.status === 'accepted' && r.accepted_by !== 'me') throw new Error('This invite has already been used');
+    if (r.status === 'pending' && r.expires_at < new Date().toISOString()) throw new Error('This invite has expired');
+    if (r.status === 'pending'){ r.status = 'accepted'; r.accepted_by = 'me'; r.accepted_at = new Date().toISOString(); LS.set('bkt-local-invites', all) }
+    const t = this._localTrip(r).t, was = this.known().find(x => x.id === r.trip_id) || {};
+    const rec = {id:r.trip_id, code:t.code, name:t.name, role:r.role === 'codirector' ? 'admin' : (was.role || 'player'), player:r.player_id}; this.remember(rec); return rec;
+  },
+  async myInvites(){
+    if (this.mode === 'supabase'){ const {data, error} = await this.sb.rpc('my_invites'); if (error) return []; return data || [] }
+    const all = LS.get('bkt-local-invites', {}), seen = LS.get('bkt-local-invite-seen', {}), now = new Date().toISOString();
+    return Object.keys(seen).filter(k => all[k]).map(k => { const r = all[k], lt = this._localTrip(r); return {code:k, trip_id:r.trip_id, trip_name:lt.trip_name, role:r.role, name:r.name, status:r.status === 'accepted' && r.accepted_by === 'me' ? 'accepted-by-you' : r.status === 'pending' && r.expires_at < now ? 'expired' : r.status, starts:lt.starts, ends:lt.ends, club:lt.club, seen_at:seen[k]} }).sort((a, b) => b.seen_at.localeCompare(a.seen_at));
+  },
+  async dismissInvite(code){
+    if (this.mode === 'supabase'){ await this.sb.rpc('dismiss_invite', {p_code:cleanInvite(code)}); return }
+    const seen = LS.get('bkt-local-invite-seen', {}); delete seen[cleanInvite(code)]; LS.set('bkt-local-invite-seen', seen);
   },
   // ---- push subscriptions (Supabase only) ----
   pushReady(){ return this.mode === 'supabase' && !!VAPID_PUBLIC },
@@ -1839,6 +2036,9 @@ const FONTSETS = {
   scorecard:{label:'Scorecard', note:'Tall condensed headings, book serif', fd:"'Big Shoulders Display',sans-serif", fb:"'Libre Caslon Text',Georgia,serif", fm:"'IBM Plex Mono',ui-monospace,monospace", q:''},
   clubhouse:{label:'Clubhouse', note:'Classic serif throughout', fd:"'Playfair Display',Georgia,serif", fb:"'Lora',Georgia,serif", fm:"'IBM Plex Mono',ui-monospace,monospace", q:'family=Playfair+Display:wght@700;900&family=Lora:ital,wght@0,400;0,700;1,400'},
   modern:{label:'Modern', note:'Clean sans for quick reading', fd:"'Oswald',sans-serif", fb:"'Source Sans 3',system-ui,sans-serif", fm:"'JetBrains Mono',ui-monospace,monospace", q:'family=Oswald:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600'},
+  editorial:{label:'Editorial', note:'Magazine serif headings, Inter text', fd:"'DM Serif Display',Georgia,serif", fb:"'Inter',system-ui,sans-serif", fm:"'IBM Plex Mono',ui-monospace,monospace", q:'family=DM+Serif+Display'},
+  retro:{label:'Retro', note:'Tall poster headings, Inter text', fd:"'Bebas Neue',sans-serif", fb:"'Inter',system-ui,sans-serif", fm:"'IBM Plex Mono',ui-monospace,monospace", q:'family=Bebas+Neue'},
+  friendly:{label:'Friendly', note:'Rounded and easy-going', fd:"'Nunito',system-ui,sans-serif", fb:"'Nunito',system-ui,sans-serif", fm:"'IBM Plex Mono',ui-monospace,monospace", q:'family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400'},
   varsity:{label:'Varsity', note:'Slab headings, sturdy body', fd:"'Roboto Slab',Georgia,serif", fb:"'Libre Franklin',system-ui,sans-serif", fm:"'IBM Plex Mono',ui-monospace,monospace", q:'family=Roboto+Slab:wght@700;800;900&family=Libre+Franklin:ital,wght@0,400;0,600;0,700;1,400'}
 };
 const hex2rgb = h => { h = String(h || '#888').replace('#',''); if (h.length === 3) h = h.split('').map(c => c + c).join(''); return [0,2,4].map(i => parseInt(h.substr(i,2),16) || 0) };
@@ -5053,7 +5253,7 @@ function videoHtml(v){
 const needIntro = () => { const v = welcome().video; return !!(v && v.url && TRIP && LS.get(TK('intro')) !== v.ver) };
 function introModal(){
   const v = welcome().video;
-  return `<div class="modal intro" data-act="introdone"><div class="sheet" data-stop="1"><div class="lbl">${esc(tripTitle())}</div><h2 style="margin:2px 0 10px">${esc(v.title || 'Welcome')}</h2>${videoHtml(v)}<button class="btn" style="width:100%;margin-top:12px" data-act="introdone">Let's play</button></div></div>`;
+  return `<div class="modal intro" data-act="introdone"><div class="sheet" data-stop="1"><div class="lbl">${esc(tripTitle())}</div><h2 style="margin:2px 0 10px">${esc(v.title || 'Welcome')}</h2>${videoHtml(v)}<div class="v4-introbtns"><button class="btn v3-primary" data-act="introdone">Let's play</button><button class="btn alt" data-act="introskip">Skip video</button></div><p class="bk-hint" style="text-align:center">You can watch it any time on the welcome page.</p></div></div>`;
 }
 /* The weekend at a glance: each day's tennis plus the director's off-court items */
 function weekendItems(){
@@ -5100,8 +5300,7 @@ function wzWelcome(){
   <h3>Welcome</h3>
   <div class="card adm">${logoUp('cover', 'Cover photo (the courts, the clubhouse, last year\'s winners)')}
     <label class="small muted">Welcome message</label><textarea rows="4" data-chg="cfgv" data-p="welcome.message" placeholder="Welcome to the 2026 Oak & Pheasant Cup. Thanks for playing…">${esc(w.message)}</textarea>
-    <label class="small muted">Welcome video link (YouTube, Vimeo or a video file)</label>${inp('data-chg="welcomevideo" placeholder="https://youtu.be/…"', w.video ? w.video.src : '')}
-    <p class="wnote" style="margin-bottom:0">It plays once the first time someone opens the tournament, and stays on the welcome page.</p></div>
+    <p class="wnote" style="margin-bottom:0">Welcome video: ${w.video && w.video.url ? '<b>set</b>' : 'none yet'}. <button class="small" style="text-decoration:underline;min-height:44px" data-act="czopen" data-v="video">Upload or link it in Customize</button></p></div>
   <h3>Where and when</h3>
   <div class="card adm">${f('address', 'Venue address (opens in Maps)', '4800 Bushland Blvd, Amarillo, TX')}${f('checkin', 'Check-in', 'Pro shop, 30 minutes before your first match')}${f('parking', 'Parking', 'North lot by the tennis center')}${f('food', 'Food & drinks', 'Lunch on the terrace both days')}${f('dress', 'Dress code', 'Club whites')}${f('awards', 'Awards', 'Trophies after the last final, Sunday')}</div>
   <h3>Off-court schedule</h3>
@@ -5474,7 +5673,7 @@ function header(){
   const bell = `<button class="hbtn v3-ring" data-act="alerts" aria-label="Notifications${un ? `, ${un} unread chat message${un === 1 ? '' : 's'}` : ''}">${ICON.bell}${un ? '<i class="v3-dot" aria-hidden="true"></i>' : ''}</button>`;
   const more = `<button class="hbtn more v3-ring" data-act="tab" data-v="more" aria-label="More">${ICON.more}</button>`;
   return `<header class="top bk-top v3-top ${home ? 'tall' : ''}">
-    <img class="v3-top-bg" src="${IMG_HEADER}" srcset="${imgSet('court-header')}" sizes="100vw" alt="" aria-hidden="true" decoding="async">
+    ${hdrImg()}
     <div class="v3-top-row">
       ${dir ? '<span class="v3-top-side"></span>' : `<span class="v3-top-side">${bell}</span>`}
       <button class="bk-brand v3-brand" data-act="tab" data-v="today" aria-label="Bracketly home for ${esc(tripTitle())}"><img class="logo brandmark v3-logo" src="${BRAND_HERO}" width="${home ? 92 : 46}" height="${home ? 92 : 46}" alt=""></button>
@@ -5483,6 +5682,7 @@ function header(){
     ${home ? '<p class="v3-tagline" aria-hidden="true"><i></i>Tennis. Pickleball. Together.<i></i></p>' : ''}
   </header>`;
 }
+const hdrImg = () => TRIP && cfg() && brand().header ? `<img class="v3-top-bg" src="${esc(brand().header)}" alt="" aria-hidden="true" decoding="async">` : `<img class="v3-top-bg" src="${IMG_HEADER}" srcset="${imgSet('court-header')}" sizes="100vw" alt="" aria-hidden="true" decoding="async">`;
 /* ---------- v3 reusable pieces: status badge, tournament card, scoreboard, match card ---------- */
 function tripStatus(c){
   c = c || cfg() || {}; const ds = (c.days || []).filter(d => d.on !== false).map(d => d.date).sort();
@@ -5519,6 +5719,7 @@ function v3Scoreboard(){
       <span class="v3-board-mid">${ICON.trophy}<em>${/cup/i.test(cup.name) ? 'Team Cup' : esc(cup.name)}</em><small>${t.winner ? esc((t.winner === 'A' ? cc.teamAName : cc.teamBName) + ' win') : esc(mid)}</small></span>
       <span class="v3-board-side"><small>${esc(cc.teamBName)}</small><b>${fmtPts(t.sideB)}</b></span></button>`;
   }
+  if (brand().clubBoard){ const cb = clubBoardHtml(); if (cb) return cb }
   const evs = state.events.filter(e => (e.published || view.admin) && e.matches.length); if (!evs.length) return '';
   const ms = evs.flatMap(e => e.matches), done = ms.filter(m => state.results[m.id] && resOf(m.id)).length, live = liveNow().length;
   return `<div class="v3-board summary" role="group" aria-label="${esc(`${evs.length} divisions, ${ms.length} matches, ${done} results in`)}">
@@ -5538,14 +5739,15 @@ function v3Match(m){
       <span class="v3-mrow-t">${esc(sideLabel(m, 'team1', true))} <i>vs</i> ${esc(sideLabel(m, 'team2', true))}</span>${badge ? `<span class="v3-mrow-st">${badge}</span>` : ''}</span>
     <span class="chev" aria-hidden="true">›</span></button>`;
 }
-const NAV_MAIN = ['today', 'courts', 'draws', 'schedule'];
+/* v4 bar, as in the mockup: Home · Events · Players · More. Schedule, Courts and Info are one tap away on Home's tournament card (and under More). */
+const NAV_MAIN = ['today', 'draws', 'players'], NAV_HOME = ['today', 'schedule', 'courts', 'info'];
 function tabbar(){
-  const cur = NAV_MAIN.includes(view.tab) ? view.tab : 'more';
+  const cur = NAV_HOME.includes(view.tab) ? 'today' : NAV_MAIN.includes(view.tab) ? view.tab : 'more';
   const un = unreadCount(), live = liveNow().length;
   const me = view.me && view.me !== GUEST ? view.me : null, pend = me && betsOn() ? bets().filter(b => betNeedsMe(b, me)).length : 0;
   const moreN = un + pend, moreAria = moreN ? `More, ${[un ? `${un} unread chat message${un === 1 ? '' : 's'}` : '', pend ? `${pend} bet${pend === 1 ? '' : 's'} waiting on you` : ''].filter(Boolean).join(', ')}` : '';
   const tb = (v, label, badge, aria) => `<button data-act="tab" data-v="${v}" ${cur === v ? 'aria-current="page"' : ''} ${aria ? `aria-label="${esc(aria)}"` : ''}>${ICON[v]}<span>${label}</span>${badge ? `<span class="badge" aria-hidden="true">${badge}</span>` : ''}</button>`;
-  return `<nav class="tabs bk-nav" aria-label="Tournament">${tb('today', 'Home')}${tb('courts', 'Courts', live, live ? `Courts, ${live} on court now` : '')}${tb('draws', 'Draws')}${tb('schedule', 'Schedule')}${tb('more', 'More', moreN, moreAria)}</nav>`;
+  return `<nav class="tabs bk-nav" aria-label="Tournament">${tb('today', 'Home', live, live ? `Home, ${live} on court now` : '')}${tb('draws', 'Events')}${tb('players', 'Players')}${tb('more', 'More', moreN, moreAria)}</nav>`;
 }
 function body(){
   switch (view.tab){
@@ -5743,7 +5945,7 @@ function homeView(){
     <section class="bk-feature" aria-labelledby="upd-h"><p class="bk-eyebrow">Tournament update</p><h2 id="upd-h">Draws are coming.</h2><p>Match times and opponents will appear here once the director publishes the draws.</p>${view.admin ? '<button class="bk-btn light" data-act="wzopen" data-v="basics">Open setup</button>' : ''}</section>
     ${betAlert}${profile}
     ${glance()}
-    ${infoSections({welcome:true})}
+    ${galleryStrip()}${infoSections({welcome:true})}
     ${photoStrip()}${sponsorsHtml()}${installHint()}`;
   }
   const mine = me ? myMatches(me) : [];
@@ -5769,7 +5971,7 @@ function homeView(){
   ${live.length ? `<section aria-labelledby="live-h">${v3SecHead('On Court Now', 'live-h')}<div class="v3-mlist">${live.map(v3Match).join('')}</div></section>` : ''}
   <section aria-labelledby="today-h">${v3SecHead(playDay ? "Today's Matches" : 'Upcoming Matches', 'today-h', '<button class="v3-link" data-act="tab" data-v="schedule">View Schedule <span aria-hidden="true">→</span></button>')}
     ${shown.length ? `<div class="v3-mlist">${shown.map(v3Match).join('')}</div>` : `<p class="bk-empty">${playDay ? 'No more matches scheduled today.' : 'No upcoming matches are scheduled.'}</p>`}</section>
-  ${infoSections({welcome:true})}
+  ${galleryStrip()}${infoSections({welcome:true})}
   ${photoStrip()}${sponsorsHtml()}${installHint()}`;
 }
 function weekendList(){
@@ -5824,7 +6026,7 @@ function playersView(){
   const all = players(), q = normName(view.q || ''), fe = view.pev || '', fr = view.prt || '';
   const evs = state.events.filter(e => (e.entrants || []).length || (e.pairs || []).length || e.clubCup);
   const ratings = [...new Set(all.map(p => p.rating).filter(r => r != null && r !== '').map(Number))].sort((a, b) => a - b);
-  const me = view.me, fl = following();
+  const me = view.me, fl = following(); if (view.cards === undefined && TRIP){ view.cards = null; setTimeout(loadCards, 0) }
   const pl = all.filter(p => (!q || normName(p.name).includes(q)) && (!fe || eventsOfPlayer(p.id).some(e => e.id === fe)) && (!fr || String(Number(p.rating)) === fr)).sort((a, b) => a.name.localeCompare(b.name));
   const opt = (v, l, cur) => `<option value="${esc(v)}" ${String(cur) === String(v) ? 'selected' : ''}>${esc(l)}</option>`;
   return `${pageHead('Players')}<p class="bk-meta">${all.length} player${all.length === 1 ? '' : 's'} entered</p>
@@ -5834,11 +6036,11 @@ function playersView(){
     ${ratings.length > 1 ? `<label><span>${esc(sport().rating)}</span><select data-chg="pfilter" data-f="prt">${opt('', 'Any rating', fr)}${ratings.map(r => opt(String(r), fmtRating(r), fr)).join('')}</select></label>` : ''}
   </div>
   <p class="bk-hint" role="status">${pl.length === all.length ? `Showing all ${all.length}` : `Showing ${pl.length} of ${all.length}`}</p>
-  ${pl.length ? `<ul class="bk-rows plrows">${pl.map(p => { const pe = eventsOfPlayer(p.id); return `<li><button class="bk-row" data-act="openplayer" data-id="${esc(p.id)}"><span><b>${esc(p.name)}${p.id === me ? ' <span class="st neutral">You</span>' : fl.includes(p.id) ? ' <span class="st neutral">Following</span>' : ''}</b><span>${[p.rating != null && p.rating !== '' ? sport().rating + ' ' + fmtRating(p.rating) : '', pe.map(e => e.name).join(', ')].filter(Boolean).map(esc).join(' · ') || 'Not in a division yet'}</span></span>${CHEV}</button></li>` }).join('')}</ul>` : '<p class="bk-empty">No players match. Try a different name or clear the filters.</p>'}`;
+  ${pl.length ? `<ul class="bk-rows plrows v4-plrows">${pl.map(p => { const pe = eventsOfPlayer(p.id); return `<li><button class="bk-row" data-act="openplayer" data-id="${esc(p.id)}">${brand().cards.show !== false ? avatar(p.id, 44) : ''}<span><b>${esc(p.name)}${p.id === me ? ' <span class="st neutral">You</span>' : fl.includes(p.id) ? ' <span class="st neutral">Following</span>' : ''}</b><span>${[p.rating != null && p.rating !== '' ? sport().rating + ' ' + fmtRating(p.rating) : '', pe.map(e => e.name).join(', ')].filter(Boolean).map(esc).join(' · ') || 'Not in a division yet'}</span></span>${CHEV}</button></li>` }).join('')}</ul>` : '<p class="bk-empty">No players match. Try a different name or clear the filters.</p>'}`;
 }
 function playerSheet(){
   syncEngine();
-  const p = P(view.pid); if (!p) return '';
+  const p = P(view.pid); if (!p) return ''; if (view.cards === undefined && TRIP){ view.cards = null; setTimeout(loadCards, 0) }
   const ms = myMatches(p.id).sort((a, b) => (a.slotIdx ?? 1e6) - (b.slotIdx ?? 1e6));
   const done = ms.filter(m => state.results[m.id] && resOf(m.id)), open = ms.filter(m => !state.results[m.id]);
   const nxt = open.find(m => TIME_SLOTS[m.slotIdx] && bothKnown(m)) || open[0];
@@ -5847,8 +6049,8 @@ function playerSheet(){
   const fol = following().includes(p.id), isMe = view.me === p.id, pe = eventsOfPlayer(p.id);
   return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="pl-h">
     <div class="sh-top"><p class="bk-eyebrow">Player profile</p><button class="hclose" data-act="closemodal" aria-label="Close player profile"><span aria-hidden="true">×</span></button></div>
-    <h2 class="sh-h" id="pl-h">${esc(p.name)}${isMe ? ' <span class="st neutral">You</span>' : ''}</h2>
-    <p class="bk-meta">${[p.rating != null && p.rating !== '' ? sport().rating + ' ' + fmtRating(p.rating) : '', p.club, pe.map(e => e.name).join(', ')].filter(Boolean).map(esc).join(' · ')}</p>
+    ${brand().cards.show !== false ? playerCardHtml(p) : `<h2 class="sh-h" id="pl-h">${esc(p.name)}${isMe ? ' <span class="st neutral">You</span>' : ''}</h2>
+    <p class="bk-meta">${[p.rating != null && p.rating !== '' ? sport().rating + ' ' + fmtRating(p.rating) : '', p.club, pe.map(e => e.name).join(', ')].filter(Boolean).map(esc).join(' · ')}</p>`}
     ${isMe ? '' : `<button class="bk-btn ${fol ? 'alt' : ''}" data-act="follow" data-id="${esc(p.id)}" aria-pressed="${fol}">${fol ? 'Following · tap to stop' : 'Follow'}</button><p class="bk-hint">Following shows their results in your alerts on this device. They aren't told.</p>`}
     <section class="bk-sec"><h3 class="bk-h2">Next match</h3>${nxt ? matchRow(nxt) : `<p class="bk-empty">${done.length ? 'No more matches scheduled.' : 'No matches scheduled yet.'}</p>`}</section>
     ${rest.length ? `<section class="bk-sec"><h3 class="bk-h2">Later</h3>${rest.map(m => matchRow(m)).join('')}</section>` : ''}
@@ -6000,7 +6202,8 @@ function moreView(){
   const grp = (title, rows) => `<section class="v3-group" aria-label="${esc(title)}"><h2 class="v3-glabel">${esc(title)}</h2><ul class="bk-rows v3-card">${rows}</ul></section>`;
   return `${pageHead('More')}<p class="bk-meta">Everything else for this tournament</p>
   ${grp('Tournament tools', [
-    irow('players', 'tab', 'players', 'Players', 'Profiles, events and followed players'),
+    irow('schedule', 'tab', 'schedule', 'Schedule', 'Every match by day, time and court'),
+    irow('courts', 'tab', 'courts', 'Courts', liveNow().length ? `${liveNow().length} on court now` : 'What is on each court'),
     irow('chat', 'tab', 'chat', 'Chat & photos', 'Tournament conversation and photo wall', un, un === 1 ? 'unread message' : 'unread messages'),
     irow('bell', 'alerts', '', 'Notifications', 'Choose what this device alerts you about'),
     irow('share', 'invite', '', 'Share', 'Player link, TV link and QR codes')].join(''))}
@@ -6090,10 +6293,10 @@ function drawFormatLabel(e){ return e.format === 'club_cup' && /cup/i.test(e.nam
 function drawsView(){
   syncEngine();
   const evs = state.events;
-  if (!evs.length) return `${pageHead('Draws')}<p class="bk-empty">No divisions have been set up yet.</p>`;
+  if (!evs.length) return `${pageHead('Events')}<p class="bk-empty">No divisions have been set up yet.</p>`;
   const cur = evs.find(e => e.id === view.ev) || evs[0];
   const vis = cur.published || view.admin;
-  return `${pageHead('Draws')}
+  return `${pageHead('Events')}
   <button class="divsel" data-act="divpick" aria-haspopup="dialog"><span class="divsel-t"><span class="sr">Division: </span><b>${esc(cur.name)}</b><span>${esc(drawFormatLabel(cur))}${evs.length > 1 ? ` · ${evs.length} divisions` : ''}</span><span class="divsel-st">${stChip(drawStateChip(cur))}</span></span><span class="divsel-r"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg><span class="sr">Change division</span></span></button>
   ${vis ? `${cur.published ? '' : '<p class="bk-note warn">Not published. Only directors can see this draw.</p>'}
     <div class="draw-meta"><span class="bk-meta">${eventSummary(cur)}</span><button class="btn alt sm" data-act="print" data-v="${cur.id}">${ICON.print} Print</button></div>
@@ -6200,6 +6403,9 @@ function modal(){
   if (view.modal === 'invite') return `<div class="modal" data-act="closemodal"><div class="sheet" data-stop="1">${shareCards()}<p><button class="btn alt" data-act="closemodal">Close</button></p></div></div>`;
   if (view.modal === 'match') return matchSheet();
   if (view.modal === 'player') return playerSheet();
+  if (view.modal === 'cardedit') return cardEditSheet();
+  if (view.modal === 'clubs') return clubSheet();
+  if (view.modal === 'gallery') return gallerySheet();
   if (view.modal === 'move') return moveSheet();
   if (view.modal === 'alerts') return alertsSheet();
   if (view.modal === 'photo') return photoSheet();
@@ -6646,7 +6852,7 @@ function inferFromEvents(){
 }
 
 /* ================= Setup flow: Event → Players → Bracket ================= */
-const WZ_STEPS = [['basics','Tournament'], ['events','Events'], ['players','Players'], ['bracket','Brackets'], ['courts','Courts & times'], ['schedule','Schedule'], ['welcome','Welcome page'], ['share','Share']];
+const WZ_STEPS = [['basics','Tournament'], ['events','Events'], ['players','Players'], ['bracket','Brackets'], ['courts','Courts & times'], ['schedule','Schedule'], ['welcome','Welcome page'], ['customize','Customize'], ['share','Share']];
 const isTennis = () => (cfg() || {}).sport !== 'pickleball';
 const evTabs = (evs, cur, sub) => `<div class="rtabs">${evs.map(e => `<button class="rtab ${e.id === cur.id ? 'on' : ''}" data-act="ev" data-v="${e.id}"><b>${esc(e.name)}</b><span>${esc(sub(e))}</span></button>`).join('')}</div>`;
 const entryCount = e => e.kind === 'clubcup' ? ((e.clubCup || {}).aIds || []).length + ((e.clubCup || {}).bIds || []).length : teamsOf(e).length;
@@ -6917,7 +7123,7 @@ function autoNoteHtml(){
 function wizardView(){
   const wz = view.wz || {step:'basics'}, step = wz.step, i = WZ_STEPS.findIndex(s => s[0] === step), fresh = !TRIP;
   let inner = '';
-  try{ inner = fresh ? wzCreate() : ({basics:wzBasics, welcome:wzWelcome, style:wzStyle, courts:wzCourts, players:wzPlayers, events:wzEvents, entries:wzPlayers, bracket:wzBracket, schedule:wzSchedule, draws:wzSchedule, share:wzShare}[step] || wzBasics)() }
+  try{ inner = fresh ? wzCreate() : ({basics:wzBasics, welcome:wzWelcome, customize:wzCustomize, style:wzStyle, courts:wzCourts, players:wzPlayers, events:wzEvents, entries:wzPlayers, bracket:wzBracket, schedule:wzSchedule, draws:wzSchedule, share:wzShare}[step] || wzBasics)() }
   catch(e){ console.error(e); inner = `<div class="card"><b>This step hit a snag.</b><p class="small">${esc(e.message)}</p></div>` }
   const si = i < 0 ? 0 : i;
   return `<div class="focus">
@@ -6926,7 +7132,7 @@ function wizardView(){
     <div id="scroller"><div class="wz">
       ${fresh ? '' : `<div class="wsteps">${WZ_STEPS.map(([k, l], j) => `<button class="${k === step ? 'on' : ''} ${stepDone(k) ? 'ok' : ''}" data-act="wzstep" data-v="${k}">${j + 1}. ${l}</button>`).join('')}</div>${step !== 'share' ? missingCard(true) : ''}`}
       ${inner}
-      ${fresh || step === 'style' ? (step === 'style' ? `<div class="wnav"><button class="btn alt" data-act="wzstep" data-v="welcome">Back to the welcome page</button><span></span></div>` : '') : `<div class="wnav">${si > 0 ? `<button class="btn alt" data-act="wzstep" data-v="${WZ_STEPS[si-1][0]}">Back</button>` : '<span></span>'}${si < WZ_STEPS.length - 1 ? `<button class="btn" data-act="wzstep" data-v="${WZ_STEPS[si+1][0]}">Next: ${WZ_STEPS[si+1][1]}</button>` : `<button class="btn gold" data-act="wzclose">Open the tournament</button>`}</div>`}
+      ${fresh || step === 'style' ? (step === 'style' ? `<div class="wnav"><button class="btn alt" data-act="wzstep" data-v="customize">Back to Customize</button><span></span></div>` : '') : `<div class="wnav">${si > 0 ? `<button class="btn alt" data-act="wzstep" data-v="${WZ_STEPS[si-1][0]}">Back</button>` : '<span></span>'}${si < WZ_STEPS.length - 1 ? `<button class="btn" data-act="wzstep" data-v="${WZ_STEPS[si+1][0]}">Next: ${WZ_STEPS[si+1][1]}</button>` : `<button class="btn gold" data-act="wzclose">Open the tournament</button>`}</div>`}
     </div></div>
   </div>`;
 }
@@ -7244,7 +7450,7 @@ function adminView(){
   const conf = clashList().filter(c => c.sure).length;
   const tabs = [['run', 'Run tournament'], ['setup', 'Setup'], ['perm', 'Permissions'], ['data', 'Data']];
   const row = (act, v, title, sub, extra) => `<li><button class="bk-row" data-act="${act}" ${v ? `data-v="${v}"` : ''}><span><b>${esc(title)}</b><span>${esc(sub)}</span></span>${extra || ''}${CHEV}</button></li>`;
-  const stepSub = {basics:'Name, venue, dates, director PIN', events:'Divisions and their formats', players:'Entries, ratings and partners', bracket:'Draws, seeding and publication', courts:'Courts and session times', schedule:'Match times and court placement', welcome:'Welcome page, sponsors, club events', share:'Player, TV and signup links'};
+  const stepSub = {basics:'Name, venue, dates, director PIN', events:'Divisions and their formats', players:'Entries, ratings and partners', bracket:'Draws, seeding and publication', courts:'Courts and session times', schedule:'Match times and court placement', welcome:'Welcome page, sponsors, club events', customize:'Theme, fonts, pictures, player cards, welcome video', share:'Player, TV and signup links'};
   let body = '';
   if (sec === 'run') body = `
     <div class="bk-feature quiet"><p class="bk-eyebrow">Now</p>
@@ -7257,6 +7463,8 @@ function adminView(){
       ${row('wzopen', 'bracket', 'Draws and publication', `${pub} published · publishing makes a draw visible to players`)}
       ${row('tab', 'draws', 'Enter or correct scores', 'Open a match from the draws or courts')}
       ${row('invite', '', 'Share, TV and print', 'Player link, TV screen, signup link, printable draws')}
+      ${row('dws', 'perm', 'Invite players and co-directors', 'Personal invite links. Nothing is emailed.')}
+      ${row('czopen', 'look', 'Customize', 'Theme, fonts, pictures, player cards, welcome video')}
     </ul>
     <section class="bk-sec"><h2 class="bk-h2">Announcement</h2>
       <p class="bk-rules">An announcement is pinned at the top of chat for everyone, and alerts anyone with "Draws and announcements" on. Nothing sends until you confirm.</p>
@@ -7264,7 +7472,7 @@ function adminView(){
       <button class="bk-btn alt" data-act="announceask">Review and send…</button></section>`;
   else if (sec === 'setup') body = `<p class="bk-rules">Setup opens step by step. Changes save as you go and reach every phone.</p>
     <ul class="bk-rows">${WZ_STEPS.map(([k, l]) => setupRow(k, l, stepSub[k] || '')).join('')}
-      ${row('wzopen', 'style', 'Look', 'Colors, fonts and layout. Preview before applying.')}</ul>`;
+</ul>`;
   else if (sec === 'perm') body = `
     <section class="bk-sec"><h2 class="bk-h2">Who can enter scores</h2>
       <p class="bk-note ${c.openScoring !== false ? 'warn' : 'ok'}" role="status"><b>${c.openScoring !== false ? 'Open scoring is on.' : 'Directors only.'}</b> ${c.openScoring !== false ? 'Anyone with the join code can enter and correct scores. Each result shows who entered it.' : 'Only people with the director PIN can enter or correct scores.'}</p>
@@ -7272,6 +7480,7 @@ function adminView(){
     <section class="bk-sec"><h2 class="bk-h2">Director access</h2>
       <p class="bk-rules">Anyone with the director PIN can change setup, publish draws and fix scores. Change the PIN in Setup → ${esc((WZ_STEPS.find(s => s[0] === 'basics') || [, 'Basics'])[1])}.</p>
       <button class="btn alt" data-act="lock">Lock director tools on this device</button></section>
+    ${invitesAdmin()}
     <section class="bk-sec"><h2 class="bk-h2">Optional features</h2>
       <label class="aswitch"><span><b>Friendly bets</b><small>Shows Bets under More. Off hides it for everyone.</small></span><input type="checkbox" role="switch" data-chg="cfgbool" data-p="bets" ${c.bets !== false ? 'checked' : ''}><i aria-hidden="true"></i></label></section>`;
   else body = `
@@ -7380,7 +7589,7 @@ function shareCards(){
 function tvView(){
   syncEngine();
   const tiles = courtBoard(), rec = recentResults(4), nxt = upNext(4), evs = visibleEvents().filter(e => e.published && e.matches.length);
-  const ph = photos().slice(0, 8), slides = evs.length + 1 + (ph.length ? 1 : 0);
+  const ph = brand().gallery.map(g => ({url:g.url, caption:g.cap || tripTitle()})).concat(photos()).slice(0, 8), slides = evs.length + 1 + (ph.length ? 1 : 0);
   const k = Math.floor(Date.now() / 25000) % slides, ev = k > 0 && k <= evs.length ? evs[k - 1] : null, showPhotos = ph.length && k === slides - 1 && k > 0;
   const now = new Date();
   const head = `<header class="tvh">${crest(64)}<div><h1>${esc(tripTitle())}</h1><span>${esc(now.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'}))}${(cfg() || {}).club ? ' · ' + esc(cfg().club) : ''}</span></div><div class="tvclock">${now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})}</div></header>`;
@@ -7401,26 +7610,26 @@ function landingView(){
   if (view.resolving) return `<div class="land2"><div class="bk-loading" role="status" aria-live="polite"><img src="${BRAND_HERO}" alt="" width="96" height="96"><p>Opening tournament ${esc(view.resolving)}…</p></div></div>`;
   const mine = view.myTrips || Dir.known(), today = isoDay(new Date());
   const past = mine.filter(t => t.end && t.end < today), cur = mine.filter(t => !(t.end && t.end < today));
-  const seg = view.lseg || (cur.length ? 'mine' : 'invites');
+  const seg = view.lseg || (view.invPeek ? 'invites' : cur.length ? 'mine' : 'invites'), invN = (view.myInv || []).filter(r => r.status === 'pending').length + (view.invPeek && !(view.myInv || []).some(r => r.code === view.invPeek.code) ? 1 : 0);
   const st = t => !t.start ? null : t.end && t.end < today ? {k:'done', label:'Completed'} : t.start <= today ? {k:'live', label:'Live event'} : {k:'upcoming', label:'Upcoming'};
   const fmtD = (a, b) => { if (!a) return ''; const p = x => { const [y, m, d] = x.split('-').map(Number); return new Date(y, m - 1, d) }, A = p(a), B = p(b || a), mo = d => d.toLocaleDateString('en-US', {month:'short'}); return +A === +B ? `${mo(A)} ${A.getDate()}` : mo(A) === mo(B) ? `${mo(A)} ${A.getDate()}–${B.getDate()}` : `${mo(A)} ${A.getDate()} – ${mo(B)} ${B.getDate()}` };
   const card = (t, i) => { const s2 = st(t); return `<li><button class="v3-ecard ${i === 0 && seg === 'mine' ? 'feat' : ''}" data-act="opentrip" data-code="${esc(t.code)}">
-      ${i === 0 && seg === 'mine' ? `<span class="v3-ecard-ph"><img src="${IMG_HERO}" srcset="${imgSet('court-hero')}" sizes="(min-width:740px) 700px, 100vw" alt="" loading="lazy" decoding="async"></span>` : ''}
+      ${i === 0 && seg === 'mine' ? `<span class="v3-ecard-ph">${t.cover ? `<img src="${esc(t.cover)}" alt="" loading="lazy" decoding="async">` : `<img src="${IMG_HERO}" srcset="${imgSet('court-hero')}" sizes="(min-width:740px) 700px, 100vw" alt="" loading="lazy" decoding="async">`}</span>` : ''}
       <span class="v3-ecard-b"><span class="v3-ecard-top">${s2 ? v3Badge(s2) : ''}</span><b>${esc(t.name)}</b>${t.club ? `<span class="v3-ecard-club">${esc(t.club)}</span>` : ''}
       <span class="v3-ecard-meta">${t.start ? `<span>${ICON.cal}${esc(fmtD(t.start, t.end))}</span>` : ''}<span>Code ${esc(t.code)}${t.role === 'admin' ? ' · director on this device' : ''}</span></span></span>${CHEV}</button></li>` };
   const segBtn = (k, label, icon, n) => `<button data-act="lseg" data-v="${k}" aria-pressed="${seg === k}">${ICON[icon]}<span>${label}${n != null ? ` (${n})` : ''}</span></button>`;
   const join = `<section class="v3-card" aria-labelledby="join-h"><h2 class="v3-h3" id="join-h">Join with an invite code</h2><p class="bk-rules">Enter the code from the tournament director, or open the link they shared.</p>
     <label class="sr" for="joincode">Join code</label><div class="joinrow"><input id="joincode" class="bk-input codebox" maxlength="8" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC123" value="${esc(view.joinCode || '')}"><button class="btn" data-act="join">Join</button></div>
     ${view.joinErr ? `<p class="bk-note err" role="alert">${esc(view.joinErr)}</p>` : ''}</section>`;
-  const list = seg === 'invites' ? join : (seg === 'past' ? past : cur).length ? `<ul class="v3-elist">${(seg === 'past' ? past : cur).map(card).join('')}</ul>` : `<p class="bk-empty">${seg === 'past' ? 'No past tournaments on this device yet.' : 'No tournaments on this device yet. Join one with a code, or start your own.'}</p>${seg === 'mine' ? join : ''}`;
+  const list = seg === 'invites' ? landingInvites() : (seg === 'past' ? past : cur).length ? `<ul class="v3-elist">${(seg === 'past' ? past : cur).map(card).join('')}</ul>` : `<p class="bk-empty">${seg === 'past' ? 'No past tournaments on this device yet.' : 'No tournaments on this device yet. Join one with a code, or start your own.'}</p>${seg === 'mine' ? join : ''}`;
   return `<div class="land2 v3-land">
-  <header class="v3-top tall v3l" role="banner"><img class="v3-top-bg" src="${IMG_HEADER}" srcset="${imgSet('court-header')}" sizes="100vw" alt="" aria-hidden="true" decoding="async">
+  <header class="v3-top tall v3l" role="banner">${hdrImg()}
     <div class="v3-top-row"><span class="v3-top-side"></span><img class="v3-logo" src="${BRAND_HERO}" alt="Bracketly. Tennis. Pickleball. Together." width="104" height="104"><span class="v3-top-side end"></span></div>
     <p class="v3-tagline" aria-hidden="true"><i></i>Tennis. Pickleball. Together.<i></i></p>
   </header>
   <div class="v3-land-in">
 <div class="v3-evhead"><h1 class="v3-h1 dark">Your Events</h1><button class="v3-goldbtn" data-act="newtrip">${ICON.plus}<span>New Event</span></button></div>
-  <div class="v3-seg" role="group" aria-label="Show events">${segBtn('mine', 'My Events', 'cal', cur.length)}${segBtn('invites', 'Invites', 'people', null)}${segBtn('past', 'Past', 'clock', past.length || null)}</div>
+  <div class="v3-seg" role="group" aria-label="Show events">${segBtn('mine', 'My Events', 'cal', cur.length)}${segBtn('invites', 'Invites', 'people', invN || null)}${segBtn('past', 'Past', 'clock', past.length || null)}</div>
   ${Dir.err ? `<p class="bk-note err" role="alert"><b>Can't reach the server.</b> Joining and recent tournaments may not load. Details are under Diagnostics.</p>` : ''}
   ${list}
   <section class="bk-sec"><h2 class="v3-h2">Organizers</h2><ul class="bk-rows"><li><button class="bk-row" data-act="newtrip"><span><b>Run a tournament</b><span>Set up events, draws, courts and a schedule</span></span>${CHEV}</button></li>
@@ -7429,6 +7638,221 @@ function landingView(){
   <details class="bk-disc" data-k="ldiag" ${isOpen('ldiag') ? 'open' : ''}><summary>Diagnostics</summary><div><p class="bk-diag">Bracketly v${APP_VERSION} · ${esc(Dir.label())}</p>${Dir.err ? `<p class="bk-diag">${esc(Dir.err)}</p><p class="bk-diag">If anonymous sign-ins are off, turn them on in Supabase → Authentication → Sign In / Providers. See SETUP.md.</p>` : ''}</div></details>
   </div></div>`;
 }
+/* ================= v4: invites, player cards, Customize (branding per tournament) =================
+   Data lives in three places, all scoped to one tournament:
+   - config.brand (admin-only kv key): header photo, gallery, player-card options, club scoreboard
+   - player_cards table: photo, club, hometown, plays, bio (the player edits their own, directors any)
+   - invites table: director-made single-use links; Bracketly never emails them */
+const MEDIA_BUCKET = 'bracketly-media';
+const MAX_IMG_BYTES = 15 * 1024 * 1024, MAX_VIDEO_BYTES = 50 * 1024 * 1024, MAX_GALLERY = 24;
+const cleanInvite = c => String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+function makeInviteCode(){ const a = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789', b = crypto.getRandomValues(new Uint8Array(10)); return [...b].map(x => a[x % a.length]).join('') }
+const inviteURL = code => `${baseURL()}?invite=${code}`;
+const BRAND_DEFAULT = {header:null, gallery:[], cards:{show:true, rating:true, self:true}, clubBoard:false};
+function brand(){ const b = (cfg() || {}).brand || {}; return Object.assign({}, BRAND_DEFAULT, b, {cards:Object.assign({}, BRAND_DEFAULT.cards, b.cards || {}), gallery:Array.isArray(b.gallery) ? b.gallery : []}) }
+function brandSet(fn){ if (needAdmin()) return; const c = cfg(), b = JSON.parse(JSON.stringify(brand())); fn(b); c.brand = b; Store.set('config', c); render() }
+async function imgBlob(file, max){ const u = await readImg(file, max || 1600, false); return dataURLtoBlob(u) }
+
+/* ---------- player cards ---------- */
+const cardOf = pid => Object.assign({}, (view.cards || {})[pid] || {});
+async function loadCards(){ if (!TRIP) return; const id = TRIP.id; try{ const m = await Dir.loadCards(); if (TRIP && TRIP.id === id){ view.cards = m || {}; render() } }catch(e){ console.warn('cards', e); view.cards = view.cards || {} } }
+const canEditCard = pid => !!view.admin || (!!view.me && view.me === pid && brand().cards.self !== false);
+function avatar(pid, size, photo){ const p = P(pid) || {}, ph = photo !== undefined ? photo : cardOf(pid).photo; return `<span class="v4-av" style="--s:${size || 40}px" aria-hidden="true">${ph ? `<img src="${esc(ph)}" alt="" loading="lazy">` : esc(initials(p.name))}</span>` }
+function cardMeta(p){ const c = cardOf(p.id); return [c.club || p.club, c.hometown, c.plays].filter(Boolean) }
+function playerCardHtml(p){
+  const c = cardOf(p.id), b = brand().cards, pe = eventsOfPlayer(p.id), isMe = view.me === p.id;
+  const rating = b.rating !== false && p.rating != null && p.rating !== '' ? `${sport().rating} ${fmtRating(p.rating)}` : '';
+  return `<article class="v4-pcard" aria-labelledby="pl-h">
+    <div class="v4-pcard-ph">${c.photo ? `<img src="${esc(c.photo)}" alt="Photo of ${esc(p.name)}">` : `<span aria-hidden="true">${esc(initials(p.name))}</span>`}</div>
+    <h2 class="v4-pcard-n" id="pl-h">${esc(p.name)}${isMe ? ' <span class="v3-badge live sm">You</span>' : ''}</h2>
+    ${rating ? `<p class="v4-pcard-r">${esc(rating)}</p>` : ''}
+    ${cardMeta(p).length ? `<p class="v4-pcard-m">${cardMeta(p).map(esc).join(' · ')}</p>` : ''}
+    ${c.bio ? `<p class="v4-pcard-bio">${esc(c.bio)}</p>` : ''}
+    ${pe.length ? `<p class="v4-pcard-ev">${pe.map(e => `<span>${esc(e.name)}</span>`).join('')}</p>` : ''}
+    <div class="v4-pcard-act">${canEditCard(p.id) ? `<button class="btn sm" data-act="cardedit" data-id="${esc(p.id)}">${c.photo || c.bio ? 'Edit card' : 'Fill in card'}</button>` : ''}<button class="btn alt sm" data-act="cardshare" data-id="${esc(p.id)}">Share card</button></div>
+    ${!c.photo && !c.bio && !canEditCard(p.id) ? '<p class="v4-pcard-hint">This player hasn\'t filled in a card yet.</p>' : ''}
+  </article>`;
+}
+function cardRead(){ const d = view.cardDraft || {}, g = id => { const el = document.getElementById(id); return el ? el.value.trim() : undefined }; [['club', 'ce-club'], ['hometown', 'ce-home'], ['plays', 'ce-plays'], ['bio', 'ce-bio']].forEach(([k, id]) => { const v = g(id); if (v !== undefined) d[k] = v }); view.cardDraft = d; return d }
+function cardEditSheet(){
+  const pid = view.cardPid, p = P(pid); if (!p) return '';
+  const d = view.cardDraft || (view.cardDraft = Object.assign({club:p.club || ''}, cardOf(pid)));
+  const f = (id, label, k, ph, max) => `<label for="${id}">${label}</label><input id="${id}" class="bk-input" maxlength="${max}" value="${esc(d[k] || '')}" placeholder="${esc(ph)}" autocomplete="off">`;
+  return `<div class="modal" data-act="cardback"><div class="sheet bk-sheet v4-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="ce-h">
+    <div class="sh-top"><p class="bk-eyebrow">Player card</p><button class="hclose" data-act="cardback" aria-label="Close without saving"><span aria-hidden="true">×</span></button></div>
+    <h2 class="sh-h" id="ce-h">${esc(p.name)}</h2>
+    <div class="v4-ce-ph">${avatar(pid, 96, d.photo || null)}<div><label class="btn alt sm">${d.photo ? 'Change photo' : 'Add a photo'}<input type="file" accept="image/*" hidden data-chg="cardphoto"></label>${d.photo ? ` <button class="btn alt sm" data-act="cardphotorm">Remove photo</button>` : ''}<p class="bk-hint">Square photos look best. It's shrunk before upload.</p></div></div>
+    ${view.cardBusy ? '<p class="bk-hint" role="status">Uploading photo…</p>' : ''}
+    ${f('ce-club', 'Club', 'club', 'Lubbock Country Club', 120)}
+    ${f('ce-home', 'Hometown', 'hometown', 'Lubbock, TX', 120)}
+    ${f('ce-plays', 'Plays', 'plays', isTennis() ? 'Right-handed · Deuce side' : 'Right-handed · Left side', 60)}
+    <label for="ce-bio">About</label><textarea id="ce-bio" class="bk-input" maxlength="600" rows="4" placeholder="A line or two for the other players">${esc(d.bio || '')}</textarea>
+    <p class="bk-hint">Name and ${esc(sport().rating)} rating come from the director's entry list.</p>
+    ${view.cardErr ? `<p class="bk-note err" role="alert">${esc(view.cardErr)}</p>` : ''}
+    <div class="bk-actions"><button class="btn" data-act="cardsave" ${view.cardBusy ? 'disabled' : ''}>Save card</button><button class="btn alt" data-act="cardback">Cancel</button></div>
+  </div></div>`;
+}
+// A shareable 1080×1350 card image in the tournament's colors
+async function drawPlayerCard(pid){
+  const p = P(pid) || {}, c = cardOf(pid), pal = palette(), W = 1080, H = 1350, cv = document.createElement('canvas'); cv.width = W; cv.height = H; const g = cv.getContext('2d');
+  const st = styleOf(), fs = FONTSETS[st.fonts] || FONTSETS.bracketly, fd = fs.fd.split(',')[0].replace(/'/g, ''), fb = 'Inter';
+  try{ await document.fonts.load(`700 80px "${fd}"`); await document.fonts.load('600 40px Inter') }catch(e){}
+  const grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, pal.primary); grad.addColorStop(1, mix(pal.primary, '#000000', .45)); g.fillStyle = grad; g.fillRect(0, 0, W, H);
+  g.strokeStyle = pal.gold; g.lineWidth = 8; g.strokeRect(40, 40, W - 80, H - 80);
+  const ld = im => new Promise((res, rej) => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = rej; i.src = im });
+  const cx = W / 2, cy = 400, R = 200;
+  g.save(); g.beginPath(); g.arc(cx, cy, R, 0, Math.PI * 2); g.closePath(); g.fillStyle = pal.card; g.fill(); g.clip();
+  let drew = false; if (c.photo){ try{ const im = await ld(c.photo), s = Math.max(2 * R / im.width, 2 * R / im.height); g.drawImage(im, cx - im.width * s / 2, cy - im.height * s / 2, im.width * s, im.height * s); drew = true }catch(e){} }
+  if (!drew){ g.fillStyle = pal.primary; g.font = `700 160px "${fd}", Georgia, serif`; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(initials(p.name), cx, cy + 8) }
+  g.restore(); g.lineWidth = 10; g.strokeStyle = pal.gold; g.beginPath(); g.arc(cx, cy, R + 8, 0, Math.PI * 2); g.stroke();
+  g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  let size = 84; g.font = `700 ${size}px "${fd}", Georgia, serif`; while (g.measureText(p.name || '').width > W - 200 && size > 44){ size -= 4; g.font = `700 ${size}px "${fd}", Georgia, serif` }
+  g.fillStyle = pal.paper; g.fillText(p.name || 'Player', cx, 720);
+  const rating = brand().cards.rating !== false && p.rating != null && p.rating !== '' ? `${sport().rating} ${fmtRating(p.rating)}` : '';
+  g.fillStyle = pal.gold; g.font = `600 44px ${fb}, sans-serif`; if (rating) g.fillText(rating, cx, 790);
+  g.fillStyle = mix(pal.paper, pal.primary, .2); { const meta = cardMeta(p), y0 = rating ? 850 : 800; let fsz = 36; const one = meta.join(' · '); g.font = `500 ${fsz}px ${fb}, sans-serif`; while (g.measureText(one).width > W - 200 && fsz > 28){ fsz -= 2; g.font = `500 ${fsz}px ${fb}, sans-serif` }
+    if (g.measureText(one).width <= W - 200) g.fillText(one, cx, y0); else { const a = meta.slice(0, 1).join(''), b2 = meta.slice(1).join(' · '); g.fillText(a.slice(0, 50), cx, y0); g.fillText(b2.slice(0, 60), cx, y0 + 44) } }
+  if (c.bio){ g.font = `400 34px ${fb}, sans-serif`; const words = c.bio.split(/\s+/), lines = []; let ln = ''; words.forEach(w => { const t = ln ? ln + ' ' + w : w; if (g.measureText(t).width > W - 240){ lines.push(ln); ln = w } else ln = t }); if (ln) lines.push(ln); lines.slice(0, 4).forEach((l, i) => g.fillText(l + (i === 3 && lines.length > 4 ? '…' : ''), cx, 960 + i * 48)) }
+  g.fillStyle = pal.gold; g.fillRect(cx - 60, 1150, 120, 3);
+  g.fillStyle = pal.paper; g.font = `700 40px "${fd}", Georgia, serif`; g.fillText(tripTitle().slice(0, 40), cx, 1215);
+  g.fillStyle = mix(pal.paper, pal.primary, .35); g.font = `500 28px ${fb}, sans-serif`; g.fillText([datesShort(), (cfg() || {}).club].filter(Boolean).join(' · ') + ' · Bracketly', cx, 1262);
+  return await new Promise(res => cv.toBlob(res, 'image/png'));
+}
+
+/* ---------- invites (director) ---------- */
+async function loadInvites(){ if (!TRIP || view.invLoading) return; view.invLoading = true; try{ view.invList = await Dir.listInvites(); view.invErr2 = null }catch(e){ view.invList = []; view.invErr2 = e.message || String(e) } view.invLoading = false; render() }
+const invStatus = s => s === 'accepted' || s === 'accepted-by-you' ? {k:'done', label:'Accepted'} : s === 'revoked' ? {k:'late', label:'Cancelled'} : s === 'expired' ? {k:'late', label:'Expired'} : {k:'upcoming', label:'Waiting'};
+function invitesAdmin(){
+  if (view.invList === undefined) setTimeout(loadInvites, 0);
+  const f = view.invForm || {role:'player'}, list = view.invList, pl = players().slice().sort((a, b) => a.name.localeCompare(b.name));
+  const share = r => `<div class="v4-invlink"><code>${esc(r.code)}</code><button class="btn alt sm" data-act="copy" data-v="${esc(inviteURL(r.code))}">Copy link</button>${navigator.share ? `<button class="btn alt sm" data-act="invshare" data-code="${esc(r.code)}" data-n="${esc(r.name || '')}">Share…</button>` : ''}</div>`;
+  return `<section class="bk-sec v4-inv" aria-labelledby="inv-h"><h2 class="bk-h2" id="inv-h">Invite people</h2>
+    <p class="bk-rules">Make a personal invite link for a player or a co-director. Bracketly doesn't send anything; copy the link or share it yourself. Each invite works once and lasts 60 days.</p>
+    <div class="v3-card v4-form">
+      <p class="v4-flabel" id="inv-role-l">Invite as</p><div class="seg2" role="group" aria-labelledby="inv-role-l"><button data-act="invrole" data-v="player" aria-pressed="${f.role === 'player'}">Player</button><button data-act="invrole" data-v="codirector" aria-pressed="${f.role === 'codirector'}">Co-director</button></div>
+      ${f.role === 'player' ? `<label for="inv-pl">Player</label><select id="inv-pl" class="bk-input"><option value="">Anyone: they pick their name</option>${pl.map(p => `<option value="${esc(p.id)}" ${f.player === p.id ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}</select>` : '<p class="bk-note warn">A co-director gets full director access on the phone that accepts, without needing the PIN.</p>'}
+      <label for="inv-name">Name <span class="muted">(for your list)</span></label><input id="inv-name" class="bk-input" maxlength="120" autocomplete="off" value="${esc(f.name || '')}">
+      <label for="inv-email">Email <span class="muted">(optional)</span></label><input id="inv-email" class="bk-input" type="email" maxlength="254" autocomplete="off" value="${esc(f.email || '')}"><p class="bk-hint">Saved with the invite for your records. Bracketly doesn't email anyone.</p>
+      ${view.invFormErr ? `<p class="bk-note err" role="alert">${esc(view.invFormErr)}</p>` : ''}
+      <button class="btn v3-primary" data-act="invcreate" ${view.invBusy ? 'disabled' : ''}>${view.invBusy ? 'Creating…' : 'Create invite'}</button>
+    </div>
+    ${view.invNew ? `<div class="bk-note ok v4-invnew" role="status"><b>Invite ready${view.invNew.name ? ` for ${esc(view.invNew.name)}` : ''}.</b> Send this link yourself:${share(view.invNew)}<small>${esc(inviteURL(view.invNew.code))}</small></div>` : ''}
+    <h3 class="v3-h3">Sent invites</h3>
+    ${view.invErr2 ? `<p class="bk-note err">${esc(view.invErr2)}</p>` : ''}
+    ${list == null ? '<p class="bk-hint">Loading…</p>' : list.length ? `<ul class="v4-invlist">${list.map(r => { const s = invStatus(r.status), who = r.player_id && P(r.player_id) ? P(r.player_id).name : ''; return `<li class="v3-card"><div class="v4-invrow"><span><b>${esc(r.name || who || (r.role === 'codirector' ? 'Co-director' : 'Player'))}</b><small>${esc([r.role === 'codirector' ? 'Co-director' : 'Player', who && who !== r.name ? who : '', r.email].filter(Boolean).join(' · '))}</small></span>${v3Badge(s)}</div>${r.status === 'pending' ? `${share(r)}<button class="bk-link" data-act="invrevoke" data-id="${esc(r.id)}">Cancel invite</button>` : ''}</li>` }).join('')}</ul>` : '<p class="bk-empty">No invites yet.</p>'}
+  </section>`;
+}
+
+/* ---------- invites (landing: the person invited) ---------- */
+function landingInvites(){
+  const pk = view.invPeek, mine = (view.myInv || []).filter(r => !pk || r.code !== pk.code);
+  const fmt = (a, b) => { if (!a) return ''; const d = x => { const [y, m, dd] = x.split('-').map(Number); return new Date(y, m - 1, dd) }, A = d(a), B = d(b || a), mo = x => x.toLocaleDateString('en-US', {month:'short'}); return +A === +B ? `${mo(A)} ${A.getDate()}` : `${mo(A)} ${A.getDate()} – ${mo(B) === mo(A) ? '' : mo(B) + ' '}${B.getDate()}` };
+  const as = r => r.role === 'codirector' ? 'as a co-director' : r.name ? `as ${r.name}` : 'as a player';
+  const act = r => r.status === 'pending' ? `<button class="btn v3-primary" data-act="invaccept" data-code="${esc(r.code)}">Accept and open</button>` : r.status === 'accepted-by-you' ? `<button class="btn alt" data-act="invaccept" data-code="${esc(r.code)}">Open tournament</button>` : `<p class="bk-hint">${r.status === 'revoked' ? 'The director cancelled this invite.' : r.status === 'expired' || r.expired ? 'This invite has expired. Ask the director for a new one.' : 'Someone already used this invite.'}</p>`;
+  const card = (r, feat) => `<li><article class="v3-card v4-invcard ${feat ? 'feat' : ''}"><p class="bk-eyebrow">${feat ? "You're invited" : 'Invite'}</p><h3 class="v4-invt">${esc(r.trip_name || 'Tournament')}</h3>
+    <p class="v4-invm">${esc([as(r), fmt(r.starts, r.ends), r.club].filter(Boolean).join(' · '))}</p>${v3Badge(invStatus(r.expired && r.status === 'pending' ? 'expired' : r.status))}
+    <div class="bk-actions">${act(r)}${r.status === 'pending' ? `<button class="btn alt" data-act="invdismiss" data-code="${esc(r.code)}">Not now</button>` : ''}</div></article></li>`;
+  return `${pk || mine.length ? `<ul class="v3-elist">${pk ? card(pk, true) : ''}${mine.map(r => card(r)).join('')}</ul>` : '<p class="bk-empty">No invites on this device yet. When a director sends you an invite link, open it and it shows up here.</p>'}
+  ${view.invErr ? `<p class="bk-note err" role="alert">${esc(view.invErr)}</p>` : ''}
+  <section class="v3-card" aria-labelledby="join-h"><h2 class="v3-h3" id="join-h">Have a code?</h2><p class="bk-rules">Enter an invite code or the tournament's join code.</p>
+    <label class="sr" for="joincode">Invite or join code</label><div class="joinrow"><input id="joincode" class="bk-input codebox" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ABC123" value="${esc(view.joinCode || '')}"><button class="btn" data-act="invcode">Continue</button></div>
+    ${view.joinErr ? `<p class="bk-note err" role="alert">${esc(view.joinErr)}</p>` : ''}</section>`;
+}
+function refreshLanding(){ Dir.mine().then(l => { view.myTrips = l; render() }).catch(() => {}); Dir.myInvites().then(l => { view.myInv = l; render() }).catch(() => {}) }
+
+/* ---------- club standings from real results (only when the director turns it on) ---------- */
+function clubStandings(){
+  const byName = new Map(players().map(p => [normName(p.name), p])), clubOf = p => (cardOf(p.id).club || p.club || '').trim();
+  const clubs = new Map(); players().forEach(p => { const c = clubOf(p); if (c && !clubs.has(c)) clubs.set(c, 0) });
+  let counted = 0;
+  state.events.filter(e => e.published || view.admin).forEach(e => e.matches.forEach(m => { const w = winnerSlot(m); if (!w || !resOf(m.id)) return; const ns = sideNames(m, w) || [], cs = [...new Set(ns.map(n => byName.get(normName(n))).filter(Boolean).map(clubOf))]; if (cs.length === 1 && cs[0]){ clubs.set(cs[0], (clubs.get(cs[0]) || 0) + 1); counted++ } }));
+  return {list:[...clubs.entries()].map(([name, pts]) => ({name, pts})).sort((a, b) => b.pts - a.pts || a.name.localeCompare(b.name)), counted};
+}
+function clubBoardHtml(){
+  const s = clubStandings(); if (s.list.length < 2) return '';
+  const [a, b] = s.list, more = s.list.length - 2;
+  return `<button class="v3-board" data-act="clubsheet" aria-label="${esc(`Club points: ${s.list.map(x => `${x.name} ${x.pts}`).join(', ')}`)}">
+    <span class="v3-board-side"><small>${esc(a.name)}</small><b>${a.pts}</b></span>
+    <span class="v3-board-mid">${ICON.trophy}<em>Club points</em><small>${more > 0 ? `+${more} more club${more === 1 ? '' : 's'}` : '1 per match won'}</small></span>
+    <span class="v3-board-side"><small>${esc(b.name)}</small><b>${b.pts}</b></span></button>`;
+}
+function clubSheet(){
+  const s = clubStandings();
+  return `<div class="modal" data-act="closemodal"><div class="sheet bk-sheet v4-sheet" data-stop="1" role="dialog" aria-modal="true" aria-labelledby="cs-h">
+    <div class="sh-top"><p class="bk-eyebrow">Club points</p><button class="hclose" data-act="closemodal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+    <h2 class="sh-h" id="cs-h">Club standings</h2><p class="bk-rules">One point for each match won by a team whose players are all from the same club. ${s.counted} match${s.counted === 1 ? '' : 'es'} counted so far.</p>
+    <ol class="v4-clubs">${s.list.map(x => `<li><span>${esc(x.name)}</span><b>${x.pts}</b></li>`).join('')}</ol></div></div>`;
+}
+
+/* ---------- gallery ---------- */
+function galleryStrip(){
+  const g = brand().gallery; if (!g.length) return '';
+  return `<section class="bk-sec" aria-labelledby="gal-h">${v3SecHead('Gallery', 'gal-h')}<div class="v4-gal" role="list">${g.map((x, i) => `<button role="listitem" class="v4-gal-i" data-act="galopen" data-i="${i}" aria-label="Open photo ${i + 1} of ${g.length}${x.cap ? ': ' + esc(x.cap) : ''}"><img src="${esc(x.url)}" alt="" loading="lazy"></button>`).join('')}</div></section>`;
+}
+function gallerySheet(){
+  const g = brand().gallery, i = Math.max(0, Math.min(g.length - 1, view.galIdx || 0)), x = g[i]; if (!x) return '';
+  return `<div class="modal photo" data-act="closemodal"><div class="sheet v4-galsheet" data-stop="1" role="dialog" aria-modal="true" aria-label="Photo ${i + 1} of ${g.length}">
+    <img class="pbig" src="${esc(x.url)}" alt="${esc(x.cap || 'Tournament photo')}">${x.cap ? `<p class="v4-galcap">${esc(x.cap)}</p>` : ''}
+    <div class="bk-actions"><button class="btn alt" data-act="galopen" data-i="${(i - 1 + g.length) % g.length}" ${g.length < 2 ? 'disabled' : ''}>‹ Previous</button><button class="btn alt" data-act="closemodal">Close</button><button class="btn alt" data-act="galopen" data-i="${(i + 1) % g.length}" ${g.length < 2 ? 'disabled' : ''}>Next ›</button></div></div></div>`;
+}
+
+/* ---------- Customize (director) ---------- */
+const CZ_TABS = [['look', 'Theme & fonts', 'tag'], ['pics', 'Pictures', 'cam'], ['cards', 'Player cards', 'user'], ['video', 'Welcome video', 'wave'], ['board', 'Scoreboard', 'trophy']];
+function wzCustomize(){
+  const t = view.cz || 'look';
+  const body = t === 'pics' ? czPictures() : t === 'cards' ? czCards() : t === 'video' ? czVideo() : t === 'board' ? czBoard() : wzStyle();
+  return `<h2 class="v3-h1 dark v4-czh">Customize</h2>
+  <p class="wnote">Make this tournament look like yours. Everything here applies to this tournament only, for everyone who opens it.</p>
+  <div class="v4-cztabs" role="tablist" aria-label="Customize sections">${CZ_TABS.map(([k, l, ic]) => `<button role="tab" aria-selected="${t === k}" data-act="cztab" data-v="${k}">${ICON[ic] || ''}<span>${l}</span></button>`).join('')}</div>
+  <div class="v4-czbody" role="tabpanel">${body}</div>`;
+}
+function czPictures(){
+  const b = brand(), busy = view.mediaBusy;
+  const hdr = b.header || IMG_HEADER;
+  return `<h3 class="v3-h3">Header photo</h3>
+  <div class="v3-card v4-picrow"><div class="v4-hdrprev"><img src="${esc(hdr)}" alt=""><img class="v4-hdrlogo" src="${BRAND_HERO}" alt=""></div>
+    <p class="bk-hint">Sits behind the Bracketly logo at the top of every page, under a dark green tint.</p>
+    <div class="bk-actions"><label class="btn alt sm">${b.header ? 'Replace photo' : 'Upload photo'}<input type="file" accept="image/*" hidden data-chg="brandpic" data-p="header"></label>${b.header ? '<button class="btn alt sm" data-act="brandpicrm" data-p="header">Use the default courts</button>' : ''}</div></div>
+  <h3 class="v3-h3">Cover photo and logo</h3>
+  <div class="v3-card">${logoUp('cover', 'Cover photo: the big picture on the tournament card and in the event list')}${pic(cfg(), 'cover') ? '' : '<p class="bk-hint">Without one, the default court photo is used.</p>'}
+    ${logoUp('logo', 'Tournament or club logo: shown beside the name, on the TV screen and printed draws')}</div>
+  <h3 class="v3-h3">Gallery</h3>
+  <div class="v3-card"><p class="bk-hint">Up to ${MAX_GALLERY} photos. They show on Home and rotate on the TV screen.</p>
+    ${b.gallery.length ? `<ul class="v4-galedit">${b.gallery.map((x, i) => `<li><img src="${esc(x.url)}" alt=""><input class="bk-input" maxlength="120" placeholder="Caption (optional)" aria-label="Caption for photo ${i + 1}" data-chg="galcap" data-i="${i}" value="${esc(x.cap || '')}"><span class="v4-galbtns"><button class="btn alt sm" data-act="galmove" data-i="${i}" data-d="-1" aria-label="Move photo ${i + 1} earlier" ${i ? '' : 'disabled'}>↑</button><button class="btn alt sm" data-act="galrm" data-i="${i}" aria-label="Remove photo ${i + 1}">Remove</button></span></li>`).join('')}</ul>` : ''}
+    <label class="btn alt sm ${b.gallery.length >= MAX_GALLERY ? 'disabled' : ''}">${busy ? esc(busy) : 'Add photos'}<input type="file" accept="image/*" multiple hidden data-chg="galadd" ${b.gallery.length >= MAX_GALLERY || busy ? 'disabled' : ''}></label></div>
+  <h3 class="v3-h3">Sponsors</h3>
+  <div class="v3-card"><p class="bk-hint">${((cfg() || {}).sponsors || []).length} sponsor logo${((cfg() || {}).sponsors || []).length === 1 ? '' : 's'} on the welcome page and TV screen.</p><button class="btn alt sm" data-act="wzstep" data-v="welcome">Edit sponsors</button></div>`;
+}
+function czCards(){
+  const b = brand().cards, pl = players().slice().sort((a, x) => a.name.localeCompare(x.name)), cards = view.cards || {};
+  const sw = (p, title, sub) => `<label class="aswitch"><span><b>${title}</b><small>${sub}</small></span><input type="checkbox" role="switch" data-chg="brandbool" data-p="${p}" ${b[p.split('.')[1]] !== false ? 'checked' : ''}><i aria-hidden="true"></i></label>`;
+  const filled = pl.filter(p => cards[p.id] && (cards[p.id].photo || cards[p.id].bio)).length;
+  if (view.cards === undefined) setTimeout(loadCards, 0);
+  return `<h3 class="v3-h3">Player cards</h3>
+  <div class="v3-card">${sw('cards.show', 'Show player cards', 'Tapping a name opens a card with photo, rating, club and a short bio.')}${sw('cards.rating', `Show ${esc(sport().rating)} rating on cards`, 'Turn off for social events.')}${sw('cards.self', 'Players can fill in their own card', 'From their own profile, after they pick their name.')}</div>
+  <h3 class="v3-h3">Cards (${filled} of ${pl.length} filled in)</h3>
+  ${pl.length ? `<ul class="bk-rows v3-card v4-cardlist">${pl.map(p => { const c = cards[p.id] || {}; return `<li><button class="bk-row" data-act="cardedit" data-id="${esc(p.id)}">${avatar(p.id, 40)}<span><b>${esc(p.name)}</b><span>${esc([c.photo ? 'Photo' : 'No photo', c.bio ? 'Bio' : '', c.club || p.club].filter(Boolean).join(' · '))}</span></span>${CHEV}</button></li>` }).join('')}</ul>` : '<p class="bk-empty">Add players first, then fill in their cards here.</p>'}`;
+}
+function czVideo(){
+  const v = welcome().video, busy = view.vidBusy;
+  return `<h3 class="v3-h3">Welcome video</h3>
+  <div class="v3-card"><p class="bk-hint">Plays once for each player the first time they open the tournament. They can skip it, and it stays on the welcome page.</p>
+    ${v && v.url ? `<div class="v4-vidprev">${videoHtml(v)}</div>` : '<p class="bk-empty">No welcome video yet.</p>'}
+    <label for="vid-title">Title</label><input id="vid-title" class="bk-input" maxlength="80" placeholder="Welcome to ${esc(tripTitle())}" value="${esc((v && v.title) || '')}" data-chg="vidtitle">
+    ${Dir.canUpload() || Dir.mode === 'local' ? `<label class="btn alt sm" style="margin-top:12px">${busy ? esc(busy) : v && v.kind === 'file' && v.uploaded ? 'Replace uploaded video' : 'Upload a video'}<input type="file" accept="video/mp4,video/webm,video/quicktime" hidden data-chg="vidfile" ${busy ? 'disabled' : ''}></label><p class="bk-hint">MP4, WebM or MOV up to ${Dir.mode === 'local' ? '8' : '50'} MB. For longer videos, use a YouTube or Vimeo link.</p>` : ''}
+    <label for="vid-link">Or paste a YouTube, Vimeo or video link</label>${inp('id="vid-link" class="bk-input" data-chg="welcomevideo" placeholder="https://youtu.be/…"', v && !v.uploaded ? v.src : '')}
+    ${v && v.url ? `<div class="bk-actions" style="margin-top:12px"><button class="btn alt sm" data-act="vidpreview">Preview as a player</button><button class="btn alt sm" data-act="vidagain">Show it to everyone again</button><button class="btn alt sm" data-act="vidrm">Remove video</button></div>` : ''}</div>`;
+}
+function czBoard(){
+  const b = brand(), cup = state.events.some(e => e.format === 'club_cup' && e.clubCup), s = clubStandings();
+  return `<h3 class="v3-h3">Home scoreboard</h3>
+  <div class="v3-card"><p class="bk-hint">The green band under the tournament card.</p>
+    ${cup ? '<p class="bk-note ok">This tournament has a Club Cup event, so the band shows the Team Cup score.</p>' : `
+    <div class="seg2" role="group" aria-label="Scoreboard"><button data-act="brandboard" data-v="0" aria-pressed="${!b.clubBoard}">Tournament summary</button><button data-act="brandboard" data-v="1" aria-pressed="${!!b.clubBoard}">Club points</button></div>
+    <p class="bk-hint">${b.clubBoard ? 'One point per match won by a team whose players share a club.' : 'Divisions, matches and results in.'}</p>
+    ${b.clubBoard && s.list.length < 2 ? `<p class="bk-note warn">Only ${s.list.length} club${s.list.length === 1 ? '' : 's'} found. Add clubs to players (entry list or player cards) to show club points. Until then the summary shows.</p>` : ''}`}</div>`;
+}
+
 /* ================= Render ================= */
 const app = document.getElementById('app');
 let raf = 0;
@@ -7473,7 +7897,7 @@ function drawInner(){
   if (!view.me && view.tab !== 'admin'){ app.innerHTML = gate() + modal(); restoreFocus(fid, sel); return }
   let main;
   try{ main = body() }catch(err){ console.error(err); main = `<div class="card" style="margin-top:14px"><b>Something on this page hit a snag.</b><p class="small">${esc(err && err.message || err)}</p><div class="row"><button class="btn sm" onclick="location.reload()">Reload</button></div></div>` }
-  app.innerHTML = header() + bannersHtml() + `<div id="scroller"><main class="wrap" id="main">${ctxRow(view.tab === 'admin')}${main}</main></div>` + (view.tab === 'chat' && view.me && (view.ctab || 'chat') === 'chat' ? composer() : '') + (view.tab === 'admin' ? '' : tabbar()) + modal() + (needIntro() && !view.modal ? introModal() : '');
+  app.innerHTML = header() + bannersHtml() + `<div id="scroller"><main class="wrap" id="main">${ctxRow(view.tab === 'admin')}${main}</main></div>` + (view.tab === 'chat' && view.me && (view.ctab || 'chat') === 'chat' ? composer() : '') + (view.tab === 'admin' ? '' : tabbar()) + modal() + ((needIntro() || (view.introForce && welcome().video)) && !view.modal ? introModal() : '');
   finishDraw(keep, fid, sel);
 }
 let _typed = null;
@@ -7502,18 +7926,19 @@ function needAdmin(){ if (!view.admin){ toast('Unlock with the director PIN firs
 async function enterTrip(t, opts){
   opts = opts || {};
   TRIP = {id:t.id, code:t.code, name:t.name, role:t.role || 'player'}; Dir.remember(TRIP); if (!opts.tv) LS.set('bkt-last', TRIP.code);
-  Object.assign(view, {screen:'app', tab:'today', me:null, modal:null, draft:'', chatImg:null, day:null, ev:null, q:''});
+  Object.assign(view, {screen:'app', tab:'today', me:null, modal:null, draft:'', chatImg:null, day:null, ev:null, q:'', cards:null, invList:undefined, invNew:null, invForm:null, introForce:false});
   view.admin = TRIP.role === 'admin';
   loadAlerts(); snap = null; view.banners = [];
   render();
   await Store.open(TRIP);
+  loadCards();
   if (view.admin) setTimeout(() => { try{ inferFromEvents(); render() }catch(e){} }, 300);
   snap = takeSnap();
   const saved = LS.get(TK('me'), null);
   if (saved && (saved === GUEST || P(saved))) view.me = saved;
   updateURL(); render();
 }
-function leaveTrip(){ Store.close(); TRIP = null; view.screen = 'land'; view.admin = false; view.me = null; view.tv = false; view.signup = false; view.print = false; LS.del('bkt-last'); updateURL(); Dir.mine().then(l => { view.myTrips = l; render() }) }
+function leaveTrip(){ Store.close(); TRIP = null; view.screen = 'land'; view.admin = false; view.me = null; view.tv = false; view.signup = false; view.print = false; LS.del('bkt-last'); updateURL(); view.invPeek = null; refreshLanding() }
 
 function tmRead(){ const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : undefined }; const o = {}; [['n1','tm1-name'],['n2','tm2-name'],['r1','tm1-rating'],['r2','tm2-rating']].forEach(([k, id]) => { const v = g(id); if (v !== undefined) o[k] = v }); return o }
 
@@ -7555,6 +7980,7 @@ const ACT = {
   async sampleprepub(){ if (Dir.mode !== 'local') return; const t = await Dir.create('Sample Club Classic', '1234'); await enterTrip(t); buildSampleClassic(); Store.keys('m:').forEach(k => Store.del(k)); Store.keys('chat:').forEach(k => Store.del(k)); saveEvents(evsCopy().map(e => Object.assign(e, {published:false}))); view.admin = false; TRIP.role = 'player'; view.tab = 'today'; toast('Local sample before publication. Director PIN 1234.') },
   /* wizard */
   wzstep(el){ dropStyleDraft(); view.wz = Object.assign(view.wz || {}, {step:el.dataset.v}); view.resetScroll = true },
+  czopen(el){ view.cz = el.dataset.v || 'look'; if (view.screen === 'wizard' && view.wz) { view.wz.step = 'customize'; view.resetScroll = true } else ACT.wzopen({dataset:{v:'customize'}}) },
   wzopen(el){ if (needAdmin()) return; try{ inferFromEvents() }catch(e){} view.screen = 'wizard'; view.wz = {step:el.dataset.v || 'basics'}; view.modal = null; view.resetScroll = true },
   wzclose(){ dropStyleDraft(); view.screen = 'app'; view.wz = null; view.tab = 'today'; view.resetScroll = true; if (!view.me){ view.me = GUEST; LS.set(TK('me'), GUEST) } },
   togglemissing(){ view.wz.showMissing = !view.wz.showMissing },
@@ -7794,7 +8220,7 @@ const ACT = {
   },
   undraw(el){ withEvent(el.dataset.id, ev => { if (hasResults(ev)) return; ev.matches = []; ev.teams = []; ev.published = false }); toast('Draw undone. Change entries or seeds, then lock it in again.') },
   /* welcome page */
-  introdone(el, e){ if (e && e.target.closest('[data-stop]') && el.classList.contains('modal')) return; const v = welcome().video; if (v) LS.set(TK('intro'), v.ver) },
+  introdone(el, e){ if (e && e.target.closest('[data-stop]') && el.classList.contains('modal')) return; const v = welcome().video; if (v) LS.set(TK('intro'), v.ver); view.introForce = false },
   playintro(){ LS.del(TK('intro')) },
   hidehint(){ LS.set('bkt-hint', 1) },
   addx(el){ const c = cfg(), d = (c.days || [])[0]; c.extras = (c.extras || []).concat([{id:'x' + uid(), date:d ? d.date : '', time:el.dataset.t, title:el.dataset.v, place:''}]); Store.set('config', c) },
@@ -8257,6 +8683,93 @@ function onRemote(key){
   render();
 }
 
+/* v4 actions */
+Object.assign(ACT, {
+  cztab(el){ view.cz = el.dataset.v },
+  brandpicrm(el){ brandSet(b => { b[el.dataset.p] = null }) },
+  galopen(el){ view.galIdx = +el.dataset.i; view.modal = 'gallery' },
+  galrm(el){ brandSet(b => { b.gallery.splice(+el.dataset.i, 1) }) },
+  galmove(el){ const i = +el.dataset.i, d = +el.dataset.d; brandSet(b => { const j = i + d; if (j < 0 || j >= b.gallery.length) return; const [x] = b.gallery.splice(i, 1); b.gallery.splice(j, 0, x) }) },
+  brandboard(el){ brandSet(b => { b.clubBoard = el.dataset.v === '1' }) },
+  clubsheet(){ view.modal = 'clubs' },
+  vidpreview(){ view.introForce = true },
+  vidagain(){ if (needAdmin()) return; const c = cfg(), w = Object.assign({}, c.welcome || {}); if (!w.video) return; w.video = Object.assign({}, w.video, {ver:uid()}); c.welcome = w; Store.set('config', c); toast('Everyone sees the video again next time they open the tournament.') },
+  async vidrm(){ if (needAdmin()) return; if (!(await ask('Remove the welcome video for everyone?', {ok:'Remove', danger:true}))) return; const c = cfg(); c.welcome = Object.assign({}, c.welcome || {}, {video:null}); Store.set('config', c); render() },
+  introskip(){ const v = welcome().video; if (v) LS.set(TK('intro'), v.ver); view.introForce = false },
+  /* player cards */
+  cardedit(el){ view.cardPid = el.dataset.id; view.cardDraft = null; view.cardErr = null; view.cardFrom = view.modal === 'player' ? 'player' : null; view.pid = el.dataset.id; view.modal = 'cardedit' },
+  cardback(el, e){ if (e && e.target.closest('[data-stop]') && el.classList.contains('modal')) return; view.modal = view.cardFrom === 'player' ? 'player' : null; view.cardDraft = null },
+  cardphotorm(){ cardRead().photo = null },
+  async cardsave(){
+    const pid = view.cardPid, d = cardRead(); if (!canEditCard(pid)) return toast('Only this player or a director can edit this card.');
+    view.cardBusy = true; view.cardErr = null; render();
+    try{ const row = await Dir.saveCard(pid, d); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}); view.modal = view.cardFrom === 'player' ? 'player' : null; view.cardDraft = null; toast('Card saved.') }
+    catch(e){ view.cardErr = e.message || String(e) }
+    view.cardBusy = false;
+  },
+  async cardshare(el){
+    try{ const blob = await drawPlayerCard(el.dataset.id), name = ((P(el.dataset.id) || {}).name || 'Player').replace(/[^\w]+/g, '-');
+      const file = new File([blob], `${name}-player-card.png`, {type:'image/png'});
+      if (navigator.canShare && navigator.canShare({files:[file]})) await navigator.share({files:[file], title:`${(P(el.dataset.id) || {}).name} · ${tripTitle()}`});
+      else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = file.name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove() }, 1500); toast('Card image saved.') } }
+    catch(e){ if (!(e && e.name === 'AbortError')) toast("Couldn't make the card image.") }
+  },
+  /* invites: director */
+  invrole(el){ view.invForm = Object.assign({}, view.invForm, invFormRead(), {role:el.dataset.v}) },
+  async invcreate(){
+    if (needAdmin()) return; const f = Object.assign({role:'player'}, view.invForm, invFormRead());
+    if (f.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email)) { view.invForm = f; view.invFormErr = "That email doesn't look right. Leave it blank if you don't need it."; return }
+    if (f.player && !f.name) f.name = (P(f.player) || {}).name || '';
+    view.invForm = f; view.invFormErr = null; view.invBusy = true; render();
+    try{ const r = await Dir.createInvite(f); view.invNew = r; view.invForm = {role:f.role}; view.invList = [r].concat((view.invList || []).filter(x => x.id !== r.id)) }
+    catch(e){ view.invFormErr = (e.message || String(e)) }
+    view.invBusy = false;
+  },
+  async invrevoke(el){ if (!(await ask('Cancel this invite? The link stops working.', {ok:'Cancel invite', danger:true}))) return; try{ await Dir.revokeInvite(el.dataset.id); if (view.invNew && view.invNew.id === el.dataset.id) view.invNew = null; view.invList = undefined; loadInvites() }catch(e){ toast(e.message || "Couldn't cancel it.") } },
+  async invshare(el){ try{ await navigator.share({title:tripTitle(), text:`${el.dataset.n ? el.dataset.n + ', you' : 'You'}'re invited to ${tripTitle()} on Bracketly.`, url:inviteURL(el.dataset.code)}) }catch(e){} },
+  /* invites: landing */
+  async invcode(){
+    const el = document.getElementById('joincode'), code = cleanInvite(el ? el.value : view.joinCode); view.joinCode = code; view.joinErr = null; view.invErr = null;
+    if (!code) { view.joinErr = 'Enter a code.'; return }
+    if (code.length === 10){ try{ view.invPeek = await Dir.peekInvite(code); Dir.myInvites().then(l => { view.myInv = l; render() }).catch(() => {}); view.joinCode = ''; return }catch(e){ if (!/No invite/i.test(e.message || '')){ view.joinErr = e.message; return } } }
+    try{ await enterTrip(await Dir.join(code)) }catch(e){ view.joinErr = code.length === 10 ? 'No invite or tournament with that code.' : (e.message || String(e)).replace(/trip/gi, 'tournament') }
+  },
+  async invaccept(el){
+    view.invErr = null; render();
+    try{ const rec = await Dir.acceptInvite(el.dataset.code); view.invPeek = null; await enterTrip(rec);
+      if (rec.player && P(rec.player)){ view.me = rec.player; LS.set(TK('me'), rec.player) }
+      toast(rec.role === 'admin' ? "You're a co-director. Director tools are unlocked on this device." : rec.player && P(rec.player) ? `Welcome, ${P(rec.player).name.split(' ')[0]}.` : 'Welcome to the tournament.') }
+    catch(e){ view.invErr = (e.message || String(e)) }
+  },
+  async invdismiss(el){ try{ await Dir.dismissInvite(el.dataset.code) }catch(e){} if (view.invPeek && view.invPeek.code === el.dataset.code) view.invPeek = null; view.myInv = (view.myInv || []).filter(r => r.code !== el.dataset.code) }
+});
+function invFormRead(){ const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : undefined }, o = {}; [['player', 'inv-pl'], ['name', 'inv-name'], ['email', 'inv-email']].forEach(([k, id]) => { const v = g(id); if (v !== undefined) o[k] = v }); return o }
+Object.assign(CHG, {
+  brandbool(el){ const [a, b] = el.dataset.p.split('.'); brandSet(x => { if (b) x[a] = Object.assign({}, x[a], {[b]:el.checked}); else x[a] = el.checked }) },
+  async brandpic(el){ const f = el.files[0]; el.value = ''; if (!f) return; if (f.size > MAX_IMG_BYTES) return toast('That photo is over 15 MB. Try a smaller one.');
+    view.mediaBusy = 'Uploading…'; render();
+    try{ const url = await Dir.uploadMedia(await imgBlob(f, 1600), 'jpg', 'brand'); brandSet(b => { b[el.dataset.p] = url }); toast('Photo updated for everyone.') }catch(e){ toast('Upload failed: ' + ((e && e.message) || e)) }
+    view.mediaBusy = null; render() },
+  async galadd(el){ const fs = [...el.files]; el.value = ''; if (!fs.length) return; const room = MAX_GALLERY - brand().gallery.length; const list = fs.slice(0, room), added = []; let bad = 0;
+    for (let i = 0; i < list.length; i++){ view.mediaBusy = `Adding ${i + 1} of ${list.length}…`; render(); try{ if (list[i].size > MAX_IMG_BYTES) throw new Error('too big'); added.push({url:await Dir.uploadMedia(await imgBlob(list[i], 1600), 'jpg', 'gallery'), cap:''}) }catch(e){ bad++ } }
+    view.mediaBusy = null; if (added.length) brandSet(b => { b.gallery = b.gallery.concat(added).slice(0, MAX_GALLERY) }); else render();
+    if (bad || fs.length > room) toast([bad ? `${bad} photo${bad === 1 ? '' : 's'} couldn't be added.` : '', fs.length > room ? `The gallery holds ${MAX_GALLERY}.` : ''].filter(Boolean).join(' ')) },
+  galcap(el){ brandSet(b => { const x = b.gallery[+el.dataset.i]; if (x) x.cap = el.value.trim().slice(0, 120) }) },
+  async cardphoto(el){ const f = el.files[0]; el.value = ''; if (!f) return; const d = cardRead(); if (f.size > MAX_IMG_BYTES) { view.cardErr = 'That photo is over 15 MB.'; render(); return }
+    view.cardBusy = true; view.cardErr = null; render();
+    try{ d.photo = await Dir.uploadMedia(await imgBlob(f, 640), 'jpg', 'players') }catch(e){ view.cardErr = "Couldn't upload that photo. Try another one." }
+    view.cardBusy = false; render() },
+  vidtitle(el){ if (needAdmin()) return; const c = cfg(), w = Object.assign({}, c.welcome || {}); if (!w.video) { toast('Add a video first.'); return } w.video = Object.assign({}, w.video, {title:el.value.trim().slice(0, 80)}); c.welcome = w; Store.set('config', c) },
+  async vidfile(el){ const f = el.files[0]; el.value = ''; if (!f) return; if (needAdmin()) return;
+    const lim = Dir.mode === 'local' ? 8 * 1024 * 1024 : MAX_VIDEO_BYTES; if (f.size > lim) return toast(`That video is over ${Math.round(lim / 1048576)} MB. Use a YouTube or Vimeo link instead.`);
+    if (!/^video\/(mp4|webm|quicktime)$/.test(f.type)) return toast('Use an MP4, WebM or MOV video.');
+    view.vidBusy = 'Uploading… big files take a minute'; render();
+    try{ const ext = f.type === 'video/quicktime' ? 'mov' : f.type === 'video/webm' ? 'webm' : 'mp4', url = await Dir.uploadMedia(f, ext, 'video'), c = cfg(), old = (c.welcome || {}).video || {};
+      c.welcome = Object.assign({}, c.welcome || {}, {video:{kind:'file', url, src:url, uploaded:true, ver:uid(), title:old.title || 'Welcome to ' + tripTitle()}}); Store.set('config', c); toast('Video uploaded. Players see it the next time they open the tournament.') }
+    catch(e){ toast('Upload failed: ' + ((e && e.message) || e)) }
+    view.vidBusy = null; render() }
+});
+
 /* ---------- Start ---------- */
 (async () => {
   { const q0 = new URLSearchParams(location.search), h0 = (location.hash.match(/t=([A-Za-z0-9]+)/) || [])[1]; const c0 = q0.get('join') || h0; if (c0) view.resolving = String(c0).toUpperCase().slice(0, 8) }
@@ -8265,16 +8778,18 @@ function onRemote(key){
   view.myTrips = null; render();
   const qs = new URLSearchParams(location.search), hash = (location.hash.match(/t=([A-Za-z0-9]+)/) || [])[1];
   view.tv = qs.get('tv') === '1'; view.signup = qs.get('signup') === '1';
+  const invQ = cleanInvite(qs.get('invite'));
+  if (invQ && Dir.ready && !Dir.err){ view.lseg = 'invites'; try{ view.invPeek = await Dir.peekInvite(invQ) }catch(e){ view.invErr = e.message || String(e) } try{ qs.delete('invite'); history.replaceState(null, '', location.pathname + (qs.toString() ? '?' + qs.toString() : '')) }catch(e){} }
   const TABMAP = {draws:'draws', courts:'courts', chat:'chat', bets:'bets', board:'courts', schedule:'schedule', more:'more'}, wantTab = TABMAP[qs.get('tab')];
   if ('serviceWorker' in navigator) navigator.serviceWorker.addEventListener('message', e => { const t = TABMAP[(e.data || {}).tab]; if (t && TRIP){ view.tab = t; view.modal = null; view.screen = 'app'; render() } });
-  const code = qs.get('join') || hash || (view.tv ? null : LS.get('bkt-last', null));
+  const code = invQ ? null : qs.get('join') || hash || (view.tv ? null : LS.get('bkt-last', null));
   if (code && Dir.ready && !Dir.err){
     view.resolving = String(code).toUpperCase().slice(0, 8); render();
     try{ await enterTrip(await Dir.join(code), {tv:view.tv}) }catch(e){ console.warn('open', e); view.joinCode = code; view.joinErr = qs.get('join') ? (e.message || String(e)).replace(/trip/gi, 'tournament') : null; view.tv = false; view.signup = false; LS.del('bkt-last'); render() }
   }
   view.resolving = null; render();
   if (TRIP && wantTab){ view.tab = wantTab; render() }
-  if (!TRIP) Dir.mine().then(l => { view.myTrips = l; render() }).catch(() => {});
+  if (!TRIP) refreshLanding();
   if ('serviceWorker' in navigator && location.protocol === 'https:' && !window.claude && window.top === window.self){
     navigator.serviceWorker.register('sw.js').then(reg => { reg.update(); document.addEventListener('visibilitychange', () => { if (!document.hidden) reg.update() }) }).catch(() => {});
     let reloaded = false; navigator.serviceWorker.addEventListener('controllerchange', () => { if (reloaded) return; reloaded = true; location.reload() });
