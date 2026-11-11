@@ -1965,19 +1965,58 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 .v6-sgdone[open] .v6-sgdone-t::after{content:"Hide"}
 .v6-sgdone-b{padding:0 10px 10px}
 @media (max-width:389px){.v3-sechead .v3-h2{font-size:22px}.v3-sechead .v3-link{flex-shrink:0}}
+/* v3.1.0 smart import */
+.si h3{font-family:var(--fd)}
+.si-steps{display:flex;gap:6px;flex-wrap:wrap}.si-steps>*{font:600 12px/1 var(--fb);padding:7px 11px;border-radius:999px;border:1px solid var(--bd,#C9CFC3);color:var(--muted);background:transparent}
+.si-steps .on{background:var(--g1,#073625);color:var(--iv,#F7F5EC);border-color:var(--au,#D5B36A)}
+.si-sheets{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 6px}.si-sheet{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--bd,#C9CFC3);border-radius:12px;background:var(--card)}
+.si-sheet.on{border-color:var(--au,#D5B36A);box-shadow:inset 0 0 0 1px var(--au,#D5B36A)}.si-sheet button{font-weight:600;background:none;border:0;padding:0;color:inherit}.si-sheet i{font-size:12px;color:var(--muted)}
+.si-hdr{width:100%;max-width:420px}
+.si-cols{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-top:10px}
+.si-col{border:1px solid var(--bd,#C9CFC3);border-radius:14px;padding:8px 10px;background:#FFFEFA;display:flex;flex-direction:column;gap:5px;min-width:0}
+.si-col.off{opacity:.72;background:transparent}
+.si-ch{display:flex;justify-content:space-between;gap:6px;align-items:flex-start}.si-ch b{overflow-wrap:anywhere;font-size:14px}
+.si-conf{flex:0 0 auto;font:600 11px/1 var(--fb);padding:4px 7px;border-radius:999px;white-space:nowrap}
+.si-conf.hi{background:#DCEFE2;color:#1E5B36}.si-conf.md{background:#F6EBCB;color:#6E5212}.si-conf.lo{background:#F6D9D5;color:#8A2820}.si-conf.no{background:#ECECE6;color:#6B6B6B}
+.si-samp{display:flex;flex-wrap:nowrap;gap:4px;overflow:hidden;mask-image:linear-gradient(90deg,#000 85%,transparent)}.si-samp span{font-size:12px;background:var(--slot,#FAF5EA);border-radius:6px;padding:2px 6px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.si-col select{width:100%;min-height:40px!important;padding:6px 10px!important}.si-col small{color:var(--muted);font-size:12px;line-height:1.3}
+.si-foot{margin-top:12px;gap:8px;flex-wrap:wrap}
+.si-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.si-chip{font:600 12.5px/1.1 var(--fb);padding:7px 10px;border-radius:999px;border:1px solid var(--bd,#C9CFC3);background:var(--card);color:var(--ink);min-height:32px}
+.si-chip.bad{border-color:#D9A39C;color:#8A2820}.si-chip.on{background:var(--g1,#073625);color:#fff;border-color:var(--g1,#073625)}
+.si-panel{border:1px solid #E3C77E;background:#FBF4E0;border-radius:14px;padding:10px 12px;margin:0 0 10px}.si-panel p{margin:2px 0 6px}
+.si-sx{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-top:1px solid rgba(0,0,0,.06);flex-wrap:wrap}.si-sx:first-of-type{border-top:0}.si-sx i{color:var(--muted);font-size:12.5px}
+.seg.sm button{min-height:34px!important;padding:6px 12px!important;font-size:13px!important}
+.si-sx .seg{display:flex!important;flex-direction:row!important;gap:6px;flex:0 0 auto;width:auto!important;margin:0}.si-sx .seg button{min-width:48px;flex:0 0 auto;width:auto!important}
+.si-panel>.seg{display:flex!important;flex-direction:row!important;gap:6px}.si-panel>.seg button{flex:1 1 0}
+.si-g{border:1px solid var(--bd,#C9CFC3);border-radius:16px;background:var(--card);margin:0 0 8px;overflow:hidden}
+.si-g>summary{list-style:none;cursor:pointer;padding:11px 12px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}.si-g>summary::-webkit-details-marker{display:none}
+.si-g>summary b{font:700 16px/1.2 var(--fd)}.si-g>summary span{font-size:13px;color:var(--muted)}.si-g>summary em.bad{color:#A52A23;font-style:normal;font-weight:600}
+.si-g.loose{border-style:dashed}
+.si-tag{font:600 11.5px/1 var(--fb);font-style:normal;padding:4px 8px;border-radius:999px;margin-left:auto}.si-tag.new{background:#DCEFE2;color:#1E5B36}.si-tag.ex{background:#E3EAF5;color:#234C82}.si-tag.skip{background:#ECECE6;color:#6B6B6B}
+.si-make{display:flex;gap:8px;align-items:center;padding:0 12px 8px;font-size:14px}.si-make input{width:20px!important;height:20px!important;min-height:0!important;flex:0 0 auto;margin:0;accent-color:var(--g1,#073625)}.si-sheet input{width:18px!important;height:18px!important;min-height:0!important;margin:0}
+.si-ents{border-top:1px solid rgba(0,0,0,.07)}
+.si-e{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;padding:8px 12px;border-top:1px solid rgba(0,0,0,.05)}.si-e:first-child{border-top:0}
+.si-e.bad{background:#FCF1EF;box-shadow:inset 3px 0 0 #C0473D}
+.si-who{min-width:0;font-size:14.5px;line-height:1.35}.si-pn{white-space:nowrap}.si-pn i{font-style:normal;color:var(--muted);font-size:12.5px}.si-pn em{font-style:normal;font-size:11px;color:#234C82;background:#E3EAF5;border-radius:6px;padding:1px 5px}
+.si-amp{color:var(--muted);font-weight:400;margin:0 6px}.si-moved{font-style:normal;font-size:11px;background:#F6EBCB;border-radius:6px;padding:1px 5px}
+.si-w{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px}.si-w span{font-size:12px;padding:2px 7px;border-radius:8px;background:#ECECE6;color:#4A4A44}.si-w span.bad{background:#F6D9D5;color:#8A2820}
+.si-mv{grid-row:1;grid-column:2;max-width:150px;min-height:36px!important;font-size:14px!important;padding:4px 8px}
+@media (max-width:520px){ .si-e{grid-template-columns:1fr} .si-mv{grid-row:auto;grid-column:1;max-width:none;width:100%} .si-pn{white-space:normal} .si-cols{grid-template-columns:1fr} .si-foot .btn{flex:1 1 auto} }
 </style>
 </head>
 <body>
 <div id="app"></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
+<script src="smart-import.js?v=3.1.0"></script>
 <script>
 /* ================= Backend: one API, three storage modes =================
    supabase : the Netlify site (config.js has a Supabase URL + anon key)
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '3.0.0';
+const APP_VERSION = '3.1.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -5392,7 +5431,7 @@ function approveSignup(s){
 
 /* ================= Roster import: paste, spreadsheets, Word, PDF ================= */
 const LIBS = {
-  xlsx: 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js',
+  xlsx: 'vendor/xlsx.full.min.js?v=0.20.3',   // v3.1: bundled (SheetJS 0.20.3), works offline and without the CDN
   mammoth: 'https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js',
   pdf: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
   pdfWorker: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'
@@ -7379,9 +7418,9 @@ function divImportCard(open){
       ${P2.dupes.length ? `<p class="small" style="margin:6px 0 0">Maybe the same person: ${P2.dupes.map(([a, b]) => esc(a) + ' / ' + esc(b)).join('; ')}. They'll be added separately; merge them on the Players step if so.</p>` : ''}
       <div class="row" style="margin-top:10px"><button class="btn gold" data-act="divgo">Add all ${tot} entries</button><button class="btn alt" data-act="divcancel">Cancel</button></div></div>`;
   }
-  return `<details class="card adm divstart" ${open ? 'open' : ''}><summary><b>Have your entry list? Start from it</b><span class="small muted">Division names with their teams under each, like "Women's 3.0" then "Kaci Griffin / Emily Owen". Events, players, levels and teams are all set up for you.</span></summary>
+  return `<details class="card adm divstart" ${open ? 'open' : ''}><summary><b>Have your entry list? Start from it</b><span class="small muted">A spreadsheet of signups (any layout), or division names with their teams under each, like "Women's 3.0" then "Kaci Griffin / Emily Owen". Players are sorted into divisions by M/F, level and singles / doubles / mixed for you to check.</span></summary>
     <textarea id="divpaste" rows="7" placeholder="Women's 2.5&#10;Jessica McFall / Rebekah Phillips&#10;Katherine Byrne / Natalie Butler&#10;Mixed 7.0&#10;Ali Hamilton / Kerry Thompson">${esc(view.divPaste || '')}</textarea>
-    <div class="row" style="justify-content:space-between;margin-top:6px"><label class="btn alt sm">Upload a file<input type="file" hidden data-chg="divfile" accept=".txt,.csv,.xlsx,.xls,.docx,.pdf"></label><button class="btn sm" data-act="divread">Read the list</button></div>
+    <div class="row" style="justify-content:space-between;margin-top:6px"><label class="btn alt sm">Upload a file<input type="file" hidden data-chg="divfile" accept=".txt,.csv,.tsv,.xlsx,.xls,.xlsm,.ods,.docx,.pdf"></label><button class="btn sm" data-act="divread">Read the list</button></div>
     ${view.divErr ? `<p class="warn">${esc(view.divErr)}</p>` : ''}</details>`;
 }
 
@@ -7469,7 +7508,7 @@ function wzEvents(){
   return `<h2 style="margin-top:4px">Events</h2>
   <h3 class="v7-eth" id="et-h">What are you running?</h3>
   ${etypeTiles(et, 'setetype')}
-  ${et === 'divisions' ? divImportCard(!evs.length) : ''}
+  ${view.si ? siCard() : et === 'divisions' ? divImportCard(!evs.length) : ''}
   ${special ? `<div class="evtypes v7-one">${special}</div>` : `
   <p class="wnote">${lad ? 'Add a ladder for each group, like Men\u2019s Singles or Women\u2019s 3.5 Doubles.' : 'Or add divisions one at a time: one bracket per division.'}</p>
   <div class="evtypes v7-one">
@@ -7809,11 +7848,11 @@ function wzRosterAll(compact){
   return `${compact ? '<p class="wnote" style="margin-top:8px">Everyone entered in any event. Change a name or level here and it changes everywhere.</p>' : '<h2 style="margin-top:4px">Players</h2>'}
   ${sus.length ? `<h3>Signups waiting (${sus.length})</h3>${sus.map(s => `<div class="card su"><div><b>${esc(s.name)}</b> <span class="small muted">${esc([s.rating, s.gender].filter(Boolean).join(' · '))}</span>${s.partner ? `<br><span class="small">with ${esc(s.partner)} ${esc([s.partnerRating, s.partnerGender].filter(Boolean).join(' · '))}</span>` : ''}<br><span class="small muted">${esc((s.events || []).map(id => (EV(id) || {}).name).filter(Boolean).join(', '))}${s.note ? ' · ' + esc(s.note) : ''}</span></div><div class="row"><button class="btn sm" data-act="suok" data-k="${s.k}">Add</button><button class="btn alt sm" data-act="suno" data-k="${s.k}">Decline</button></div></div>`).join('')}` : ''}
   <h3>Upload a full list</h3>
-  <div class="card adm"><p class="small muted" style="margin-top:0">Excel, CSV, Word or PDF. Columns like Name (or First and Last), Rating, M/F, Partner, Partner rating, Event or Division, Email and Phone are picked up automatically. You'll see what was found before anything is added.</p>
+  <div class="card adm"><p class="small muted" style="margin-top:0">Excel (.xlsx or .xls), CSV, a Google Sheets download, Word or PDF. Title rows, several tabs, “Last, First” names, event columns or check marks and partner columns are all read, then everyone is sorted into divisions by M/F, level and singles / doubles / mixed. You check the columns and the divisions before anything is added.</p>
     <label class="btn sm">Choose file<input type="file" hidden data-chg="rosterfile" accept=".xlsx,.xls,.xlsm,.ods,.csv,.tsv,.txt,.docx,.pdf"></label>${view.impBusy ? ' <span class="small muted">Reading…</span>' : ''}${view.impErr ? `<p class="warn">${esc(view.impErr)}</p>` : ''}</div>
   <h3>Paste a list</h3>
   <div class="card adm"><label class="small muted">One player per line, or one team per line with a slash</label>
-    <textarea id="paste" rows="5" placeholder="Jane Doe, 3.5, F&#10;Mike Chen, 4.0, M&#10;Amy Fox 3.5 F / Ben Carter 3.5 M">${esc(view.paste || '')}</textarea>
+    <textarea id="paste-roster" rows="5" placeholder="Jane Doe, 3.5, F&#10;Mike Chen, 4.0, M&#10;Amy Fox 3.5 F / Ben Carter 3.5 M&#10;…or paste rows copied from a spreadsheet, header row and all">${esc(view.paste || '')}</textarea>
     <div class="row" style="justify-content:space-between;margin-top:8px"><span class="small muted">Copying rows straight from a spreadsheet works. Names already here get their rating and M/F updated.</span><button class="btn sm" data-act="pasteplayers">Add to roster</button></div></div>
   <h3>Signup link</h3>
   <div class="card adm"><label class="aset"><input type="checkbox" data-chg="cfgbool" data-p="signupsOpen" ${c.signupsOpen ? 'checked' : ''}><span><b>Signups open</b><small>Players sign themselves up with rating and partner. You approve each one here.</small></span></label>
@@ -7827,6 +7866,7 @@ function wzRosterAll(compact){
 }
 
 function importPreview(){
+  if (view.si) return siCard();
   const im = view.imp; if (!im) return '';
   const plan = planImport(im.entries), sample = im.entries.slice(0, 6);
   plan.rated = Math.min(plan.people, im.entries.reduce((n, e) => n + (e.b && e.teamRating != null ? 2 : [e.a, e.b].filter(x => x && (x.rating != null || x.tier)).length), 0));
@@ -8588,7 +8628,7 @@ const ACT = {
   rmlogo(el){ const c = cfg(), p = el.dataset.p; [p, p + 'Orig', p + 'Color'].forEach(k => c[k] = null); c[p + 'Keep'] = false; Store.set('config', c) },
   courtn(el){ const c = cfg(), cs = c.courts || []; if (+el.dataset.v > 0) cs.push({name:'Court ' + (cs.length + 1)}); else if (cs.length > 1) cs.pop(); c.courts = cs; Store.set('config', c) },
   psort(el){ view.psort = el.dataset.v },
-  pasteplayers(){ { const el0 = document.getElementById('paste'), dl = parseDivisionList(el0 ? el0.value : view.paste); if (dl){ view.divImp = {parsed:dl}; view.paste = ''; view.resetScroll = true; return toast('That list has divisions. Check them at the top, then add.') } } const el = document.getElementById('paste'), ents = parsePasteEntries(el ? el.value : view.paste); if (!ents.length) return toast('One player per line: Name, rating, M/F. Teams: Jane Doe 3.5 F / John Doe 4.0 M'); const r = applyImport(ents); view.paste = ''; const t = ents.filter(e => e.b).length; toast(`Added ${r.added}${r.updated ? `, updated ${r.updated}` : ''}${t ? `, ${t} team${t === 1 ? '' : 's'} linked` : ''}.`) },
+  pasteplayers(){ { const el0 = (document.getElementById('paste-roster') || document.getElementById('paste')), dl = parseDivisionList(el0 ? el0.value : view.paste); if (dl){ view.divImp = {parsed:dl}; view.paste = ''; view.resetScroll = true; return toast('That list has divisions. Check them at the top, then add.') } } const el = (document.getElementById('paste-roster') || document.getElementById('paste')), ents = parsePasteEntries(el ? el.value : view.paste); if (!ents.length) return toast('One player per line: Name, rating, M/F. Teams: Jane Doe 3.5 F / John Doe 4.0 M'); const r = applyImport(ents); view.paste = ''; const t = ents.filter(e => e.b).length; toast(`Added ${r.added}${r.updated ? `, updated ${r.updated}` : ''}${t ? `, ${t} team${t === 1 ? '' : 's'} linked` : ''}.`) },
   tmtype(el){ view.tm = Object.assign({}, view.tm, tmRead(), {type:el.dataset.v, lv:null, evTouched:false}) },
   tmlv(el){ view.tm = Object.assign({}, view.tm, tmRead(), {lv:+el.dataset.v, evTouched:false}) },
   addteam(){
@@ -9970,6 +10010,196 @@ Object.assign(CHG, {
 function cardFromRow(get){
   const nt = String(get('ntrp') || '').trim(), m = /(\d(?:[.,]\d)?)\s*([CSATMD])?\b/i.exec(nt);
   return {usta:String(get('usta') || '').replace(/\D/g, '') || null, ntrp:m ? m[1].replace(',', '.') : null, ntrp_type:m && m[2] ? m[2].toUpperCase() : null, wtn_s:get('wtn_s') || null, wtn_d:get('wtn_d') || null, utr:get('utr') || null};
+}
+/* ================= v3.1.0: smart spreadsheet import =================
+   Travis: "really amplify the app's ability to decipher a spreadsheet and sort the players by level / sex / singles / doubles".
+   smart-import.js (window.SmartImport) reads the file: finds the header row (title rows, blanks, several sheets are fine),
+   works out each column from its header and its values, splits combined events ("Men's 4.0 Doubles", WD, XD 7.0, a list in
+   one cell, check-mark columns, repeated rows), pairs partners (mutual first, one-sided flagged), and sorts every entry into a
+   division by sex x level x singles/doubles/mixed. Here the director checks the columns, then the divisions, fixes what's
+   flagged, and nothing is saved until "Add". */
+const SI_SHEET_EXT = /\.(csv|tsv|xlsx|xlsm|xls|ods|numbers)$/i;
+function siStart(tables, file){
+  if (!window.SmartImport) throw new Error('The importer did not load. Reload the page and try again.');
+  tables = tables.map((t, i) => Array.isArray(t) ? {name:t.name || ('Sheet ' + (i + 1)), rows:t} : t).filter(t => (t.rows || []).some(r => (r || []).some(c => String(c ?? '').trim())));
+  const sheets = tables.map(t => SmartImport.analyzeSheet(t.rows, t.name));
+  if (!sheets.some(s => s.people)) throw new Error(`Couldn't find a column of names in ${file || 'that list'}. A header row like Name, Gender, Rating, Event helps.`);
+  view.si = {file:file || 'Pasted list', tables, sheets, use:sheets.map(s => s.people), step:'map', tab:Math.max(0, sheets.findIndex(s => s.people)), moves:{}, sexFix:{}, sameAs:{}, notSame:{}, merge:[], notDupes:[], create:{}, kind:'auto', filter:''};
+  view.imp = null; view.divImp = null; view.impErr = null; view.divErr = null; view.resetScroll = true;
+}
+/* Like readTables, but keeps each sheet's name: "Men's 3.5 Doubles" on a tab is a division */
+async function siReadFile(f){
+  const name = f.name.toLowerCase();
+  if (/\.(tsv|txt)$/.test(name)) return siTablesFromText(await f.text());
+  await loadScript(LIBS.xlsx);
+  const wb = /\.csv$/.test(name) ? XLSX.read(await f.text(), {type:'string', raw:false}) : XLSX.read(await f.arrayBuffer(), {type:'array'});
+  return wb.SheetNames.map(n => ({name:/\.csv$/.test(name) ? 'CSV' : n, rows:XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1, raw:false, defval:''})}));
+}
+function siTablesFromText(text){ return SmartImport.tablesFromText(text).map(t => ({name:t.name, rows:t.rows})) }
+const siLooksTabular = text => { try{ const t = SmartImport.tablesFromText(text)[0].rows.filter(r => r.some(c => c.trim())); if (t.length < 2) return false; const multi = t.filter(r => r.filter(c => c.trim()).length >= 2).length; return multi >= t.length * .6 && SmartImport.analyzeSheet(t, 'Pasted').people }catch(e){ return false } };
+function siResult(){
+  const si = view.si; if (!si) return null;
+  const recs = si.sheets.map((s, i) => si.use[i] ? SmartImport.extract(s) : []);
+  const r = SmartImport.build(recs, {players:players(), cards:view.cards || {}, sport:isTennis() ? 'tennis' : 'pickleball', moves:si.moves, sexFix:si.sexFix, sameAs:si.sameAs, notSame:si.notSame, merge:si.merge, notDupes:si.notDupes, defaultKind:si.kind === 'auto' ? 'auto' : si.kind});
+  const evs = events();
+  r.groups.forEach(g => { g.existing = siExisting(g, evs); g.make = !!g.division.kind && !g.existing && si.create[g.key] !== false });
+  return r;
+}
+function siExisting(g, evs){
+  const d = g.division; if (!d.kind) return null;
+  const plain = !d.tier && !d.label && !d.age && !d.junior;
+  return evs.find(e => e.kind !== 'clubcup' && e.kind !== 'proam' && evKey(e.name) === evKey(g.label))
+    || (plain ? evs.find(e => e.kind === d.kind && (d.kind === 'mixed' || (e.gender || '') === (d.gender || '')) && (e.level ?? null) === (d.level ?? null) && (e.cap ?? null) === (d.cap ?? null) && !(d.kind === 'mixed' && d.cap == null && e.cap != null)) : null) || null;
+}
+const SI_WARN = {noSex:'M/F unknown', noLevel:'No level', needPartner:'Needs a partner', unpaired:'No partner', oneSided:'One-sided partner', partnerConflict:'Partner conflict', partnerFuzzy:'Partner name close match', partnerOnly:'Only listed as a partner', partnerGuess:'Check partner', rateHigh:'Rated above division', rateLow:'Playing up', sexMismatch:'M/F vs division', divMismatch:'Partners listed different divisions', mixedSameSex:'Mixed team, same sex', madeMixed:'Sorted into mixed', noEvent:'No event listed', repeat:'Listed twice', conflict:'Conflicting values', merged:'Merged rows'};
+const SI_BAD = new Set(['noSex', 'noLevel', 'needPartner', 'unpaired', 'partnerConflict', 'rateHigh', 'sexMismatch', 'divMismatch', 'mixedSameSex', 'conflict', 'partnerFuzzy', 'partnerGuess']);
+function siConfPill(c){ const p = Math.round((c.conf || 0) * 100); return c.role ? `<span class="si-conf ${p >= 85 ? 'hi' : p >= 60 ? 'md' : 'lo'}">${p >= 85 ? 'Sure' : p >= 60 ? 'Likely' : 'Guess'} · ${p}%</span>` : '<span class="si-conf no">Not used</span>' }
+function siMapStep(){
+  const si = view.si, sh = si.sheets, cur = sh[si.tab] || sh[0];
+  const rowsN = sh.reduce((n, s, i) => n + (si.use[i] ? s.rows.slice(s.hi + 1).filter(r => r.some(Boolean)).length : 0), 0);
+  const hdrOpts = [['-1', 'No header row'], ...cur.rows.slice(0, 15).map((r, i) => [String(i), `Row ${i + 1}: ${r.filter(Boolean).slice(0, 3).join(', ').slice(0, 40) || '(blank)'}`])];
+  return `<div class="card adm impbox si" id="si-top">
+    <div class="si-steps"><span class="on">1 · Columns</span><span>2 · Divisions</span></div>
+    <h3 style="margin:6px 0 2px">Reading ${esc(si.file)}</h3>
+    <p class="small muted" style="margin:0 0 8px">${rowsN} row${rowsN === 1 ? '' : 's'}${sh.length > 1 ? ` across ${si.use.filter(Boolean).length} of ${sh.length} sheets` : ''}. Check what each column holds; change any that are wrong. Nothing is saved yet.</p>
+    ${sh.length > 1 ? `<div class="si-sheets">${sh.map((s, i) => `<label class="si-sheet ${si.tab === i ? 'on' : ''}"><input type="checkbox" data-chg="siuse" data-i="${i}" ${si.use[i] ? 'checked' : ''} aria-label="Use sheet ${esc(s.name)}"><button class="small" data-act="sitab" data-i="${i}">${esc(s.name || 'Sheet ' + (i + 1))}</button>${s.ctx && (s.ctx.kind || s.ctx.gender) && evKey(SmartImport.eventLabel(Object.assign({kind:null}, s.ctx)).replace(' · event not listed', '')) !== evKey(s.name) ? `<i>${esc(SmartImport.eventLabel(Object.assign({kind:null}, s.ctx)).replace(' · event not listed', ''))}</i>` : ''}</label>`).join('')}</div>` : ''}
+    <label class="small muted" style="display:block;margin:6px 0 2px">Header row${sh.length > 1 ? ` on “${esc(cur.name)}”` : ''}</label>${sel(`data-chg="sihdr" data-i="${si.tab}" class="si-hdr"`, hdrOpts, String(cur.hi))}
+    ${cur.titles && cur.titles.length ? `<p class="small muted" style="margin:4px 0 0">Skipped title rows: ${cur.titles.map(esc).join(' · ').slice(0, 140)}</p>` : ''}
+    <div class="si-cols">${cur.cols.map(c => `<div class="si-col ${c.role ? '' : 'off'}"><div class="si-ch"><b>${esc(c.header || 'Column ' + (c.i + 1))}</b>${siConfPill(c)}</div>
+      <div class="si-samp">${c.samples.length ? c.samples.map(x => `<span>${esc(String(x).slice(0, 28))}</span>`).join('') : '<span class="muted">empty</span>'}</div>
+      ${sel(`data-chg="sicol" data-s="${si.tab}" data-i="${c.i}" aria-label="What column ${esc(c.header || c.i + 1)} holds"`, SmartImport.ROLES, c.role)}
+      ${c.why && (!/^header "/.test(c.why) || /\(|,/.test(c.why) || c.role === 'eventcol') ? `<small>${esc(c.why)}${c.role === 'eventcol' && c.ev ? ` → ${esc(SmartImport.eventLabel(Object.assign({kind:null}, c.ev)).replace(' · event not listed', ''))}` : ''}</small>` : ''}</div>`).join('')}</div>
+    ${!cur.cols.some(c => ['name', 'first', 'last'].includes(c.role)) && si.use[si.tab] ? '<p class="warn">Pick the column with the players’ names.</p>' : ''}
+    <div class="row si-foot"><button class="btn gold" data-act="sinext" ${si.sheets.some((s, i) => si.use[i] && s.cols.some(c => ['name', 'first', 'last'].includes(c.role))) ? '' : 'disabled'}>Sort the players →</button><button class="btn alt" data-act="sicancel">Cancel</button></div></div>`;
+}
+function siPerson(r, k){ const p = r.byKey.get(k); if (!p) return ''; const lv = p.tier ? tierLabel(p.tier) : p.rating != null ? fmtRating(p.rating) : ''; return `<span class="si-pn">${esc(p.name)}${lv || p.sex ? ` <i>${esc([lv, p.sex].filter(Boolean).join(' '))}</i>` : ''}${p.existingId ? ' <em title="Already on your roster">on roster</em>' : ''}</span>` }
+function siMoveOpts(r, e){
+  const d = e.division, keys = new Map(r.groups.map(g => [g.key, g.label]));
+  const add = dd => { const k = SmartImport.groupKey(dd); if (!keys.has(k)) keys.set(k, SmartImport.eventLabel(dd)) };
+  events().filter(ev => ['singles', 'doubles', 'mixed'].includes(ev.kind)).forEach(ev => add({kind:ev.kind, gender:ev.kind === 'mixed' ? '' : ev.gender || '', level:ev.level ?? null, cap:ev.cap ?? null, tier:'', label:'', age:''}));
+  if (isTennis()){
+    const kinds = e.members.length === 2 ? ['doubles', 'mixed'] : ['singles', 'doubles'];
+    kinds.forEach(kd => { if (kd === 'mixed') TEAM_LEVELS.X.forEach(x => add({kind:'mixed', gender:'', cap:x, level:null, tier:'', label:'', age:''})); else ['M', 'F'].forEach(g => TEAM_LEVELS.M.forEach(x => add({kind:kd, gender:g, level:x, cap:null, tier:'', label:'', age:''}))) });
+  }
+  return [...keys.entries()].sort((a, b) => a[1].localeCompare(b[1], undefined, {numeric:true}));
+}
+function siSortStep(){
+  const si = view.si, r = siResult(); view._siR = r;
+  const ents = r.entries, nEnt = ents.filter(e => e.division.kind).length, bad = ents.filter(e => e.warn.some(w => SI_BAD.has(w.t)));
+  const counts = {}; ents.forEach(e => e.warn.forEach(w => { counts[w.t] = (counts[w.t] || 0) + 1 }));
+  const newG = r.groups.filter(g => g.division.kind && !g.existing), made = newG.filter(g => g.make).length;
+  const loose = ents.filter(e => !e.division.kind);
+  const f = si.filter;
+  const chips = Object.entries(counts).filter(([t]) => SI_WARN[t]).sort((a, b) => (SI_BAD.has(b[0]) - SI_BAD.has(a[0])) || b[1] - a[1]).map(([t, n]) => `<button class="si-chip ${SI_BAD.has(t) ? 'bad' : ''} ${f === t ? 'on' : ''}" data-act="sifilter" data-v="${t}">${n} · ${esc(SI_WARN[t])}</button>`).join('');
+  const sexQ = r.sexUnknown, sug = sexQ.filter(p => p.sexGuess);
+  const exMaybe = r.people.filter(p => p.maybeExisting && !si.sameAs[p.key] && !si.notSame[p.key]);
+  const groupHtml = r.groups.map(g => {
+    const list = g.entries.filter(e => !f || e.warn.some(w => w.t === f)); if (!list.length) return '';
+    const kindN = g.division.kind === 'singles' || !g.division.kind ? 'player' : 'team';
+    const nT = g.entries.length, nb = g.entries.filter(e => e.warn.some(w => SI_BAD.has(w.t))).length;
+    return `<details class="si-g ${g.division.kind ? '' : 'loose'}" open><summary><b>${esc(g.label.replace(' · event not listed', ''))}</b><span>${nT} ${kindN}${nT === 1 ? '' : 's'}${nb ? ` · <em class="bad">${nb} to check</em>` : ''}</span>
+      ${g.division.kind ? (g.existing ? `<i class="si-tag ex">Adds to ${esc(g.existing.name)}</i>` : `<i class="si-tag ${g.make ? 'new' : 'skip'}">${g.make ? 'New division' : 'Won’t be created'}</i>`) : '<i class="si-tag skip">No event: roster only</i>'}</summary>
+      ${g.division.kind && !g.existing ? `<label class="si-make"><input type="checkbox" data-chg="simake" data-k="${esc(g.key)}" ${g.make ? 'checked' : ''}> Create “${esc(g.label)}”</label>` : ''}
+      <div class="si-ents">${list.map(e => `<div class="si-e ${e.warn.some(w => SI_BAD.has(w.t)) ? 'bad' : ''}"><div class="si-who">${e.members.map(k => siPerson(r, k)).join('<b class="si-amp">/</b>')}${e.movedFrom ? ' <em class="si-moved">moved</em>' : ''}</div>
+        ${e.warn.length ? `<div class="si-w">${e.warn.map(w => `<span class="${SI_BAD.has(w.t) ? 'bad' : ''}" title="${esc(w.msg)}">${esc(w.msg)}</span>`).join('')}</div>` : ''}
+        <select class="si-mv" data-chg="simove" data-id="${esc(e.id)}" aria-label="Move to division"><option value="">Move to…</option>${siMoveOpts(r, e).filter(([k]) => k !== g.key).map(([k, l]) => `<option value="${esc(k)}">${esc(l)}${r.groups.some(x => x.key === k) || events().some(ev => evKey(ev.name) === evKey(l)) ? '' : ' (new)'}</option>`).join('')}${e.movedFrom ? '<option value="__undo">Undo move</option>' : ''}</select></div>`).join('')}</div></details>`;
+  }).join('');
+  return `<div class="card adm impbox si" id="si-top">
+    <div class="si-steps"><button class="small" data-act="siback">1 · Columns</button><span class="on">2 · Divisions</span></div>
+    <h3 style="margin:6px 0 2px">${r.people.length} player${r.people.length === 1 ? '' : 's'} · ${nEnt} entr${nEnt === 1 ? 'y' : 'ies'} · ${r.groups.filter(g => g.division.kind).length} division${r.groups.filter(g => g.division.kind).length === 1 ? '' : 's'}</h3>
+    <p class="small muted" style="margin:0 0 8px">Sorted by M/F, level and singles / doubles / mixed. ${bad.length ? `<b>${bad.length} to check</b> (in red). ` : 'Everything looks right. '}Use “Move to…” to put an entry in another division. Nothing is saved until you tap Add.</p>
+    ${chips ? `<div class="si-chips">${f ? '<button class="si-chip on" data-act="sifilter" data-v="">Show all</button>' : ''}${chips}</div>` : ''}
+    ${sexQ.length ? `<div class="si-panel"><b>M/F unknown for ${sexQ.length}</b><p class="small muted">Not in the file or the division name.${sug.length ? ' Suggestions from first names are only guesses; confirm each.' : ''}</p>
+      ${sexQ.map(p => `<div class="si-sx"><span>${esc(p.name)}${p.sexGuess ? ` <i>suggest ${p.sexGuess}?</i>` : ''}</span><div class="seg sm">${['M', 'F'].map(x => `<button data-act="sisex" data-k="${esc(p.key)}" data-v="${x}">${x}</button>`).join('')}</div></div>`).join('')}
+      ${sug.length > 1 ? `<button class="btn alt sm" data-act="sisexall">Use the ${sug.length} suggestions</button>` : ''}</div>` : ''}
+    ${r.dupes.length ? `<div class="si-panel"><b>Maybe the same person</b>${r.dupes.map(([a, b]) => `<div class="si-sx"><span>${esc(r.byKey.get(a).name)} / ${esc(r.byKey.get(b).name)}</span><span class="row"><button class="btn alt sm" data-act="simerge" data-a="${esc(a)}" data-b="${esc(b)}">Same person</button><button class="small" style="text-decoration:underline" data-act="sinotdupe" data-a="${esc(a)}" data-b="${esc(b)}">Different</button></span></div>`).join('')}</div>` : ''}
+    ${exMaybe.length ? `<div class="si-panel"><b>Already on your roster?</b>${exMaybe.map(p => `<div class="si-sx"><span>${esc(p.name)} → ${esc(p.maybeExisting.name)}</span><span class="row"><button class="btn alt sm" data-act="sisame" data-k="${esc(p.key)}" data-id="${p.maybeExisting.id}">Same person</button><button class="small" style="text-decoration:underline" data-act="sinotsame" data-k="${esc(p.key)}">New player</button></span></div>`).join('')}</div>` : ''}
+    ${loose.length || si.kind !== 'auto' ? `<div class="si-panel"><b>${si.kind === 'auto' ? `${loose.length} with no event listed` : 'No event listed: entered as'}</b><div class="seg sm" style="margin-top:6px">${[['auto', 'Roster only'], ['singles', 'Singles'], ['doubles', 'Doubles']].map(([k, l]) => `<button class="${si.kind === k ? 'on' : ''}" data-act="sikind" data-v="${k}">${l}</button>`).join('')}</div></div>` : ''}
+    <div class="si-groups">${groupHtml || '<p class="small muted">Nothing matches that filter.</p>'}</div>
+    ${newG.length && made < newG.length ? `<button class="btn alt" style="width:100%;margin-top:8px" data-act="simakeall">Create all ${newG.length} new divisions</button>` : ''}
+    <div class="row si-foot"><button class="btn gold" data-act="sigo">Add ${r.people.length} player${r.people.length === 1 ? '' : 's'}${nEnt ? ` · ${nEnt} entr${nEnt === 1 ? 'y' : 'ies'}` : ''}</button><button class="btn alt" data-act="siback">Back</button><button class="btn alt" data-act="sicancel">Cancel</button></div>
+    <p class="small muted" style="margin:6px 0 0">${made ? `${made} new division${made === 1 ? '' : 's'} will be created. ` : ''}Names already on the roster are reused, never duplicated; levels and M/F already set are kept.</p></div>`;
+}
+function siCard(){ if (!view.si) return ''; try{ return view.si.step === 'sort' ? siSortStep() : siMapStep() }catch(e){ console.error(e); return `<div class="card adm impbox"><p class="warn">Couldn't sort that list: ${esc(e.message || String(e))}</p><button class="btn alt" data-act="sicancel">Close</button></div>` } }
+function siCommit(){
+  const si = view.si, r = siResult(); if (!r) return null;
+  const pl = players().slice(), idOf = new Map(); let added = 0, updated = 0;
+  r.people.forEach(p => {
+    let ex = (p.existingId && pl.find(x => x.id === p.existingId)) || findByName(p.name, pl);
+    if (ex){ let ch = false; const fill = (k, v) => { if (v != null && v !== '' && (ex[k] == null || ex[k] === '')){ ex[k] = v; ch = true } };
+      if (ex.rating == null && !ex.tier){ fill('rating', p.rating); fill('tier', p.tier) } fill('gender', p.sex); fill('email', p.email); fill('phone', p.phone); fill('club', p.club); if (ch) updated++ }
+    else { ex = {id:'p' + uid(), name:p.name, rating:p.rating ?? null, tier:p.tier || '', gender:p.sex || '', email:p.email || '', phone:p.phone || '', club:p.club || ''}; pl.push(ex); added++ }
+    idOf.set(p.key, ex.id);
+  });
+  // partner links (doubles first, then mixed) only where the player has none yet
+  ['doubles', 'mixed'].forEach(kd => r.entries.filter(e => e.division.kind === kd && e.members.length === 2).forEach(e => { const [a, b] = e.members.map(k => pl.find(x => x.id === idOf.get(k))); if (a && b && !a.partnerId && !b.partnerId){ a.partnerId = b.id; b.partnerId = a.id } }));
+  savePlayers(pl);
+  const evs = evsCopy(), lad = etype() === 'ladder'; let made = 0, entered = 0; const skipped = [];
+  r.groups.forEach(g => {
+    const d = g.division; if (!d.kind || !g.entries.length) return;
+    let ev = g.existing ? evs.find(e => e.id === g.existing.id) : null;
+    if (!ev){ if (!g.make) return; ev = newEvent({kind:d.kind, gender:d.kind === 'mixed' ? 'X' : d.gender || '', level:d.kind === 'mixed' ? null : d.level ?? null, cap:d.kind === 'mixed' ? d.cap ?? null : null, name:g.label, format:lad && d.kind !== 'mixed' ? 'challenge_ladder' : 'single_elim_cons'}); if (!lad) ev.autoFormat = true; evs.push(ev); made++ }
+    if (hasResults(ev)){ skipped.push(ev.name); return }
+    ev.teamLv = ev.teamLv || {};
+    g.entries.forEach(e => {
+      const ids = e.members.map(k => idOf.get(k)).filter(Boolean);
+      ids.forEach(i => { if (!ev.entrants.includes(i)){ ev.entrants.push(i); entered++ } });
+      if (ids.length === 2 && KINDS[ev.kind].size === 2 && !ev.pairs.some(t => t.includes(ids[0]) || t.includes(ids[1]))){ ev.pairs.push(ids); if (ev.kind === 'mixed' && ev.cap && !allRated(ids)) ev.teamLv[pairKey(ids)] = ev.cap }
+    });
+  });
+  saveEvents(evs);
+  inferFromEvents();
+  // USTA # / NTRP / WTN / UTR go on the player cards (same as the old importer)
+  const withCard = r.people.filter(p => p.usta || p.ntrp || p.wtn_s || p.wtn_d || p.utr);
+  if (withCard.length) (async () => { try{ if (!view.cards) view.cards = await Dir.loadCards() || {}; let n = 0;
+    for (const p of withCard){ const pid = idOf.get(p.key); if (!pid) continue; const old = cardOf(pid), add = {usta:p.usta || null, ntrp:p.ntrp || null, ntrp_type:p.ntrp_type || null, wtn_s:p.wtn_s || null, wtn_d:p.wtn_d || null, utr:p.utr || null};
+      const d = Object.assign({}, old, Object.fromEntries(Object.entries(add).filter(([k, v]) => v != null && v !== '' && (old[k] == null || old[k] === ''))));
+      try{ const row = await Dir.saveCard(pid, d); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}); n++ }catch(e){ console.warn('import card', p.name, e) } }
+    if (n) toast(`USTA # and ratings added to ${n} player card${n === 1 ? '' : 's'}.`); render() }catch(e){ console.warn('import cards', e) } })();
+  view.si = null; view._siR = null;
+  return {added, updated, made, entered, skipped};
+}
+Object.assign(ACT, {
+  sitab(el){ view.si.tab = +el.dataset.i },
+  sinext(){ view.si.step = 'sort'; view.resetScroll = true },
+  siback(){ view.si.step = 'map'; view.resetScroll = true },
+  sicancel(){ view.si = null; view._siR = null },
+  sifilter(el){ view.si.filter = el.dataset.v === view.si.filter ? '' : el.dataset.v },
+  sisex(el){ view.si.sexFix = Object.assign({}, view.si.sexFix, {[el.dataset.k]:el.dataset.v}) },
+  sisexall(){ const r = siResult(); r.sexUnknown.filter(p => p.sexGuess).forEach(p => { view.si.sexFix[p.key] = p.sexGuess }) },
+  simerge(el){ view.si.merge.push([el.dataset.a, el.dataset.b]) },
+  sinotdupe(el){ view.si.notDupes.push([el.dataset.a, el.dataset.b]) },
+  sisame(el){ view.si.sameAs[el.dataset.k] = el.dataset.id },
+  sinotsame(el){ view.si.notSame[el.dataset.k] = true },
+  sikind(el){ view.si.kind = el.dataset.v },
+  simakeall(){ Object.keys(view.si.create).forEach(k => { view.si.create[k] = true }) },
+  sigo(){ if (needAdmin()) return; const r = siCommit(); if (!r) return;
+    toast(`Added ${r.added} player${r.added === 1 ? '' : 's'}${r.updated ? `, updated ${r.updated}` : ''}${r.entered ? `, ${r.entered} entr${r.entered === 1 ? 'y' : 'ies'}` : ''}${r.made ? `, ${r.made} new division${r.made === 1 ? '' : 's'}` : ''}.${r.skipped.length ? ' Skipped (has scores): ' + r.skipped.join(', ') : ''}`);
+    if (view.screen === 'wizard'){ view.wz = Object.assign(view.wz || {}, {step:'players'}); view.ev = (events()[0] || {}).id } view.resetScroll = true },
+  sipaste(){ const t = ((document.getElementById('sipaste') || {}).value || '').trim(); if (!t) return toast('Paste rows copied from your spreadsheet first.'); try{ siStart(siTablesFromText(t), 'Pasted list') }catch(e){ view.impErr = e.message } }
+});
+Object.assign(CHG, {
+  siuse(el){ view.si.use[+el.dataset.i] = el.checked; if (el.checked) view.si.tab = +el.dataset.i },
+  sihdr(el){ const si = view.si, i = +el.dataset.i; si.sheets[i] = SmartImport.analyzeSheet(si.tables[i].rows, si.tables[i].name, {hi:+el.value}); si.use[i] = si.sheets[i].people || si.use[i] },
+  sicol(el){ const s = view.si.sheets[+el.dataset.s], c = s.cols.find(x => x.i === +el.dataset.i); if (!c) return; c.role = el.value; c.conf = el.value ? 1 : 0; c.why = 'set by you'; if (el.value === 'eventcol') c.ev = SmartImport.parseEventItem(c.header) || null; if (['name', 'first', 'last'].includes(el.value)) view.si.use[+el.dataset.s] = true },
+  simove(el){ const id = el.dataset.id, v = el.value; if (!v) return; const m = Object.assign({}, view.si.moves); if (v === '__undo') delete m[id]; else m[id] = v; view.si.moves = m },
+  simake(el){ view.si.create = Object.assign({}, view.si.create, {[el.dataset.k]:el.checked}) }
+});
+/* File inputs: spreadsheets go to the smart importer; Word / PDF / text lists keep the division-list reader first */
+{ const _rf = CHG.rosterfile, _df = CHG.divfile;
+  const viaSmart = async (el, fallback) => {
+    const f = el.files[0]; if (!f) return;
+    if (!SI_SHEET_EXT.test(f.name)) return fallback(el);
+    view.impBusy = true; view.impErr = null; view.divErr = null; render();
+    try{ siStart(await siReadFile(f), f.name) }catch(e){ console.error(e); view.impErr = view.divErr = e.message || String(e) } finally { view.impBusy = false; el.value = '' }
+  };
+  CHG.rosterfile = el => el.dataset.ev ? _rf(el) : viaSmart(el, _rf);
+  CHG.divfile = el => viaSmart(el, _df);
+}
+/* Pasting a table copied from a spreadsheet (tabs / commas with a header) also goes to the smart importer */
+{ const _pp = ACT.pasteplayers, _dr = ACT.divread;
+  ACT.pasteplayers = function(el, e){ const t = ((document.getElementById('paste-roster') || document.getElementById('paste') || {}).value || view.paste || ''); if (siLooksTabular(t)){ try{ siStart(siTablesFromText(t), 'Pasted list'); view.paste = ''; return }catch(err){} } return _pp(el, e) };
+  ACT.divread = function(el, e){ const t = ((document.getElementById('divpaste') || {}).value || view.divPaste || ''); if (siLooksTabular(t)){ try{ siStart(siTablesFromText(t), 'Pasted list'); view.divPaste = ''; return }catch(err){} } return _dr(el, e) };
 }
 /* Ladder upkeep */
 setInterval(() => { if (state.events && state.events.some(isLadder)) { lSweep(); render() } }, 60000);

@@ -1,0 +1,10 @@
+Timestamp,Email Address,First Name,Last Name,Gender,NTRP Rating,Which events are you entering?,Doubles Partner,Mixed Doubles Partner,Phone Number,T-Shirt Size
+10/1/2026 9:14:02,amy.fox@example.com,Amy,Fox,Female,3.5,"Singles, Doubles, Mixed Doubles",Beth Gale,Carl Hunt,(806) 555-0101,M
+10/1/2026 9:20:11,beth.gale@example.com,Beth,Gale,Female,3.5,Doubles,Amy Fox,,806-555-0102,S
+10/1/2026 10:02:45,carl.hunt@example.com,Carl,Hunt,Male,4.0,"Doubles, Mixed Doubles",Dan Irving,Amy Fox,806.555.0103,L
+10/2/2026 8:00:00,dan@example.com,Dan,Irving,Male,4.0,Doubles,,,8065550104,XL
+10/2/2026 8:30:00,erin.j@example.com,Erin,Jones,F,3.0,"Singles, Doubles",TBD,,806 555 0105,M
+10/2/2026 9:00:00,fred@example.com,Fred,Klein,M,4.5,Singles,,,,
+10/3/2026 7:45:00,gina@example.com,Gina,Lowe,F,3.5,"Doubles, Mixed Doubles",Hana Moss,Ivan Nash,,
+10/3/2026 7:50:00,ivan@example.com,Ivan,Nash,M,3.5,Mixed Doubles,,Gina Lowe,,
+,,,,,,,,,,
