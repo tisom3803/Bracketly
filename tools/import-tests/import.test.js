@@ -189,3 +189,35 @@ test('director merges two spellings into one player', () => {
   assert.deepEqual(teams(r, 'Mixed 7.0'), ['Dee Mulkey / Zach Mulkey']);
   assert.equal(r.dupes.length, 0);
 });
+test('09 club lines: level column is the line, team rows, Club Cup', () => {
+  const r = R('09_club_lines.xlsx');
+  const cols = r.sheets[0].cols.map(c => c.role);
+  assert.deepEqual(cols, ['event', 'level', 'club', 'name', 'partner']);
+  assert.deepEqual(r.groups.map(g => g.label + ':' + g.entries.length), ["Women's A Doubles:4", "Women's B Doubles:4", "Women's C Doubles:4", "Men's Pro Doubles:2", "Men's Pro/A Doubles:4", "Men's A Doubles:4", "Men's A/B Doubles:4", "Men's B Doubles:4", "Men's B/C Doubles:4", "Men's C Doubles:2", 'Mixed Pro/A1:4', 'Mixed A1/A2:4', 'Mixed A2/B1:4', 'Mixed B1/B2:4', 'Mixed B2/C1:4', 'Mixed C1/C2:4']);
+  // the line level is not a player rating
+  assert.ok(r.people.every(p => p.rating == null && !p.tier));
+  // team rows: no cross-row partner complaints
+  const ws = r.entries.flatMap(e => e.warn.map(w => w.t));
+  assert.deepEqual([...new Set(ws)], ['sameName']);
+  assert.ok(teams(r, "Men's B Doubles").includes('Lowry / Lowry (2)'));
+  // a surname in men's and women's divisions is two people; mixed picks the one opposite the partner
+  assert.equal(person(r, 'Sutter (M)').sex, 'M'); assert.equal(person(r, 'Sutter (F)').sex, 'F');
+  assert.ok(teams(r, 'Mixed C1/C2').some(t => t.includes('Sutter (F)')));  // partner is a man
+  assert.equal(r.sexUnknown.length, 0);
+  // surname-only next to full names with that surname: asked, not merged
+  assert.deepEqual(r.dupes.map(d => d.sort().join('|')).sort(), ['hank lowry|lowry', 'lowry|mia lowry']);
+  // Club Cup: OHC vs PLC, line against line
+  const cc = r.clubCup;
+  assert.deepEqual(cc.clubs, ['OHC', 'PLC']);
+  assert.equal(cc.matches, 30); assert.equal(cc.odd, 0);
+  assert.deepEqual(cc.sessions.map(s => s.label + ':' + s.lines.map(l => l.label).join(',')), ["Men's Doubles:Pro,Pro/A,A,A/B,B,B/C,C", "Women's Doubles:A,B,C", 'Mixed Doubles:Pro/A1,A1/A2,A2/B1,B1/B2,B2/C1,C1/C2']);
+});
+test('parsers: line levels', () => {
+  assert.deepEqual(SI.parseLevel('Pro/A'), {label:'Pro/A'});
+  assert.equal(SI.parseLevel('A1/A2').label, 'A1/A2');
+  assert.equal(SI.parseLevel('A').tier, 'a');
+  const ev = SI.parseEvents("Mixed Pro/A1, Men's A/B Doubles");
+  assert.deepEqual(ev.map(e => [e.kind, e.label, e.raw]), [['mixed', 'Pro/A1', 'Mixed Pro/A1'], ['doubles', 'A/B', "Men's A/B Doubles"]]);
+  // a plain player-level column (one level per player) is still the player's rating
+  const r = R('07_typos_codes.xlsx'); assert.equal(person(r, 'Quinn Avery').rating, 4.5);
+});

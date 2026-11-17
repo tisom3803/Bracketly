@@ -15,3 +15,4 @@
 | 08_plain_roster.csv | Plain roster with no events |
 
 Run: `node --test tools/import-tests/import.test.js` (from the repo root). `node tools/import-tests/dump.js <fixture>` prints what was found.
+- `09_club_lines.xlsx` — club-vs-club lines (Division + Level like Pro/A, A1/A2 + Club, one team per row, surname-only names, an "X / X" row, one surname in men's and women's). Anonymized from a real director's sheet. Should become a Club Cup (30 matches).

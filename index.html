@@ -1998,6 +1998,7 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 .si-ents{border-top:1px solid rgba(0,0,0,.07)}
 .si-e{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;padding:8px 12px;border-top:1px solid rgba(0,0,0,.05)}.si-e:first-child{border-top:0}
 .si-e.bad{background:#FCF1EF;box-shadow:inset 3px 0 0 #C0473D}
+.si-e.si-m{grid-template-columns:1fr;gap:2px}.si-ln{font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}.si-cup .seg{flex-wrap:wrap}.si-cup .seg button{flex:1 1 auto}
 .si-who{min-width:0;font-size:14.5px;line-height:1.35}.si-pn{white-space:nowrap}.si-pn i{font-style:normal;color:var(--muted);font-size:12.5px}.si-pn em{font-style:normal;font-size:11px;color:#234C82;background:#E3EAF5;border-radius:6px;padding:1px 5px}
 .si-amp{color:var(--muted);font-weight:400;margin:0 6px}.si-moved{font-style:normal;font-size:11px;background:#F6EBCB;border-radius:6px;padding:1px 5px}
 .si-w{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px}.si-w span{font-size:12px;padding:2px 7px;border-radius:8px;background:#ECECE6;color:#4A4A44}.si-w span.bad{background:#F6D9D5;color:#8A2820}
@@ -2009,7 +2010,7 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 <div id="app"></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
-<script src="smart-import.js?v=3.1.0"></script>
+<script src="smart-import.js?v=3.1.0.2"></script>
 <script>
 /* ================= Backend: one API, three storage modes =================
    supabase : the Netlify site (config.js has a Supabase URL + anon key)
@@ -10051,8 +10052,8 @@ function siExisting(g, evs){
   return evs.find(e => e.kind !== 'clubcup' && e.kind !== 'proam' && evKey(e.name) === evKey(g.label))
     || (plain ? evs.find(e => e.kind === d.kind && (d.kind === 'mixed' || (e.gender || '') === (d.gender || '')) && (e.level ?? null) === (d.level ?? null) && (e.cap ?? null) === (d.cap ?? null) && !(d.kind === 'mixed' && d.cap == null && e.cap != null)) : null) || null;
 }
-const SI_WARN = {noSex:'M/F unknown', noLevel:'No level', needPartner:'Needs a partner', unpaired:'No partner', oneSided:'One-sided partner', partnerConflict:'Partner conflict', partnerFuzzy:'Partner name close match', partnerOnly:'Only listed as a partner', partnerGuess:'Check partner', rateHigh:'Rated above division', rateLow:'Playing up', sexMismatch:'M/F vs division', divMismatch:'Partners listed different divisions', mixedSameSex:'Mixed team, same sex', madeMixed:'Sorted into mixed', noEvent:'No event listed', repeat:'Listed twice', conflict:'Conflicting values', merged:'Merged rows'};
-const SI_BAD = new Set(['noSex', 'noLevel', 'needPartner', 'unpaired', 'partnerConflict', 'rateHigh', 'sexMismatch', 'divMismatch', 'mixedSameSex', 'conflict', 'partnerFuzzy', 'partnerGuess']);
+const SI_WARN = {noSex:'M/F unknown', noLevel:'No level', needPartner:'Needs a partner', unpaired:'No partner', oneSided:'One-sided partner', partnerConflict:'Partner conflict', partnerFuzzy:'Partner name close match', partnerOnly:'Only listed as a partner', partnerGuess:'Check partner', rateHigh:'Rated above division', rateLow:'Playing up', sexMismatch:'M/F vs division', divMismatch:'Partners listed different divisions', mixedSameSex:'Mixed team, same sex', madeMixed:'Sorted into mixed', noEvent:'No event listed', repeat:'Listed twice', conflict:'Conflicting values', merged:'Merged rows', sameName:'Same name twice'};
+const SI_BAD = new Set(['noSex', 'noLevel', 'needPartner', 'unpaired', 'partnerConflict', 'rateHigh', 'sexMismatch', 'divMismatch', 'mixedSameSex', 'conflict', 'partnerFuzzy', 'partnerGuess', 'sameName']);
 function siConfPill(c){ const p = Math.round((c.conf || 0) * 100); return c.role ? `<span class="si-conf ${p >= 85 ? 'hi' : p >= 60 ? 'md' : 'lo'}">${p >= 85 ? 'Sure' : p >= 60 ? 'Likely' : 'Guess'} · ${p}%</span>` : '<span class="si-conf no">Not used</span>' }
 function siMapStep(){
   const si = view.si, sh = si.sheets, cur = sh[si.tab] || sh[0];
@@ -10068,6 +10069,7 @@ function siMapStep(){
     <div class="si-cols">${cur.cols.map(c => `<div class="si-col ${c.role ? '' : 'off'}"><div class="si-ch"><b>${esc(c.header || 'Column ' + (c.i + 1))}</b>${siConfPill(c)}</div>
       <div class="si-samp">${c.samples.length ? c.samples.map(x => `<span>${esc(String(x).slice(0, 28))}</span>`).join('') : '<span class="muted">empty</span>'}</div>
       ${sel(`data-chg="sicol" data-s="${si.tab}" data-i="${c.i}" aria-label="What column ${esc(c.header || c.i + 1)} holds"`, SmartImport.ROLES, c.role)}
+      ${c.role === 'level' && SmartImport.levelAsDivision(cur) ? `<small>Read as the division's level (line), not each player's rating: the same player plays at different levels.</small>` : ''}
       ${c.why && (!/^header "/.test(c.why) || /\(|,/.test(c.why) || c.role === 'eventcol') ? `<small>${esc(c.why)}${c.role === 'eventcol' && c.ev ? ` → ${esc(SmartImport.eventLabel(Object.assign({kind:null}, c.ev)).replace(' · event not listed', ''))}` : ''}</small>` : ''}</div>`).join('')}</div>
     ${!cur.cols.some(c => ['name', 'first', 'last'].includes(c.role)) && si.use[si.tab] ? '<p class="warn">Pick the column with the players’ names.</p>' : ''}
     <div class="row si-foot"><button class="btn gold" data-act="sinext" ${si.sheets.some((s, i) => si.use[i] && s.cols.some(c => ['name', 'first', 'last'].includes(c.role))) ? '' : 'disabled'}>Sort the players →</button><button class="btn alt" data-act="sicancel">Cancel</button></div></div>`;
@@ -10093,7 +10095,16 @@ function siSortStep(){
   const chips = Object.entries(counts).filter(([t]) => SI_WARN[t]).sort((a, b) => (SI_BAD.has(b[0]) - SI_BAD.has(a[0])) || b[1] - a[1]).map(([t, n]) => `<button class="si-chip ${SI_BAD.has(t) ? 'bad' : ''} ${f === t ? 'on' : ''}" data-act="sifilter" data-v="${t}">${n} · ${esc(SI_WARN[t])}</button>`).join('');
   const sexQ = r.sexUnknown, sug = sexQ.filter(p => p.sexGuess);
   const exMaybe = r.people.filter(p => p.maybeExisting && !si.sameAs[p.key] && !si.notSame[p.key]);
-  const groupHtml = r.groups.map(g => {
+  const cc = r.clubCup, cup = siCupMode(r);
+  const teamTxt = e => e.members.map(k => esc(r.byKey.get(k).name)).join(' / ');
+  const cupHtml = cc ? `<div class="si-panel si-cup"><b>Two clubs, team against team: ${esc(cc.clubs[0])} vs ${esc(cc.clubs[1])}</b>
+      <p class="small muted" style="margin:2px 0 6px">Every line has teams from both clubs, so this reads as a Club Cup: each ${esc(cc.clubs[0])} team plays the ${esc(cc.clubs[1])} team on the same line.</p>
+      <div class="seg sm"><button class="${cup ? 'on' : ''}" data-act="simode" data-v="cup">One Club Cup · ${cc.matches} matches</button><button class="${cup ? '' : 'on'}" data-act="simode" data-v="div">Separate divisions</button></div>
+      ${cc.both.length ? `<p class="small bad" style="margin:6px 0 0">On both clubs: ${cc.both.map(k => esc(r.byKey.get(k).name)).join(', ')}. They'll be listed on ${esc(cc.clubs[0])}; fix after adding.</p>` : ''}
+      ${cc.odd ? `<p class="small muted" style="margin:6px 0 0">${cc.odd} team${cc.odd === 1 ? ' has' : 's have'} no opponent on their line; they're added to the club roster without a match.</p>` : ''}</div>` : '';
+  const cupLines = cup ? cc.sessions.map(se => `<details class="si-g" open><summary><b>${esc(se.label)}</b><span>${se.lines.reduce((n, l) => n + l.matches, 0)} matches</span></summary><div class="si-ents">${se.lines.map(ln => { const n = Math.max(ln.a.length, ln.b.length); return Array.from({length:n}, (_, i) => { const a = ln.a[i], b = ln.b[i], bad = [a, b].some(e => e && e.warn.some(w => SI_BAD.has(w.t))); const ws = [a, b].filter(Boolean).flatMap(e => e.warn);
+      return `<div class="si-e si-m ${bad ? 'bad' : ''}"><div class="si-ln">${esc(ln.label || 'Line')}${n > 1 ? ` · ${i + 1}` : ''}</div><div class="si-who"><span>${a ? teamTxt(a) : '<i class="muted">no team</i>'}</span> <i class="muted">vs</i> <span>${b ? teamTxt(b) : '<i class="muted">no team</i>'}</span></div>${ws.length ? `<div class="si-w">${ws.map(w => `<span class="${SI_BAD.has(w.t) ? 'bad' : ''}">${esc(w.msg)}</span>`).join('')}</div>` : ''}</div>` }).join('') }).join('')}</div></details>`).join('') : '';
+  const groupHtml = cup ? '' : r.groups.map(g => {
     const list = g.entries.filter(e => !f || e.warn.some(w => w.t === f)); if (!list.length) return '';
     const kindN = g.division.kind === 'singles' || !g.division.kind ? 'player' : 'team';
     const nT = g.entries.length, nb = g.entries.filter(e => e.warn.some(w => SI_BAD.has(w.t))).length;
@@ -10106,8 +10117,10 @@ function siSortStep(){
   }).join('');
   return `<div class="card adm impbox si" id="si-top">
     <div class="si-steps"><button class="small" data-act="siback">1 · Columns</button><span class="on">2 · Divisions</span></div>
-    <h3 style="margin:6px 0 2px">${r.people.length} player${r.people.length === 1 ? '' : 's'} · ${nEnt} entr${nEnt === 1 ? 'y' : 'ies'} · ${r.groups.filter(g => g.division.kind).length} division${r.groups.filter(g => g.division.kind).length === 1 ? '' : 's'}</h3>
-    <p class="small muted" style="margin:0 0 8px">Sorted by M/F, level and singles / doubles / mixed. ${bad.length ? `<b>${bad.length} to check</b> (in red). ` : 'Everything looks right. '}Use “Move to…” to put an entry in another division. Nothing is saved until you tap Add.</p>
+    <h3 style="margin:6px 0 2px">${cup ? `${r.people.length} players · ${nEnt} teams · ${cc.matches} matches` : `${r.people.length} player${r.people.length === 1 ? '' : 's'} · ${nEnt} entr${nEnt === 1 ? 'y' : 'ies'} · ${r.groups.filter(g => g.division.kind).length} division${r.groups.filter(g => g.division.kind).length === 1 ? '' : 's'}`}</h3>
+    <p class="small muted" style="margin:0 0 8px">${cup ? `${esc(cc.clubs[0])} vs ${esc(cc.clubs[1])}, line against line. ` : 'Sorted by M/F, level and singles / doubles / mixed. '}${bad.length ? `<b>${bad.length} to check</b> (in red). ` : 'Everything looks right. '}${cup ? '' : 'Use “Move to…” to put an entry in another division. '} Nothing is saved until you tap Add.</p>
+    ${cupHtml}
+    ${r.warnings.length ? `<div class="si-panel"><b>Read this way</b>${r.warnings.map(w => `<p class="small ${w.lvl === 'info' ? 'muted' : 'bad'}" style="margin:4px 0 0">${esc(w.msg)}</p>`).join('')}</div>` : ''}
     ${chips ? `<div class="si-chips">${f ? '<button class="si-chip on" data-act="sifilter" data-v="">Show all</button>' : ''}${chips}</div>` : ''}
     ${sexQ.length ? `<div class="si-panel"><b>M/F unknown for ${sexQ.length}</b><p class="small muted">Not in the file or the division name.${sug.length ? ' Suggestions from first names are only guesses; confirm each.' : ''}</p>
       ${sexQ.map(p => `<div class="si-sx"><span>${esc(p.name)}${p.sexGuess ? ` <i>suggest ${p.sexGuess}?</i>` : ''}</span><div class="seg sm">${['M', 'F'].map(x => `<button data-act="sisex" data-k="${esc(p.key)}" data-v="${x}">${x}</button>`).join('')}</div></div>`).join('')}
@@ -10115,11 +10128,12 @@ function siSortStep(){
     ${r.dupes.length ? `<div class="si-panel"><b>Maybe the same person</b>${r.dupes.map(([a, b]) => `<div class="si-sx"><span>${esc(r.byKey.get(a).name)} / ${esc(r.byKey.get(b).name)}</span><span class="row"><button class="btn alt sm" data-act="simerge" data-a="${esc(a)}" data-b="${esc(b)}">Same person</button><button class="small" style="text-decoration:underline" data-act="sinotdupe" data-a="${esc(a)}" data-b="${esc(b)}">Different</button></span></div>`).join('')}</div>` : ''}
     ${exMaybe.length ? `<div class="si-panel"><b>Already on your roster?</b>${exMaybe.map(p => `<div class="si-sx"><span>${esc(p.name)} → ${esc(p.maybeExisting.name)}</span><span class="row"><button class="btn alt sm" data-act="sisame" data-k="${esc(p.key)}" data-id="${p.maybeExisting.id}">Same person</button><button class="small" style="text-decoration:underline" data-act="sinotsame" data-k="${esc(p.key)}">New player</button></span></div>`).join('')}</div>` : ''}
     ${loose.length || si.kind !== 'auto' ? `<div class="si-panel"><b>${si.kind === 'auto' ? `${loose.length} with no event listed` : 'No event listed: entered as'}</b><div class="seg sm" style="margin-top:6px">${[['auto', 'Roster only'], ['singles', 'Singles'], ['doubles', 'Doubles']].map(([k, l]) => `<button class="${si.kind === k ? 'on' : ''}" data-act="sikind" data-v="${k}">${l}</button>`).join('')}</div></div>` : ''}
-    <div class="si-groups">${groupHtml || '<p class="small muted">Nothing matches that filter.</p>'}</div>
-    ${newG.length && made < newG.length ? `<button class="btn alt" style="width:100%;margin-top:8px" data-act="simakeall">Create all ${newG.length} new divisions</button>` : ''}
-    <div class="row si-foot"><button class="btn gold" data-act="sigo">Add ${r.people.length} player${r.people.length === 1 ? '' : 's'}${nEnt ? ` · ${nEnt} entr${nEnt === 1 ? 'y' : 'ies'}` : ''}</button><button class="btn alt" data-act="siback">Back</button><button class="btn alt" data-act="sicancel">Cancel</button></div>
-    <p class="small muted" style="margin:6px 0 0">${made ? `${made} new division${made === 1 ? '' : 's'} will be created. ` : ''}Names already on the roster are reused, never duplicated; levels and M/F already set are kept.</p></div>`;
+    <div class="si-groups">${cup ? cupLines : groupHtml || '<p class="small muted">Nothing matches that filter.</p>'}</div>
+    ${!cup && newG.length && made < newG.length ? `<button class="btn alt" style="width:100%;margin-top:8px" data-act="simakeall">Create all ${newG.length} new divisions</button>` : ''}
+    <div class="row si-foot"><button class="btn gold" data-act="sigo">Add ${r.people.length} player${r.people.length === 1 ? '' : 's'}${cup ? ` · Club Cup (${cc.matches} matches)` : nEnt ? ` · ${nEnt} entr${nEnt === 1 ? 'y' : 'ies'}` : ''}</button><button class="btn alt" data-act="siback">Back</button><button class="btn alt" data-act="sicancel">Cancel</button></div>
+    <p class="small muted" style="margin:6px 0 0">${cup ? `One new Club Cup event with ${cc.sessions.length} session${cc.sessions.length === 1 ? '' : 's'}. ` : made ? `${made} new division${made === 1 ? '' : 's'} will be created. ` : ''}Names already on the roster are reused, never duplicated; levels and M/F already set are kept.</p></div>`;
 }
+function siCupMode(r){ return !!(r && r.clubCup && r.clubCup.matches && (view.si.mode || 'cup') === 'cup') }
 function siCard(){ if (!view.si) return ''; try{ return view.si.step === 'sort' ? siSortStep() : siMapStep() }catch(e){ console.error(e); return `<div class="card adm impbox"><p class="warn">Couldn't sort that list: ${esc(e.message || String(e))}</p><button class="btn alt" data-act="sicancel">Close</button></div>` } }
 function siCommit(){
   const si = view.si, r = siResult(); if (!r) return null;
@@ -10135,6 +10149,17 @@ function siCommit(){
   ['doubles', 'mixed'].forEach(kd => r.entries.filter(e => e.division.kind === kd && e.members.length === 2).forEach(e => { const [a, b] = e.members.map(k => pl.find(x => x.id === idOf.get(k))); if (a && b && !a.partnerId && !b.partnerId){ a.partnerId = b.id; b.partnerId = a.id } }));
   savePlayers(pl);
   const evs = evsCopy(), lad = etype() === 'ladder'; let made = 0, entered = 0; const skipped = [];
+  if (siCupMode(r)){
+    const cc = r.clubCup, ids = e => e.members.map(k => idOf.get(k)).filter(Boolean), uniq = a => [...new Set(a)];
+    const ev = newEvent({kind:'clubcup', format:'club_cup', name:`${cc.clubs[0]} vs ${cc.clubs[1]} Cup`});
+    const all = cc.sessions.flatMap(se => se.lines), aIds = uniq(all.flatMap(l => l.a.flatMap(ids))), bIds = uniq(all.flatMap(l => l.b.flatMap(ids))).filter(i => !aIds.includes(i));
+    Object.assign(ev.clubCup, {teamAName:cc.clubs[0], teamBName:cc.clubs[1], aIds, bIds, pointsPerMatch:1, pointsToWin:cc.matches / 2 + .5, sessions:cc.sessions.map((se, i) => ({id:'s' + (i + 1), label:se.label}))});
+    cc.sessions.forEach((se, si2) => se.lines.forEach(ln => { for (let i = 0; i < ln.matches; i++) ev.matches.push({id:ev.id + '-cc-' + uid(), eventId:ev.id, sessionId:'s' + (si2 + 1), matchType:se.kind === 'mixed' ? 'mixed' : 'doubles', aIds:ids(ln.a[i]), bIds:ids(ln.b[i]), label:(ln.label || 'Line') + (ln.matches > 1 ? ' · ' + (i + 1) : '')}) }));
+    syncClubCupRosters(ev); evs.push(ev); made = 1; entered = ev.matches.length;
+    buildSchedule(evs, {note:false}); saveEvents(evs); inferFromEvents();
+    view.ev = ev.id; view.si = null; view._siR = null;
+    return {added, updated, made, entered, skipped, cup:ev.name};
+  }
   r.groups.forEach(g => {
     const d = g.division; if (!d.kind || !g.entries.length) return;
     let ev = g.existing ? evs.find(e => e.id === g.existing.id) : null;
@@ -10172,9 +10197,10 @@ Object.assign(ACT, {
   sisame(el){ view.si.sameAs[el.dataset.k] = el.dataset.id },
   sinotsame(el){ view.si.notSame[el.dataset.k] = true },
   sikind(el){ view.si.kind = el.dataset.v },
+  simode(el){ view.si.mode = el.dataset.v },
   simakeall(){ Object.keys(view.si.create).forEach(k => { view.si.create[k] = true }) },
   sigo(){ if (needAdmin()) return; const r = siCommit(); if (!r) return;
-    toast(`Added ${r.added} player${r.added === 1 ? '' : 's'}${r.updated ? `, updated ${r.updated}` : ''}${r.entered ? `, ${r.entered} entr${r.entered === 1 ? 'y' : 'ies'}` : ''}${r.made ? `, ${r.made} new division${r.made === 1 ? '' : 's'}` : ''}.${r.skipped.length ? ' Skipped (has scores): ' + r.skipped.join(', ') : ''}`);
+    if (r.cup) toast(`Added ${r.added} player${r.added === 1 ? '' : 's'} and ${r.cup} with ${r.entered} matches.`); else toast(`Added ${r.added} player${r.added === 1 ? '' : 's'}${r.updated ? `, updated ${r.updated}` : ''}${r.entered ? `, ${r.entered} entr${r.entered === 1 ? 'y' : 'ies'}` : ''}${r.made ? `, ${r.made} new division${r.made === 1 ? '' : 's'}` : ''}.${r.skipped.length ? ' Skipped (has scores): ' + r.skipped.join(', ') : ''}`);
     if (view.screen === 'wizard'){ view.wz = Object.assign(view.wz || {}, {step:'players'}); view.ev = (events()[0] || {}).id } view.resetScroll = true },
   sipaste(){ const t = ((document.getElementById('sipaste') || {}).value || '').trim(); if (!t) return toast('Paste rows copied from your spreadsheet first.'); try{ siStart(siTablesFromText(t), 'Pasted list') }catch(e){ view.impErr = e.message } }
 });

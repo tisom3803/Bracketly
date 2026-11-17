@@ -77,6 +77,8 @@ function parseLevel(v, opts){
   s = s.replace(/\s+/g, ' ').trim();
   if (!s) return out;
   if (/^(pro|professional|teaching pro|tour)$/.test(s)) return Object.assign(out, {tier:'pro'});
+  // Line levels used by club play: "Pro/A", "A/B", "A1/A2", "Pro/A1", "B2/C1", "A1"
+  if (/^(pro|[abcd]\d?)(\s*[\/~&+\-]\s*(pro|[abcd]\d?))+$/.test(s) || /^[abcd]\d$/.test(s)) return Object.assign(out, {label:lineLabel(s)});
   let m = s.match(/^(?:flight |level |class |group |division |div |grade )?([abcd])(?: (?:flight|player|level|division|div|grade|group))?$/);
   if (m) return Object.assign(out, {tier:m[1]});
   for (const [w, l] of SKILL) if (new RegExp('^' + w + '\\b').test(s) && !/\d/.test(s)) return Object.assign(out, {label:l});
@@ -93,6 +95,10 @@ function parseLevel(v, opts){
   const t = s.match(/\d(?:\.\d)?\s*([csatmd])\b/); if (t) out.ntrpType = t[1].toUpperCase();
   return out;
 }
+const lineLabel = s => S(s).toLowerCase().split(/\s*[\/~&+\-]\s*/).map(x => x === 'pro' ? 'Pro' : x.toUpperCase()).join('/');
+const isLineLabel = s => /^(Pro|[ABCD]\d?)(\/(Pro|[ABCD]\d?))*$/.test(S(s)) && (/\//.test(S(s)) || /\d/.test(S(s)));
+// Pro, then A, A1, A2, B ... for sorting tiers and line labels
+const lineRank = d => { const full = S((d && (d.tier || d.label)) || '').toLowerCase(), t = full.split('/')[0].trim(), half = full.includes('/') ? .5 : 0; if (!t) return 999; if (t === 'pro') return half; const m = t.match(/^([a-d])(\d?)/); return m ? (m[1].charCodeAt(0) - 96) * 10 + (+m[2] || 0) + half : 500 };
 const TRUTHY = /^(x|y|yes|yep|true|1|✓|✔|☑|✅|checked|in|entered|selected|on|t|playing|registered|ok|\*)$/i;
 const FALSY = /^(n|no|false|0|-+|none|n\/?a|not playing|off|f|no thanks|declined|skip|nope)$/i;
 
@@ -105,7 +111,7 @@ function parseEventItem(v){
   const pm = raw.match(/\s*(?:\bw\/\s*|\bwith\s+|\bpartner(?:ed)?(?: with)?\s*[:\-]?\s+|\bp:\s*|\(\s*(?:w\/|with|partner[:\s])\s*)([A-Za-z][A-Za-z'.\-]+(?:\s+[A-Za-z'.\-]+){0,3})\s*\)?\s*$/i);
   if (pm){ partner = pm[1].trim(); raw = raw.slice(0, pm.index).trim() }
   let s = ' ' + raw.toLowerCase().replace(/[’']/g, '').replace(/[_|]/g, ' ').replace(/\b(division|div|event|draw|bracket|category|entries|entry|tournament|flight|draws|events|ntrp|usta|level|dupr)\b/g, ' ').replace(/\s+/g, ' ') + ' ';
-  const t = {kind:null, gender:'', level:null, cap:null, tier:'', label:'', age:'', raw:clean(v)};
+  const t = {kind:null, gender:'', level:null, cap:null, tier:'', label:'', age:'', raw:clean(v).replace(/~/g, '/')};
   // codes: MS MD WS WD XD MX BS BD GS GD LS LD
   const code = s.match(/\s(m|w|x|b|g|l|mx)([sd])(?=[\s\d.\-]|$)/) || s.match(/\s(mxd|xd|mx)(?=[\s\d.\-]|$)/);
   if (code){
@@ -141,7 +147,7 @@ function parseEventItem(v){
 }
 /* A cell with several events: "Men's 4.0 Singles, Doubles; Mixed 8.0 w/ Jane Doe" */
 function parseEvents(v){
-  const s = clean(v).replace(/\bw\/\s*/gi, 'with '); if (!s) return [];
+  const s = clean(v).replace(/\bw\/\s*/gi, 'with ').replace(/\b(pro|[abcd]\d?)\s*\/\s*(?=(pro|[abcd]\d?)\b)/gi, '$1~').replace(/\b(pro|[abcd]\d?)\s*\/\s*(?=(pro|[abcd]\d?)\b)/gi, '$1~'); if (!s) return [];
   const items = s.split(/\s*(?:[,;|\n]|\s\+\s|\/(?![a-z]{1,2}\b)|\s&\s|\sand\s)\s*/i).filter(Boolean);
   const out = []; let prev = null;
   // "with Jane Doe" may have been cut by a comma: glue name-only items back to the previous event as its partner
@@ -162,8 +168,8 @@ function eventLabel(d, sport){
   if (d.kind === 'doubles') return [age && /\+/.test(age) ? age : '', g || (lv || age ? '' : 'Open'), age && /U$/.test(age) ? age : '', lv || (g ? '' : ''), 'Doubles'].filter(Boolean).join(' ');
   return [age && /\+/.test(age) ? age : '', g, age && /U$/.test(age) ? age : '', lv, '· event not listed'].filter(Boolean).join(' ');
 }
-const groupKey = d => [d.kind || '?', d.kind === 'mixed' ? 'X' : (d.gender || ''), d.cap != null ? 'c' + fmtLv(d.cap) : d.level != null ? fmtLv(d.level) + (d.plus ? '+' : '') : d.tier ? 't' + d.tier : d.label ? 'l' + d.label.toLowerCase() : '', d.age || '', d.junior ? 'j' : ''].join('|');
-function parseGroupKey(k){ const [kind, gender, lv, age, j] = k.split('|'); const d = {kind:kind === '?' ? null : kind, gender:gender === 'X' ? '' : gender, level:null, cap:null, tier:'', label:'', age:age || '', junior:j === 'j'}; if (/^c/.test(lv)) d.cap = parseFloat(lv.slice(1)); else if (/^t/.test(lv)) d.tier = lv.slice(1); else if (/^l/.test(lv)) d.label = lv.slice(1).replace(/^./, c => c.toUpperCase()); else if (lv){ d.level = parseFloat(lv); d.plus = /\+$/.test(lv) } return d }
+const groupKey = d => [d.kind || '?', d.kind === 'mixed' ? 'X' : (d.gender || ''), d.cap != null ? 'c' + fmtLv(d.cap) : d.level != null ? fmtLv(d.level) + (d.plus ? '+' : '') : d.tier ? 't' + d.tier : d.label ? 'l' + d.label : '', d.age || '', d.junior ? 'j' : ''].join('|');
+function parseGroupKey(k){ const [kind, gender, lv, age, j] = k.split('|'); const d = {kind:kind === '?' ? null : kind, gender:gender === 'X' ? '' : gender, level:null, cap:null, tier:'', label:'', age:age || '', junior:j === 'j'}; if (/^c/.test(lv)) d.cap = parseFloat(lv.slice(1)); else if (/^t/.test(lv)) d.tier = lv.slice(1); else if (/^l/.test(lv)) d.label = lv.slice(1); else if (lv){ d.level = parseFloat(lv); d.plus = /\+$/.test(lv) } return d }
 
 /* ---------- columns ---------- */
 const ROLES = [
@@ -323,6 +329,21 @@ function analyzeSheet(rows0, sheetName, opts){
 }
 
 /* ---------- rows -> records ---------- */
+/* A Level column next to an Event / Division column is the division's level (a "line") rather than the player's own
+   rating when it holds line levels like Pro/A or A1/A2, or the same player shows up at different levels on different rows. */
+function levelAsDivision(sheet, colsOverride){
+  const cols = colsOverride || sheet.cols, rows = sheet.rows, hi = sheet.hi;
+  const at = role => { const c = cols.find(x => x.role === role); return c ? c.i : null };
+  const lv = at('level'); if (lv == null || !cols.some(c => c.role === 'event' || c.role === 'eventcol')) return false;
+  const nm = at('name'), f = at('first'), l = at('last'), seen = new Map(); let lines = 0;
+  for (let ri = hi + 1; ri < rows.length; ri++){
+    const r = rows[ri], v = clean(r[lv]); if (!v) continue;
+    const L = parseLevel(v); if (L.label && isLineLabel(L.label)) lines++;
+    const raw = nm != null ? clean(r[nm]) : [f, l].map(i => i == null ? '' : clean(r[i])).join(' ');
+    splitTeam(raw).map(parseName).filter(Boolean).forEach(n => { const k = normName(n), set = seen.get(k) || new Set(); set.add(v.toLowerCase()); seen.set(k, set) });
+  }
+  return lines > 0 || [...seen.values()].some(x => x.size > 1);
+}
 function extract(sheet, colsOverride){
   const cols = colsOverride || sheet.cols, rows = sheet.rows, hi = sheet.hi;
   const by = role => cols.filter(c => c.role === role).map(c => c.i);
@@ -333,6 +354,7 @@ function extract(sheet, colsOverride){
   const evCols = cols.filter(c => c.role === 'event'), flagCols = cols.filter(c => c.role === 'eventcol');
   const hasPeople = cols.some(c => ['name', 'first', 'last'].includes(c.role));
   if (!hasPeople) return recs;
+  const levelIsDiv = levelAsDivision(sheet, cols);
   for (let ri = hi + 1; ri < rows.length; ri++){
     const r = rows[ri]; if (!r.some(Boolean)) continue;
     if (hi >= 0 && r.join('|').toLowerCase() === rows[hi].join('|').toLowerCase()) continue;
@@ -343,7 +365,7 @@ function extract(sheet, colsOverride){
     if (!rawName) continue;
     let names = splitTeam(rawName).map(parseName).filter(Boolean);
     if (!names.length || BAD_NAME.test(names[0])) continue;
-    const lvA = parseLevel(get(r, 'level') || get(r, 'ntrp'));
+    const lvA = parseLevel((levelIsDiv ? '' : get(r, 'level')) || get(r, 'ntrp'));
     const ntrp = (get(r, 'ntrp').match(/(\d(?:[.,]\d)?)\s*([csatmd])?\b/i) || []);
     const a = {name:names[0], sex:parseSex(get(r, 'sex')) || sexHint('name') || sexHint('first'), rating:lvA.rating ?? null, tier:lvA.tier || '', label:lvA.label || '', age:lvA.age || parseLevel(get(r, 'agegrp')).age || '',
       email:get(r, 'email').toLowerCase(), phone:get(r, 'phone'), club:get(r, 'club'), usta:get(r, 'usta').replace(/\D/g, ''),
@@ -369,6 +391,7 @@ function extract(sheet, colsOverride){
     // events
     const evs = [];
     evCols.forEach(c => parseEvents(r[c.i]).forEach(e => evs.push(Object.assign(e, {src:'col'}))));
+    if (levelIsDiv && get(r, 'level')){ const L = parseLevel(get(r, 'level'), {max:20}); evs.forEach(e => { if (e.level == null && e.cap == null && !e.tier && !e.label){ if (L.rating != null){ if (e.kind === 'mixed' || L.rating > 7.5) e.cap = L.rating; else e.level = L.rating } else if (L.tier) e.tier = L.tier; else if (L.label) e.label = L.label; if (L.age && !e.age) e.age = L.age; e.lineFromCol = true } }) }
     flagCols.forEach(c => {
       const val = clean(r[c.i]); if (!val || FALSY.test(val)) return;
       const base = Object.assign({}, c.ev || parseEventItem(c.header) || {kind:null}); delete base.raw;
@@ -420,6 +443,32 @@ function build(sheetRecs, opts){
     if (x.usta) byUsta.set(x.usta, x.key); if (x.email) byEmail.set(x.email, x.key);
     return x.key;
   }
+  /* One-word names ("Matos") used in both men's and women's divisions are two different people: split them into
+     "Matos (M)" and "Matos (F)"; in mixed rows the one opposite the partner is meant. */
+  const splitNotes = [];
+  {
+    const rowEvs = r => r.events.length ? r.events : [Object.assign({}, r.ctx || {}, r.section || {})];
+    const rowG = r => { if (rowEvs(r).some(e => e.kind === 'mixed')) return ''; const gs = new Set(rowEvs(r).map(e => e.gender).filter(Boolean)); return gs.size === 1 ? [...gs][0] : '' };
+    const isMixedRow = r => rowEvs(r).some(e => e.kind === 'mixed');
+    const names = r => [['a', r.a], ...['any', 'd', 'x'].filter(k => r.partners[k] && r.partners[k].name).map(k => [k, r.partners[k]])];
+    const gOf = new Map(); const note = (n, g) => { if (!g) return; const k = keyOf(n), set = gOf.get(k) || new Set(); set.add(g); gOf.set(k, set) };
+    recs.forEach(r => { const g = rowG(r); names(r).forEach(([k, p]) => note(p.name, p.sex || g)) });
+    const split = new Set([...gOf.entries()].filter(([k, set]) => !k.includes(' ') && set.size > 1).map(([k]) => k));
+    if (split.size){
+      const sole = n => { const set = gOf.get(keyOf(n)); return set && set.size === 1 ? [...set][0] : '' };
+      recs.forEach(r => {
+        const g = rowG(r), list = names(r);
+        list.forEach(([k, p]) => {
+          if (!split.has(keyOf(p.name))) return;
+          let use = p.sex || g;
+          if (!use && isMixedRow(r)){ const other = list.find(([k2, q]) => q !== p && (k === 'a' ? k2 !== 'a' : k2 === 'a')); const go = other && (other[1].sex || sole(other[1].name)); if (go) use = go === 'M' ? 'F' : 'M' }
+          if (!use) return;
+          const base = p.name; p.name = `${base} (${use})`; p.sex = use;
+          if (!splitNotes.includes(base)) splitNotes.push(base);
+        });
+      });
+    }
+  }
   (opts.merge || []).forEach(([keep, drop]) => { if (keep && drop && keep !== drop) alias.set(drop, keep) });
   recs.forEach(r => { r.aKey = upsert(r.a, r.src) });
   // partners named on rows become people too (they may never have their own row)
@@ -456,7 +505,7 @@ function build(sheetRecs, opts){
         else if (e.kind === 'mixed' && !r.partners.x && !evs.some(z => z.kind === 'doubles' && !z.partner && !r.partners.d)) pt = r.partners.any;
       }
       if (pt && pt.need) pt = {need:true, raw:pt.raw};
-      raw.push({pKey:r.aKey, ev:e, partner:pt, src:r.src, teamRating:r.teamRating});
+      raw.push({pKey:r.aKey, ev:e, partner:pt, src:r.src, teamRating:r.teamRating, club:r.a.club || ''});
     });
   });
   // create partner-only people
@@ -465,7 +514,10 @@ function build(sheetRecs, opts){
     const res = resolveName(x.partner.name);
     if (res){ x.qKey = res.key; x.qHow = res.how; const q = people.get(res.key); if (x.partner.sex && !q.sex) { q.sex = x.partner.sex; q.sexSrc = 'file' } if (x.partner.rating != null && q.rating == null) q.rating = x.partner.rating; if (x.partner.email && !q.email) q.email = x.partner.email; if (x.partner.phone && !q.phone) q.phone = x.partner.phone; if (x.partner.usta && !q.usta) q.usta = x.partner.usta }
     else { x.qKey = upsert(Object.assign({name:x.partner.name}, x.partner), null, {stub:true}); x.qHow = 'new' }
-    if (x.qKey === x.pKey){ x.qKey = null; x.selfPartner = true }
+    if (x.qKey === x.pKey){
+      if (x.partner.team){ const n2 = people.get(x.pKey).name + ' (2)'; x.qKey = upsert({name:n2}, null, {stub:true}); x.sameName = people.get(x.pKey).name }
+      else { x.qKey = null; x.selfPartner = true }
+    }
   });
   /* 3. sex: file > division name > existing roster > mixed partner opposite > first-name suggestion (not applied) */
   const exByKey = new Map(existing.map(p => [keyOf(p.name), p]));
@@ -500,11 +552,18 @@ function build(sheetRecs, opts){
   const isDbl = k => k === 'doubles' || k === 'mixed';
   const entries = [];
   const used = new Set();   // raw idx consumed
-  const slotKey = (k, x) => k + '|' + kindOf(x) + '|' + (x.ev.kind === 'mixed' ? '' : x.ev.gender || '') + '|' + (x.ev.level ?? x.ev.cap ?? x.ev.tier ?? x.ev.label ?? '');
+  const slotKey = (k, x) => k + '|' + kindOf(x) + '|' + (x.ev.kind === 'mixed' ? '' : x.ev.gender || '') + '|' + ((x.ev.level ?? x.ev.cap) ?? (x.ev.tier || x.ev.label || ''));
   const findRaw = (pKey, kind, prefer) => { const c = raw.map((x, i) => [x, i]).filter(([x, i]) => !used.has(i) && x.pKey === pKey && (kindOf(x) === kind || (!x.ev.kind && isDbl(kind)))); return (prefer ? c.find(([x]) => prefer(x)) : null) || c[0] || null };
   const evMerge = (e1, e2) => { const o = Object.assign({}, e1); ['kind', 'gender', 'level', 'cap', 'tier', 'label', 'age', 'junior', 'plus'].forEach(k => { if ((o[k] == null || o[k] === '' || o[k] === false) && e2 && e2[k] != null && e2[k] !== '') o[k] = e2[k] }); return o };
-  const evDiffer = (e1, e2) => e1 && e2 && ((e1.level != null && e2.level != null && e1.level !== e2.level) || (e1.cap != null && e2.cap != null && e1.cap !== e2.cap) || (e1.gender && e2.gender && e1.gender !== e2.gender && e1.kind !== 'mixed'));
-  const push = (members, ev, ws, src, tr) => entries.push({members, ev, warn:ws || [], src, teamRating:tr ?? null});
+  const evDiffer = (e1, e2) => e1 && e2 && ((e1.level != null && e2.level != null && e1.level !== e2.level) || (e1.cap != null && e2.cap != null && e1.cap !== e2.cap) || (e1.gender && e2.gender && e1.gender !== e2.gender && e1.kind !== 'mixed') || ((e1.tier || e1.label) && (e2.tier || e2.label) && (e1.tier || e1.label) !== (e2.tier || e2.label)));
+  const push = (members, ev, ws, src, tr, club) => entries.push({members, ev, warn:ws || [], src, teamRating:tr ?? null, club:club || ''});
+  // a team typed on one row (Player 1 / Player 2) is a team: no cross-checking against other rows
+  raw.forEach((x, i) => {
+    if (used.has(i) || !x.qKey || !x.partner || !x.partner.team || !isDbl(kindOf(x))) return;
+    used.add(i);
+    const ws = x.sameName ? [{t:'sameName', msg:`Both players are listed as "${x.sameName}"; check which ${x.sameName}s`}] : [];
+    push([x.pKey, x.qKey], evMerge(x.ev, {kind:kindOf(x)}), ws, x.src, x.teamRating, x.club);
+  });
   // mutual
   raw.forEach((x, i) => {
     if (used.has(i) || !x.qKey || !isDbl(kindOf(x))) return;
@@ -514,7 +573,7 @@ function build(sheetRecs, opts){
       used.add(i); used.add(back[1]);
       const ws = []; if (evDiffer(x.ev, back[0].ev)) ws.push({t:'divMismatch', msg:`Partners listed different divisions (${x.ev.raw || ''} / ${back[0].ev.raw || ''})`});
       if (x.qHow === 'fuzzy' || back[0].qHow === 'fuzzy') ws.push({t:'partnerFuzzy', msg:`Partner name matched loosely ("${x.partner.name}")`, lvl:'info'});
-      push([x.pKey, x.qKey], evMerge(evMerge(x.ev, back[0].ev), {kind:k}), ws, x.src, x.teamRating ?? back[0].teamRating);
+      push([x.pKey, x.qKey], evMerge(evMerge(x.ev, back[0].ev), {kind:k}), ws, x.src, x.teamRating ?? back[0].teamRating, x.club);
     }
   });
   // one-sided (B didn't name anyone, or never registered) and conflicts
@@ -539,7 +598,7 @@ function build(sheetRecs, opts){
     else ws.push({t:'oneSided', msg:`${q.name} has a row but isn't entered in this event; added with ${people.get(x.pKey).name}`});
     if (x.qHow === 'fuzzy') ws.push({t:'partnerFuzzy', msg:`Partner "${x.partner.name}" matched to ${q.name}`});
     if (x.partner && x.partner.guess) ws.push({t:'partnerGuess', msg:'One partner column but several doubles events; check this team'});
-    push([x.pKey, x.qKey], evMerge(evMerge(x.ev, other && other[0].ev), {kind:k}), ws, x.src, x.teamRating);
+    push([x.pKey, x.qKey], evMerge(evMerge(x.ev, other && other[0].ev), {kind:k}), ws, x.src, x.teamRating, x.club);
   });
   // everyone left: singles, unpaired doubles, or no event
   raw.forEach((x, i) => {
@@ -547,13 +606,13 @@ function build(sheetRecs, opts){
     const k = kindOf(x), ws = [];
     if (isDbl(k)) ws.push(x.partner && x.partner.need ? {t:'needPartner', msg:'Needs a partner'} : x.selfPartner ? {t:'unpaired', msg:'Listed themself as partner'} : {t:'unpaired', msg:'No partner listed'});
     if (!k) ws.push({t:'noEvent', msg:'No event listed', lvl:'info'});
-    push([x.pKey], evMerge(x.ev, {kind:k}), ws, x.src);
+    push([x.pKey], evMerge(x.ev, {kind:k}), ws, x.src, null, x.club);
   });
   // a row with no event for someone who is entered elsewhere adds nothing
   for (let i = entries.length - 1; i >= 0; i--){ const e = entries[i]; if (e.ev.src === 'none' && e.members.length === 1 && entries.some(o => o !== e && o.members.includes(e.members[0]))) entries.splice(i, 1) }
   // repeated rows for the same person+event collapse into one entry
   const seenE = new Map(), out = [];
-  entries.forEach(e => { const id = (e.ev.kind || '?') + ':' + e.members.slice().sort().join('+') + ':' + (e.ev.kind === 'mixed' ? '' : e.ev.gender || '') + ':' + (e.ev.level ?? e.ev.cap ?? e.ev.tier ?? e.ev.label ?? ''); if (seenE.has(id)){ const p = seenE.get(id); p.repeat = (p.repeat || 1) + 1; return } e.id = id; seenE.set(id, e); out.push(e) });
+  entries.forEach(e => { const id = (e.ev.kind || '?') + ':' + e.members.slice().sort().join('+') + ':' + (e.ev.kind === 'mixed' ? '' : e.ev.gender || '') + ':' + ((e.ev.level ?? e.ev.cap) ?? (e.ev.tier || e.ev.label || '')); if (seenE.has(id)){ const p = seenE.get(id); p.repeat = (p.repeat || 1) + 1; return } e.id = id; seenE.set(id, e); out.push(e) });
   // a person who is unpaired in an event but also part of a team in the same event: drop the unpaired duplicate
   const final = out.filter(e => !(e.members.length === 1 && isDbl(e.ev.kind) && out.some(o => o !== e && o.members.length === 2 && o.members.includes(e.members[0]) && o.ev.kind === e.ev.kind && !evDiffer(o.ev, e.ev))));
   /* 5. division for each entry: event says it; else from the players' sex and level */
@@ -599,7 +658,7 @@ function build(sheetRecs, opts){
     groups.get(e.key).entries.push(e);
   });
   const kOrder = {singles:0, doubles:1, mixed:2, null:3};
-  const glist = [...groups.values()].sort((a, b) => (kOrder[a.division.kind] - kOrder[b.division.kind]) || (a.division.gender || 'Z').localeCompare(b.division.gender || 'Z') || ((a.division.level ?? a.division.cap ?? 99) - (b.division.level ?? b.division.cap ?? 99)) || a.label.localeCompare(b.label));
+  const glist = [...groups.values()].sort((a, b) => (kOrder[a.division.kind] - kOrder[b.division.kind]) || (a.division.gender || 'Z').localeCompare(b.division.gender || 'Z') || ((a.division.level ?? a.division.cap ?? 99) - (b.division.level ?? b.division.cap ?? 99)) || (lineRank(a.division) - lineRank(b.division)) || a.label.localeCompare(b.label));
   /* 7. possible duplicates within the file (not merged: the director decides) */
   const plist = [...people.values()], dupes = [];
   for (let i = 0; i < plist.length; i++) for (let j = i + 1; j < plist.length; j++){
@@ -608,9 +667,29 @@ function build(sheetRecs, opts){
     if ((opts.notDupes || []).some(([x, y]) => (x === plist[i].key && y === plist[j].key) || (y === plist[i].key && x === plist[j].key))) continue;
     if ((a[a.length - 1] === b[b.length - 1] && a[0] !== b[0] && sameFirst(a[0], b[0])) || (a[0] === b[0] && a[a.length - 1] !== b[b.length - 1] && lev(a[a.length - 1], b[b.length - 1]) === 1 && a[a.length - 1].length >= 5)) dupes.push([plist[i].key, plist[j].key]);
   }
+  // a one-word name ("Posey") next to full names with that surname ("Casey Posey") may be the same person
+  plist.forEach(p => { if (p.key.includes(' ') || /\(/.test(p.name)) return; const full = plist.filter(q => q !== p && q.key.includes(' ') && !/\(/.test(q.name) && q.key.split(' ').pop() === p.key); full.forEach(q => { if (!(opts.notDupes || []).some(([x, y]) => [x, y].sort().join('|') === [p.key, q.key].sort().join('|'))) dupes.push([q.key, p.key]) }) });
+  splitNotes.forEach(n => warnings.push({t:'splitName', msg:`"${n}" is listed in both men's and women's divisions, so it's read as two people: ${n} (M) and ${n} (F)`, lvl:'info'}));
   plist.forEach(p => { if (p.merged.length) p.warn.push({t:'merged', msg:`Same USTA # or email as "${p.merged.join('", "')}"; merged`, lvl:'info'}) });
   const used2 = new Set(final.flatMap(e => e.members));
-  return {people:plist.filter(p => used2.has(p.key)), byKey:people, entries:final, groups:glist, dupes, warnings, sexUnknown:plist.filter(p => used2.has(p.key) && !p.sex)};
+  /* 8. Two clubs, teams on each line: this is a Club Cup (club against club, line against line) */
+  let clubCup = null;
+  const withClub = final.filter(e => e.club), clubs = [...new Set(withClub.map(e => e.club.trim()))];
+  if (clubs.length === 2 && withClub.length >= final.length * .8 && final.every(e => e.members.length === 2)){
+    const sessions = [];
+    final.forEach(e => {
+      const d = e.division, sk = (d.kind || '') + '|' + (d.kind === 'mixed' ? '' : d.gender || '');
+      let se = sessions.find(x => x.key === sk); if (!se){ se = {key:sk, kind:d.kind, gender:d.kind === 'mixed' ? '' : d.gender || '', label:d.kind === 'mixed' ? 'Mixed Doubles' : (d.gender === 'M' ? "Men's" : d.gender === 'F' ? "Women's" : 'Open') + ' Doubles', lines:[]}; sessions.push(se) }
+      const lk = d.cap != null ? fmtLv(d.cap) : d.level != null ? fmtLv(d.level) : d.tier ? (d.tier === 'pro' ? 'Pro' : d.tier.toUpperCase()) : d.label || '';
+      let ln = se.lines.find(x => x.label === lk); if (!ln){ ln = {label:lk, a:[], b:[]}; se.lines.push(ln) }
+      (e.club.trim() === clubs[0] ? ln.a : ln.b).push(e);
+    });
+    let matches = 0, odd = 0;
+    sessions.forEach(se => se.lines.forEach(ln => { ln.matches = Math.min(ln.a.length, ln.b.length); matches += ln.matches; odd += Math.abs(ln.a.length - ln.b.length) }));
+    const both = plist.filter(p => used2.has(p.key)).filter(p => { const cs = new Set(final.filter(e => e.members.includes(p.key) && e.club).map(e => e.club.trim())); if (cs.size === 1) p.club = [...cs][0]; return cs.size > 1 });
+    clubCup = {clubs, sessions, matches, odd, both:both.map(p => p.key)};
+  }
+  return {people:plist.filter(p => used2.has(p.key)), byKey:people, entries:final, groups:glist, dupes, warnings, sexUnknown:plist.filter(p => used2.has(p.key) && !p.sex), clubCup};
 }
 
 /* Pasted text -> table rows (tabs from a spreadsheet copy, CSV, semicolons, pipes or 2+ spaces) */
@@ -646,7 +725,7 @@ function run(tables, opts){
   return Object.assign({sheets, use:useSheets, records:recs}, build(recs, opts));
 }
 
-const API = {clean, normName, parseName, splitTeam, parseSex, parseLevel, parseEventItem, parseEvents, eventLabel, groupKey, parseGroupKey, headerRole, sniff, findHeader, analyzeSheet, extract, build, run, tablesFromText, csvRows, guessSexFromFirst, ROLES, fmtLv};
+const API = {levelAsDivision, clean, normName, parseName, splitTeam, parseSex, parseLevel, parseEventItem, parseEvents, eventLabel, groupKey, parseGroupKey, headerRole, sniff, findHeader, analyzeSheet, extract, build, run, tablesFromText, csvRows, guessSexFromFirst, ROLES, fmtLv};
 if (typeof module !== 'undefined' && module.exports) module.exports = API;
 root.SmartImport = API;
 })(typeof window !== 'undefined' ? window : globalThis);
