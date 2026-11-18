@@ -730,6 +730,7 @@ function run(tables, opts){
    cell, or a listing with role labels ("Team Cole", "Pro: …", "A: …"). Returns {teams, warnings, how}. */
 const PA_HEAD = [
   ['team', /^(team|team name|name of team|team \/ captain)$/],
+  ['section', /^(section|division|gender|category|sex|men \/ women|m\/f|m \/ f|men or women)$/],
   ['flight', /^(flight|group|pool)$/],
   ['bio', /^((pro'?s? )?bio(graphy)?|about( the)? pro|pro notes?)$/],
   ['pro', /^((the )?pro(fessional)?|pro( player| name)?|teaching pro|club pro|pro'?s name|player 1 \(?pro\)?)$/],
@@ -747,12 +748,20 @@ function proAmTeams(rows){
     t.row = row; teams.push(t);
   };
   let hi = -1, map = null;
-  for (let i = 0; i < Math.min(rows.length, 12); i++){ const m = head(rows[i]); if (m.pro != null && ['a', 'b', 'c'].filter(k => m[k] != null).length >= 2){ hi = i; map = m; break } }
+  // Pro column is optional: teams are A, B and C players; the Pro may be picked later
+  let prosOnly = null;
+  for (let i = 0; i < Math.min(rows.length, 12); i++){ const m = head(rows[i]); if (['a', 'b', 'c'].filter(k => m[k] != null).length >= 2){ hi = i; map = m; break } if (m.pro != null && !prosOnly) prosOnly = {i, m} }
   let how = '';
+  if (!map && prosOnly){
+    // a list of Pros (Pro column, optional Bio), no teams
+    const pros = [];
+    for (let i = prosOnly.i + 1; i < rows.length; i++){ const r = rows[i], n = parseName(r[prosOnly.m.pro] || ''); if (n && !BAD_NAME.test(n)) pros.push({name:n, bio:prosOnly.m.bio == null ? '' : r[prosOnly.m.bio] || ''}) }
+    return {teams:[], pros, warnings:[], how:'pros'};
+  }
   if (map){
     how = 'columns';
     for (let i = hi + 1; i < rows.length; i++){ const r = rows[i]; if (!r.some(Boolean)) continue; const g = k => map[k] == null ? '' : r[map[k]] || '';
-      add({name:g('team'), flight:g('flight'), bio:g('bio'), pro:g('pro'), a:g('a'), b:g('b'), c:g('c')}, i + 1) }
+      add({name:g('team'), flight:g('flight'), section:g('section'), bio:g('bio'), pro:g('pro'), a:g('a'), b:g('b'), c:g('c')}, i + 1) }
   } else {
     // role-labelled listing: "Team Cole" / "Pro: Cole Whitaker" / "A | Clint Barrow"
     const lab = /^(pro|a|b|c)\s*(?:player|amateur)?\s*[:\-–]?\s*(.*)$/i;
@@ -772,18 +781,20 @@ function proAmTeams(rows){
         let names = r.filter(Boolean).filter(v => !/^\d+([.,]\d+)?$/.test(v));
         if (names.length === 1) names = splitTeam(names[0]);
         names = names.map(parseName).filter(Boolean).filter(n => !BAD_NAME.test(n));
-        if (names.length >= 4){ const team = names.length >= 5 && /^team\b/i.test(names[0]) ? names.shift() : ''; add({name:team, pro:names[0], a:names[1], b:names[2], c:names[3]}, i + 1) }
+        const team = names.length >= 4 && /^team\b/i.test(names[0]) ? names.shift() : '';
+        if (names.length >= 4) add({name:team, pro:names[0], a:names[1], b:names[2], c:names[3]}, i + 1);
+        else if (names.length === 3) add({name:team, pro:'', a:names[0], b:names[1], c:names[2]}, i + 1);
       });
       if (teams.length) how = 'order';
     }
   }
   const seen = new Map();
   teams.forEach((t, ti) => {
-    const miss = ['pro', 'a', 'b', 'c'].filter(k => !t[k]);
-    if (miss.length) warnings.push({t:'missingRole', team:ti, msg:`${t.name || (t.pro ? 'Team ' + t.pro.split(' ')[0] : 'Row ' + t.row)}: no ${miss.map(k => k === 'pro' ? 'Pro' : k.toUpperCase()).join(', ')} player`});
+    const miss = ['a', 'b', 'c'].filter(k => !t[k]);
+    if (miss.length) warnings.push({t:'missingRole', team:ti, msg:`${t.name || (t.pro ? 'Team ' + t.pro.split(' ')[0] : t.a ? t.a.split(' ')[0] + "'s team" : 'Row ' + t.row)}: no ${miss.map(k => k.toUpperCase()).join(', ')} player`});
     ['pro', 'a', 'b', 'c'].forEach(k => { const n = normName(t[k]); if (!n) return; if (seen.has(n) && seen.get(n) !== ti) warnings.push({t:'twoTeams', team:ti, msg:`${t[k]} is on two teams`}); seen.set(n, ti) });
   });
-  return {teams, warnings, how};
+  return {teams, pros:[], warnings, how};
 }
 
 const API = {proAmTeams, levelAsDivision, clean, normName, parseName, splitTeam, parseSex, parseLevel, parseEventItem, parseEvents, eventLabel, groupKey, parseGroupKey, headerRole, sniff, findHeader, analyzeSheet, extract, build, run, tablesFromText, csvRows, guessSexFromFirst, ROLES, fmtLv};

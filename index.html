@@ -2030,6 +2030,34 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 .pai-list em{font-style:normal}.pai-list em i{font-style:normal;font-weight:700;opacity:.6;margin-right:4px}
 .pai-list u{color:#b3261e;text-decoration:none}
 .pai-list small{color:var(--muted,#777)}
+/* v3.2 Pro-Am teams, Pros, selection */
+.pasub{display:flex;flex-wrap:wrap;margin:6px 0 10px}.pasub button{flex:1 1 30%;font-size:13px;padding:8px 6px}
+.pateams,.papros,.paassign{display:grid;gap:10px;margin:10px 0}
+.pasetteam,.papro{background:var(--card,#fffdf6);border:1px solid var(--line,#e6e2d6);border-radius:14px;padding:10px 12px}
+.pateam-h{display:flex;gap:8px;align-items:center}.pateam-n{width:22px;text-align:center;opacity:.6}.pateam-h .paname{flex:1;font-weight:700;padding:6px 8px}.paflsel{width:auto;padding:6px}
+.pateam-p{display:grid;grid-template-columns:1fr;gap:6px;margin-top:8px}.pateam-p label{display:grid;grid-template-columns:22px minmax(0,1fr);align-items:center;font-size:12px}.pateam-p i{font-style:normal;font-weight:700;opacity:.6}.pateam-p input{padding:6px 8px;font-size:14px}
+.pateam-f{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px;margin-top:8px;font-size:14px}.pateam-more summary{font-size:13px;color:var(--muted,#777);cursor:pointer}
+.pasetteam .bad,.papick .bad{color:#b3261e}
+.papro-h{display:flex;gap:10px;align-items:center}.papro-n{display:flex;flex-direction:column;gap:4px}
+.pachip{display:inline-block;font:600 12px/1.4 var(--fb,inherit);padding:2px 8px;border-radius:99px;background:#efe9d8;color:#5a4b1e;width:max-content}.pachip.ok{background:#dcefe2;color:#1d5a35}
+.linkbtn{background:none;border:0;text-decoration:underline;color:var(--muted,#666);font-size:13px;cursor:pointer;padding:4px}
+.papick .lbl{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8a6d1d;margin:0 0 6px;font-weight:700}
+.papick.on{border:2px solid #c9a646}
+.papick-clock{display:flex;gap:12px;align-items:center}.papick-clock b{display:block;font-size:20px}
+.papick-pros{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
+.papick-pro{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;border:1px solid var(--line,#e6e2d6);border-radius:12px;background:#fff;font:inherit;cursor:pointer}.papick-pro b{font-size:13px;text-align:center}
+.papick-order{margin:0 0 8px;padding-left:22px}.papick-order li{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--line,#eee)}
+.papick-mv button{border:1px solid var(--line,#ddd);background:#fff;border-radius:6px;margin-left:4px;width:30px;height:28px}
+.paassign-r{display:grid;grid-template-columns:40px minmax(0,1fr) minmax(0,46%);gap:8px;align-items:center}.paassign-n{display:flex;flex-direction:column;min-width:0}.paassign-n span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.paassign-r select{padding:6px}
+.paflights-g{display:grid;gap:10px}.paflight{border:1px solid var(--line,#e6e2d6);border-radius:12px;padding:8px 10px}.paflight-r{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:4px 0}.paflight-r select{width:auto;padding:4px 6px;font-size:13px}
+.tvpk{margin-top:14px}.tvpk h2{font:600 44px/1.1 var(--fd);color:var(--iv);margin:0 0 18px}.tvpk h2::after{display:none!important}
+.tvpk-g{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:28px}
+.tvpk-clock{background:rgba(247,245,236,.08);border:2px solid #c9a646;border-radius:24px;padding:28px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;color:var(--iv)}
+.tvpk-clock .lbl{font-size:20px;letter-spacing:.14em;text-transform:uppercase;color:#e7c766;font-weight:700}.tvpk-clock b{font:600 46px/1.1 var(--fd)}.tvpk-clock span{font-size:22px;opacity:.85}.tvpk-clock em{font-style:normal;color:#e7c766;font-size:20px}.tvpk-clock small{font-size:18px;opacity:.7}.tvpk-next{font-size:18px;opacity:.75;margin:6px 0 0}
+.tvpk-side h3{color:#e7c766;font-size:22px;margin:0 0 10px}.tvpk-side h3 small{opacity:.7;margin-left:6px}
+.tvpk-pros{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:20px}.tvpk-pros figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:6px;width:120px}.tvpk-pros figcaption{color:var(--iv);font-size:17px;text-align:center}
+.tvpk-picks{list-style:none;margin:0;padding:0;display:grid;gap:8px}.tvpk-picks li{display:flex;align-items:center;gap:12px;color:var(--iv);font-size:20px;background:rgba(247,245,236,.07);border-radius:12px;padding:8px 12px}.tvpk-picks li span{opacity:.8}
+.tpic.tp-tvpk{border:3px solid rgba(231,199,102,.7)}
 /* v3.2 Pro-Am */
 .pacards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:8px 0 16px}
 .pacard{background:var(--card,#fff);border:1px solid var(--line,#ddd);border-radius:16px;overflow:hidden}
@@ -2059,7 +2087,7 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 <div id="app"></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
-<script src="smart-import.js?v=3.2.0"></script>
+<script src="smart-import.js?v=3.2.0.1"></script>
 <script>
 /* ================= Backend: one API, three storage modes =================
    supabase : the Netlify site (config.js has a Supabase URL + anon key)
@@ -4835,7 +4863,7 @@ function teamsOf(ev){
   else { const need = ev.kind === 'proam' ? 4 : 2; list = (ev.pairs || []).filter(t => t.length === need && t.every(P)) }
   const teams = list.map(pids => {
     const t = {id:'T' + pids.join('.'), pids:pids.slice(), players:pids.map(pname), rating:evTeamRating(ev, pids), rated:evTeamRated(ev, pids)};
-    if (ev.kind === 'proam'){ t.playerRoles = ['pro','a','b','c']; t.name = ((ev.paNames || {})[pids[0]]) || 'Team ' + firstName(pids[0]) }
+    if (ev.kind === 'proam'){ t.playerRoles = ['pro','a','b','c']; const pt = paHasModel(ev) ? ev.paTeams.find(x => x.a && x.a === pids[1]) : null; t.name = (pt && pt.name) || ((ev.paNames || {})[pids[0]]) || 'Team ' + firstName(pids[0]) }
     return t;
   });
   const byRating = (a, b) => (b.rated - a.rated) || (b.rating - a.rating) || a.players.join().localeCompare(b.players.join());
@@ -5013,6 +5041,7 @@ function drawEvent(ev){
     if (!opts.some(o => o.poolSize === pc.poolSize && o.advancePerPool === pc.advancePerPool)) ev.poolConfig = {poolSize:opts[0].poolSize, advancePerPool:opts[0].advancePerPool};
   }
   if (ev.format === 'pro_am') ev.flights = null;
+  if (ev.format === 'pro_am' && paHasModel(ev)){ const miss = paMissingPros(ev); if (miss.length) throw new Error(`${ev.name}: ${miss.length} team${miss.length === 1 ? ' has' : 's have'} no Pro yet. Assign Pros on the Teams & Pros step first.`); ev.flights = paFlightsFor(ev) }
   syncEngine();
   const prev = state.events; state.events = events().map(normEvent).map(e => e.id === ev.id ? ev : e);
   if (!state.events.includes(ev)) state.events.push(ev);
@@ -5450,6 +5479,7 @@ function missing(){
       continue;
     }
     const go = {step:'players', ev:ev.id};
+    if (ev.kind === 'proam' && paHasModel(ev)){ const miss = paMissingPros(ev); if (miss.length){ add('players', `${ev.name}: ${miss.length} team${miss.length === 1 ? '' : 's'} without a Pro`, miss.map(t => ({t:paRecName(ev, t), go}))); continue } }
     if (n < 2) { add('players', `${ev.name}: needs at least 2 ${ev.kind === 'singles' ? 'players' : 'teams'}`, [{t:`${ev.name}: ${n} so far`, go}]); continue }
     const upL = ev.kind === 'singles' ? [] : unpaired(ev), up = upL.length; if (up) add('players', `${ev.name}: ${up} without a partner`, upL.map(x => ({t:(P(x) || {}).name || pname(x) || String(x), go})));
     const badL = (ev.entrants || []).filter(id => fitIssue(ev, P(id))), bad = badL.length; if (bad) add('players', `${ev.name}: ${bad} entr${bad === 1 ? 'y' : 'ies'} outside the event's rules`, badL.map(id => ({t:`${pname(id)}: ${fitIssue(ev, P(id))}`, go})));
@@ -6256,7 +6286,7 @@ function v3Scoreboard(){
   const evs = state.events.filter(e => (e.published || view.admin) && e.matches.length); if (!evs.length) return '';
   const ms = evs.flatMap(e => e.matches), done = ms.filter(m => state.results[m.id] && resOf(m.id)).length, live = liveNow().length;
   return `<div class="v3-board summary" role="group" aria-label="${esc(`${evs.length} divisions, ${ms.length} matches, ${done} results in`)}">
-    ${(() => { const sm = specialMode(); const e0 = sm && evs[0]; if (sm === 'proam' && e0) return `<span class="v3-board-side"><small>Teams</small><b>${(e0.pairs || []).filter(t => (t || []).some(Boolean)).length}</b></span>`; if (sm === 'clubcup') return `<span class="v3-board-side"><small>Clubs</small><b>2</b></span>`; return `<span class="v3-board-side"><small>Divisions</small><b>${evs.length}</b></span>` })()}
+    ${(() => { const sm = specialMode(); const e0 = sm && evs[0]; if (sm === 'proam' && e0) return `<span class="v3-board-side"><small>Teams</small><b>${evs.reduce((n, e) => n + (e.pairs || []).filter(t => (t || []).some(Boolean)).length, 0)}</b></span>`; if (sm === 'clubcup') return `<span class="v3-board-side"><small>Clubs</small><b>2</b></span>`; return `<span class="v3-board-side"><small>Divisions</small><b>${evs.length}</b></span>` })()}
     <span class="v3-board-side"><small>${live ? 'On court' : 'Matches'}</small><b>${live || ms.length}</b></span>
     <span class="v3-board-side"><small>Results in</small><b>${done}</b></span></div>`;
 }
@@ -6461,7 +6491,7 @@ function installHint(){
 function glance(){
   const n = events().length, np = players().length, mix = divisionMix();
   const row = (act, v, title, sub) => `<li><button class="bk-row" data-act="${act}" data-v="${v}"><span><b>${esc(title)}</b>${sub ? `<span>${esc(sub)}</span>` : ''}</span>${CHEV}</button></li>`;
-  const rows = [n ? row('tab', 'draws', `${n} division${n === 1 ? '' : 's'}`, mix) : '', np ? row('tab', 'players', `${np} player${np === 1 ? '' : 's'}`, 'Find players and their events') : '', row('tab', 'schedule', 'Weekend schedule', 'Match days, check-in and off-court events')].join('');
+  const rows = [n ? row('tab', 'draws', `${n} ${specialMode() === 'proam' ? 'section' : 'division'}${n === 1 ? '' : 's'}`, mix) : '', np ? row('tab', 'players', `${np} player${np === 1 ? '' : 's'}`, 'Find players and their events') : '', row('tab', 'schedule', 'Weekend schedule', 'Match days, check-in and off-court events')].join('');
   return `<section class="bk-sec" aria-labelledby="gl-h"><h2 class="bk-h2" id="gl-h">At a glance</h2><ul class="bk-rows">${rows}</ul></section>`;
 }
 function homeView(){
@@ -6916,7 +6946,7 @@ function drawsView(){
   const cur = evs.find(e => e.id === view.ev) || evs[0];
   const vis = cur.published || view.admin;
   return `${pageHead('Draws')}
-  <button class="divsel" data-act="divpick" aria-haspopup="dialog"><span class="divsel-t"><span class="sr">Division: </span><b>${esc(cur.name)}</b><span>${esc(drawFormatLabel(cur))}${evs.length > 1 ? ` · ${evs.length} divisions` : ''}</span><span class="divsel-st">${stChip(drawStateChip(cur))}</span></span><span class="divsel-r"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg><span class="sr">Change division</span></span></button>
+  <button class="divsel" data-act="divpick" aria-haspopup="dialog"><span class="divsel-t"><span class="sr">Division: </span><b>${esc(cur.name)}</b><span>${esc(drawFormatLabel(cur))}${evs.length > 1 ? ` · ${evs.length} ${specialMode() === 'proam' ? 'sections' : 'divisions'}` : ''}</span><span class="divsel-st">${stChip(drawStateChip(cur))}</span></span><span class="divsel-r"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg><span class="sr">Change division</span></span></button>
   ${vis ? `${cur.published ? '' : '<p class="bk-note warn">Not published. Only directors can see this draw.</p>'}
     <div class="draw-meta"><span class="bk-meta">${eventSummary(cur)}</span><button class="btn alt sm" data-act="print" data-v="${cur.id}">${ICON.print} Print</button></div>
     ${eventDraw(cur)}`
@@ -7579,26 +7609,209 @@ function etype(){
 const etypeTiles = (cur, act) => `<div class="v7-etypes" role="radiogroup" aria-label="Type of event">${ETYPES.map(([k, l, d]) => `<button class="v7-etype ${cur === k ? 'on' : ''}" role="radio" aria-checked="${cur === k}" data-act="${act}" data-v="${k}"><b>${l}</b><span>${d}</span></button>`).join('')}</div>`;
 /* v3.2: in a Pro-Am or Club Cup tournament the tournament IS the event. One event sits underneath, made for the
    director; setup asks for teams, not events. Tournaments that already have several events keep the old screens. */
-function specialMode(){ if (!TRIP) return null; const et = etype(); if (et !== 'proam' && et !== 'clubcup') return null; const evs = events(); return evs.every(e => e.kind === et) && evs.length <= 1 ? et : null }
+function specialMode(){ if (!TRIP) return null; const et = etype(); if (et !== 'proam' && et !== 'clubcup') return null; const evs = events(); return evs.every(e => e.kind === et) && (evs.length <= 1 || (et === 'proam' && evs.every(e => e.paSection))) ? et : null }
 function ensureSpecialEvent(){
   const et = etype(); if (et !== 'proam' && et !== 'clubcup') return null;
   const evs = evsCopy(); if (evs.some(e => e.kind === et)) return null;
   if (evs.some(e => (e.entrants || []).length || (e.matches || []).length || (e.pairs || []).some(t => (t || []).some(Boolean)))) return null; // real divisions: leave them alone
-  const ev = newEvent(et === 'proam' ? {kind:'proam', format:'pro_am', name:tripTitle()} : {kind:'clubcup', format:'club_cup', name:tripTitle()});
+  if (et === 'proam'){ const out = paNewSections(); saveEvents(out); return out[0] }
+  const ev = newEvent({kind:'clubcup', format:'club_cup', name:tripTitle()});
   saveEvents([ev]); return ev;
 }
+/* A new Pro-Am starts with Men's and Women's sections (one group is a tap away on Format) */
+function paNewSections(){ return [['M', 'Men\u2019s'], ['W', 'Women\u2019s']].map(([k, n]) => { const e = newEvent({kind:'proam', format:'pro_am', name:n}); e.paSection = k; e.paTeams = []; e.paAssign = {}; return e }) }
 const needSpecial = () => { const et = TRIP && etype(); if ((et === 'proam' || et === 'clubcup') && !events().some(e => e.kind === et) && view.admin) queueMicrotask(() => { if (ensureSpecialEvent()) render() }) };
-const WZ_LABELS = {proam:{events:'Format', players:'Pro-Am teams', bracket:'Flights & draw'}, clubcup:{events:'Format', players:'Clubs & players', bracket:'Lineup'}};
-const WZ_SUBS = {proam:{events:'Pro-Am, games per match', players:'Pro, A, B and C players; photos and Pro bios', bracket:'Flights and the round-by-round draw'}, clubcup:{events:'Club Cup, points to win', players:'The two clubs, their photos and players', bracket:'Who plays whom, line by line'}};
+const WZ_LABELS = {proam:{events:'Format', players:'Teams & Pros', bracket:'Flights & draw'}, clubcup:{events:'Format', players:'Clubs & players', bracket:'Lineup'}};
+const WZ_SUBS = {proam:{events:'Sections, games per match, who scores', players:'A, B and C teams, the Pros, and the Pro selection', bracket:'Flights of 4, the draw and the finals'}, clubcup:{events:'Club Cup, points to win', players:'The two clubs, their photos and players', bracket:'Who plays whom, line by line'}};
 const wzLabel = (k, l) => { const m = specialMode(); return (m && WZ_LABELS[m][k]) || l };
+/* ===== v3.2 Pro-Am model: amateur teams (A, B, C) first, a shared pool of Pros, then the Pro selection.
+   ev.paTeams [{id, name, a, b, c}], ev.paAssign {teamId: proPid}, ev.paFlight {teamId: flightNo};
+   cfg().paPros [pid] (one pool for the whole tournament), cfg().paPick {on, order:['evId|teamId'], log}.
+   ev.pairs / ev.entrants are rebuilt from these, so the engine, standings, TV and print work unchanged. ===== */
+const paHasModel = ev => !!ev && Array.isArray(ev.paTeams);
+const paPool = () => (((cfg() || {}).paPros) || []).filter(P);
+const paEvsAll = () => events().filter(e => e.kind === 'proam');
+function paModelOf(ev){
+  if (paHasModel(ev)) return {teams:ev.paTeams, assign:ev.paAssign || {}, legacy:false};
+  const teams = [], assign = {};
+  (ev.pairs || []).forEach((p, i) => { if (!(p || []).some(Boolean)) return; const id = 'L' + i; teams.push({id, name:(ev.paNames || {})[p[0]] || '', a:p[1] || '', b:p[2] || '', c:p[3] || ''}); if (p[0]) assign[id] = p[0] });
+  return {teams, assign, legacy:true};
+}
+function paSync(ev){
+  if (!paHasModel(ev)) return;
+  const A = ev.paAssign = ev.paAssign || {}, pool = new Set(paPool());
+  Object.keys(A).forEach(k => { if (!ev.paTeams.some(t => t.id === k) || !pool.has(A[k])) delete A[k] });
+  ev.pairs = ev.paTeams.map(t => [A[t.id] || '', t.a || '', t.b || '', t.c || '']);
+  ev.entrants = [...new Set(ev.pairs.flat().filter(Boolean))];
+  ev.paNames = {}; ev.paTeams.forEach(t => { if (t.name && A[t.id]) ev.paNames[A[t.id]] = t.name });
+  if (ev.paFlight) Object.keys(ev.paFlight).forEach(k => { if (!ev.paTeams.some(t => t.id === k)) delete ev.paFlight[k] });
+}
+/* Older Pro-Am events (Pro / A / B / C rows) move to the new model the first time a director opens setup. Nothing about the draw changes. */
+function paMigrateAll(){
+  const evs = evsCopy(); let pool = paPool(), ch = false;
+  evs.forEach(ev => { if (ev.kind !== 'proam' || paHasModel(ev)) return; const m = paModelOf(ev), ph = ev.photos || {}; ev.paTeams = []; ev.paAssign = {};
+    m.teams.forEach(t => { const id = 'pt' + uid(), pro = m.assign[t.id]; ev.paTeams.push(Object.assign({}, t, {id})); if (pro){ ev.paAssign[id] = pro; if (!pool.includes(pro)) pool.push(pro); if (ph.teams && ph.teams[pro]){ ph.teams[id] = ph.teams[pro]; delete ph.teams[pro] } } });
+    ch = true });
+  if (!ch) return false;
+  const c = cfg(); c.paPros = pool; Store.set('config', c); evs.forEach(e => { if (e.kind === 'proam') paSync(e) }); saveEvents(evs); return true;
+}
+const needPaMigrate = () => { if (view.admin && paEvsAll().some(e => !paHasModel(e))) queueMicrotask(() => { if (paMigrateAll()) render() }) };
+const paWhere = pid => { for (const e of paEvsAll()){ const A = e.paAssign || {}; const tid = Object.keys(A).find(k => A[k] === pid); if (tid) return {ev:e, team:(e.paTeams || []).find(t => t.id === tid)} } return null };
+const paRecName = (ev, t) => t ? (t.name || ((ev.paAssign || {})[t.id] ? 'Team ' + firstName(ev.paAssign[t.id]) : t.a ? firstName(t.a) + '\u2019s team' : 'New team')) : 'Team';
+const paSecLabel = ev => paEvsAll().length > 1 ? ev.name : '';
+const paMissingPros = ev => ev && ev.kind === 'proam' && paHasModel(ev) ? ev.paTeams.filter(t => !(ev.paAssign || {})[t.id]) : [];
+/* flights: groups of 4 in team order (remainder rules as autoSplitProAmFlights), or what the director chose */
+function paAutoFlights(n){ const out = []; proAmFlightSizes(n).forEach((k, fi) => { for (let i = 0; i < k; i++) out.push(fi + 1) }); return out }
+function paFlightNo(ev, t){ const F = ev.paFlight || {}; if (F[t.id]) return +F[t.id]; const i = (ev.paTeams || []).findIndex(x => x.id === t.id); return paAutoFlights((ev.paTeams || []).length)[i] || 1 }
+const paFlightCount = ev => Math.max(1, ...((ev.paTeams || []).map(t => paFlightNo(ev, t))), proAmFlightSizes((ev.paTeams || []).length).length);
+function paFlightsFor(ev){
+  const ts = teamsOf(ev); if (!ts.length || !paHasModel(ev)) return null;
+  const fl = {}; ts.forEach(t => { const rec = ev.paTeams.find(x => x.a && x.a === t.pids[1]); const f = rec ? paFlightNo(ev, rec) : 1; (fl[f] = fl[f] || []).push({id:t.id, i:rec ? ev.paTeams.indexOf(rec) : 99}) });
+  return Object.keys(fl).map(Number).sort((a, b) => a - b).map((f, i) => ({id:`${ev.id}-F${i + 1}`, name:`Flight ${i + 1}`, teamIds:fl[f].sort((a, b) => a.i - b.i).map(x => x.id)}));
+}
+function paPidFor(name){ name = String(name || '').trim().replace(/\s+/g, ' ').slice(0, 60); if (!name) return ''; const pl = players().slice(); let p = findByName(name, pl); if (!p){ p = {id:'p' + uid(), name, rating:null, tier:'', gender:'', email:'', phone:'', club:''}; pl.push(p); savePlayers(pl) } return p.id }
+/* who already holds this player? (amateur on a team, or a Pro) */
+function paHolder(pid, skipTeam){
+  if (!pid) return null;
+  for (const e of paEvsAll()) for (const t of (e.paTeams || [])) if (t.id !== skipTeam && [t.a, t.b, t.c].includes(pid)) return `${pname(pid)} is already on ${paRecName(e, t)}${paSecLabel(e) ? ' (' + paSecLabel(e) + ')' : ''}`;
+  if (paPool().includes(pid)) return `${pname(pid)} is in the Pro list`;
+  return null;
+}
+function paEdit(evId, fn, opts){
+  if (needAdmin()) return; paMigrateAll();
+  const evs = evsCopy(), ev = evs.find(e => e.id === evId); if (!ev) return;
+  if (!(opts && opts.free) && hasResults(ev)){ toast(`Scores are in${paSecLabel(ev) ? ' for ' + ev.name : ''}, so its teams and Pros are locked.`); return }
+  const out = fn(ev, evs); if (out === false) return;
+  evs.forEach(e => { if (e.kind === 'proam') paSync(e) }); saveEvents(evs); return out;
+}
+/* assign (or clear) a Pro; a Pro can only be on one team in the whole tournament */
+function paAssign(evId, teamId, pid){
+  let moved = null;
+  const r = paEdit(evId, (ev, evs) => {
+    if (pid) for (const e of evs){ if (e.kind !== 'proam' || !e.paAssign) continue; for (const [tid, p] of Object.entries(e.paAssign)){ if (p !== pid || (e === ev && tid === teamId)) continue; if (e !== ev && hasResults(e)){ toast(`${pname(pid)} already has scores with ${e.name}.`); return false } moved = paRecName(e, (e.paTeams || []).find(t => t.id === tid)); delete e.paAssign[tid] } }
+    ev.paAssign = ev.paAssign || {}; if (pid) ev.paAssign[teamId] = pid; else delete ev.paAssign[teamId];
+    return true;
+  });
+  if (r && moved) toast(`${pname(pid)} moved from ${moved}. That team needs a Pro now.`);
+  else if (r && (findEvent(evId) || {}).matches && isDrawn(findEvent(evId))) toast('Pro changed. Redraw on Flights & draw to use the new team.');
+  return r;
+}
+const paPick = () => Object.assign({on:false, order:[], log:[]}, (cfg() || {}).paPick || {});
+const paSetPick = pk => { const c = cfg(); c.paPick = pk; Store.set('config', c) };
+const paTeamByKey = key => { const [eid, tid] = String(key).split('|'); const e = findEvent(eid); const t = e && (e.paTeams || []).find(x => x.id === tid); return t ? {e, t} : null };
+const paOnClock = () => { const pk = paPick(); if (!pk.on) return null; return pk.order.map(paTeamByKey).find(x => x && !(x.e.paAssign || {})[x.t.id]) || null };
+const paAvailable = () => { const used = new Set(paEvsAll().flatMap(e => Object.values(e.paAssign || {}))); return paPool().filter(p => !used.has(p)) };
+const paAllTeams = () => paEvsAll().flatMap(e => paModelOf(e).teams.map(t => ({e, t})));
+
+/* ---------- setup screens ---------- */
+function paSubTabs(ev){
+  const all = paAllTeams(), withPro = all.filter(x => (paModelOf(x.e).assign || {})[x.t.id]).length, sub = view.pasub || 'teams', pool = paPool().length;
+  return `<div class="seg pasub" role="tablist">${[['teams', `1. Teams (${paModelOf(ev).teams.length})`], ['pros', `2. Pros (${pool})`], ['pick', `3. Pro selection (${withPro}/${all.length})`]].map(([k, l]) => `<button role="tab" class="${sub === k ? 'on' : ''}" aria-selected="${sub === k}" data-act="pasub" data-v="${k}">${l}</button>`).join('')}</div>`;
+}
+function paSetup(ev){
+  needPaMigrate();
+  const sub = view.pasub || 'teams';
+  return `${paSubTabs(ev)}${paImportCard()}${sub === 'pros' ? paProsTab() : sub === 'pick' ? paPickTab() : paTeamsTab(ev)}`;
+}
+const paNamesList = () => `<datalist id="pa-names">${players().slice().sort((a, b) => a.name.localeCompare(b.name)).map(p => `<option value="${esc(p.name)}"></option>`).join('')}</datalist>`;
+function paTeamsTab(ev){
+  const M = paModelOf(ev), locked = hasResults(ev), A = M.assign, ph = paPhotos(ev).teams || {}, nF = paFlightCount(ev), sec = paSecLabel(ev);
+  return `${paNamesList()}
+  <p class="wnote" style="margin-top:4px">Each team is an A, a B and a C player${sec ? ` in ${esc(sec)}` : ''}. Teams pick their Pro on step 3. Flights of 4 are made in this order; move a team to another flight here or on Flights &amp; draw.</p>
+  ${locked ? `<div class="missing"><b>Scores are in${sec ? ' for ' + esc(sec) : ''}, so these teams are locked.</b></div>` : ''}
+  <div class="card adm paadd"><h3 style="margin:0 0 6px">Add a team${sec ? ` to ${esc(sec)}` : ''}</h3><div class="grid2">${['a', 'b', 'c'].map(k => `<div><label class="small muted" for="pat-${k}">${k.toUpperCase()} player</label><input id="pat-${k}" class="bk-input" list="pa-names" autocomplete="off" ${locked ? 'disabled' : ''}></div>`).join('')}<div><label class="small muted" for="pat-name">Team name <span class="muted">(optional)</span></label><input id="pat-name" class="bk-input" maxlength="40" autocomplete="off" ${locked ? 'disabled' : ''}></div></div>
+    <button class="btn gold" style="width:100%;margin-top:8px" data-act="paaddteam" data-ev="${esc(ev.id)}" ${locked ? 'disabled' : ''}>Add team</button></div>
+  ${M.teams.length ? `<div class="pateams">${M.teams.map((t, i) => { const pro = A[t.id], f = paFlightNo(ev, t);
+    return `<div class="pasetteam"><div class="pateam-h"><b class="pateam-n">${i + 1}</b><input class="bk-input paname" value="${esc(t.name || '')}" placeholder="${esc(paRecName(ev, t))}" maxlength="40" aria-label="Team name" data-chg="patname" data-ev="${esc(ev.id)}" data-team="${esc(t.id)}" ${locked ? 'disabled' : ''}>
+      ${nF > 1 || M.teams.length > 4 ? `<select class="bk-input paflsel" aria-label="Flight" data-chg="paflight" data-ev="${esc(ev.id)}" data-team="${esc(t.id)}" ${locked ? 'disabled' : ''}>${Array.from({length:Math.min(8, nF + 1)}, (_, k) => `<option value="${k + 1}" ${f === k + 1 ? 'selected' : ''}>Flight ${k + 1}</option>`).join('')}</select>` : ''}</div>
+      <div class="pateam-p">${['a', 'b', 'c'].map(k => `<label><i>${k.toUpperCase()}</i><input class="bk-input" list="pa-names" value="${esc(t[k] ? pname(t[k]) : '')}" placeholder="${k.toUpperCase()} player" data-chg="patplayer" data-ev="${esc(ev.id)}" data-team="${esc(t.id)}" data-k="${k}" ${locked ? 'disabled' : ''}></label>`).join('')}</div>
+      <div class="pateam-f"><span>${pro ? `Pro: <b>${esc(pname(pro))}</b>` : '<span class="bad">No Pro yet</span>'}</span>
+        <details class="pateam-more"><summary>Photo${locked ? '' : ' · remove'}</summary>${photoEditTile(ev, 'team:' + t.id, ph[t.id], 'Team photo', '')}${locked ? '' : `<button class="btn alt sm" data-act="paremteam" data-ev="${esc(ev.id)}" data-team="${esc(t.id)}">Remove this team</button>`}</details></div></div>` }).join('')}</div>` : '<p class="small muted">No teams yet. Add them above, or upload or paste your list below.</p>'}
+  <details class="more" ${!M.teams.length ? 'open' : ''}><summary>Upload or paste your teams</summary><div class="card adm">
+    <textarea id="paste" rows="4" placeholder="Clint Barrow / Sloane Mathis / Marissa Dunn&#10;(A / B / C, one team per line)">${esc(view.paste || '')}</textarea>
+    <div class="row" style="justify-content:space-between;margin-top:6px"><span class="small muted">One team per line: A / B / C. If a Pro is already picked, put them first: Pro / A / B / C.</span><button class="btn sm" data-act="pasteev" data-ev="${esc(ev.id)}" ${locked ? 'disabled' : ''}>Read teams</button></div>
+    <p class="small muted" style="margin:10px 0 4px">Or a spreadsheet: one row per team with A, B and C columns. Team name, Pro, Pro bio, Flight and Men/Women columns are picked up when they're there.</p>
+    <label class="btn alt sm">Choose file<input type="file" hidden data-chg="rosterfile" data-ev="${esc(ev.id)}" accept=".xlsx,.xls,.xlsm,.ods,.csv,.tsv,.txt" ${locked ? 'disabled' : ''}></label>${view.impBusy ? ' <span class="small muted">Reading…</span>' : ''}${view.impErr ? `<p class="warn">${esc(view.impErr)}</p>` : ''}</div></details>
+  <button class="btn alt" style="width:100%;margin-top:10px" data-act="pasub" data-v="pros">Next: the Pros →</button>`;
+}
+function paProsTab(){
+  const pool = paPool(), teams = paAllTeams().length;
+  return `${paNamesList()}
+  <p class="wnote" style="margin-top:4px">One list of Pros for the whole Pro-Am${paEvsAll().length > 1 ? ' (both sections pick from it)' : ''}. Add them any time; they show as Available until a team picks them.</p>
+  ${pool.length < teams ? `<div class="missing"><b>${teams} team${teams === 1 ? '' : 's'}, ${pool.length} Pro${pool.length === 1 ? '' : 's'}.</b> Add ${teams - pool.length} more so every team can have one.</div>` : ''}
+  <div class="card adm paadd"><label class="small muted" for="pap-name">Add a Pro</label><div class="row" style="gap:6px;flex-wrap:nowrap"><input id="pap-name" class="bk-input" list="pa-names" autocomplete="off" style="flex:1"><button class="btn gold" data-act="paaddpro">Add</button></div>
+    <details class="more" style="margin-top:6px"><summary>Paste or upload a list of Pros</summary><textarea id="pap-paste" rows="3" placeholder="Cole Whitaker&#10;Wade Garrison | Head pro at Oak Hills (a bio after | is optional)"></textarea><div class="row" style="justify-content:space-between;margin-top:6px"><label class="btn alt sm">Spreadsheet (a Pro column, optional Bio)<input type="file" hidden data-chg="paprofile" accept=".xlsx,.xls,.xlsm,.ods,.csv,.tsv,.txt"></label><button class="btn sm" data-act="papastepros">Add these Pros</button></div></details></div>
+  ${pool.length ? `<div class="papros">${pool.map(pid => { const w = paWhere(pid), card = cardOf(pid), busy = view.photoBusy === 'pro' + pid;
+    return `<div class="papro"><div class="papro-h">${teamPic(paProPhoto(null, pid), 56, pname(pid))}<div class="papro-n"><b>${esc(pname(pid))}</b>${w ? `<span class="pachip">${esc(paRecName(w.ev, w.team))}${paSecLabel(w.ev) ? ' · ' + esc(w.ev.name) : ''}</span>` : '<span class="pachip ok">Available</span>'}</div></div>
+      <div class="row phbtns"><label class="btn alt sm ${busy ? 'dis' : ''}">${busy ? 'Uploading…' : card.photo ? 'Replace photo' : 'Add photo'}<input type="file" hidden accept="image/*" data-chg="paprophoto" data-pid="${esc(pid)}" ${busy ? 'disabled' : ''}></label>${card.photo && !busy ? `<button class="linkbtn" data-act="paprophotorm" data-pid="${esc(pid)}">Remove photo</button>` : ''}<button class="linkbtn" data-act="parempro" data-pid="${esc(pid)}">Remove Pro</button></div>
+      <label class="small muted" for="pabio-${esc(pid)}">Bio <span class="muted">(team card and TV)</span></label><textarea id="pabio-${esc(pid)}" class="bk-input pabio" rows="2" maxlength="600" placeholder="Head pro at …, former college player…" data-chg="paprobio" data-pid="${esc(pid)}">${esc(card.bio || '')}</textarea></div>` }).join('')}</div>` : ''}
+  <button class="btn alt" style="width:100%;margin-top:10px" data-act="pasub" data-v="pick">Next: Pro selection →</button>`;
+}
+function paPickTab(){
+  const evs = paEvsAll(), pool = paPool(), all = paAllTeams(), pk = paPick(), clock = paOnClock(), avail = paAvailable();
+  const missing = all.filter(x => !(paModelOf(x.e).assign || {})[x.t.id]);
+  const lockedEvs = evs.filter(hasResults), drawnEvs = evs.filter(e => isDrawn(e) && !hasResults(e));
+  const proOpts = (e, t) => { const cur = (paModelOf(e).assign || {})[t.id] || ''; return `<option value="">— No Pro yet —</option>${pool.map(p => { const w = paWhere(p), here = cur === p; return `<option value="${esc(p)}" ${here ? 'selected' : ''}>${esc(pname(p))}${!here && w ? ` (now ${esc(paRecName(w.ev, w.team))})` : !here ? ' · available' : ''}</option>` }).join('')}` };
+  const order = pk.order.map(paTeamByKey).filter(Boolean);
+  const pickCard = pk.on ? `<div class="card adm papick on">
+      ${clock ? `<p class="lbl">On the clock · pick ${order.filter(x => (x.e.paAssign || {})[x.t.id]).length + 1} of ${order.length}</p><div class="papick-clock">${teamPic((paPhotos(clock.e).teams || {})[clock.t.id], 64, paRecName(clock.e, clock.t))}<div><b>${esc(paRecName(clock.e, clock.t))}</b><span class="small muted">${esc([clock.t.a, clock.t.b, clock.t.c].filter(Boolean).map(pname).join(' · '))}${paSecLabel(clock.e) ? ' · ' + esc(clock.e.name) : ''}</span></div></div>
+        <p class="small muted" style="margin:8px 0 4px">Tap the Pro they choose:</p>
+        <div class="papick-pros">${avail.map(p => `<button class="papick-pro" data-act="papick" data-pid="${esc(p)}">${teamPic(paProPhoto(null, p), 52, pname(p))}<b>${esc(pname(p))}</b></button>`).join('') || '<p class="bad small">No Pros left. Add more on step 2.</p>'}</div>`
+      : `<p class="lbl">Selection complete</p><p class="small">Every team in the order has its Pro.</p>`}
+      <div class="row" style="margin-top:10px"><button class="btn alt sm" data-act="papickundo" ${pk.log.length ? '' : 'disabled'}>Undo last pick</button><button class="btn alt sm" data-act="papickend">${clock ? 'Stop selection' : 'Finish'}</button></div>
+      <p class="wnote" style="margin-bottom:0">The TV screen shows the selection live while it runs.</p></div>`
+    : `<div class="card adm papick"><h3 style="margin:0 0 4px">Run a Pro selection <span class="small muted">(optional)</span></h3><p class="small muted" style="margin:0 0 8px">Teams pick in turn from the Pros still available, and the TV shows it live. Set the order by hand, or draw it at random.</p>
+      ${missing.length ? `<ol class="papick-order">${(pk.order.length ? order.filter(x => !(x.e.paAssign || {})[x.t.id]) : missing).map((x, i, arr) => `<li><span>${esc(paRecName(x.e, x.t))}${paSecLabel(x.e) ? ` <i class="small muted">${esc(x.e.name)}</i>` : ''}</span><span class="papick-mv"><button data-act="papickmv" data-k="${esc(x.e.id + '|' + x.t.id)}" data-v="-1" aria-label="Move up" ${i ? '' : 'disabled'}>▲</button><button data-act="papickmv" data-k="${esc(x.e.id + '|' + x.t.id)}" data-v="1" aria-label="Move down" ${i < arr.length - 1 ? '' : 'disabled'}>▼</button></span></li>`).join('')}</ol>
+        <div class="row"><button class="btn alt sm" data-act="papickrand">Random draw</button><button class="btn gold sm" data-act="papickstart" ${avail.length ? '' : 'disabled'}>Start Pro selection</button></div>${avail.length ? '' : '<p class="small bad">Add Pros on step 2 first.</p>'}`
+      : '<p class="small">Every team has a Pro.</p>'}</div>`;
+  return `<p class="wnote" style="margin-top:4px">Each team needs a Pro before the draw and schedule. Pick from the list for each team, or run a Pro selection below. A Pro can only be on one team.</p>
+  ${lockedEvs.length ? `<div class="missing"><b>Scores are in for ${esc(lockedEvs.map(e => e.name).join(', '))}: those Pros are locked.</b></div>` : ''}
+  ${drawnEvs.length ? `<div class="missing"><b>${esc(drawnEvs.map(e => e.name).join(', '))} ${drawnEvs.length === 1 ? 'is' : 'are'} already drawn.</b> No scores yet, so swapping a Pro is fine, but redraw afterwards.</div>` : ''}
+  ${missing.length ? `<div class="missing"><b>${missing.length} team${missing.length === 1 ? '' : 's'} without a Pro.</b> The draw waits until every team has one.${pool.length < all.length ? ` Only ${pool.length} Pro${pool.length === 1 ? '' : 's'} for ${all.length} teams.` : ''}</div>` : all.length ? '<div class="okbox">Every team has a Pro.</div>' : ''}
+  ${pickCard}
+  ${evs.map(e => { const M = paModelOf(e); if (!M.teams.length) return ''; const L = hasResults(e);
+    return `${paSecLabel(e) ? `<h3>${esc(e.name)}</h3>` : '<h3>Teams</h3>'}<div class="paassign">${M.teams.map(t => `<div class="paassign-r">${teamPic((paPhotos(e).teams || {})[t.id], 40, paRecName(e, t))}<div class="paassign-n"><b>${esc(paRecName(e, t))}</b><span class="small muted">${esc([t.a, t.b, t.c].filter(Boolean).map(pname).join(' · '))}</span></div><select class="bk-input" aria-label="Pro for ${esc(paRecName(e, t))}" data-chg="paassign" data-ev="${esc(e.id)}" data-team="${esc(t.id)}" ${L || pk.on ? 'disabled' : ''}>${proOpts(e, t)}</select></div>`).join('')}</div>` }).join('')}
+  ${!missing.length && all.length ? `<button class="btn gold" style="width:100%;margin-top:10px" data-act="wzstep" data-v="bracket">Next: flights and the draw →</button>` : ''}`;
+}
+/* TV: live Pro selection (takes over the screen while it runs) */
+function tvProPick(){
+  const pk = paPick(), order = pk.order.map(paTeamByKey).filter(Boolean), clock = paOnClock(), avail = paAvailable();
+  const done = order.filter(x => (x.e.paAssign || {})[x.t.id]);
+  const nextUp = clock ? order.slice(order.indexOf(order.find(x => x.t.id === clock.t.id)) + 1).filter(x => !(x.e.paAssign || {})[x.t.id]).slice(0, 3) : [];
+  return `<section class="tvpk"><h2>Pro selection</h2><div class="tvpk-g">
+    <div class="tvpk-clock">${clock ? `<span class="lbl">On the clock</span>${teamPic((paPhotos(clock.e).teams || {})[clock.t.id], 170, paRecName(clock.e, clock.t), 'tp-tvpk')}<b>${esc(paRecName(clock.e, clock.t))}</b><span>${esc([clock.t.a, clock.t.b, clock.t.c].filter(Boolean).map(pname).join(' · '))}</span>${paSecLabel(clock.e) ? `<em>${esc(clock.e.name)}</em>` : ''}<small>Pick ${done.length + 1} of ${order.length}</small>${nextUp.length ? `<p class="tvpk-next">Up next: ${esc(nextUp.map(x => paRecName(x.e, x.t)).join(', '))}</p>` : ''}` : `<span class="lbl">Selection complete</span><b>Every team has its Pro</b>`}</div>
+    <div class="tvpk-side"><h3>Available Pros <small>${avail.length}</small></h3><div class="tvpk-pros">${avail.map(p => `<figure>${teamPic(paProPhoto(null, p), 92, pname(p), 'tp-tvpk')}<figcaption>${esc(pname(p))}</figcaption></figure>`).join('') || '<p class="tvempty">None left</p>'}</div>
+      <h3>Picks</h3><ol class="tvpk-picks">${done.slice().reverse().slice(0, 8).map(x => { const p = x.e.paAssign[x.t.id]; return `<li>${teamPic(paProPhoto(null, p), 44, pname(p), 'tp-tvpk')}<b>${esc(pname(p))}</b><span>→ ${esc(paRecName(x.e, x.t))}${paSecLabel(x.e) ? ' · ' + esc(x.e.name) : ''}</span></li>` }).join('') || '<li class="tvempty">No picks yet</li>'}</ol></div></div></section>`;
+}
+/* Pro-Am Format step pieces: sections and who scores */
+function paFlightsCard(ev){
+  const M = paModelOf(ev), nF = paFlightCount(ev), locked = hasResults(ev), by = {};
+  M.teams.forEach(t => { const f = paFlightNo(ev, t); (by[f] = by[f] || []).push(t) });
+  const ks = Object.keys(by).map(Number).sort((a, b) => a - b), odd = ks.filter(k => by[k].length % 2 || by[k].length < 2);
+  return `<div class="card adm paflights"><h3 style="margin:0 0 4px">Flights</h3><p class="small muted" style="margin:0 0 8px">Flights of 4 are made in team order. Move a team with its menu. ${ks.length === 2 ? 'The two flight winners play the final.' : 'A final between flight winners is made when there are exactly 2 flights.'}</p>
+    <div class="paflights-g">${ks.map(k => `<div class="paflight"><b>Flight ${k} <span class="small muted">${by[k].length} teams</span></b>${by[k].map(t => `<div class="paflight-r"><span>${esc(paRecName(ev, t))}</span><select class="bk-input" aria-label="Move ${esc(paRecName(ev, t))}" data-chg="paflight" data-ev="${esc(ev.id)}" data-team="${esc(t.id)}" ${locked ? 'disabled' : ''}>${Array.from({length:Math.min(8, nF + 1)}, (_, i) => `<option value="${i + 1}" ${k === i + 1 ? 'selected' : ''}>${k === i + 1 ? 'Flight ' + (i + 1) : 'Move to Flight ' + (i + 1)}</option>`).join('')}</select></div>`).join('')}</div>`).join('')}</div>
+    ${odd.length ? `<p class="small bad" style="margin:8px 0 0">${odd.map(k => `Flight ${k} has ${by[k].length} team${by[k].length === 1 ? '' : 's'}`).join('; ')}: ${odd.some(k => by[k].length < 2) ? 'a flight needs at least 2 teams' : 'one team sits out each round'}.</p>` : ''}
+    ${isDrawn(ev) && !locked ? '<p class="small muted" style="margin:6px 0 0">Changed flights after the draw? Tap Redraw below.</p>' : ''}</div>`;
+}
+function paSectionsCard(){
+  const evs = paEvsAll(), two = evs.length > 1, anyRes = evs.some(hasResults);
+  return `<div class="card adm"><label class="small muted">Sections</label><div class="seg">${[['one', 'One group'], ['mw', 'Men\u2019s & Women\u2019s']].map(([k, l]) => `<button class="${(two ? 'mw' : 'one') === k ? 'on' : ''}" data-act="pasections" data-v="${k}" ${anyRes ? 'disabled' : ''}>${l}</button>`).join('')}</div>
+    ${two ? `<div class="grid2" style="margin-top:6px">${evs.map(e => `<div><label class="small muted">Section name</label><input class="bk-input" value="${esc(e.name)}" maxlength="30" data-chg="pasecname" data-ev="${esc(e.id)}"></div>`).join('')}</div>` : ''}
+    <p class="wnote" style="margin-bottom:0">${two ? 'Each section has its own teams, flights of 4 and a final between the flight winners. Both sections pick from one list of Pros.' : 'All teams in one group: flights of 4 and a final between the two flight winners.'}</p></div>`;
+}
+function paScorersCard(){
+  const on = (cfg() || {}).openScoring !== false;
+  return `<div class="card adm"><label class="small muted">Who can enter scores</label><div class="seg">${[['0', 'Director only'], ['1', 'Players']].map(([k, l]) => `<button class="${(on ? '1' : '0') === k ? 'on' : ''}" data-act="pascorers" data-v="${k}">${l}</button>`).join('')}</div>
+    <p class="wnote" style="margin-bottom:0">${on ? 'Anyone with the join link can enter a score from their phone.' : 'Only someone unlocked with the director PIN can enter scores. Players and fans see results but no score buttons.'}</p></div>`;
+}
 function wzSpecialFormat(et){
   const ev = events().find(e => e.kind === et); if (!ev){ needSpecial(); return `<h2 style="margin-top:4px">Format</h2><p class="small muted">Setting up…</p>` }
   return `<h2 style="margin-top:4px">Format</h2>
   <h3 class="v7-eth" id="et-h">What are you running?</h3>
   ${etypeTiles(et, 'setetype')}
-  <div class="card adm evbuild"><b>${et === 'proam' ? 'The tournament is the Pro-Am' : 'The tournament is the Club Cup'}</b><span class="small muted">${et === 'proam' ? 'No events or divisions to set up. Add your teams next: a Pro plus an A, a B and a C player, with a photo and a short bio for each Pro.' : 'No events or divisions to set up. Name the two clubs next, add their photos or logos, and put each club\u2019s players in. A spreadsheet of lines works too.'}</span></div>
-  ${et === 'proam' ? paSettings(ev) : ''}
-  <button class="btn gold" style="width:100%;margin-top:6px" data-act="goplayers" data-id="${esc(ev.id)}">${et === 'proam' ? 'Next: add the Pro-Am teams' : 'Next: the clubs and their players'} →</button>`;
+  <div class="card adm evbuild"><b>${et === 'proam' ? 'The tournament is the Pro-Am' : 'The tournament is the Club Cup'}</b><span class="small muted">${et === 'proam' ? 'No events or divisions to set up. Next you add the teams (an A, a B and a C player each), list the Pros, and each team picks its Pro.' : 'No events or divisions to set up. Name the two clubs next, add their photos or logos, and put each club\u2019s players in. A spreadsheet of lines works too.'}</span></div>
+  ${et === 'proam' ? paSectionsCard() + paSettings(ev) + paScorersCard() : ''}
+  <button class="btn gold" style="width:100%;margin-top:6px" data-act="goplayers" data-id="${esc(ev.id)}">${et === 'proam' ? 'Next: the teams' : 'Next: the clubs and their players'} →</button>`;
 }
 /* Pro-Am team import: one team per row (Pro | A | B | C), a "Pro / A / B / C" line, or Pro: / A: / B: / C: lists */
 function paImportStart(tables, file, evId){
@@ -7609,30 +7822,44 @@ function paImportStart(tables, file, evId){
 }
 function paImportCard(){
   const pi = view.pai; if (!pi) return '';
-  const nm = t => t.name || (t.pro ? 'Team ' + t.pro.split(' ')[0] : 'Team');
+  const nm = t => t.name || (t.pro ? 'Team ' + t.pro.split(' ')[0] : t.a ? t.a.split(' ')[0] + '\u2019s team' : 'Team');
   return `<div class="card adm impbox pai" id="pai-top"><h3 style="margin:0 0 2px">${pi.teams.length} team${pi.teams.length === 1 ? '' : 's'} from ${esc(pi.file)}</h3>
-    <p class="small muted" style="margin:0 0 8px">${pi.how === 'columns' ? 'Read from the Pro, A, B and C columns.' : pi.how === 'labels' ? 'Read from the Pro: / A: / B: / C: labels.' : 'Read in order: Pro, then A, B and C.'} Nothing is saved until you tap Add. Names already on the roster are reused.</p>
+    <p class="small muted" style="margin:0 0 8px">${pi.how === 'columns' ? 'Read from the A, B and C columns.' : pi.how === 'labels' ? 'Read from the A: / B: / C: labels.' : 'Read in order: A, B, C (Pro first when a line has four names).'} ${pi.teams.some(t => t.pro) ? 'Pros in the list are added to the Pro list and assigned.' : 'No Pros in this list: teams pick theirs on step 3.'} Nothing is saved until you tap Add. Names already on the roster are reused.</p>
     ${pi.warnings.length ? `<div class="si-panel">${pi.warnings.map(w => `<p class="small bad" style="margin:2px 0">${esc(w.msg)}</p>`).join('')}</div>` : ''}
-    <ol class="pai-list">${pi.teams.map(t => `<li><b>${esc(nm(t))}</b><span>${[['pro', 'Pro'], ['a', 'A'], ['b', 'B'], ['c', 'C']].map(([k, l]) => `<em><i>${l}</i>${t[k] ? esc(t[k]) : '<u>missing</u>'}</em>`).join('')}</span>${t.bio ? '<small>Pro bio included</small>' : ''}</li>`).join('')}</ol>
+    <ol class="pai-list">${pi.teams.map(t => `<li><b>${esc(nm(t))}</b><span>${[['a', 'A'], ['b', 'B'], ['c', 'C'], ['pro', 'Pro']].map(([k, l]) => k === 'pro' && !t[k] ? '' : `<em><i>${l}</i>${t[k] ? esc(t[k]) : '<u>missing</u>'}</em>`).join('')}${t.section && paEvsAll().length > 1 ? `<em><i>Section</i>${esc(t.section)}</em>` : ''}${t.flight ? `<em><i>Flight</i>${esc(t.flight)}</em>` : ''}</span>${t.bio ? '<small>Pro bio included</small>' : ''}</li>`).join('')}</ol>
     <div class="row si-foot"><button class="btn gold" data-act="paigo">Add ${pi.teams.length} team${pi.teams.length === 1 ? '' : 's'}</button><button class="btn alt" data-act="paicancel">Cancel</button></div></div>`;
 }
+function paAddPros(list){
+  paMigrateAll(); const pool = paPool(), bios = []; let added = 0, skipped = 0;
+  const am = new Set(paEvsAll().flatMap(e => (e.paTeams || []).flatMap(t => [t.a, t.b, t.c])));
+  (list || []).forEach(x => { const n = String(x.name || '').trim(); if (!n) return; const pid = paPidFor(n); if (pool.includes(pid) || am.has(pid)){ skipped++; return } pool.push(pid); added++; if (x.bio) bios.push([pid, String(x.bio).slice(0, 600)]) });
+  const c = cfg(); c.paPros = pool; Store.set('config', c); paSaveBios(bios); return {added, skipped};
+}
+function paSaveBios(bios){ if (!bios.length) return; (async () => { if (!view.cards) view.cards = await Dir.loadCards() || {}; for (const [pid, bio] of bios){ const old = cardOf(pid); if (old.bio) continue; try{ const row = await Dir.saveCard(pid, Object.assign({}, old, {bio})); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}) }catch(e){ console.warn('bio', e) } } render() })() }
 function paImportCommit(){
   const pi = view.pai; if (!pi) return null;
-  const pl = players().slice(), bios = []; let added = 0, newP = 0;
-  const idFor = name => { if (!name) return ''; let p = findByName(name, pl); if (!p){ p = {id:'p' + uid(), name, rating:null, tier:'', gender:'', email:'', phone:'', club:''}; pl.push(p); newP++ } return p.id };
-  const evs = evsCopy(), ev = evs.find(e => e.id === pi.ev); if (!ev) return null;
-  if (hasResults(ev)){ toast('This Pro-Am has scores, so teams are locked.'); return null }
+  paMigrateAll();
+  const evs = evsCopy(), base = evs.find(e => e.id === pi.ev); if (!base) return null;
+  const secs = evs.filter(e => e.kind === 'proam' && e.paSection);
+  const secFor = s => { s = String(s || '').trim().toLowerCase(); if (!s || secs.length < 2) return base; return (/^(w|f|women|womens|women's|ladies|female|girls)/.test(s) ? secs.find(e => e.paSection === 'W') : /^(m|men|mens|men's|male|gents|boys)/.test(s) ? secs.find(e => e.paSection === 'M') : null) || base };
+  if (evs.some(e => e.kind === 'proam' && hasResults(e) && pi.teams.some(t => secFor(t.section) === e))){ toast('That section has scores, so its teams are locked.'); return null }
+  const pool = paPool(), bios = []; let added = 0, dupPro = 0;
+  const idFor = n => n ? paPidFor(n) : '';
   pi.teams.forEach(t => {
-    const ids = ['pro', 'a', 'b', 'c'].map(k => idFor(t[k])); if (!ids[0]) return;
-    ev.pairs = (ev.pairs || []).filter(x => !(x || []).some(id => id && ids.includes(id)));
-    ev.pairs.push(ids); ids.filter(Boolean).forEach(id => { if (!ev.entrants.includes(id)) ev.entrants.push(id) });
-    if (t.name && t.name !== 'Team ' + t.pro.split(' ')[0]){ ev.paNames = ev.paNames || {}; ev.paNames[ids[0]] = t.name.slice(0, 40) }
-    if (t.bio) bios.push([ids[0], t.bio.slice(0, 600)]); added++;
+    const ev = secFor(t.section); paHasModel(ev) || (ev.paTeams = [], ev.paAssign = {});
+    const ids = ['a', 'b', 'c'].map(k => idFor(t[k])), pro = idFor(t.pro); if (!ids.some(Boolean)) return;
+    evs.forEach(e => { if (e.kind === 'proam' && paHasModel(e)) e.paTeams = e.paTeams.filter(x => ![x.a, x.b, x.c].some(id => id && ids.includes(id))) });
+    const id = 'pt' + uid(), nm = t.name && !(t.pro && t.name === 'Team ' + t.pro.split(' ')[0]) ? t.name.slice(0, 40) : '';
+    ev.paTeams.push({id, name:nm, a:ids[0], b:ids[1], c:ids[2]});
+    const fl = parseInt(String(t.flight || '').replace(/\D+/g, ''), 10); if (fl > 0 && fl < 9){ ev.paFlight = Object.assign({}, ev.paFlight || {}); ev.paFlight[id] = fl }
+    if (pro){ if (!pool.includes(pro)) pool.push(pro); if (evs.some(e => Object.values(e.paAssign || {}).includes(pro))) dupPro++; else ev.paAssign[id] = pro; if (t.bio) bios.push([pro, t.bio.slice(0, 600)]) }
+    added++;
   });
-  savePlayers(pl); saveEvents(evs); try{ inferFromEvents() }catch(e){}
-  view.pai = null;
-  if (bios.length) (async () => { if (!view.cards) view.cards = await Dir.loadCards() || {}; for (const [pid, bio] of bios){ const old = cardOf(pid); if (old.bio) continue; try{ const row = await Dir.saveCard(pid, Object.assign({}, old, {bio})); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}) }catch(e){ console.warn('bio', e) } } render() })();
-  return {added, newP};
+  savePlayers(players()); const c = cfg(); c.paPros = pool; Store.set('config', c);
+  evs.forEach(e => { if (e.kind === 'proam') paSync(e) }); saveEvents(evs); try{ inferFromEvents() }catch(e){}
+  view.pai = null; paSaveBios(bios);
+  if (dupPro) toast(`${dupPro} Pro${dupPro === 1 ? ' was' : 's were'} listed on two teams; only the first keeps them.`);
+  return {added, newP:0};
 }
 function wzEvents(){
   { const sm = specialMode() || (TRIP && ['proam', 'clubcup'].includes(etype()) && !events().length ? etype() : null); if (sm) return wzSpecialFormat(sm) }
@@ -7736,6 +7963,11 @@ function wzPlayers(){
     <p class="wnote">No events yet. Paste your entry list above (division names with their teams) and the events are made for you, or <button class="small" style="text-decoration:underline" data-act="wzstep" data-v="events">add events one at a time</button>.</p>
     ${players().length ? `<details class="more" ${view.rosterOpen ? 'open' : ''}><summary data-act="rostertoggle">Everyone on the roster (${players().length})</summary>${wzRosterAll(true)}</details>` : ''}`;
   const ev = evs.find(e => e.id === view.ev) || evs[0], n = entryCount(ev);
+  if (ev.kind === 'proam') return `<h2 style="margin-top:4px">${smode ? 'Teams & Pros' : 'Players'}</h2>
+    ${smode && evs.length < 2 ? '' : evTabs(evs, ev, e => e.kind === 'proam' ? `${paModelOf(e).teams.length} teams` : entryNoun(e, entryCount(e)))}
+    ${smode ? '' : `<div class="evhead"><b>${esc(ev.name)}</b><span class="small muted">Pro-Am</span></div>${paSettings(ev)}`}
+    ${paSetup(ev)}
+    <details class="more" ${view.rosterOpen ? 'open' : ''}><summary data-act="rostertoggle">Everyone on the roster (${players().length})</summary>${wzRosterAll(true)}</details>`;
   const others = players().filter(p => !eventsOfPlayer(p.id).some(e => e.id === ev.id) && !fitIssue(ev, p)).sort((a, b) => a.name.localeCompare(b.name));
   const cc = ev.clubCup;
   const allIn = new Set(evs.flatMap(e => [...(e.entrants || []), ...(e.pairs || []).flat(), ...((e.clubCup || {}).aIds || []), ...((e.clubCup || {}).bIds || [])]).filter(Boolean));
@@ -7794,7 +8026,10 @@ function wzBracket(){
   if (!evs.length) return `<h2 style="margin-top:4px">Brackets</h2><p class="muted">Add an event first.</p>`;
   const ev = evs.find(e => e.id === view.ev) || evs[0], n = entryCount(ev), locked = hasResults(ev);
   const smode = specialMode();
-  const head = `<h2 style="margin-top:4px">${esc(wzLabel('bracket', 'Brackets'))}</h2>${autoNoteHtml()}${smode ? '' : evTabs(evs, ev, e => isDrawn(e) ? (e.published ? 'Published' : 'Drawn') : entryNoun(e, entryCount(e)))}`;
+  let head = `<h2 style="margin-top:4px">${esc(wzLabel('bracket', 'Brackets'))}</h2>${autoNoteHtml()}${smode && evs.length < 2 ? '' : evTabs(evs, ev, e => isDrawn(e) ? (e.published ? 'Published' : 'Drawn') : entryNoun(e, entryCount(e)))}`;
+  if (ev.kind === 'proam' && paHasModel(ev)){ const miss = paMissingPros(ev);
+    if (miss.length || !ev.paTeams.length) return head + (ev.paTeams.length ? `<div class="missing"><div class="mh2"><b>${miss.length} team${miss.length === 1 ? '' : 's'}${evs.length > 1 ? ' in ' + esc(ev.name) : ''} without a Pro</b></div><p class="small" style="margin:4px 0 8px">The draw and schedule wait until every team has a Pro: ${esc(miss.map(t => paRecName(ev, t)).join(', '))}.</p><button class="btn sm" data-act="pagopick">Assign Pros</button></div>` : `<div class="empty-state"><p>Add the teams first.</p><button class="btn" data-act="goplayers" data-id="${ev.id}">Add teams</button></div>`);
+    head += paFlightsCard(ev) }
   if (ev.kind === 'clubcup') return head + `<p class="wnote">Build the lineup: who plays whom in each session. Set session times here or on the Schedule step.</p>${lineupEditor(ev)}${ev.matches.length ? `<h3>How it looks</h3>${eventDraw(ev)}` : ''}`;
   if (n < 2) return head + `<div class="empty-state"><p>${esc(ev.name)} needs at least 2 ${ev.kind === 'singles' ? 'players' : 'teams'} first.</p><button class="btn" data-act="goplayers" data-id="${ev.id}">Add players</button></div>`;
   const rec = recommendFormat(ev, n), fmtNow = ev.autoFormat && !isDrawn(ev) && BRACKET_FORMATS.includes(ev.format) ? rec : ev.format, sc = ev.scoring || {}, scs = Object.entries(SCORING_FORMATS).filter(([k, v]) => v.sport === (cfg().sport || 'tennis'));
@@ -7935,7 +8170,8 @@ function seedTournament(d){
   syncDays(c);
   c.etype = ETYPES.some(t => t[0] === d.etype) ? d.etype : 'divisions';
   Store.set('config', c); Store.set('players', []);
-  const first = c.etype === 'clubcup' ? [newEvent({kind:'clubcup', format:'club_cup', name:c.name || undefined})] : c.etype === 'proam' ? [newEvent({kind:'proam', format:'pro_am', name:c.name || undefined})] : [];
+  const first = c.etype === 'clubcup' ? [newEvent({kind:'clubcup', format:'club_cup', name:c.name || undefined})] : c.etype === 'proam' ? paNewSections() : [];
+  if (c.etype === 'proam'){ c.openScoring = false; c.paPros = [] }
   Store.set('events', first);
 }
 
@@ -8365,7 +8601,9 @@ function tvView(){
   const ph = brand().gallery.map(g => ({url:g.url, caption:g.cap || tripTitle()})).concat(photos()).slice(0, 8), spN = sponsorsSorted().length ? 1 : 0, slides = evs.length + 1 + (ph.length ? 1 : 0) + spN;
   const k = Math.floor(Date.now() / 25000) % slides, ev = k > 0 && k <= evs.length ? evs[k - 1] : null, showPhotos = ph.length && k === evs.length + 1, showSp = spN && k === slides - 1 && k > evs.length + (ph.length ? 1 : 0);
   const now = new Date();
+  const pkLive = paPick().on && paEvsAll().length;
   const head = `<header class="tvh">${crest(64)}<div><h1>${esc(tripTitle())}</h1><span>${esc(now.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'}))}${(cfg() || {}).club ? ' · ' + esc(cfg().club) : ''}</span></div><div class="tvclock">${now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})}</div></header>`;
+  if (pkLive) return `<div class="tv tv2">${head}${tvProPick()}</div>`;
   if (showSp) return `<div class="tv tv2">${head}${tvSponsors()}</div>`;
   if (showPhotos) return `<div class="tv">${head}<section class="tvphotos">${ph.map(p => `<figure><img src="${esc(p.url)}" alt=""><figcaption>${esc(p.caption || photoBy(p))}</figcaption></figure>`).join('')}</section></div>`;
   const tK = dayKey(isoDay(now)), at = i => TIME_SLOTS[i] ? (TIME_SLOTS[i][0] === tK ? TIME_SLOTS[i][1] : `${TIME_SLOTS[i][0].split(',')[0]} ${TIME_SLOTS[i][1]}`) : '';
@@ -8436,7 +8674,7 @@ async function imgBlob(file, max){ const u = await readImg(file, max || 1600, fa
 const ccPhoto = (ev, side) => (((ev && ev.clubCup) || {})[side === 'A' ? 'photoA' : 'photoB']) || null;
 const paPhotos = ev => (ev && ev.photos) || {};
 const paProId = t => t && Array.isArray(t.pids) ? (t.pids[Math.max(0, (t.playerRoles || []).indexOf('pro'))] || null) : null;
-const paTeamPhoto = (ev, t) => { const id = paProId(t); return id ? ((paPhotos(ev).teams || {})[id] || null) : null };
+const paTeamPhoto = (ev, t) => { const pt = paHasModel(ev) && t && t.pids ? ev.paTeams.find(x => x.a && x.a === t.pids[1]) : null; if (pt) return (paPhotos(ev).teams || {})[pt.id] || null; const id = paProId(t); return id ? ((paPhotos(ev).teams || {})[id] || null) : null };
 const paProPhoto = (ev, pid) => pid ? ((paPhotos(ev).pros || {})[pid] || cardOf(pid).photo || null) : null;
 function teamPic(url, size, label, cls){ return `<span class="tpic ${cls || ''}" style="--s:${size}px" aria-hidden="true">${url ? `<img src="${esc(url)}" alt="" loading="lazy" decoding="async">` : esc(initials(label || ''))}</span>` }
 function sidePhoto(m, slot){
@@ -8857,7 +9095,7 @@ const ACT = {
   async opentrip(el){ try{ await enterTrip(await Dir.join(el.dataset.code)) }catch(e){ toast("Couldn't open that tournament."); Dir.forget((Dir.known().find(x => x.code === el.dataset.code) || {}).id); view.myTrips = Dir.known() } },
   newtrip(){ view.screen = 'wizard'; TRIP = null; view.wz = {step:'basics', draft:{name:'', sport:'tennis', start:'', end:'', pin:'', etype:'divisions'}} },
   ntetype(el){ const g = id => (document.getElementById(id) || {}).value || ''; Object.assign(view.wz.draft, {name:g('nt-name'), start:g('nt-start'), end:g('nt-end'), pin:g('nt-pin'), etype:el.dataset.v}) },
-  setetype(el){ if (needAdmin()) return; const c = cfg(); c.etype = el.dataset.v; Store.set('config', c); ensureSpecialEvent(); if (el.dataset.v === 'ladder' && (view.nd || {}).kind === 'mixed') view.nd = Object.assign({}, view.nd, {kind:'doubles', level:'3.5'}) },
+  setetype(el){ if (needAdmin()) return; const c = cfg(); c.etype = el.dataset.v; if (c.etype === 'proam' && !events().some(e => e.kind === 'proam')){ c.openScoring = false; Dir.setOpenScoring(false).catch(e => console.warn(e)) } Store.set('config', c); ensureSpecialEvent(); if (el.dataset.v === 'ladder' && (view.nd || {}).kind === 'mixed') view.nd = Object.assign({}, view.nd, {kind:'doubles', level:'3.5'}) },
   ntsport(el){ const g = id => (document.getElementById(id) || {}).value || ''; Object.assign(view.wz.draft, {name:g('nt-name'), start:g('nt-start'), end:g('nt-end'), pin:g('nt-pin'), sport:el.dataset.v}) },
   async createtrip(){
     const g = id => (document.getElementById(id) || {}).value || '';
@@ -8871,7 +9109,7 @@ const ACT = {
     try{
       const t = await Dir.create(d.name, d.pin);
       await enterTrip(t);
-      seedTournament(d);
+      seedTournament(d); if (d.etype === 'proam') Dir.setOpenScoring(false).catch(e => console.warn(e));
       view.screen = 'wizard'; view.wz = {step:'basics'}; view.admin = true; view.me = GUEST; LS.set(TK('me'), GUEST);
       toast(`Tournament created. Join code ${t.code}.`);
     }catch(e){ view.wz = view.wz || {}; view.wz.err = e.message || String(e); view.wz.busy = false }
@@ -9010,6 +9248,7 @@ const ACT = {
   drawone(el){ if (needAdmin()) return; try{ withEvent(el.dataset.id, (ev, evs) => { drawEvent(ev); if (isLadder(ev)) return toast(`${ev.name} ladder started. Publish it so players can see it and challenge.`); buildSchedule(evs); toast(`${ev.name} drawn.${autoTxt()}`) }); view.ev = el.dataset.id }catch(e){ toast(e.message) } },
   async drawall(){
     if (needAdmin()) return;
+    { const miss = events().filter(e => paMissingPros(e).length); if (miss.length) return toast(`Not yet: ${miss.map(e => `${paMissingPros(e).length} team${paMissingPros(e).length === 1 ? '' : 's'}${miss.length > 1 || paEvsAll().length > 1 ? ' in ' + e.name : ''}`).join(' and ')} still need a Pro. Assign Pros on Teams & Pros first.`) }
     const evs = evsCopy(), redo = evs.filter(e => !hasResults(e) && e.kind !== 'clubcup' && !isLadder(e) && teamsOf(e).length >= 2);
     if (evs.some(isDrawn) && !await ask(`Redraw ${redo.length} event${redo.length === 1 ? '' : 's'} without scores and rebuild the schedule? Events with scores keep their draw.`)) return;
     const fails = []; redo.forEach(e => { try{ drawEvent(e) }catch(err){ fails.push(err.message) } }); if (fails.length) toast(fails[0]); evs.filter(e => e.kind === 'clubcup').forEach(syncClubCupRosters);
@@ -9613,7 +9852,7 @@ function onRemote(key){
 Object.assign(ACT, {
   cztab(el){ view.cz = el.dataset.v },
   brandpicrm(el){ brandSet(b => { b[el.dataset.p] = null }) },
-  pagames(el){ if (needAdmin()) return; withEvent(el.dataset.id, ev => { ev.proAmGames = +el.dataset.v || 0 }) },
+  pagames(el){ if (needAdmin()) return; const v = +el.dataset.v || 0; if (specialMode() === 'proam'){ const evs = evsCopy(); evs.forEach(e => { if (e.kind === 'proam') e.proAmGames = v }); saveEvents(evs) } else withEvent(el.dataset.id, ev => { ev.proAmGames = v }) },
   evphotorm(el){ if (needAdmin()) return; const old = withEvent(el.dataset.ev, ev => evPhotoSet(ev, el.dataset.k, null)); if (old) Dir.removeMedia(old); toast('Photo removed.') },
   galopen(el){ view.galIdx = +el.dataset.i; view.modal = 'gallery' },
   galrm(el){ brandSet(b => { b.gallery.splice(+el.dataset.i, 1) }) },
@@ -9673,6 +9912,22 @@ Object.assign(ACT, {
 });
 function invFormRead(){ const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : undefined }, o = {}; [['player', 'inv-pl'], ['name', 'inv-name'], ['email', 'inv-email']].forEach(([k, id]) => { const v = g(id); if (v !== undefined) o[k] = v }); return o }
 Object.assign(CHG, {
+  /* v3.2 Pro-Am model */
+  patname(el){ paEdit(el.dataset.ev, ev => { const t = ev.paTeams.find(x => x.id === el.dataset.team); if (!t) return false; t.name = el.value.trim().slice(0, 40) }) },
+  patplayer(el){ const v = el.value.trim(), pid = v ? paPidFor(v) : ''; const clash = pid && paHolder(pid, el.dataset.team); if (clash){ toast(clash); render(); return }
+    paEdit(el.dataset.ev, ev => { const t = ev.paTeams.find(x => x.id === el.dataset.team); if (!t) return false; if (pid && [t.a, t.b, t.c].includes(pid) && t[el.dataset.k] !== pid){ toast('That player is already on this team.'); return false } t[el.dataset.k] = pid }) },
+  paflight(el){ paEdit(el.dataset.ev, ev => { ev.paFlight = Object.assign({}, ev.paFlight || {}); (ev.paTeams || []).forEach(t => { if (!ev.paFlight[t.id]) ev.paFlight[t.id] = paFlightNo(ev, t) }); ev.paFlight[el.dataset.team] = +el.value || 1 }); const e = findEvent(el.dataset.ev); if (e && isDrawn(e)) toast('Flight changed. Redraw on Flights & draw to use it.') },
+  paassign(el){ paAssign(el.dataset.ev, el.dataset.team, el.value) },
+  pasecname(el){ if (needAdmin()) return; const v = el.value.trim().slice(0, 30); if (!v) return; withEvent(el.dataset.ev, ev => { ev.name = v }) },
+  async paprophoto(el){ if (needAdmin()) return; const f = el.files[0], pid = el.dataset.pid; if (!f || !pid) return; view.photoBusy = 'pro' + pid; render();
+    try{ const b = await photoBlob(f, 1200), url = await Dir.uploadMedia(b, b.type === 'image/webp' ? 'webp' : 'jpg', 'players'); const old = cardOf(pid), prev = old.photo; const row = await Dir.saveCard(pid, Object.assign({}, old, {photo:url})); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}); if (prev && prev !== url) Dir.removeMedia(prev); toast('Photo saved.') }
+    catch(e){ console.error(e); toast(e.message || String(e)) } finally { view.photoBusy = null; el.value = ''; render() } },
+  async paprofile(el){ const f = el.files[0]; if (!f) return;
+    try{ const tables = SI_SHEET_EXT.test(f.name) ? await siReadFile(f) : siTablesFromText(await f.text()); let pros = [];
+      for (const t of tables){ const r = SmartImport.proAmTeams(t.rows); const ps = r.pros.length ? r.pros : r.teams.filter(x => x.pro).map(x => ({name:x.pro, bio:x.bio || ''})); if (ps.length > pros.length) pros = ps }
+      if (!pros.length){ const flat = tables.flatMap(t => t.rows.map(r => (r || []).find(Boolean))).filter(Boolean).map(String).filter(n => !/^(pro|pros|name|names)$/i.test(n.trim())); pros = flat.map(n => ({name:n.trim(), bio:''})) }
+      const r = paAddPros(pros); toast(`Added ${r.added} Pro${r.added === 1 ? '' : 's'} from ${f.name}${r.skipped ? ` (${r.skipped} skipped)` : ''}.`) }
+    catch(e){ toast(e.message || String(e)) } finally { el.value = '' } },
   paname(el){ if (needAdmin()) return; const v = el.value.trim().slice(0, 40), pid = el.dataset.pid; withEvent(el.dataset.ev, ev => { ev.paNames = Object.assign({}, ev.paNames || {}); if (!v || v === 'Team ' + firstName(pid)) delete ev.paNames[pid]; else ev.paNames[pid] = v }) },
   async paprobio(el){ if (needAdmin()) return; const pid = el.dataset.pid, bio = el.value.trim().slice(0, 600), old = cardOf(pid);
     try{ const row = await Dir.saveCard(pid, Object.assign({}, old, {bio})); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}); toast('Bio saved.') }catch(e){ toast("Couldn't save the bio: " + ((e && e.message) || e)) } render() },
@@ -10473,6 +10728,50 @@ function siCommit(){
   return {added, updated, made, entered, skipped};
 }
 Object.assign(ACT, {
+  /* v3.2 Pro-Am model */
+  pasub(el){ view.pasub = el.dataset.v; view.resetScroll = true },
+  pagopick(){ view.wz = Object.assign(view.wz || {}, {step:'players'}); view.pasub = 'pick'; view.resetScroll = true },
+  paaddteam(el){
+    const g = id => ((document.getElementById(id) || {}).value || '').trim();
+    const names = ['pat-a', 'pat-b', 'pat-c'].map(g), name = g('pat-name').slice(0, 40);
+    if (!names.some(Boolean)) return toast('Type the A, B and C players.');
+    const ids = names.map(paPidFor), clash = ids.map(id => paHolder(id)).find(Boolean); if (clash) return toast(clash);
+    if (new Set(ids.filter(Boolean)).size !== ids.filter(Boolean).length) return toast('The same player is in two spots.');
+    const r = paEdit(el.dataset.ev, ev => { ev.paTeams.push({id:'pt' + uid(), name, a:ids[0], b:ids[1], c:ids[2]}); return true });
+    if (r){ ['pat-a', 'pat-b', 'pat-c', 'pat-name'].forEach(id => { const x = document.getElementById(id); if (x) x.value = '' }); toast(names.filter(Boolean).length < 3 ? 'Team added. Fill in the missing player when you know it.' : 'Team added.') }
+  },
+  async paremteam(el){ if (!await ask('Remove this team? Its players stay on the roster.', {ok:'Remove team'})) return; paEdit(el.dataset.ev, ev => { ev.paTeams = ev.paTeams.filter(t => t.id !== el.dataset.team); delete (ev.paAssign || {})[el.dataset.team]; const pk = paPick(); if (pk.order.length){ pk.order = pk.order.filter(k => k !== ev.id + '|' + el.dataset.team); paSetPick(pk) } return true }) },
+  paaddpro(){ const x = document.getElementById('pap-name'), n = ((x || {}).value || '').trim(); if (!n) return toast('Type the Pro\u2019s name.'); const pid = paPidFor(n);
+    for (const e of paEvsAll()) for (const t of (e.paTeams || [])) if ([t.a, t.b, t.c].includes(pid)) return toast(`${n} is an amateur on ${paRecName(e, t)}.`);
+    if (paPool().includes(pid)) return toast(`${n} is already in the list.`);
+    paMigrateAll(); const c = cfg(); c.paPros = [...paPool(), pid]; Store.set('config', c); if (x) x.value = ''; toast(`${n} added. Available.`) },
+  papastepros(){ const box = document.getElementById('pap-paste'), lines = String((box || {}).value || '').split(/\n+/).map(l => l.trim()).filter(Boolean); if (!lines.length) return toast('One Pro per line.');
+    const r = paAddPros(lines.map(l => { const [n, ...b] = l.split(/\s*[|\t]\s*/); return {name:n.replace(/^\d+[.)]\s*/, ''), bio:b.join(' ')} })); if (box) box.value = ''; toast(`Added ${r.added} Pro${r.added === 1 ? '' : 's'}${r.skipped ? ` (${r.skipped} already listed or on a team)` : ''}.`) },
+  async parempro(el){ const pid = el.dataset.pid, w = paWhere(pid);
+    if (w && hasResults(w.ev)) return toast(`${pname(pid)} already has scores, so they stay.`);
+    if (!await ask(`Remove ${pname(pid)} from the Pro list?${w ? ` ${paRecName(w.ev, w.team)} will need another Pro.` : ''}`, {ok:'Remove'})) return;
+    paMigrateAll(); const c = cfg(); c.paPros = paPool().filter(p => p !== pid); Store.set('config', c);
+    const evs = evsCopy(); evs.forEach(e => { if (e.kind === 'proam'){ Object.keys(e.paAssign || {}).forEach(k => { if (e.paAssign[k] === pid) delete e.paAssign[k] }); paSync(e) } }); saveEvents(evs) },
+  async paprophotorm(el){ if (needAdmin()) return; const pid = el.dataset.pid, old = cardOf(pid); if (!old.photo) return; const url = old.photo;
+    try{ const row = await Dir.saveCard(pid, Object.assign({}, old, {photo:null})); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}); Dir.removeMedia(url); toast('Photo removed.') }catch(e){ toast(e.message || String(e)) } },
+  papick(el){ const cl = paOnClock(); if (!cl) return; const pid = el.dataset.pid; if (!paAvailable().includes(pid)) return toast('That Pro is taken.');
+    if (paAssign(cl.e.id, cl.t.id, pid)){ const pk = paPick(); pk.log = [...pk.log, cl.e.id + '|' + cl.t.id]; paSetPick(pk); toast(`${paRecName(findEvent(cl.e.id), cl.t)} pick ${pname(pid)}.`) } },
+  papickundo(){ if (needAdmin()) return; const pk = paPick(), k = pk.log[pk.log.length - 1]; if (!k) return; const x = paTeamByKey(k); if (x && paAssign(x.e.id, x.t.id, '') !== undefined){ pk.log = pk.log.slice(0, -1); paSetPick(pk) } },
+  papickend(){ if (needAdmin()) return; const pk = paPick(); pk.on = false; pk.log = []; paSetPick(pk) },
+  papickstart(){ if (needAdmin()) return; const pk = paPick(), miss = paAllTeams().filter(x => !(paModelOf(x.e).assign || {})[x.t.id]).map(x => x.e.id + '|' + x.t.id);
+    const ord = pk.order.filter(k => miss.includes(k)); miss.forEach(k => { if (!ord.includes(k)) ord.push(k) });
+    if (!ord.length) return toast('Every team has a Pro.'); paMigrateAll(); paSetPick({on:true, order:ord, log:[]}); toast('Pro selection started. It\u2019s on the TV now.') },
+  papickrand(){ if (needAdmin()) return; const miss = paAllTeams().filter(x => !(paModelOf(x.e).assign || {})[x.t.id]).map(x => x.e.id + '|' + x.t.id);
+    for (let i = miss.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [miss[i], miss[j]] = [miss[j], miss[i]] }
+    paSetPick(Object.assign(paPick(), {order:miss})); toast('Pick order drawn at random.') },
+  papickmv(el){ if (needAdmin()) return; const pk = paPick(); let ord = pk.order.length ? pk.order.slice() : paAllTeams().filter(x => !(paModelOf(x.e).assign || {})[x.t.id]).map(x => x.e.id + '|' + x.t.id);
+    const live = ord.filter(k => { const x = paTeamByKey(k); return x && !(x.e.paAssign || {})[x.t.id] }); const i = live.indexOf(el.dataset.k), j = i + (+el.dataset.v); if (i < 0 || j < 0 || j >= live.length) return; [live[i], live[j]] = [live[j], live[i]]; paSetPick(Object.assign(pk, {order:live})) },
+  async pasections(el){ if (needAdmin()) return; ensureSpecialEvent(); const all = evsCopy(), pas = all.filter(e => e.kind === 'proam');
+    if (el.dataset.v === 'mw'){ if (pas.length >= 2) return; const e1 = pas[0]; if (!e1) return; e1.paSection = 'M'; e1.name = 'Men\u2019s'; if (!paHasModel(e1)){ e1.paTeams = []; e1.paAssign = {} }
+      const e2 = newEvent({kind:'proam', format:'pro_am', name:'Women\u2019s'}); e2.paSection = 'W'; e2.proAmGames = e1.proAmGames; e2.paTeams = []; e2.paAssign = {}; e2.published = e1.published; all.push(e2); saveEvents(all); paMigrateAll(); return toast('Two sections: Men\u2019s and Women\u2019s.') }
+    const rest = pas.slice(1); if (rest.some(e => (e.paTeams || []).length || (e.pairs || []).some(t => (t || []).some(Boolean)))) return toast(`Move or remove the teams in ${rest.map(e => e.name).join(', ')} first.`);
+    const e1 = pas[0]; delete e1.paSection; e1.name = tripTitle(); saveEvents(all.filter(e => !rest.includes(e))); toast('One group.') },
+  async pascorers(el){ if (needAdmin()) return; const on = el.dataset.v === '1', c = cfg(); c.openScoring = on; Store.set('config', c); try{ await Dir.setOpenScoring(on) }catch(e){ console.warn(e) } toast(on ? 'Players can enter scores.' : 'Only the director enters scores.') },
   paigo(){ if (needAdmin()) return; const r = paImportCommit(); if (r) toast(`Added ${r.added} team${r.added === 1 ? '' : 's'}${r.newP ? ` (${r.newP} new player${r.newP === 1 ? '' : 's'})` : ''}.`) },
   paicancel(){ view.pai = null },
   sitab(el){ view.si.tab = +el.dataset.i },

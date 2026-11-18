@@ -235,3 +235,11 @@ test('10 Pro-Am teams: one team per row into Pro / A / B / C', () => {
   const ord = SI.proAmTeams([['Cole Whitaker / Clint Barrow / Sloane Mathis / Marissa Dunn']]);
   assert.deepEqual([ord.how, ord.teams[0].b], ['order', 'Sloane Mathis']);
 });
+test('11 Pro-Am: amateur teams without a Pro column, 3-name lines, and a Pros list', () => {
+  const r = SI.proAmTeams([['Team', 'A', 'B', 'C'], ['Aces', 'Clint Barrow', 'Sloane Mathis', 'Marissa Dunn'], ['', 'Luke Ashford', 'Tatum Reyes', 'Reese Calloway']]);
+  assert.deepEqual([r.how, r.teams.length, r.teams[0].pro, r.teams[0].name, r.warnings.length], ['columns', 2, '', 'Aces', 0]);
+  const o = SI.proAmTeams([['Clint Barrow / Sloane Mathis / Marissa Dunn']]);
+  assert.deepEqual([o.teams[0].pro, o.teams[0].a, o.teams[0].c], ['', 'Clint Barrow', 'Marissa Dunn']);
+  const p = SI.proAmTeams([['Pro', 'Bio'], ['Cole Whitaker', 'Head pro'], ['Wade Garrison', '']]);
+  assert.deepEqual([p.how, p.pros.length, p.pros[0].bio], ['pros', 2, 'Head pro']);
+});
