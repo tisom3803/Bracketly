@@ -5015,10 +5015,12 @@ function matchStatus(m, now){
   if (state.results[m.id]) return r ? 'done' : 'bye';
   if (r && r.live) return 'live';
   const t = slotDate(m.slotIdx); if (!t) return 'unscheduled';
-  const len = ((cfg() || {}).slotMinutes || 90) * 60000;
+  const len = matchLenMs();
   if (bothKnown(m) && now >= t.getTime() && now < t.getTime() + len) return 'now';
   return now < t.getTime() ? 'later' : 'late';
 }
+/* v3.2: a match can run longer than the time grid (e.g. a 15-minute grid for fixed start times like 8:30 / 9:45 with 75-minute matches) */
+function matchLenMs(){ const c = cfg() || {}; return (c.matchMinutes || c.slotMinutes || 90) * 60000 }
 const allMatches = (onlyPublished) => state.events.filter(ev => !onlyPublished || ev.published || view.admin).flatMap(ev => ev.matches);
 function myMatches(pid){
   const n = pname(pid);
@@ -6721,7 +6723,7 @@ function scheduleView(){
   const extra = x => `<div class="agx"><span class="st neutral">Club event</span><b>${esc(x.title)}</b>${x.place ? `<span>${placeLink(x.place)}</span>` : ''}${x.notes ? `<span>${esc(x.notes)}</span>` : ''}</div>`;
   const filtered = sf.ev || sf.court || sf.mine;
   /* v3.0: "now" is the first time slot still in play today; time slots where every match is final fold into one line */
-  const nowT = Date.now(), slotLen = ((cfg() || {}).slotMinutes || 90) * 60000, isToday = dayK === todayKey;
+  const nowT = Date.now(), slotLen = matchLenMs(), isToday = dayK === todayKey;
   const fin = it => !!(it.m && state.results[it.m.id]), played = it => fin(it) && bothKnown(it.m);
   const folds = g => g.items.length > 0 && g.items.every(fin) && g.items.some(played); // a slot of only auto-advanced byes is not "all final"
   const nowIdx = isToday ? groups.findIndex(g => g.items.some(it => it.m && !state.results[it.m.id] && (['live', 'now'].includes(matchStatus(it.m, nowT)) || (slotDate(it.m.slotIdx) && slotDate(it.m.slotIdx).getTime() + slotLen > nowT)))) : -1;
@@ -7656,7 +7658,9 @@ function paMigrateAll(){
   const c = cfg(); c.paPros = pool; Store.set('config', c); evs.forEach(e => { if (e.kind === 'proam') paSync(e) }); saveEvents(evs); return true;
 }
 const needPaMigrate = () => { if (view.admin && paEvsAll().some(e => !paHasModel(e))) queueMicrotask(() => { if (paMigrateAll()) render() }) };
-const paWhere = pid => { for (const e of paEvsAll()){ const A = e.paAssign || {}; const tid = Object.keys(A).find(k => A[k] === pid); if (tid) return {ev:e, team:(e.paTeams || []).find(t => t.id === tid)} } return null };
+/* A Pro is unique within a section, but one Pro can have a team in each section (Lobapalooza: Team Ben in Men's and in Ladies) */
+const paWhereAll = pid => { const out = []; for (const e of paEvsAll()){ const A = e.paAssign || {}; Object.keys(A).forEach(k => { if (A[k] === pid) out.push({ev:e, team:(e.paTeams || []).find(t => t.id === k)}) }) } return out };
+const paWhere = (pid, ev) => paWhereAll(pid).find(w => !ev || w.ev.id === ev.id) || null;
 const paRecName = (ev, t) => t ? (t.name || ((ev.paAssign || {})[t.id] ? 'Team ' + firstName(ev.paAssign[t.id]) : t.a ? firstName(t.a) + '\u2019s team' : 'New team')) : 'Team';
 const paSecLabel = ev => paEvsAll().length > 1 ? ev.name : '';
 const paMissingPros = ev => ev && ev.kind === 'proam' && paHasModel(ev) ? ev.paTeams.filter(t => !(ev.paAssign || {})[t.id]) : [];
@@ -7688,7 +7692,7 @@ function paEdit(evId, fn, opts){
 function paAssign(evId, teamId, pid){
   let moved = null;
   const r = paEdit(evId, (ev, evs) => {
-    if (pid) for (const e of evs){ if (e.kind !== 'proam' || !e.paAssign) continue; for (const [tid, p] of Object.entries(e.paAssign)){ if (p !== pid || (e === ev && tid === teamId)) continue; if (e !== ev && hasResults(e)){ toast(`${pname(pid)} already has scores with ${e.name}.`); return false } moved = paRecName(e, (e.paTeams || []).find(t => t.id === tid)); delete e.paAssign[tid] } }
+    if (pid) for (const [tid, p] of Object.entries(ev.paAssign || {})){ if (p !== pid || tid === teamId) continue; moved = paRecName(ev, (ev.paTeams || []).find(t => t.id === tid)); delete ev.paAssign[tid] }
     ev.paAssign = ev.paAssign || {}; if (pid) ev.paAssign[teamId] = pid; else delete ev.paAssign[teamId];
     return true;
   });
@@ -7700,7 +7704,7 @@ const paPick = () => Object.assign({on:false, order:[], log:[]}, (cfg() || {}).p
 const paSetPick = pk => { const c = cfg(); c.paPick = pk; Store.set('config', c) };
 const paTeamByKey = key => { const [eid, tid] = String(key).split('|'); const e = findEvent(eid); const t = e && (e.paTeams || []).find(x => x.id === tid); return t ? {e, t} : null };
 const paOnClock = () => { const pk = paPick(); if (!pk.on) return null; return pk.order.map(paTeamByKey).find(x => x && !(x.e.paAssign || {})[x.t.id]) || null };
-const paAvailable = () => { const used = new Set(paEvsAll().flatMap(e => Object.values(e.paAssign || {}))); return paPool().filter(p => !used.has(p)) };
+const paAvailable = ev => { if (!ev){ const c = paOnClock(); ev = c ? c.e : null } const used = new Set((ev ? [ev] : paEvsAll()).flatMap(e => Object.values(e.paAssign || {}))); return paPool().filter(p => !used.has(p)) };
 const paAllTeams = () => paEvsAll().flatMap(e => paModelOf(e).teams.map(t => ({e, t})));
 
 /* ---------- setup screens ---------- */
@@ -7737,21 +7741,21 @@ function paTeamsTab(ev){
 function paProsTab(){
   const pool = paPool(), teams = paAllTeams().length;
   return `${paNamesList()}
-  <p class="wnote" style="margin-top:4px">One list of Pros for the whole Pro-Am${paEvsAll().length > 1 ? ' (both sections pick from it)' : ''}. Add them any time; they show as Available until a team picks them.</p>
-  ${pool.length < teams ? `<div class="missing"><b>${teams} team${teams === 1 ? '' : 's'}, ${pool.length} Pro${pool.length === 1 ? '' : 's'}.</b> Add ${teams - pool.length} more so every team can have one.</div>` : ''}
+  <p class="wnote" style="margin-top:4px">One list of Pros for the whole Pro-Am${paEvsAll().length > 1 ? '. Each section picks from it, and a Pro can have one team in each section' : ''}. Add them any time; they show as Available until a team picks them.</p>
+  ${(() => { const most = Math.max(0, ...paEvsAll().map(e => paModelOf(e).teams.length)); return pool.length < most ? `<div class="missing"><b>${most} teams in a section, ${pool.length} Pro${pool.length === 1 ? '' : 's'}.</b> Add ${most - pool.length} more so every team can have one.</div>` : '' })()}
   <div class="card adm paadd"><label class="small muted" for="pap-name">Add a Pro</label><div class="row" style="gap:6px;flex-wrap:nowrap"><input id="pap-name" class="bk-input" list="pa-names" autocomplete="off" style="flex:1"><button class="btn gold" data-act="paaddpro">Add</button></div>
     <details class="more" style="margin-top:6px"><summary>Paste or upload a list of Pros</summary><textarea id="pap-paste" rows="3" placeholder="Cole Whitaker&#10;Wade Garrison | Head pro at Oak Hills (a bio after | is optional)"></textarea><div class="row" style="justify-content:space-between;margin-top:6px"><label class="btn alt sm">Spreadsheet (a Pro column, optional Bio)<input type="file" hidden data-chg="paprofile" accept=".xlsx,.xls,.xlsm,.ods,.csv,.tsv,.txt"></label><button class="btn sm" data-act="papastepros">Add these Pros</button></div></details></div>
-  ${pool.length ? `<div class="papros">${pool.map(pid => { const w = paWhere(pid), card = cardOf(pid), busy = view.photoBusy === 'pro' + pid;
-    return `<div class="papro"><div class="papro-h">${teamPic(paProPhoto(null, pid), 56, pname(pid))}<div class="papro-n"><b>${esc(pname(pid))}</b>${w ? `<span class="pachip">${esc(paRecName(w.ev, w.team))}${paSecLabel(w.ev) ? ' · ' + esc(w.ev.name) : ''}</span>` : '<span class="pachip ok">Available</span>'}</div></div>
+  ${pool.length ? `<div class="papros">${pool.map(pid => { const ws = paWhereAll(pid), card = cardOf(pid), busy = view.photoBusy === 'pro' + pid;
+    return `<div class="papro"><div class="papro-h">${teamPic(paProPhoto(null, pid), 56, pname(pid))}<div class="papro-n"><b>${esc(pname(pid))}</b>${ws.map(w => `<span class="pachip">${esc(paRecName(w.ev, w.team))}${paSecLabel(w.ev) ? ' · ' + esc(w.ev.name) : ''}</span>`).join('')}${ws.length < paEvsAll().length ? `<span class="pachip ok">Available${paEvsAll().length > 1 && ws.length ? ' in ' + esc(paEvsAll().filter(e => !ws.some(w => w.ev.id === e.id)).map(e => e.name).join(', ')) : ''}</span>` : ''}</div></div>
       <div class="row phbtns"><label class="btn alt sm ${busy ? 'dis' : ''}">${busy ? 'Uploading…' : card.photo ? 'Replace photo' : 'Add photo'}<input type="file" hidden accept="image/*" data-chg="paprophoto" data-pid="${esc(pid)}" ${busy ? 'disabled' : ''}></label>${card.photo && !busy ? `<button class="linkbtn" data-act="paprophotorm" data-pid="${esc(pid)}">Remove photo</button>` : ''}<button class="linkbtn" data-act="parempro" data-pid="${esc(pid)}">Remove Pro</button></div>
       <label class="small muted" for="pabio-${esc(pid)}">Bio <span class="muted">(team card and TV)</span></label><textarea id="pabio-${esc(pid)}" class="bk-input pabio" rows="2" maxlength="600" placeholder="Head pro at …, former college player…" data-chg="paprobio" data-pid="${esc(pid)}">${esc(card.bio || '')}</textarea></div>` }).join('')}</div>` : ''}
   <button class="btn alt" style="width:100%;margin-top:10px" data-act="pasub" data-v="pick">Next: Pro selection →</button>`;
 }
 function paPickTab(){
-  const evs = paEvsAll(), pool = paPool(), all = paAllTeams(), pk = paPick(), clock = paOnClock(), avail = paAvailable();
+  const evs = paEvsAll(), pool = paPool(), all = paAllTeams(), pk = paPick(), clock = paOnClock(), avail = clock ? paAvailable(clock.e) : (evs.some(e => paAvailable(e).length) ? pool : []);
   const missing = all.filter(x => !(paModelOf(x.e).assign || {})[x.t.id]);
   const lockedEvs = evs.filter(hasResults), drawnEvs = evs.filter(e => isDrawn(e) && !hasResults(e));
-  const proOpts = (e, t) => { const cur = (paModelOf(e).assign || {})[t.id] || ''; return `<option value="">— No Pro yet —</option>${pool.map(p => { const w = paWhere(p), here = cur === p; return `<option value="${esc(p)}" ${here ? 'selected' : ''}>${esc(pname(p))}${!here && w ? ` (now ${esc(paRecName(w.ev, w.team))})` : !here ? ' · available' : ''}</option>` }).join('')}` };
+  const proOpts = (e, t) => { const cur = (paModelOf(e).assign || {})[t.id] || ''; return `<option value="">— No Pro yet —</option>${pool.map(p => { const w = paWhere(p, e), here = cur === p; return `<option value="${esc(p)}" ${here ? 'selected' : ''}>${esc(pname(p))}${!here && w ? ` (now ${esc(paRecName(w.ev, w.team))})` : !here ? ' · available' : ''}</option>` }).join('')}` };
   const order = pk.order.map(paTeamByKey).filter(Boolean);
   const pickCard = pk.on ? `<div class="card adm papick on">
       ${clock ? `<p class="lbl">On the clock · pick ${order.filter(x => (x.e.paAssign || {})[x.t.id]).length + 1} of ${order.length}</p><div class="papick-clock">${teamPic((paPhotos(clock.e).teams || {})[clock.t.id], 64, paRecName(clock.e, clock.t))}<div><b>${esc(paRecName(clock.e, clock.t))}</b><span class="small muted">${esc([clock.t.a, clock.t.b, clock.t.c].filter(Boolean).map(pname).join(' · '))}${paSecLabel(clock.e) ? ' · ' + esc(clock.e.name) : ''}</span></div></div>
@@ -7764,7 +7768,7 @@ function paPickTab(){
       ${missing.length ? `<ol class="papick-order">${(pk.order.length ? order.filter(x => !(x.e.paAssign || {})[x.t.id]) : missing).map((x, i, arr) => `<li><span>${esc(paRecName(x.e, x.t))}${paSecLabel(x.e) ? ` <i class="small muted">${esc(x.e.name)}</i>` : ''}</span><span class="papick-mv"><button data-act="papickmv" data-k="${esc(x.e.id + '|' + x.t.id)}" data-v="-1" aria-label="Move up" ${i ? '' : 'disabled'}>▲</button><button data-act="papickmv" data-k="${esc(x.e.id + '|' + x.t.id)}" data-v="1" aria-label="Move down" ${i < arr.length - 1 ? '' : 'disabled'}>▼</button></span></li>`).join('')}</ol>
         <div class="row"><button class="btn alt sm" data-act="papickrand">Random draw</button><button class="btn gold sm" data-act="papickstart" ${avail.length ? '' : 'disabled'}>Start Pro selection</button></div>${avail.length ? '' : '<p class="small bad">Add Pros on step 2 first.</p>'}`
       : '<p class="small">Every team has a Pro.</p>'}</div>`;
-  return `<p class="wnote" style="margin-top:4px">Each team needs a Pro before the draw and schedule. Pick from the list for each team, or run a Pro selection below. A Pro can only be on one team.</p>
+  return `<p class="wnote" style="margin-top:4px">Each team needs a Pro before the draw and schedule. Pick from the list for each team, or run a Pro selection below. A Pro can be on only one team${evs.length > 1 ? ' per section' : ''}.</p>
   ${lockedEvs.length ? `<div class="missing"><b>Scores are in for ${esc(lockedEvs.map(e => e.name).join(', '))}: those Pros are locked.</b></div>` : ''}
   ${drawnEvs.length ? `<div class="missing"><b>${esc(drawnEvs.map(e => e.name).join(', '))} ${drawnEvs.length === 1 ? 'is' : 'are'} already drawn.</b> No scores yet, so swapping a Pro is fine, but redraw afterwards.</div>` : ''}
   ${missing.length ? `<div class="missing"><b>${missing.length} team${missing.length === 1 ? '' : 's'} without a Pro.</b> The draw waits until every team has one.${pool.length < all.length ? ` Only ${pool.length} Pro${pool.length === 1 ? '' : 's'} for ${all.length} teams.` : ''}</div>` : all.length ? '<div class="okbox">Every team has a Pro.</div>' : ''}
@@ -7775,12 +7779,12 @@ function paPickTab(){
 }
 /* TV: live Pro selection (takes over the screen while it runs) */
 function tvProPick(){
-  const pk = paPick(), order = pk.order.map(paTeamByKey).filter(Boolean), clock = paOnClock(), avail = paAvailable();
+  const pk = paPick(), order = pk.order.map(paTeamByKey).filter(Boolean), clock = paOnClock(), avail = clock ? paAvailable(clock.e) : [];
   const done = order.filter(x => (x.e.paAssign || {})[x.t.id]);
   const nextUp = clock ? order.slice(order.indexOf(order.find(x => x.t.id === clock.t.id)) + 1).filter(x => !(x.e.paAssign || {})[x.t.id]).slice(0, 3) : [];
   return `<section class="tvpk"><h2>Pro selection</h2><div class="tvpk-g">
     <div class="tvpk-clock">${clock ? `<span class="lbl">On the clock</span>${teamPic((paPhotos(clock.e).teams || {})[clock.t.id], 170, paRecName(clock.e, clock.t), 'tp-tvpk')}<b>${esc(paRecName(clock.e, clock.t))}</b><span>${esc([clock.t.a, clock.t.b, clock.t.c].filter(Boolean).map(pname).join(' · '))}</span>${paSecLabel(clock.e) ? `<em>${esc(clock.e.name)}</em>` : ''}<small>Pick ${done.length + 1} of ${order.length}</small>${nextUp.length ? `<p class="tvpk-next">Up next: ${esc(nextUp.map(x => paRecName(x.e, x.t)).join(', '))}</p>` : ''}` : `<span class="lbl">Selection complete</span><b>Every team has its Pro</b>`}</div>
-    <div class="tvpk-side"><h3>Available Pros <small>${avail.length}</small></h3><div class="tvpk-pros">${avail.map(p => `<figure>${teamPic(paProPhoto(null, p), 92, pname(p), 'tp-tvpk')}<figcaption>${esc(pname(p))}</figcaption></figure>`).join('') || '<p class="tvempty">None left</p>'}</div>
+    <div class="tvpk-side"><h3>Available Pros${clock && paSecLabel(clock.e) ? ' · ' + esc(clock.e.name) : ''} <small>${avail.length}</small></h3><div class="tvpk-pros">${avail.map(p => `<figure>${teamPic(paProPhoto(null, p), 92, pname(p), 'tp-tvpk')}<figcaption>${esc(pname(p))}</figcaption></figure>`).join('') || '<p class="tvempty">None left</p>'}</div>
       <h3>Picks</h3><ol class="tvpk-picks">${done.slice().reverse().slice(0, 8).map(x => { const p = x.e.paAssign[x.t.id]; return `<li>${teamPic(paProPhoto(null, p), 44, pname(p), 'tp-tvpk')}<b>${esc(pname(p))}</b><span>→ ${esc(paRecName(x.e, x.t))}${paSecLabel(x.e) ? ' · ' + esc(x.e.name) : ''}</span></li>` }).join('') || '<li class="tvempty">No picks yet</li>'}</ol></div></div></section>`;
 }
 /* Pro-Am Format step pieces: sections and who scores */
@@ -7852,13 +7856,13 @@ function paImportCommit(){
     const id = 'pt' + uid(), nm = t.name && !(t.pro && t.name === 'Team ' + t.pro.split(' ')[0]) ? t.name.slice(0, 40) : '';
     ev.paTeams.push({id, name:nm, a:ids[0], b:ids[1], c:ids[2]});
     const fl = parseInt(String(t.flight || '').replace(/\D+/g, ''), 10); if (fl > 0 && fl < 9){ ev.paFlight = Object.assign({}, ev.paFlight || {}); ev.paFlight[id] = fl }
-    if (pro){ if (!pool.includes(pro)) pool.push(pro); if (evs.some(e => Object.values(e.paAssign || {}).includes(pro))) dupPro++; else ev.paAssign[id] = pro; if (t.bio) bios.push([pro, t.bio.slice(0, 600)]) }
+    if (pro){ if (!pool.includes(pro)) pool.push(pro); if (Object.values(ev.paAssign || {}).includes(pro)) dupPro++; else ev.paAssign[id] = pro; if (t.bio) bios.push([pro, t.bio.slice(0, 600)]) }
     added++;
   });
   savePlayers(players()); const c = cfg(); c.paPros = pool; Store.set('config', c);
   evs.forEach(e => { if (e.kind === 'proam') paSync(e) }); saveEvents(evs); try{ inferFromEvents() }catch(e){}
   view.pai = null; paSaveBios(bios);
-  if (dupPro) toast(`${dupPro} Pro${dupPro === 1 ? ' was' : 's were'} listed on two teams; only the first keeps them.`);
+  if (dupPro) toast(`${dupPro} Pro${dupPro === 1 ? ' was' : 's were'} listed on two teams in one section; only the first keeps them.`);
   return {added, newP:0};
 }
 function wzEvents(){
@@ -10747,14 +10751,14 @@ Object.assign(ACT, {
     paMigrateAll(); const c = cfg(); c.paPros = [...paPool(), pid]; Store.set('config', c); if (x) x.value = ''; toast(`${n} added. Available.`) },
   papastepros(){ const box = document.getElementById('pap-paste'), lines = String((box || {}).value || '').split(/\n+/).map(l => l.trim()).filter(Boolean); if (!lines.length) return toast('One Pro per line.');
     const r = paAddPros(lines.map(l => { const [n, ...b] = l.split(/\s*[|\t]\s*/); return {name:n.replace(/^\d+[.)]\s*/, ''), bio:b.join(' ')} })); if (box) box.value = ''; toast(`Added ${r.added} Pro${r.added === 1 ? '' : 's'}${r.skipped ? ` (${r.skipped} already listed or on a team)` : ''}.`) },
-  async parempro(el){ const pid = el.dataset.pid, w = paWhere(pid);
-    if (w && hasResults(w.ev)) return toast(`${pname(pid)} already has scores, so they stay.`);
-    if (!await ask(`Remove ${pname(pid)} from the Pro list?${w ? ` ${paRecName(w.ev, w.team)} will need another Pro.` : ''}`, {ok:'Remove'})) return;
+  async parempro(el){ const pid = el.dataset.pid, ws = paWhereAll(pid);
+    if (ws.some(w => hasResults(w.ev))) return toast(`${pname(pid)} already has scores, so they stay.`);
+    if (!await ask(`Remove ${pname(pid)} from the Pro list?${ws.length ? ` ${ws.map(w => paRecName(w.ev, w.team)).join(' and ')} will need another Pro.` : ''}`, {ok:'Remove'})) return;
     paMigrateAll(); const c = cfg(); c.paPros = paPool().filter(p => p !== pid); Store.set('config', c);
     const evs = evsCopy(); evs.forEach(e => { if (e.kind === 'proam'){ Object.keys(e.paAssign || {}).forEach(k => { if (e.paAssign[k] === pid) delete e.paAssign[k] }); paSync(e) } }); saveEvents(evs) },
   async paprophotorm(el){ if (needAdmin()) return; const pid = el.dataset.pid, old = cardOf(pid); if (!old.photo) return; const url = old.photo;
     try{ const row = await Dir.saveCard(pid, Object.assign({}, old, {photo:null})); view.cards = Object.assign({}, view.cards || {}, {[pid]:row}); Dir.removeMedia(url); toast('Photo removed.') }catch(e){ toast(e.message || String(e)) } },
-  papick(el){ const cl = paOnClock(); if (!cl) return; const pid = el.dataset.pid; if (!paAvailable().includes(pid)) return toast('That Pro is taken.');
+  papick(el){ const cl = paOnClock(); if (!cl) return; const pid = el.dataset.pid; if (!paAvailable(cl.e).includes(pid)) return toast(`That Pro already has a team${paSecLabel(cl.e) ? ' in ' + cl.e.name : ''}.`);
     if (paAssign(cl.e.id, cl.t.id, pid)){ const pk = paPick(); pk.log = [...pk.log, cl.e.id + '|' + cl.t.id]; paSetPick(pk); toast(`${paRecName(findEvent(cl.e.id), cl.t)} pick ${pname(pid)}.`) } },
   papickundo(){ if (needAdmin()) return; const pk = paPick(), k = pk.log[pk.log.length - 1]; if (!k) return; const x = paTeamByKey(k); if (x && paAssign(x.e.id, x.t.id, '') !== undefined){ pk.log = pk.log.slice(0, -1); paSetPick(pk) } },
   papickend(){ if (needAdmin()) return; const pk = paPick(); pk.on = false; pk.log = []; paSetPick(pk) },
