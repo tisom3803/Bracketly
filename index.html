@@ -1361,6 +1361,7 @@ header.top.bk-top.v3-top,.v3-top{position:relative;overflow:hidden;display:block
 .v3-logo{display:block;border-radius:50%;box-shadow:0 4px 14px rgba(0,0,0,.35);transition:width .2s var(--ease),height .2s var(--ease)}
 .v3-top.tall .v3-logo{width:92px;height:92px}.v3-top:not(.tall) .v3-logo{width:46px;height:46px}
 .v3-top.v3l .v3-logo{width:104px;height:104px}
+.v3-logo.v3-tlogo{object-fit:cover;background:#fff;border:3px solid rgba(255,255,255,.9)} /* v3.2.1: the tournament's own logo on its home banner */
 .v3-ring{border:1.5px solid var(--au)!important;color:var(--iv)!important;background:rgba(7,54,37,.35)}
 .v3-ring:hover{background:rgba(213,179,106,.16)!important}
 .v3-ring svg{width:20px!important;height:20px!important}
@@ -2077,6 +2078,8 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 .tvpa-note{color:rgba(247,245,236,.7);font-size:16px;margin:10px 0 0}
 .tvpa-side{color:var(--iv)}.tvpa-top{list-style:none;margin:0;padding:0;display:grid;gap:6px}.tvpa-top li{display:grid;grid-template-columns:1fr auto;padding:8px 12px;background:rgba(247,245,236,.06);border-radius:12px}.tvpa-top li b{font-size:20px}.tvpa-top li span{grid-column:1;font-size:14px;opacity:.7}.tvpa-top li em{grid-row:1/3;grid-column:2;align-self:center;font:700 28px/1 var(--fd);font-style:normal}
 .tvpa-pro{margin-top:16px;padding:16px;border-radius:18px;background:rgba(247,245,236,.08);border:1px solid rgba(213,179,106,.35);text-align:center}.tvpa-pro .tpic{display:grid;margin:4px auto 10px}.tvpa-pro b{display:block;font:600 26px/1.2 var(--fd)}.tvpa-pro span{font-size:16px;opacity:.75}.tvpa-pro p{font-size:17px;line-height:1.45;margin:10px 0 0;text-align:left}
+.tvpa-pro.tight{display:grid;grid-template-columns:auto 1fr;column-gap:14px;text-align:left;align-items:center}.tvpa-pro.tight h3{grid-column:1/-1;text-align:center;margin-top:0}.tvpa-pro.tight .tpic{--s:84px!important;grid-row:2/4;margin:0}.tvpa-pro.tight b,.tvpa-pro.tight span{grid-column:2}.tvpa-pro.tight p{grid-column:1/-1}
+#app.tvmode #scroller{overflow:hidden}
 .tvsp{margin-top:20px;text-align:center}.tvsp h2::after,.tvsp h2::before{display:none!important}.tvsp h2{font:600 40px/1.1 var(--fd);color:var(--iv);margin:10px 0 24px}
 .tvsp-grid{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:center}.tvsp-grid figure{margin:0;background:rgba(247,245,236,.95);border-radius:18px;padding:18px 26px;min-width:220px}.tvsp-grid figure.title{flex-basis:100%;max-width:640px;margin:0 auto;padding:26px}
 .tvsp-grid img{max-height:110px;max-width:280px;object-fit:contain}.tvsp-grid .title img{max-height:180px;max-width:520px}.tvsp-grid span{font:700 28px/1.2 var(--fd);color:var(--ink)}.tvsp-grid figcaption{font-size:15px;color:var(--muted);margin-top:8px}
@@ -2094,7 +2097,7 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '3.2.0';
+const APP_VERSION = '3.2.1';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -6189,7 +6192,7 @@ function header(){
     ${hdrImg()}
     <div class="v3-top-row">
       ${dir ? '<span class="v3-top-side"></span>' : `<span class="v3-top-side">${bell}${meBtn}</span>`}
-      <button class="bk-brand v3-brand" data-act="tab" data-v="today" aria-label="Bracketly home for ${esc(tripTitle())}"><img class="logo brandmark v3-logo" src="${BRAND_HERO}" width="${home ? 92 : 46}" height="${home ? 92 : 46}" alt=""><span class="v6-top-t" aria-hidden="true">${esc(tripTitle())}</span></button>
+      <button class="bk-brand v3-brand" data-act="tab" data-v="today" aria-label="Bracketly home for ${esc(tripTitle())}">${(() => { const tl = pic(cfg() || {}, 'logo'); return `<img class="logo brandmark v3-logo${tl ? ' v3-tlogo' : ''}" src="${tl || BRAND_HERO}" width="${home ? 92 : 46}" height="${home ? 92 : 46}" alt="">` })()}<span class="v6-top-t" aria-hidden="true">${esc(tripTitle())}</span></button>
       <span class="v3-top-side end">${syncPill()}${dir ? `<button class="bk-hpill" data-act="tab" data-v="today">Return to tournament</button>` : more}</span>
     </div>
     ${home ? '<p class="v3-tagline" aria-hidden="true"><i></i>Tennis. Pickleball. Together.<i></i></p>' : ''}
@@ -8680,6 +8683,33 @@ const paPhotos = ev => (ev && ev.photos) || {};
 const paProId = t => t && Array.isArray(t.pids) ? (t.pids[Math.max(0, (t.playerRoles || []).indexOf('pro'))] || null) : null;
 const paTeamPhoto = (ev, t) => { const pt = paHasModel(ev) && t && t.pids ? ev.paTeams.find(x => x.a && x.a === t.pids[1]) : null; if (pt) return (paPhotos(ev).teams || {})[pt.id] || null; const id = paProId(t); return id ? ((paPhotos(ev).teams || {})[id] || null) : null };
 const paProPhoto = (ev, pid) => pid ? ((paPhotos(ev).pros || {})[pid] || cardOf(pid).photo || null) : null;
+/* v3.2.1: fit the Pro-Am TV slide to the screen (1280x720 up to 1920x1080): no clipped bios, no scrollbars */
+function fitTV(extra){
+  const sec = document.querySelector('.tvpa'); if (!sec) return;
+  /* the sponsor strip under a Pro-Am slide keeps only the presenting sponsor (every sponsor gets the sponsors slide) */
+  const spx = sec.parentElement && sec.parentElement.querySelector(':scope > .sponsors');
+  if (spx){ let cut = false; [...spx.children].forEach((el, i) => { if (i > 0 && el.classList.contains('lbl')) cut = true; if (cut) el.style.display = 'none' }) }
+  const spH = spx && spx.offsetHeight ? spx.getBoundingClientRect().height + 16 : 0;
+  const H = window.innerHeight - 12 - spH - (extra || 0), top = sec.getBoundingClientRect().top, avail = H - top; if (avail < 120) return;
+  const main = sec.querySelector('.tvpa-main'), side = sec.querySelector('.tvpa-side');
+  if (main){ main.style.zoom = ''; const mh = main.scrollHeight; if (mh > avail) main.style.zoom = Math.max(.5, avail / mh).toFixed(3) }
+  if (!side) return;
+  const pro = side.querySelector('.tvpa-pro'), p = pro && pro.querySelector('p'), rows = [...side.querySelectorAll('.tvpa-top li')];
+  const topH = [...side.children].find(el => el.tagName === 'H3');
+  side.style.zoom = ''; rows.forEach(li => li.style.display = ''); if (topH) topH.style.display = ''; if (pro) pro.classList.remove('tight'); if (p) p.style.fontSize = '';
+  const bottom = () => { const last = side.lastElementChild; return last ? last.getBoundingClientRect().bottom : 0 };
+  const over = () => bottom() > H;
+  let f = 17; while (p && over() && f > 15){ f--; p.style.fontSize = f + 'px' }
+  for (let n = rows.length - 1; over() && n >= 3; n--) rows[n].style.display = 'none';
+  if (pro && over()) pro.classList.add('tight');
+  while (p && over() && f > 14){ f--; p.style.fontSize = f + 'px' }
+  if (pro && over()){ for (let n = Math.min(rows.length, 3) - 1; over() && n >= 0; n--) rows[n].style.display = 'none'; if (topH && rows.every(li => li.style.display === 'none')) topH.style.display = 'none' }
+  while (p && over() && f > 13){ f--; p.style.fontSize = f + 'px' }
+  if (over()){ const h = bottom() - top; if (h > 0) side.style.zoom = Math.max(.5, avail / h).toFixed(3) }
+  const sc = document.getElementById('scroller'), d = sc ? sc.scrollHeight - sc.clientHeight : 0;
+  if (d > 1 && !extra) fitTV(d + 2);
+}
+window.addEventListener('resize', () => { if (view && view.tv) requestAnimationFrame(() => fitTV()) });
 function teamPic(url, size, label, cls){ return `<span class="tpic ${cls || ''}" style="--s:${size}px" aria-hidden="true">${url ? `<img src="${esc(url)}" alt="" loading="lazy" decoding="async">` : esc(initials(label || ''))}</span>` }
 function sidePhoto(m, slot){
   const ev = findEvent(m.eventId); if (!ev) return null;
@@ -8755,7 +8785,7 @@ function tvProAm(ev){
       return `${fl.length > 1 ? `<h3>${esc(f.name)}</h3>` : ''}<ol class="tvpa-list">${st.map((r, i) => { const pid = paProId(r.team), ph = paTeamPhoto(ev, r.team) || paProPhoto(ev, pid); return `<li class="${i === 0 && r.games ? 'lead' : ''}"><span class="tvpa-n">${i + 1}</span>${teamPic(ph, 56, paTeamName(r.team))}<span class="tvpa-t"><b>${esc(paTeamName(r.team))}</b><small>${esc((r.team.players || []).join(' · '))}</small></span><span class="tvpa-g"><b>${r.games}</b><small>games</small></span></li>` }).join('')}</ol>` }).join('')}
       ${T ? `<p class="tvpa-note">${T}-game matches, no-ad · total games won</p>` : ''}</div>
     <aside class="tvpa-side">${top.length ? `<h3>Top amateurs</h3><ol class="tvpa-top">${top.map(r => `<li><b>${esc(r.name)}</b><span>${esc(PA_ROLE[r.role])} · ${esc(paTeamName(r.team))}</span><em>${r.games}</em></li>`).join('')}</ol>` : ''}
-      ${pick ? `<div class="tvpa-pro"><h3>Meet the Pros</h3>${teamPic(paProPhoto(ev, pick.pid), 132, pname(pick.pid), 'tp-pro')}<b>${esc(pname(pick.pid))}</b><span>${esc(paTeamName(pick.t))}</span>${paBio(pick.pid) ? `<p>${esc(paBio(pick.pid).slice(0, 280))}</p>` : ''}</div>` : ''}</aside></section>`;
+      ${pick ? `<div class="tvpa-pro"><h3>Meet the Pros</h3>${teamPic(paProPhoto(ev, pick.pid), 132, pname(pick.pid), 'tp-pro')}<b>${esc(pname(pick.pid))}</b><span>${esc(paTeamName(pick.t))}</span>${paBio(pick.pid) ? `<p>${esc(paBio(pick.pid).slice(0, 600))}</p>` : ''}</div>` : ''}</aside></section>`;
 }
 function tvSponsors(){
   const sp = sponsorsSorted(); if (!sp.length) return '';
@@ -9036,7 +9066,7 @@ function drawInner(){
   }
   syncEngine();
   if (view.print){ app.innerHTML = `<div id="scroller">${printView()}</div>`; requestAnimationFrame(fitPrintBrackets); return }
-  if (view.tv){ app.innerHTML = `<div id="scroller">${tvView()}</div>`; return }
+  if (view.tv){ app.innerHTML = `<div id="scroller">${tvView()}</div>`; requestAnimationFrame(() => fitTV()); return }
   if (view.signup){ app.innerHTML = `<div id="scroller">${signupView()}</div>` + modal(); restoreFocus(fid, sel); return }
   if (view.screen === 'wizard'){ app.innerHTML = wizardView() + modal(); finishDraw(keep, fid, sel); return }
   if (!view.me && view.tab !== 'admin'){ app.innerHTML = gate() + modal(); restoreFocus(fid, sel); return }
