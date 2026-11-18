@@ -5004,7 +5004,17 @@ function buildSchedule(evs, opts){
       }
       if (ev.format === 'club_cup') ((ev.clubCup || {}).sessions || []).forEach(se => groups.push({chain:ev.id, after:[], ms:ev.matches.filter(m => m.sessionId === se.id)}));
     });
-    groups.forEach(g => { g.ms = g.ms.filter(m => !fixed.has(m.id)); g.ms.forEach(m => gkey.set(m.id, g)) });
+    groups.forEach(g => { g.ms = g.ms.filter(m => !fixed.has(m.id)) });
+    // A block that can't play at once (more matches than courts, or the same player on two lines) goes out in waves:
+    // each wave fits the courts with nobody twice, and waves follow one another like sessions do.
+    for (let gi = 0; gi < groups.length; gi++){
+      const g = groups[gi], ps = g.ms.flatMap(knownOf);
+      if (g.ms.length <= courts && new Set(ps).size === ps.length) continue;
+      const waves = [];
+      g.ms.forEach(m => { const mp = knownOf(m); let w = waves.find(x => x.ms.length < courts && !mp.some(p => x.ps.has(p))); if (!w){ w = {ms:[], ps:new Set()}; waves.push(w) } w.ms.push(m); mp.forEach(p => w.ps.add(p)) });
+      groups.splice(gi, 1, ...waves.map(w => ({chain:g.chain, after:g.after, ms:w.ms}))); gi += waves.length - 1;
+    }
+    groups.forEach(g => g.ms.forEach(m => gkey.set(m.id, g)));
     const chainEnd = {};
     const placeGroups = () => groups.forEach(g => {
       const prior = Math.max(-1, chainEnd[g.chain] ?? -1, ...g.after.map(c => chainEnd[c] ?? -1));
