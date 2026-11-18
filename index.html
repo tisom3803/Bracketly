@@ -2004,6 +2004,22 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 .si-w{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:4px}.si-w span{font-size:12px;padding:2px 7px;border-radius:8px;background:#ECECE6;color:#4A4A44}.si-w span.bad{background:#F6D9D5;color:#8A2820}
 .si-mv{grid-row:1;grid-column:2;max-width:150px;min-height:36px!important;font-size:14px!important;padding:4px 8px}
 @media (max-width:520px){ .si-e{grid-template-columns:1fr} .si-mv{grid-row:auto;grid-column:1;max-width:none;width:100%} .si-pn{white-space:normal} .si-cols{grid-template-columns:1fr} .si-foot .btn{flex:1 1 auto} }
+
+/* v3.2 photos */
+.tpic{--s:40px;display:inline-grid;place-items:center;flex:none;width:var(--s);height:var(--s);border-radius:50%;overflow:hidden;background:var(--slot,#EEF0EA);color:var(--muted,#667);font:700 calc(var(--s) * .36)/1 var(--fb,inherit);vertical-align:middle;box-shadow:0 0 0 2px rgba(255,255,255,.85),0 1px 3px rgba(0,0,0,.18)}
+.tpic img{width:100%;height:100%;object-fit:cover;display:block}
+.tpic.tp-cup{display:grid;margin:0 auto 6px;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 2px 8px rgba(0,0,0,.3)}
+.tpic.tp-board{display:grid;margin:0 auto 4px}
+.tpic.tp-side{margin-right:8px;box-shadow:0 0 0 1px rgba(0,0,0,.08)}.mr-t .tpic.tp-side{align-self:center}
+.tpic.tp-tv{margin:0 8px 0 0;vertical-align:-8px}.tvrow .tpic.tp-tv,.tvc2 .tpic.tp-tv{display:inline-grid!important;width:var(--s)!important;height:var(--s)!important}
+.pateam{position:relative;display:inline-block;margin-right:8px;vertical-align:middle}.tpic.tp-papro{position:absolute;right:-6px;bottom:-4px}
+.phgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0 8px}
+@media (max-width:520px){ .phgrid{grid-template-columns:1fr} }
+.phtile{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1.5px dashed var(--line,#ddd);border-radius:12px;background:var(--card,#fff);min-width:0}
+.phtile-b{display:flex;flex-direction:column;gap:2px;min-width:0}.phtile-b b{font-size:14px;overflow-wrap:anywhere}
+.phbtns{gap:8px;align-items:center;margin-top:4px}.phbtns .btn.dis{opacity:.6;pointer-events:none}.phrm{text-decoration:underline;color:var(--muted,#667)}
+.phpa{margin-top:10px}.phpair h4{margin:10px 0 2px;font-size:14px}
+@media print{ .tpic{box-shadow:none;border:1px solid #ccc} .phgrid,.phpa{display:none} }
 </style>
 </head>
 <body>
@@ -2017,7 +2033,7 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '3.1.0';
+const APP_VERSION = '3.2.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -2199,6 +2215,15 @@ const Dir = {
     }
     if (this.mode === 'claude' && this.assets){ const r = await this.assets.upload(blob); return r.url }
     return await fileURL(blob);
+  },
+  // v3.2: remove a photo this tournament uploaded (director-only by storage policy); anything else is left alone
+  async removeMedia(url){
+    try{
+      if (this.mode !== 'supabase' || !url || !TRIP) return false;
+      const mark = `/object/public/${MEDIA_BUCKET}/`, i = String(url).indexOf(mark); if (i < 0) return false;
+      const path = decodeURIComponent(String(url).slice(i + mark.length).split('?')[0]); if (!path.startsWith(TRIP.id + '/')) return false;
+      const {error} = await this.sb.storage.from(MEDIA_BUCKET).remove([path]); if (error) throw error; return true;
+    }catch(e){ console.warn('remove photo', e); return false }
   },
   // ---- v4 player cards ----
   async loadCards(){
@@ -6185,9 +6210,9 @@ function v3Scoreboard(){
     const cc = cup.clubCup, t = getClubCupTotals(cup);
     const mid = cc.pointsToWin ? `${fmtPts(cc.pointsToWin)} to win` : `${t.matchesComplete} of ${t.matchesTotal} played`;
     return `<button class="v3-board" data-act="openev" data-id="${esc(cup.id)}" aria-label="${esc(`${cup.name}: ${cc.teamAName} ${fmtPts(t.sideA)}, ${cc.teamBName} ${fmtPts(t.sideB)}. ${mid}${t.winner ? `. ${t.winner === 'A' ? cc.teamAName : cc.teamBName} win` : ''}`)}">
-      <span class="v3-board-side"><small>${esc(cc.teamAName)}</small><b>${fmtPts(t.sideA)}</b></span>
+      <span class="v3-board-side">${cc.photoA || cc.photoB ? teamPic(cc.photoA, 40, cc.teamAName, 'tp-board') : ''}<small>${esc(cc.teamAName)}</small><b>${fmtPts(t.sideA)}</b></span>
       <span class="v3-board-mid">${ICON.trophy}<em>${/cup/i.test(cup.name) ? 'Team Cup' : esc(cup.name)}</em><small>${t.winner ? esc((t.winner === 'A' ? cc.teamAName : cc.teamBName) + ' win') : esc(mid)}</small></span>
-      <span class="v3-board-side"><small>${esc(cc.teamBName)}</small><b>${fmtPts(t.sideB)}</b></span></button>`;
+      <span class="v3-board-side">${cc.photoA || cc.photoB ? teamPic(cc.photoB, 40, cc.teamBName, 'tp-board') : ''}<small>${esc(cc.teamBName)}</small><b>${fmtPts(t.sideB)}</b></span></button>`;
   }
   if (brand().clubBoard){ const cb = clubBoardHtml(); if (cb) return cb }
   const evs = state.events.filter(e => (e.published || view.admin) && e.matches.length); if (!evs.length) return '';
@@ -6313,7 +6338,8 @@ function teamRow(m, slot, opts){
   const seed = team && team.seed && !m.proAm && m.poolIdx == null ? `<span class="mr-seed">${team.seed}</span>` : '';
   const label = names === null ? `<span class="tbd">${esc(feederLabel(m, slot))}</span>` : esc(opts.short ? names.map(x => x.split(' ').slice(-1)[0]).join(' / ') : names.join(' / ') || '—');
   const mine = view.me && names && names.includes(pname(view.me));
-  return `<span class="mr-t ${won ? 'won' : ''} ${lost ? 'lost' : ''} ${mine ? 'mine' : ''}">${seed}<span class="mr-n">${label}</span>${won ? '<span class="mr-w" aria-hidden="true">✓</span>' : ''}<span class="mr-s">${setCells(m, slot).map(c => `<span>${esc(c)}</span>`).join('')}</span></span>`;
+  const ph = names === null ? null : sidePhoto(m, slot);
+  return `<span class="mr-t ${won ? 'won' : ''} ${lost ? 'lost' : ''} ${mine ? 'mine' : ''}">${seed}${ph ? teamPic(ph, 24, '', 'tp-side') : ''}<span class="mr-n">${label}</span>${won ? '<span class="mr-w" aria-hidden="true">✓</span>' : ''}<span class="mr-s">${setCells(m, slot).map(c => `<span>${esc(c)}</span>`).join('')}</span></span>`;
 }
 function matchAria(m, ctx, when, s){
   const team = slot => { const t = (m.team1Id || m.team2Id || m.feedsFrom) && !m.sideAPlayers ? matchTeam(m, slot) : null; return (t && t.seed && !m.proAm && m.poolIdx == null ? `seed ${t.seed}, ` : '') + sideLabel(m, slot) };
@@ -6933,7 +6959,7 @@ function proAmView(ev, print){
     const ms = ev.matches.filter(m => m.proAm && m.proAm.flightId === f.id);
     const rounds = [1,2,3].map(r => ms.filter(m => m.proAm.round === r));
     return `<h2 class="bk-h2">${esc(f.name)}</h2>
-    <table class="tbl stand"><caption class="sr">${esc(f.name)} standings</caption><tr><th scope="col"><span class="sr">Place</span></th><th scope="col" style="text-align:left">Team</th><th scope="col">Games</th><th scope="col">Matchups</th></tr>${st.map((r, i) => `<tr><td class="n">${i + 1}</td><td style="text-align:left"><b>${esc(r.team.name || proAmDefaultTeamName(r.team))}</b><br><span class="small muted">${esc(r.team.players.join(', '))}</span></td><td class="n">${r.games}-${r.gamesAgainst}</td><td class="n">${r.matchupsWon}-${r.matchups - r.matchupsWon}</td></tr>`).join('')}</table>
+    <table class="tbl stand"><caption class="sr">${esc(f.name)} standings</caption><tr><th scope="col"><span class="sr">Place</span></th><th scope="col" style="text-align:left">Team</th><th scope="col">Games</th><th scope="col">Matchups</th></tr>${st.map((r, i) => `<tr><td class="n">${i + 1}</td><td style="text-align:left">${(() => { const tp = paTeamPhoto(ev, r.team), pp = paProPhoto(ev, paProId(r.team)); return tp || pp ? `<span class="pateam">${teamPic(tp || pp, print ? 44 : 40, r.team.name || '', 'tp-pa')}${tp && pp ? teamPic(pp, 22, '', 'tp-papro') : ''}</span>` : '' })()}<b>${esc(r.team.name || proAmDefaultTeamName(r.team))}</b><br><span class="small muted">${esc(r.team.players.join(', '))}</span></td><td class="n">${r.games}-${r.gamesAgainst}</td><td class="n">${r.matchupsWon}-${r.matchups - r.matchupsWon}</td></tr>`).join('')}</table>
     ${print ? '' : rounds.map((rm, i) => rm.length ? `<h3 class="bk-group">Round ${i + 1}</h3>${rm.map(m => matchRow(m, {noEvent:true})).join('')}` : '').join('')}`;
   }).join('');
   const fin = ev.matches.filter(m => m.proAm && m.proAm.isFinal);
@@ -6942,7 +6968,7 @@ function proAmView(ev, print){
 /* Club Cup stays a team-total format with session groups, never an elimination tree. */
 function clubCupView(ev, print){
   const cc = ev.clubCup || {}, t = getClubCupTotals(ev);
-  return `<div class="cupscore" role="group" aria-label="${esc(`${cc.teamAName} ${fmtPts(t.sideA)}, ${cc.teamBName} ${fmtPts(t.sideB)}`)}"><div><b>${esc(cc.teamAName)}</b><span class="big">${fmtPts(t.sideA)}</span></div><div class="mid">${cc.pointsToWin ? `${fmtPts(cc.pointsToWin)} to win` : `${t.matchesComplete} of ${t.matchesTotal} played`}${t.winner ? `<br><b>${esc(t.winner === 'A' ? cc.teamAName : cc.teamBName)} win</b>` : ''}</div><div><b>${esc(cc.teamBName)}</b><span class="big">${fmtPts(t.sideB)}</span></div></div>
+  return `<div class="cupscore" role="group" aria-label="${esc(`${cc.teamAName} ${fmtPts(t.sideA)}, ${cc.teamBName} ${fmtPts(t.sideB)}`)}"><div>${cc.photoA || cc.photoB ? teamPic(cc.photoA, print ? 64 : 56, cc.teamAName, 'tp-cup') : ''}<b>${esc(cc.teamAName)}</b><span class="big">${fmtPts(t.sideA)}</span></div><div class="mid">${cc.pointsToWin ? `${fmtPts(cc.pointsToWin)} to win` : `${t.matchesComplete} of ${t.matchesTotal} played`}${t.winner ? `<br><b>${esc(t.winner === 'A' ? cc.teamAName : cc.teamBName)} win</b>` : ''}</div><div>${cc.photoA || cc.photoB ? teamPic(cc.photoB, print ? 64 : 56, cc.teamBName, 'tp-cup') : ''}<b>${esc(cc.teamBName)}</b><span class="big">${fmtPts(t.sideB)}</span></div></div>
   ${(cc.sessions || []).map(s => { const ms = ev.matches.filter(m => m.sessionId === s.id); if (!ms.length) return ''; const sp = slotParts(ms[0]); return `<h2 class="bk-group">${esc(s.label)}${sp ? ` · ${esc(sp.dayShort)} ${esc(sp.time)}` : ''}</h2>${s.notes ? `<p class="bk-meta" style="margin:-4px 0 8px">${esc(s.notes)}</p>` : ''}${ms.map(m => matchRow(m, {noEvent:true, ctx:m.label || (m.line ? proAmLineLabel(m.line) : cap1(m.matchType || ''))})).join('')}` }).join('')}`;
 }
 const fmtPts = n => { const w = Math.floor(n + 1e-9), h = n - w >= .49; return h ? (w ? w + '½' : '½') : String(w) };
@@ -6993,7 +7019,8 @@ function readScoreInputs(m){
 function sideCell(m, slot, ev){
   const names = sideNames(m, slot), cc = m.sessionId != null && ev.clubCup ? (slot === 'team1' ? ev.clubCup.teamAName : ev.clubCup.teamBName) : '';
   const inner = names === null ? `<span class="pn tbd">${esc(feederLabel(m, slot))}</span>` : (names.length ? names.map(n => `<span class="pn">${esc(n)}</span>`).join('') : '<span class="pn">—</span>');
-  return inner + (cc ? `<span class="club">${esc(cc)}</span>` : '');
+  const ph = names === null ? null : sidePhoto(m, slot);
+  return (ph ? teamPic(ph, 22, '', 'tp-side') : '') + inner + (cc ? `<span class="club">${esc(cc)}</span>` : '');
 }
 /* Saved rows -> table rows, in team1/team2 order (handles the pro-am {t1,t2} shape). */
 function savedRows(m, sr){
@@ -7619,11 +7646,13 @@ function wzPlayers(){
   ${evTabs(evs, ev, e => entryNoun(e, entryCount(e)))}
   <div class="evhead"><b>${esc(ev.name)}</b><span class="small muted">${esc(KINDS[ev.kind].label)}${ev.level ? ' · ' + fmtLevel(ev.level) + ' and under' : ''}${ev.cap ? ' · combined ' + fmtLevel(ev.cap) : ''} · ${entryNoun(ev, n)}</span></div>
   ${ev.kind === 'clubcup' ? `<div class="card adm"><div class="grid2"><div><label class="small muted">Club A</label>${inp(`data-chg="ccv" data-id="${ev.id}" data-f="teamAName"`, cc.teamAName)}</div><div><label class="small muted">Club B</label>${inp(`data-chg="ccv" data-id="${ev.id}" data-f="teamBName"`, cc.teamBName)}</div></div>
+    ${ccPhotoEdit(ev)}
     <div class="grid2"><div><label class="small muted">Points per match</label>${inp(`data-chg="ccv" data-id="${ev.id}" data-f="pointsPerMatch" inputmode="decimal"`, cc.pointsPerMatch)}</div><div><label class="small muted">Points to win (0 = most points)</label>${inp(`data-chg="ccv" data-id="${ev.id}" data-f="pointsToWin" inputmode="decimal"`, cc.pointsToWin)}</div></div>
     <label class="small muted">Players by</label><div class="seg">${[['rating', 'Ratings'], ['tier', 'Pro / A / B / C']].map(([k, l]) => `<button class="${(cc.by || 'rating') === k ? 'on' : ''}" data-act="ccby" data-id="${ev.id}" data-v="${k}">${l}</button>`).join('')}</div></div>` : ''}
   <h3>Add ${ev.kind === 'singles' || ev.kind === 'clubcup' ? 'players' : ev.kind === 'proam' ? 'teams of four' : 'teams'}</h3>
   ${quickAdd(ev)}
   ${entryList(ev)}
+  ${ev.kind === 'proam' ? paPhotoEdit(ev) : ''}
   ${n >= 2 && ev.kind !== 'clubcup' ? `<button class="btn alt" style="margin-top:10px" data-act="gobracket" data-id="${ev.id}">Next: build the ${esc(ev.name)} bracket →</button>` : ''}
   <details class="more"><summary>Paste or upload a list into ${esc(ev.name)}</summary><div class="card adm">
     <textarea id="paste" rows="4" placeholder="${ev.kind === 'singles' || ev.kind === 'clubcup' ? 'Jane Doe, 3.5&#10;Mike Chen, 4.0' : 'Amy Fox 3.5 / Ben Carter 3.5&#10;Cara Nash 4.0 / Dan Park 4.0'}">${esc(view.paste || '')}</textarea>
@@ -7968,7 +7997,7 @@ function wzEntries(){
   <p class="wnote">${ev.pairing === 'auto' ? (ev.kind === 'proam' ? 'Players are split into four rating tiers. Each team gets one from each tier, balanced.' : ev.cap ? `Each stronger player takes the strongest partner that keeps the team at or under ${fmtLevel(ev.cap)}.` : 'Top-rated players pair with lower-rated players so teams come out even.') : ev.pairing === 'request' ? 'Partners named on the signup form are paired when you approve the signup. Pair anyone left over by hand or with Auto.' : 'Pick each partner below. Picking someone already on a team swaps them.'}</p>
   ${ups.length ? `<div class="row"><button class="btn sm" data-act="autopair" data-ev="${ev.id}" ${locked ? 'disabled' : ''}>Auto-pair ${ups.length} unpaired</button><span class="small muted">${ups.map(pname).map(esc).join(', ')}</span></div>` : ''}
   <div class="pairs">${ev.pairs.map((t, i) => { const iss = pairIssue(ev, t); return `<div class="pair ${iss ? 'bad' : ''}">${Array.from({length:size}, (_, j) => `${ev.kind === 'proam' ? `<i class="role">${['Pro','A','B','C'][j]}</i>` : ''}${sel(`data-chg="pairpick" data-ev="${ev.id}" data-i="${i}" data-j="${j}" ${locked ? 'disabled' : ''}`, [['', '—'], ...ev.entrants.filter(P).map(id => [id, `${pname(id)}${(P(id) || {}).rating != null ? ' ' + fmtRating(P(id).rating) : ''}`])], t[j] || '')}`).join('')}<span class="pr">${t.filter(Boolean).length === size && allRated(t.filter(Boolean)) ? fmtRating(teamRating(t)) : ''}</span><button class="x" data-act="rmpair" data-ev="${ev.id}" data-i="${i}" ${locked ? 'disabled' : ''} aria-label="Remove team">×</button>${iss ? `<span class="warn" style="width:100%;margin:2px 0 0">${esc(iss)}</span>` : ''}</div>` }).join('')}</div>
-  <button class="btn alt sm" data-act="addpair" data-ev="${ev.id}" ${locked ? 'disabled' : ''}>Add a team</button>` : ''}
+  <button class="btn alt sm" data-act="addpair" data-ev="${ev.id}" ${locked ? 'disabled' : ''}>Add a team</button>${ev.kind === 'proam' ? paPhotoEdit(ev) : ''}` : ''}
   <h3>Seeds</h3>
   <div class="seg">${[['rating','From ratings'],['hand','By hand']].map(([k, l]) => `<button class="${ev.seeding === k ? 'on' : ''}" data-act="evset" data-id="${ev.id}" data-f="seeding" data-v="${k}">${l}</button>`).join('')}</div>
   <p class="wnote">${ev.seeding === 'rating' ? `Seeds follow ${size > 1 ? 'combined team' : ''} rating, highest first. Unrated ${size > 1 ? 'teams' : 'players'} go last.` : 'Use the arrows to set the order. New entries start at the bottom.'}</p>
@@ -7980,6 +8009,7 @@ function clubCupEntries(ev){
   const counts = ids => CC_TIERS.map(([k, l]) => `${l} ${ids.filter(id => tierOf(cc, id) === k).length}`).join(' · ');
   const fours = Math.min(...[aIds, bIds].flatMap(ids => CC_TIERS.map(([k]) => ids.filter(id => tierOf(cc, id) === k).length)));
   return `<div class="card adm"><div class="grid2"><div><label class="small muted">Club A</label>${inp(`data-chg="ccv" data-id="${ev.id}" data-f="teamAName"`, cc.teamAName)}</div><div><label class="small muted">Club B</label>${inp(`data-chg="ccv" data-id="${ev.id}" data-f="teamBName"`, cc.teamBName)}</div></div>
+    ${ccPhotoEdit(ev)}
     <div class="grid2"><div><label class="small muted">Points per match</label>${inp(`data-chg="ccv" data-id="${ev.id}" data-f="pointsPerMatch" inputmode="decimal"`, cc.pointsPerMatch)}</div><div><label class="small muted">Points to win (0 = most points)</label>${inp(`data-chg="ccv" data-id="${ev.id}" data-f="pointsToWin" inputmode="decimal"`, cc.pointsToWin)}</div></div>
     <label class="small muted">Players by</label><div class="seg">${[['rating', 'Ratings'], ['tier', 'Pro / A / B / C']].map(([k, l]) => `<button class="${(cc.by || 'rating') === k ? 'on' : ''}" data-act="ccby" data-id="${ev.id}" data-v="${k}">${l}</button>`).join('')}</div>
     <p class="wnote" style="margin-bottom:0">${tiers ? 'Players are ranked Pro, A, B or C instead of by rating. Build the lineup any way you like on the Draws step; the auto lineup puts Pros against Pros, A players against A players, and so on.' : 'The auto lineup puts players against players of a similar rating.'}</p></div>
@@ -8231,7 +8261,8 @@ function tvView(){
   const head = `<header class="tvh">${crest(64)}<div><h1>${esc(tripTitle())}</h1><span>${esc(now.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'}))}${(cfg() || {}).club ? ' · ' + esc(cfg().club) : ''}</span></div><div class="tvclock">${now.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'})}</div></header>`;
   if (showPhotos) return `<div class="tv">${head}<section class="tvphotos">${ph.map(p => `<figure><img src="${esc(p.url)}" alt=""><figcaption>${esc(p.caption || photoBy(p))}</figcaption></figure>`).join('')}</section></div>`;
   const tK = dayKey(isoDay(now)), at = i => TIME_SLOTS[i] ? (TIME_SLOTS[i][0] === tK ? TIME_SLOTS[i][1] : `${TIME_SLOTS[i][0].split(',')[0]} ${TIME_SLOTS[i][1]}`) : '';
-  const vs = m => `${esc(sideLabel(m, 'team1', true))} <i>vs</i> ${esc(sideLabel(m, 'team2', true))}`;
+  const tp = (m, sl) => { const u = sideNames(m, sl) === null ? null : sidePhoto(m, sl); return u ? teamPic(u, 34, '', 'tp-tv') : '' };
+  const vs = m => `${tp(m, 'team1')}${esc(sideLabel(m, 'team1', true))} <i>vs</i> ${tp(m, 'team2')}${esc(sideLabel(m, 'team2', true))}`;
   return `<div class="tv tv2">${head}
     ${ev ? `<section class="tvdraw"><h2>${esc(ev.name)}</h2>${eventDraw(ev, true)}</section>` : `
     <section class="tvgrid"><div><h2>Courts</h2><div class="tvcourts">${tiles.slice(0, 6).map(t => { const st = t.cur ? matchStatus(t.cur) : ''; return `<div class="tvc2 ${t.cur ? 'busy' : ''}"><div class="tvc2-h"><b>${esc(courtName(t.c))}</b><span class="st ${t.cur ? 'live' : 'neutral'}">${t.cur ? (st === 'live' ? 'In progress' : 'Scheduled now') : 'No match in progress'}</span></div>${t.cur ? `<p class="tvc2-t">${vs(t.cur)}</p><p class="tvc2-s">${esc((findEvent(t.cur.eventId) || {}).name || '')}</p>` : ''}${t.nxt ? `<p class="tvc2-n">Next ${esc(at(t.nxt.slotIdx))} · ${vs(t.nxt)}</p>` : ''}</div>` }).join('')}${tiles.length > 6 ? `<p class="tvmore">+ ${tiles.length - 6} more courts on the app</p>` : ''}</div></div>
@@ -8289,6 +8320,59 @@ const BRAND_DEFAULT = {header:null, gallery:[], cards:{show:true, rating:true, s
 function brand(){ const b = (cfg() || {}).brand || {}; return Object.assign({}, BRAND_DEFAULT, b, {cards:Object.assign({}, BRAND_DEFAULT.cards, b.cards || {}), gallery:Array.isArray(b.gallery) ? b.gallery : []}) }
 function brandSet(fn){ if (needAdmin()) return; const c = cfg(), b = JSON.parse(JSON.stringify(brand())); fn(b); c.brand = b; Store.set('config', c); render() }
 async function imgBlob(file, max){ const u = await readImg(file, max || 1600, false); return dataURLtoBlob(u) }
+
+/* ===== v3.2 photos: a photo or logo for each Club Cup club, and for each Pro-Am team and its Pro =====
+   URLs live on the event (the director-only 'events' key): ev.clubCup.photoA / photoB, ev.photos.teams[proId] / ev.photos.pros[proId].
+   Files go to bracketly-media under <trip>/brand/ (director-only writes), downscaled to 1200px on this device first.
+   A Pro with no Pro-Am photo falls back to their player-card photo. */
+const ccPhoto = (ev, side) => (((ev && ev.clubCup) || {})[side === 'A' ? 'photoA' : 'photoB']) || null;
+const paPhotos = ev => (ev && ev.photos) || {};
+const paProId = t => t && Array.isArray(t.pids) ? (t.pids[Math.max(0, (t.playerRoles || []).indexOf('pro'))] || null) : null;
+const paTeamPhoto = (ev, t) => { const id = paProId(t); return id ? ((paPhotos(ev).teams || {})[id] || null) : null };
+const paProPhoto = (ev, pid) => pid ? ((paPhotos(ev).pros || {})[pid] || cardOf(pid).photo || null) : null;
+function teamPic(url, size, label, cls){ return `<span class="tpic ${cls || ''}" style="--s:${size}px" aria-hidden="true">${url ? `<img src="${esc(url)}" alt="" loading="lazy" decoding="async">` : esc(initials(label || ''))}</span>` }
+function sidePhoto(m, slot){
+  const ev = findEvent(m.eventId); if (!ev) return null;
+  if (ev.format === 'club_cup' && m.sessionId != null) return ccPhoto(ev, slot === 'team1' ? 'A' : 'B');
+  if (m.proAm){ const t = matchTeam(m, slot); return t ? (paTeamPhoto(ev, t) || paProPhoto(ev, paProId(t))) : null }
+  return null;
+}
+function evPhotoSet(ev, k, url){
+  let old = null;
+  if (k === 'ccA' || k === 'ccB'){ const f = k === 'ccA' ? 'photoA' : 'photoB'; ev.clubCup = ev.clubCup || {}; old = ev.clubCup[f] || null; if (url) ev.clubCup[f] = url; else delete ev.clubCup[f] }
+  else { const [kind, pid] = k.split(':'), box = kind === 'pro' ? 'pros' : 'teams'; ev.photos = ev.photos || {}; ev.photos[box] = ev.photos[box] || {}; old = ev.photos[box][pid] || null; if (url) ev.photos[box][pid] = url; else delete ev.photos[box][pid] }
+  return old;
+}
+/* Downscale to 1200px on the long side; WebP where the browser can make it, JPEG otherwise. */
+function photoBlob(file, max){
+  max = max || 1200;
+  return new Promise((res, rej) => {
+    const u = URL.createObjectURL(file), im = new Image();
+    im.onload = () => { URL.revokeObjectURL(u); const s = Math.min(1, max / Math.max(im.width, im.height)), cv = document.createElement('canvas');
+      cv.width = Math.max(1, Math.round(im.width * s)); cv.height = Math.max(1, Math.round(im.height * s));
+      const cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(im, 0, 0, cv.width, cv.height);
+      cv.toBlob(b => { if (b && b.type === 'image/webp') return res(b); cv.toBlob(j => j ? res(j) : rej(new Error("Couldn't read that photo")), 'image/jpeg', .82) }, 'image/webp', .82) };
+    im.onerror = () => { URL.revokeObjectURL(u); rej(new Error("Couldn't read that photo. Use a JPEG, PNG or WebP.")) };
+    im.src = u;
+  });
+}
+function photoEditTile(ev, k, url, title, sub){
+  const busy = view.photoBusy === ev.id + k;
+  return `<div class="phtile">${teamPic(url, 56, title)}<div class="phtile-b"><b>${esc(title)}</b>${sub ? `<span class="small muted">${esc(sub)}</span>` : ''}
+    <div class="row phbtns"><label class="btn alt sm ${busy ? 'dis' : ''}">${busy ? 'Uploading…' : url ? 'Replace' : 'Add photo'}<input type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/*" hidden data-chg="evphoto" data-ev="${esc(ev.id)}" data-k="${esc(k)}" ${busy ? 'disabled' : ''}></label>${url && !busy ? `<button class="small phrm" data-act="evphotorm" data-ev="${esc(ev.id)}" data-k="${esc(k)}">Remove</button>` : ''}</div></div></div>`;
+}
+function ccPhotoEdit(ev){
+  const cc = ev.clubCup || {};
+  return `<label class="small muted" style="display:block;margin-top:8px">Club photos or logos <span class="muted">(optional)</span></label><div class="phgrid">${photoEditTile(ev, 'ccA', cc.photoA, cc.teamAName || 'Club A', 'Scoreboard, TV and match rows')}${photoEditTile(ev, 'ccB', cc.photoB, cc.teamBName || 'Club B', 'Scoreboard, TV and match rows')}</div>`;
+}
+function paPhotoEdit(ev){
+  const pros = (ev.pairs || []).map(t => t[0]).filter(P);
+  if (!pros.length) return '';
+  const ph = paPhotos(ev);
+  return `<details class="others phpa" ${isOpen('phpa' + ev.id) ? 'open' : ''} data-k="phpa${esc(ev.id)}"><summary>Team and Pro photos <span class="small muted">(optional)</span></summary>
+    <p class="wnote">A team photo shows on the standings, match rows and TV. A Pro photo shows next to the Pro; without one, the Pro's player card photo is used.</p>
+    ${pros.map(pid => `<div class="phpair"><h4>Team ${esc(firstName(pid))}</h4><div class="phgrid">${photoEditTile(ev, 'team:' + pid, (ph.teams || {})[pid], 'Team photo', '')}${photoEditTile(ev, 'pro:' + pid, (ph.pros || {})[pid], pname(pid), 'Pro' + (!(ph.pros || {})[pid] && cardOf(pid).photo ? ' · using card photo' : ''))}</div></div>`).join('')}</details>`;
+}
 
 /* ---------- player cards ---------- */
 const cardOf = pid => Object.assign({}, (view.cards || {})[pid] || {});
@@ -9351,6 +9435,7 @@ function onRemote(key){
 Object.assign(ACT, {
   cztab(el){ view.cz = el.dataset.v },
   brandpicrm(el){ brandSet(b => { b[el.dataset.p] = null }) },
+  evphotorm(el){ if (needAdmin()) return; const old = withEvent(el.dataset.ev, ev => evPhotoSet(ev, el.dataset.k, null)); if (old) Dir.removeMedia(old); toast('Photo removed.') },
   galopen(el){ view.galIdx = +el.dataset.i; view.modal = 'gallery' },
   galrm(el){ brandSet(b => { b.gallery.splice(+el.dataset.i, 1) }) },
   galmove(el){ const i = +el.dataset.i, d = +el.dataset.d; brandSet(b => { const j = i + d; if (j < 0 || j >= b.gallery.length) return; const [x] = b.gallery.splice(i, 1); b.gallery.splice(j, 0, x) }) },
@@ -9409,6 +9494,14 @@ Object.assign(ACT, {
 });
 function invFormRead(){ const g = id => { const el = document.getElementById(id); return el ? el.value.trim() : undefined }, o = {}; [['player', 'inv-pl'], ['name', 'inv-name'], ['email', 'inv-email']].forEach(([k, id]) => { const v = g(id); if (v !== undefined) o[k] = v }); return o }
 Object.assign(CHG, {
+  async evphoto(el){
+    const f = el.files[0]; el.value = ''; if (!f) return; if (needAdmin()) return;
+    if (f.type && !/^image\//.test(f.type)) return toast('Use a JPEG, PNG or WebP photo.');
+    if (f.size > MAX_IMG_BYTES) return toast('That photo is over 15 MB. Try a smaller one.');
+    const id = el.dataset.ev, k = el.dataset.k; view.photoBusy = id + k; render();
+    try{ const b = await photoBlob(f, 1200), url = await Dir.uploadMedia(b, b.type === 'image/webp' ? 'webp' : 'jpg', 'brand'); const old = withEvent(id, ev => evPhotoSet(ev, k, url)); if (old && old !== url) Dir.removeMedia(old); toast('Photo saved. Everyone sees it now.') }
+    catch(e){ toast('Upload failed: ' + ((e && e.message) || e)) }
+    view.photoBusy = null; render() },
   brandbool(el){ const [a, b] = el.dataset.p.split('.'); brandSet(x => { if (b) x[a] = Object.assign({}, x[a], {[b]:el.checked}); else x[a] = el.checked }) },
   async brandpic(el){ const f = el.files[0]; el.value = ''; if (!f) return; if (f.size > MAX_IMG_BYTES) return toast('That photo is over 15 MB. Try a smaller one.');
     view.mediaBusy = 'Uploading…'; render();
