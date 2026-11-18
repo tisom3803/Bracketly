@@ -725,7 +725,68 @@ function run(tables, opts){
   return Object.assign({sheets, use:useSheets, records:recs}, build(recs, opts));
 }
 
-const API = {levelAsDivision, clean, normName, parseName, splitTeam, parseSex, parseLevel, parseEventItem, parseEvents, eventLabel, groupKey, parseGroupKey, headerRole, sniff, findHeader, analyzeSheet, extract, build, run, tablesFromText, csvRows, guessSexFromFirst, ROLES, fmtLv};
+
+/* Pro-Am teams: one team per row (Pro | A | B | C columns, optional Team / Flight / Pro bio), a "Pro / A / B / C"
+   cell, or a listing with role labels ("Team Cole", "Pro: …", "A: …"). Returns {teams, warnings, how}. */
+const PA_HEAD = [
+  ['team', /^(team|team name|name of team|team \/ captain)$/],
+  ['flight', /^(flight|group|pool)$/],
+  ['bio', /^((pro'?s? )?bio(graphy)?|about( the)? pro|pro notes?)$/],
+  ['pro', /^((the )?pro(fessional)?|pro( player| name)?|teaching pro|club pro|pro'?s name|player 1 \(?pro\)?)$/],
+  ['a', /^(a|a player|a amateur|amateur a|a level|player a|a'?s?|1st amateur|amateur 1)$/],
+  ['b', /^(b|b player|b amateur|amateur b|b level|player b|b'?s?|2nd amateur|amateur 2)$/],
+  ['c', /^(c|c player|c amateur|amateur c|c level|player c|c'?s?|3rd amateur|amateur 3)$/],
+];
+function proAmTeams(rows){
+  rows = (rows || []).map(r => (r || []).map(clean));
+  const head = r => { const m = {}; r.forEach((v, i) => { const h = normHead(v); const hit = PA_HEAD.find(([k, re]) => re.test(h)); if (hit && m[hit[0]] == null) m[hit[0]] = i }); return m };
+  const teams = [], warnings = [];
+  const add = (t, row) => {
+    ['pro', 'a', 'b', 'c'].forEach(k => { t[k] = t[k] ? parseName(t[k]) || '' : '' });
+    if (!t.pro && !t.a && !t.b && !t.c) return;
+    t.row = row; teams.push(t);
+  };
+  let hi = -1, map = null;
+  for (let i = 0; i < Math.min(rows.length, 12); i++){ const m = head(rows[i]); if (m.pro != null && ['a', 'b', 'c'].filter(k => m[k] != null).length >= 2){ hi = i; map = m; break } }
+  let how = '';
+  if (map){
+    how = 'columns';
+    for (let i = hi + 1; i < rows.length; i++){ const r = rows[i]; if (!r.some(Boolean)) continue; const g = k => map[k] == null ? '' : r[map[k]] || '';
+      add({name:g('team'), flight:g('flight'), bio:g('bio'), pro:g('pro'), a:g('a'), b:g('b'), c:g('c')}, i + 1) }
+  } else {
+    // role-labelled listing: "Team Cole" / "Pro: Cole Whitaker" / "A | Clint Barrow"
+    const lab = /^(pro|a|b|c)\s*(?:player|amateur)?\s*[:\-–]?\s*(.*)$/i;
+    let cur = null, labelled = 0;
+    rows.forEach((r, i) => {
+      const cells = r.filter(Boolean); if (!cells.length) return;
+      const one = cells.join(' ').trim();
+      let m = cells.length >= 2 && /^(pro|a|b|c)(\s*(player|amateur))?:?$/i.test(cells[0]) ? [null, cells[0].replace(/[^a-z]/gi, '').replace(/player|amateur/i, ''), cells[1]] : one.match(lab);
+      if (m && m[2] && /^(pro|a|b|c)$/i.test(m[1]) && (cells.length >= 2 || /[:\-–]/.test(one))){ labelled++; if (!cur){ cur = {name:''}; } const k = m[1].toLowerCase(); if (!cur[k]) cur[k] = m[2].trim(); else { add(cur, i); cur = {name:'', [k]:m[2].trim()} } return }
+      if (/^team\b/i.test(one) && cells.length === 1){ if (cur) add(cur, i); cur = {name:one}; return }
+    });
+    if (cur) add(cur, rows.length);
+    if (labelled >= 3) how = 'labels';
+    else {
+      teams.length = 0;
+      rows.forEach((r, i) => {
+        let names = r.filter(Boolean).filter(v => !/^\d+([.,]\d+)?$/.test(v));
+        if (names.length === 1) names = splitTeam(names[0]);
+        names = names.map(parseName).filter(Boolean).filter(n => !BAD_NAME.test(n));
+        if (names.length >= 4){ const team = names.length >= 5 && /^team\b/i.test(names[0]) ? names.shift() : ''; add({name:team, pro:names[0], a:names[1], b:names[2], c:names[3]}, i + 1) }
+      });
+      if (teams.length) how = 'order';
+    }
+  }
+  const seen = new Map();
+  teams.forEach((t, ti) => {
+    const miss = ['pro', 'a', 'b', 'c'].filter(k => !t[k]);
+    if (miss.length) warnings.push({t:'missingRole', team:ti, msg:`${t.name || (t.pro ? 'Team ' + t.pro.split(' ')[0] : 'Row ' + t.row)}: no ${miss.map(k => k === 'pro' ? 'Pro' : k.toUpperCase()).join(', ')} player`});
+    ['pro', 'a', 'b', 'c'].forEach(k => { const n = normName(t[k]); if (!n) return; if (seen.has(n) && seen.get(n) !== ti) warnings.push({t:'twoTeams', team:ti, msg:`${t[k]} is on two teams`}); seen.set(n, ti) });
+  });
+  return {teams, warnings, how};
+}
+
+const API = {proAmTeams, levelAsDivision, clean, normName, parseName, splitTeam, parseSex, parseLevel, parseEventItem, parseEvents, eventLabel, groupKey, parseGroupKey, headerRole, sniff, findHeader, analyzeSheet, extract, build, run, tablesFromText, csvRows, guessSexFromFirst, ROLES, fmtLv};
 if (typeof module !== 'undefined' && module.exports) module.exports = API;
 root.SmartImport = API;
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -221,3 +221,17 @@ test('parsers: line levels', () => {
   // a plain player-level column (one level per player) is still the player's rating
   const r = R('07_typos_codes.xlsx'); assert.equal(person(r, 'Quinn Avery').rating, 4.5);
 });
+test('10 Pro-Am teams: one team per row into Pro / A / B / C', () => {
+  const rows = load('10_proam_teams.xlsx')[0].rows;
+  const r = SI.proAmTeams(rows);
+  assert.equal(r.how, 'columns');
+  assert.equal(r.teams.length, 4);
+  assert.deepEqual([r.teams[0].name, r.teams[0].pro, r.teams[0].a, r.teams[0].b, r.teams[0].c], ['Team Cole', 'Cole Whitaker', 'Clint Barrow', 'Sloane Mathis', 'Marissa Dunn']);
+  assert.equal(r.teams[0].bio, 'Head pro at Oak Hills since 2015.');
+  assert.equal(r.teams[2].name, 'Net Gains');
+  assert.deepEqual(r.warnings.map(w => w.t), ['missingRole']);
+  const lab = SI.proAmTeams([['Team Cole'], ['Pro: Cole Whitaker'], ['A: Clint Barrow'], ['B: Sloane Mathis'], ['C: Marissa Dunn']]);
+  assert.deepEqual([lab.how, lab.teams[0].pro, lab.teams[0].c], ['labels', 'Cole Whitaker', 'Marissa Dunn']);
+  const ord = SI.proAmTeams([['Cole Whitaker / Clint Barrow / Sloane Mathis / Marissa Dunn']]);
+  assert.deepEqual([ord.how, ord.teams[0].b], ['order', 'Sloane Mathis']);
+});

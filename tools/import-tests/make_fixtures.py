@@ -165,4 +165,15 @@ for r in [
  ["Mixed", "C1/C2", "PLC", "Opal Vance", "Fay Rhodes"],
 ]: ws.append(r)
 wb.save(os.path.join(D, '09_club_lines.xlsx'))
+# 10. Pro-Am teams: title row, then Team | Pro | A | B | C | Pro bio, one team per row (one team missing a C player)
+wb = openpyxl.Workbook(); ws = wb.active; ws.title = 'Pro-Am Teams'
+for r in [
+ ['Cedar Hills Pro-Am 2027', '', '', '', '', ''],
+ ['Team', 'Pro', 'A Player', 'B Player', 'C Player', 'Pro Bio'],
+ ['Team Cole', 'Cole Whitaker', 'Clint Barrow', 'Sloane Mathis', 'Marissa Dunn', 'Head pro at Oak Hills since 2015.'],
+ ['', 'Wade Garrison', 'Luke Ashford', 'Tatum Reyes', 'Reese Calloway', ''],
+ ['Net Gains', 'Grant Holloway', 'Hadley Stone', 'Brett Sandoval', 'Avery Lockhart', 'Former college No. 1.'],
+ ['', 'Reid Callahan', 'Lainey Brooks', 'Tanner Pruitt', '', ''],
+]: ws.append(r)
+wb.save(os.path.join(D, '10_proam_teams.xlsx'))
 print('ok')
