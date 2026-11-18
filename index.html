@@ -6256,7 +6256,7 @@ function v3Scoreboard(){
   const evs = state.events.filter(e => (e.published || view.admin) && e.matches.length); if (!evs.length) return '';
   const ms = evs.flatMap(e => e.matches), done = ms.filter(m => state.results[m.id] && resOf(m.id)).length, live = liveNow().length;
   return `<div class="v3-board summary" role="group" aria-label="${esc(`${evs.length} divisions, ${ms.length} matches, ${done} results in`)}">
-    <span class="v3-board-side"><small>Divisions</small><b>${evs.length}</b></span>
+    ${(() => { const sm = specialMode(); const e0 = sm && evs[0]; if (sm === 'proam' && e0) return `<span class="v3-board-side"><small>Teams</small><b>${(e0.pairs || []).filter(t => (t || []).some(Boolean)).length}</b></span>`; if (sm === 'clubcup') return `<span class="v3-board-side"><small>Clubs</small><b>2</b></span>`; return `<span class="v3-board-side"><small>Divisions</small><b>${evs.length}</b></span>` })()}
     <span class="v3-board-side"><small>${live ? 'On court' : 'Matches'}</small><b>${live || ms.length}</b></span>
     <span class="v3-board-side"><small>Results in</small><b>${done}</b></span></div>`;
 }
