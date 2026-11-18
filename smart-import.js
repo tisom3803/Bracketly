@@ -792,7 +792,8 @@ function proAmTeams(rows){
   teams.forEach((t, ti) => {
     const miss = ['a', 'b', 'c'].filter(k => !t[k]);
     if (miss.length) warnings.push({t:'missingRole', team:ti, msg:`${t.name || (t.pro ? 'Team ' + t.pro.split(' ')[0] : t.a ? t.a.split(' ')[0] + "'s team" : 'Row ' + t.row)}: no ${miss.map(k => k.toUpperCase()).join(', ')} player`});
-    ['pro', 'a', 'b', 'c'].forEach(k => { const n = normName(t[k]); if (!n) return; if (seen.has(n) && seen.get(n) !== ti) warnings.push({t:'twoTeams', team:ti, msg:`${t[k]} is on two teams`}); seen.set(n, ti) });
+    /* a Pro can have one team per section (Men's and Women's); amateurs stay on one team */
+    ['pro', 'a', 'b', 'c'].forEach(k => { const n = normName(t[k]); if (!n) return; const key = k === 'pro' ? 'pro|' + String(t.section || '').trim().toLowerCase().charAt(0) + '|' + n : n; if (seen.has(key) && seen.get(key) !== ti) warnings.push({t:'twoTeams', team:ti, msg:k === 'pro' && t.section ? `${t[k]} is the Pro for two teams in ${t.section}` : `${t[k]} is on two teams`}); seen.set(key, ti) });
   });
   return {teams, pros:[], warnings, how};
 }
