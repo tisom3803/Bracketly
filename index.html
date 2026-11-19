@@ -2180,20 +2180,65 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 .tv .tl .nm{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.2;overflow-wrap:anywhere}
 @media print{ .tl .nm{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.15;overflow-wrap:anywhere} }
 .printpage .tl .nm{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.15}
+
+/* ===== v3.4 sponsors: white logo cards, tier sizes, editor, import preview, bulk logo review ===== */
+.splogo{display:inline-flex;align-items:center;justify-content:center;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:8px 14px;color:#1d2a22;text-decoration:none;box-sizing:border-box;max-width:100%}
+.splogo img{display:block;object-fit:contain;max-width:100%}
+.splogo .spname{font:700 15px/1.2 var(--fd);color:#1d2a22;text-align:center;overflow-wrap:anywhere}
+.splogo.sp-xl{min-height:84px;min-width:200px;padding:12px 22px}.splogo.sp-xl img{max-height:72px;max-width:280px}.splogo.sp-xl .spname{font-size:22px}
+.splogo.sp-lg{min-height:64px;min-width:150px}.splogo.sp-lg img{max-height:52px;max-width:200px}.splogo.sp-lg .spname{font-size:18px}
+.splogo.sp-md{min-height:52px;min-width:120px}.splogo.sp-md img{max-height:40px;max-width:160px}
+.splogo.sp-sm{min-height:44px;min-width:96px;padding:6px 10px}.splogo.sp-sm img{max-height:32px;max-width:130px}.splogo.sp-sm .spname{font-size:13.5px}
+a.splogo:hover{border-color:var(--au2,#c9a45c)}
+.sprow{gap:10px 12px}.sprow img{max-height:none;max-width:none}.sptitle img{max-height:72px!important;max-width:280px!important}
+.ov-sp li{background:none;border:0;padding:0;min-height:0;display:flex}.ov-sp li > .splogo{width:100%}
+.ov-sp.title li > .splogo{min-height:96px}
+/* TV: logos keep a white card on the dark slide; presenting sponsor big */
+.tvsp{margin-top:10px}.tvsp-tier{margin:0 0 18px}.tvsp-lbl{font:600 15px/1 var(--fm);letter-spacing:.18em;text-transform:uppercase;color:var(--iv);opacity:.85;margin:0 0 10px}
+.tvsp-row{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:stretch}
+.tvsp .splogo{border-radius:16px;border:0;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.tvsp .splogo.sp-xl{min-width:520px;min-height:190px;padding:20px 40px}.tvsp .splogo.sp-xl img{max-height:160px;max-width:560px}.tvsp .splogo.sp-xl .spname{font-size:48px}
+.tvsp .splogo.sp-lg{min-width:340px;min-height:130px}.tvsp .splogo.sp-lg img{max-height:100px;max-width:340px}.tvsp .splogo.sp-lg .spname{font-size:32px}
+.tvsp .splogo.sp-md{min-width:250px;min-height:100px}.tvsp .splogo.sp-md img{max-height:76px;max-width:250px}.tvsp .splogo.sp-md .spname{font-size:24px}
+.tvsp .splogo.sp-sm{min-width:190px;min-height:78px;padding:10px 16px}.tvsp .splogo.sp-sm img{max-height:56px;max-width:190px}.tvsp .splogo.sp-sm .spname{font-size:19px}
+.tv .sponsors .splogo{box-shadow:none}.tv .sponsors .splogo.sp-xl{min-height:64px}.tv .sponsors .splogo.sp-xl img{max-height:54px}
+/* setup editor */
+.spedit-tools{gap:8px;flex-wrap:wrap;margin:0 0 8px}.spaste textarea{width:100%;font:14px/1.4 var(--fb)}
+.splist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.sprow3{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;align-items:start;padding:10px;border:1px solid var(--bd);border-radius:12px;background:var(--card)}
+.spthumb{width:72px;height:52px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.spthumb img{max-width:64px;max-height:44px;object-fit:contain}.spthumb i{font:700 15px var(--fb);font-style:normal;color:var(--muted)}
+.spf{display:flex;flex-direction:column;gap:6px;min-width:0}.spf1{display:flex;gap:6px}.spf1 input{flex:1 1 auto;min-width:0}.spf1 .sptier{flex:0 0 auto;max-width:150px}
+.spf2 input{width:100%}.spf3{gap:6px;flex-wrap:wrap}.spf3 .btn{min-height:40px}
+.spimp,.spbulk{margin:10px 0;border:1.5px solid var(--au2,#c9a45c);border-radius:12px;padding:12px;background:var(--paper)}
+.spi-wrap{overflow-x:auto;margin:6px 0}.tbl.spi td{vertical-align:top;padding:8px 6px}.tbl.spi small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.tbl.spi small.new{color:#1b6b3a}.tbl.spi small.upd{color:#8a5a00}.tbl.spi tr.off{opacity:.45}.tbl.spi select{min-height:40px;max-width:150px}
+.tbl.spi input[type=checkbox]{width:22px;height:22px}.ell{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px}
+.spb-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.spb-list li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;align-items:center;padding:8px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+.spb-list li.nomatch{border-color:#c0392b;background:#fff6f4}.spb-list li > div{display:flex;flex-direction:column;gap:4px;min-width:0}.spb-list b.ell{max-width:100%}
+.spb-list small{font-size:12px;color:var(--muted)}.spb-list select{min-height:40px;width:100%}
+@media (max-width:560px){ .spf1{flex-wrap:wrap}.spf1 .sptier{max-width:none;flex:1 1 100%} .tbl.spi th:nth-child(4),.tbl.spi td:nth-child(4){display:none} }
+/* print: presented-by line and a sponsor page */
+.ph-sp{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin:0 0 4px;font:600 10px/1 var(--fb);text-transform:uppercase;letter-spacing:.12em;color:#555}
+.ph-sp .splogo{min-height:30px;min-width:0;padding:3px 8px}.ph-sp .splogo img{max-height:24px;max-width:110px}.ph-sp .spname{font-size:12px}
+.psp-tier{margin:10px 0 16px;text-align:center}.psp-tier h3{font:600 12px/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:#555;margin:0 0 8px}
+.psp-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.psp .splogo.sp-xl{min-width:300px;min-height:110px}.psp .splogo.sp-xl img{max-height:96px;max-width:360px}
+@media print{ .splogo{border:1px solid #ddd;break-inside:avoid} .psp{break-before:page} }
 </style>
 </head>
 <body>
 <div id="app"></div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script src="config.js"></script>
-<script src="smart-import.js?v=3.2.0.2"></script>
+<script src="smart-import.js?v=3.4.0"></script>
 <script>
 /* ================= Backend: one API, three storage modes =================
    supabase : the Netlify site (config.js has a Supabase URL + anon key)
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '3.3.0';
+const APP_VERSION = '3.4.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -5914,8 +5959,7 @@ function wzWelcome(){
   <p class="wnote">This is the first thing players see when they open the link: your welcome, where to go, and what to know.</p>
   <h3>Logo</h3><div class="card adm">${logoUp('logo', 'Club or tournament logo')}<p class="wnote" style="margin-bottom:0">Logos are redrawn in the app's colors. <button class="small" style="text-decoration:underline" data-act="wzstep" data-v="style">Change the look</button></p></div>
   <h3>Sponsors</h3>
-  <div class="card adm">${(c.sponsors || []).map((s, i) => `<div class="sprow2">${s.logo ? `<img src="${s.logo}" alt="" width="40" height="40">` : ''}${inp(`data-chg="sponsor" data-i="${i}" placeholder="Sponsor name"`, s.name)}${sel(`data-chg="sponsortier" data-i="${i}" aria-label="Sponsor level" class="sptier"`, [['', 'Level'], ...Object.entries(SP_TIERS)], s.tier || '')}<label class="btn alt sm">Logo<input type="file" accept="image/*" hidden data-chg="sponsorlogo" data-i="${i}"></label><button class="btn alt sm" data-act="rmsponsor" data-i="${i}">Remove</button></div>`).join('')}
-    <button class="btn alt sm" data-act="addsponsor">Add a sponsor</button></div>
+  ${sponsorsEditor()}
   <h3>Welcome</h3>
   <div class="card adm">${logoUp('cover', 'Cover photo (the courts, the clubhouse, last year\'s winners)')}
     <label class="small muted">Welcome message</label><textarea rows="4" data-chg="cfgv" data-p="welcome.message" placeholder="Welcome to the 2026 Oak & Pheasant Cup. Thanks for playing…">${esc(w.message)}</textarea>
@@ -7104,7 +7148,7 @@ function overviewView(){
     ${nc ? `<li class="ov-row">${ICON.courts || ''}<span><b>${nc} court${nc === 1 ? '' : 's'}</b><span>${esc((c.courts || []).slice(0, 8).map(x => x.name).join(', '))}${nc > 8 ? '…' : ''}</span></span></li>` : ''}
     ${contact ? `<li class="ov-row">${ICON.phone || ''}<span><b>Director contact</b><span class="ov-pre">${escTel(contact)}</span></span></li>` : ''}</ul></section>` : '';
   const sp = sponsorsSorted(); const tiers = ['title', 'gold', 'silver', 'bronze', 'friend', ''];
-  const spons = sp.length ? `<section class="ov-sec" aria-labelledby="ov-sp">${v3SecHead('Sponsors', 'ov-sp')}${tiers.map(t => { const g = sp.filter(x => (x.tier || '') === t); return g.length ? `<h3 class="ov-h3">${esc(SP_TIERS[t] || 'Sponsors')}</h3><ul class="ov-sp ${t === 'title' ? 'title' : ''}">${g.map(x => `<li>${x.logo ? `<img src="${esc(x.logo)}" alt="${esc(x.name || 'Sponsor')}">` : `<span>${esc(x.name)}</span>`}</li>`).join('')}</ul>` : '' }).join('')}</section>` : '';
+  const spons = sp.length ? `<section class="ov-sec" aria-labelledby="ov-sp">${v3SecHead('Sponsors', 'ov-sp')}${tiers.map(t => { const g = sp.filter(x => (x.tier || '') === t); return g.length ? `<h3 class="ov-h3">${esc(SP_TIERS[t] || 'Sponsors')}</h3><ul class="ov-sp ${t === 'title' ? 'title' : ''}">${g.map(x => `<li>${spLogoTile(x, spTierCls(t), true)}</li>`).join('')}</ul>` : '' }).join('')}</section>` : '';
   const empty = !evs.length ? `<p class="bk-empty">${view.admin ? 'Add events in setup and they show up here.' : 'The director is still setting things up. Check back soon.'}</p>` : '';
   return `${hero}${links}${board}${secs}${pros}${sched}${details}${spons}${empty}`;
 }
@@ -7126,11 +7170,101 @@ function countdownHtml(){
   const ms = start.getTime() - Date.now(), d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, mi = Math.floor(ms / 6e4) % 60;
   return `<div class="cd"><div class="lbl">First ball in</div><div class="cdtiles">${[[d,'days'],[h,'hours'],[mi,'min']].map(([v,l]) => `<div class="cdt"><b>${v}</b><span>${l}</span></div>`).join('')}</div><div class="cdsub">${esc(dayLabel(isoDay(start)))} · ${esc(start.toLocaleTimeString('en-US', {hour:'numeric', minute:'2-digit'}))}</div></div>`;
 }
+
+/* ===== v3.4 Sponsors: list import, logos (single + bulk by file name), tier-sized display ===== */
+const SP_ORDER = ['title', 'gold', 'silver', 'bronze', 'friend', ''];
+const spLogoTile = (x, cls, link) => { const inner = x.logo ? `<img src="${esc(x.logo)}" alt="${esc(x.name || 'Sponsor')}" loading="lazy" decoding="async">` : `<span class="spname">${esc(x.name || 'Sponsor')}</span>`;
+  return link && x.url ? `<a class="splogo ${cls || ''}" href="${esc(x.url)}" target="_blank" rel="noopener" title="${esc(x.name || '')} (opens in a new tab)">${inner}</a>` : `<span class="splogo ${cls || ''}" ${x.logo ? `title="${esc(x.name || '')}"` : ''}>${inner}</span>` };
+const spGroups = () => { const all = sponsorsSorted(); return SP_ORDER.map(t => ({t, list:all.filter(x => (x.tier || '') === t)})).filter(g => g.list.length) };
+const spTierCls = t => t === 'title' ? 'sp-xl' : t === 'gold' ? 'sp-lg' : t === 'silver' ? 'sp-md' : 'sp-sm';
+/* client-side logo prep: up to 800px (400px on this-device-only trips), transparent margins trimmed, PNG when the
+   logo has transparency (SVGs are drawn to PNG), otherwise WebP/JPEG to keep it small */
+async function logoBlobFromImg(im, isSvg){
+  let w = im.naturalWidth || im.width, h = im.naturalHeight || im.height; if (!w || !h){ w = 800; h = 400 }
+  const max = Dir.mode === 'supabase' ? 800 : 400, k = Math.min(isSvg ? 8 : 1, max / Math.max(w, h));
+  const cv = document.createElement('canvas'); cv.width = Math.max(1, Math.round(w * k)); cv.height = Math.max(1, Math.round(h * k));
+  const x = cv.getContext('2d'); x.imageSmoothingQuality = 'high'; x.drawImage(im, 0, 0, cv.width, cv.height);
+  let alpha = false, x0 = cv.width, y0 = cv.height, x1 = -1, y1 = -1;
+  try{ const d = x.getImageData(0, 0, cv.width, cv.height).data;
+    for (let yy = 0; yy < cv.height; yy++) for (let xx = 0; xx < cv.width; xx++){ const a = d[(yy * cv.width + xx) * 4 + 3]; if (a < 250) alpha = true; if (a > 8){ if (xx < x0) x0 = xx; if (xx > x1) x1 = xx; if (yy < y0) y0 = yy; if (yy > y1) y1 = yy } }
+  }catch(e){ throw new Error('That image is on a site that blocks copying it.') }
+  let out = cv;
+  if (alpha && x1 >= 0 && (x0 > 2 || y0 > 2 || x1 < cv.width - 3 || y1 < cv.height - 3)){ const pad = 4; out = document.createElement('canvas'); out.width = x1 - x0 + 1 + pad * 2; out.height = y1 - y0 + 1 + pad * 2; out.getContext('2d').drawImage(cv, x0, y0, x1 - x0 + 1, y1 - y0 + 1, pad, pad, x1 - x0 + 1, y1 - y0 + 1) }
+  const toB = (type, q) => new Promise(r => out.toBlob(r, type, q));
+  if (alpha) return {blob:await toB('image/png'), ext:'png'};
+  let b = await toB('image/webp', .9); if (b && b.type === 'image/webp') return {blob:b, ext:'webp'};
+  return {blob:await toB('image/jpeg', .9), ext:'jpg'};
+}
+async function logoFromFile(f){
+  if (f.size > 15 * 1024 * 1024) throw new Error(`${f.name} is over 15 MB`);
+  const isSvg = /svg/i.test(f.type) || /\.svg$/i.test(f.name);
+  const im = await loadImgURL(await fileURL(f)).catch(() => { throw new Error(`${f.name} isn't an image we can read`) });
+  const {blob, ext} = await logoBlobFromImg(im, isSvg);
+  return await Dir.uploadMedia(blob, ext, 'brand');
+}
+async function logoFromUrl(u){
+  const im = await loadImgURL(u); const {blob, ext} = await logoBlobFromImg(im, /\.svg(\?|$)/i.test(u));
+  return await Dir.uploadMedia(blob, ext, 'brand');
+}
+function spSetLogo(i, url){ const c = cfg(), sp = (c.sponsors || [])[i]; if (!sp) return; const old = sp.logo; sp.logo = url || null; delete sp.logoFile; Store.set('config', c); if (old && old !== url) Dir.removeMedia(old) }
+function sponsorsEditor(){
+  const c = cfg() || {}, list = c.sponsors || [], busy = view.spBusy;
+  return `<div class="card adm spedit">
+    <p class="small muted" style="margin-top:0">Add sponsors one by one, or import a list (a spreadsheet or pasted table with Sponsor, Level, Website and Logo columns), then drop in all the logo files at once: they match to sponsors by file name.</p>
+    <div class="row spedit-tools"><label class="btn alt sm ${busy ? 'disabled' : ''}">Import a list<input type="file" hidden data-chg="spfile" accept=".xlsx,.xls,.xlsm,.ods,.csv,.tsv,.txt"></label><label class="btn alt sm ${busy || !list.length ? 'disabled' : ''}">Upload logos<input type="file" hidden multiple accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg" data-chg="splogos" ${busy || !list.length ? 'disabled' : ''}></label><button class="btn alt sm" data-act="addsponsor">Add a sponsor</button></div>
+    <details class="more spaste"><summary>Paste a list instead</summary><textarea id="sp-paste" rows="4" placeholder="Western Bank, Presenting, westernbank.com&#10;Plains Capital Bank, Gold&#10;…or headings: Gold, then one sponsor per line"></textarea><button class="btn sm" data-act="sppaste" style="margin-top:6px">Read this list</button></details>
+    ${busy ? `<p class="small" role="status">${esc(busy)}</p>` : ''}
+    ${spImportCard()}${spBulkCard()}
+    ${list.length ? `<ul class="splist">${list.map((x, i) => `<li class="sprow3">
+      <span class="spthumb">${x.logo ? `<img src="${esc(x.logo)}" alt="">` : `<i>${esc((x.name || '?').split(/\s+/).map(w => w[0] || '').join('').slice(0, 3).toUpperCase() || '?')}</i>`}</span>
+      <div class="spf">
+        <div class="spf1">${inp(`data-chg="sponsor" data-i="${i}" placeholder="Sponsor name" aria-label="Sponsor name"`, x.name)}${sel(`data-chg="sponsortier" data-i="${i}" aria-label="Sponsor level" class="sptier"`, [['', 'Level'], ...Object.entries(SP_TIERS)], x.tier || '')}</div>
+        <div class="spf2">${inp(`data-chg="sponsorurl" data-i="${i}" type="url" inputmode="url" placeholder="Website (optional)" aria-label="Website for ${esc(x.name || 'this sponsor')}"`, x.url || '')}</div>
+        ${x.logoFile && !x.logo ? `<p class="small muted" style="margin:2px 0 0">Logo file in the list: <b>${esc(x.logoFile)}</b>. Upload it with "Upload logos".</p>` : ''}
+        <div class="row spf3"><label class="btn alt sm">${x.logo ? 'Replace logo' : 'Add logo'}<input type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml,.svg" hidden data-chg="sponsorlogo" data-i="${i}"></label>${x.logo ? `<button class="btn alt sm" data-act="spnologo" data-i="${i}">Remove logo</button>` : ''}<button class="btn alt sm" data-act="rmsponsor" data-i="${i}" aria-label="Remove ${esc(x.name || 'sponsor')}">Remove</button></div>
+      </div></li>`).join('')}</ul>` : '<p class="small muted">No sponsors yet.</p>'}
+    <p class="wnote" style="margin-bottom:0">Logos sit on a white card everywhere (TV included). A PNG or SVG with a transparent background looks best.</p></div>`;
+}
+function spImportStart(tables, file){
+  let best = null; if (!window.SmartImport || !SmartImport.sponsorList){ view.spErr = 'The importer did not load. Reload the page and try again.'; return }
+  (tables || []).forEach(t => { const r = SmartImport.sponsorList(t.rows); if (!best || r.sponsors.length > best.sponsors.length) best = Object.assign(r, {sheet:t.name}) });
+  if (!best || !best.sponsors.length){ toast(`Couldn't find sponsors in ${file}. Use a Sponsor column (Level, Website and Logo are optional), or one sponsor per line.`); return }
+  const have = new Map(((cfg() || {}).sponsors || []).map((x, i) => [normName(x.name), i]));
+  best.sponsors.forEach(x => { x.at = have.has(normName(x.name)) ? have.get(normName(x.name)) : -1; x.on = true });
+  view.spi = Object.assign(best, {file}); view.spb = null;
+}
+function spImportCard(){
+  const pi = view.spi; if (!pi) return '';
+  const nNew = pi.sponsors.filter(x => x.on && x.at < 0).length, nUp = pi.sponsors.filter(x => x.on && x.at >= 0).length;
+  return `<div class="impbox spimp" id="spi-top"><h3 style="margin:0 0 2px">${pi.sponsors.length} sponsor${pi.sponsors.length === 1 ? '' : 's'} from ${esc(pi.file)}</h3>
+    <p class="small muted" style="margin:0 0 6px">${pi.how === 'columns' ? `Read from the columns: ${Object.entries(pi.cols || {}).filter(([k]) => !k.startsWith('_')).map(([k]) => ({name:'Sponsor', tier:'Level', url:'Website', logo:'Logo', amount:'Amount'})[k]).filter(Boolean).join(', ')}.` : pi.how === 'list' ? 'Read as a list, with level headings like "Gold" or "Presented by".' : 'No headings, so the columns were guessed from what is in them.'} ${pi.tierNote ? esc(pi.tierNote) : 'Levels: Title/Presenting/Diamond → Presenting; Platinum → Presenting (or Gold if the list also has a Presenting sponsor); Gold, Silver, Bronze; Friend/Supporter/Patron/In-kind → Friend; 1–5 = top to bottom.'}</p>
+    ${pi.warnings.length ? `<div class="si-panel">${pi.warnings.map(w => `<p class="small bad" style="margin:2px 0">${esc(w.msg)}</p>`).join('')}</div>` : ''}
+    <div class="spi-wrap"><table class="tbl spi"><thead><tr><th scope="col"><span class="sr">Include</span></th><th scope="col">Sponsor</th><th scope="col">Level</th><th scope="col">Website / logo</th></tr></thead><tbody>${pi.sponsors.map((x, k) => `<tr class="${x.on ? '' : 'off'}">
+      <td><input type="checkbox" data-chg="spion" data-k="${k}" ${x.on ? 'checked' : ''} aria-label="Include ${esc(x.name)}"></td>
+      <td><b>${esc(x.name)}</b><small class="${x.at >= 0 ? 'upd' : 'new'}">${x.at >= 0 ? 'Updates the sponsor you have' : 'New'}</small></td>
+      <td>${sel(`data-chg="spitier" data-k="${k}" aria-label="Level for ${esc(x.name)}"`, [['', 'No level'], ...Object.entries(SP_TIERS)], x.tier || '')}${x.tierIn ? `<small>${esc(x.tierWhy && x.tierWhy !== 'unknown' ? x.tierWhy.replace(/^"(.*)"$/, 'from "$1"') : `"${x.tierIn}" not known`)}</small>` : ''}</td>
+      <td>${x.url ? `<small class="ell">${esc(x.url.replace(/^https?:\/\//, ''))}</small>` : ''}${x.logo ? `<small class="ell">${/^https?:/i.test(x.logo) ? 'Logo link: ' : 'Logo file: '}${esc(x.logo.split('/').pop())}</small>` : ''}${!x.url && !x.logo ? '<small class="muted">—</small>' : ''}</td></tr>`).join('')}</tbody></table></div>
+    <p class="small muted">Same name as a sponsor you already have = update it (level, website and logo fill in or change); nothing is removed. Logo links are copied in when the site allows it, otherwise the link is kept. Logo file names wait for "Upload logos".</p>
+    <div class="row si-foot"><button class="btn gold" data-act="spigo" ${nNew + nUp ? '' : 'disabled'}>Add ${nNew} new${nUp ? `, update ${nUp}` : ''}</button><button class="btn alt" data-act="spicancel">Cancel</button></div></div>`;
+}
+function spBulkStart(files){
+  const list = (cfg() || {}).sponsors || [];
+  const m = SmartImport.matchLogos(files.map(f => f.name), list.map(x => x.name || ''), {refs:list.map(x => x.logoFile || '')});
+  view.spb = {items:m.map((r, k) => ({f:files[k], prev:URL.createObjectURL(files[k]), to:r.idx >= 0 ? String(r.idx) : '', score:r.score, why:r.why, auto:r.idx >= 0}))}; view.spi = null;
+}
+function spBulkCard(){
+  const b = view.spb; if (!b) return '';
+  const list = (cfg() || {}).sponsors || [], ok = b.items.filter(x => x.to !== '').length, miss = b.items.filter(x => !x.auto).length;
+  const opts = [['', 'Skip this file'], ['__new', 'Add as a new sponsor'], ...list.map((x, i) => [String(i), (x.name || 'Sponsor ' + (i + 1)) + (x.logo ? ' (has a logo: replace)' : '')])];
+  return `<div class="impbox spbulk" id="spb-top"><h3 style="margin:0 0 2px">${b.items.length} logo file${b.items.length === 1 ? '' : 's'}</h3>
+    <p class="small muted" style="margin:0 0 8px">${b.items.length - miss} matched by file name${miss ? `; <b>${miss} need${miss === 1 ? 's' : ''} you to pick</b> a sponsor (or add as a new one, or skip)` : ''}. Check them, then add.</p>
+    <ul class="spb-list">${b.items.map((x, k) => `<li class="${x.auto ? '' : 'nomatch'}"><span class="spthumb"><img src="${esc(x.prev)}" alt=""></span><div><b class="ell">${esc(x.f.name)}</b><small>${x.auto ? `Matched: ${esc(x.why)}${x.score < .85 ? ' (check)' : ''}` : 'No match yet'}</small>${sel(`data-chg="spbto" data-k="${k}" aria-label="Sponsor for ${esc(x.f.name)}"`, opts, x.to)}${x.to === '__new' ? `<small>New sponsor: ${esc(SmartImport.nameFromFile(x.f.name))}</small>` : ''}</div></li>`).join('')}</ul>
+    <div class="row si-foot"><button class="btn gold" data-act="spbgo" ${ok ? '' : 'disabled'}>Add ${ok} logo${ok === 1 ? '' : 's'}</button><button class="btn alt" data-act="spbcancel">Cancel</button></div></div>`;
+}
 function sponsorsHtml(){
   const all = sponsorsSorted(); if (!all.length) return '';
-  const ttl = all.filter(s => s.tier === 'title'), sp = all.filter(s => s.tier !== 'title');
-  const one = s => s.logo ? `<img src="${esc(s.logo)}" alt="${esc(s.name || 'Sponsor')}">` : `<span>${esc(s.name)}</span>`;
-  return `<div class="sponsors">${ttl.length ? `<div class="lbl">Presented by</div><div class="sprow sptitle">${ttl.map(one).join('')}</div>` : ''}${sp.length ? `<div class="lbl">${ttl.length ? 'With thanks to' : 'Thanks to our sponsors'}</div><div class="sprow">${sp.map(one).join('')}</div>` : ''}</div>`;
+  const ttl = all.filter(s => s.tier === 'title'), sp = all.filter(s => s.tier !== 'title'), link = !view.tv;
+  return `<div class="sponsors">${ttl.length ? `<div class="lbl">Presented by</div><div class="sprow sptitle">${ttl.map(x => spLogoTile(x, 'sp-xl', link)).join('')}</div>` : ''}${sp.length ? `<div class="lbl">${ttl.length ? 'With thanks to' : 'Thanks to our sponsors'}</div><div class="sprow">${sp.map(x => spLogoTile(x, spTierCls(x.tier), link)).join('')}</div>` : ''}</div>`;
 }
 function todayView(){
   syncEngine();
@@ -7607,7 +7741,8 @@ function signupView(){
 
 /* ---------- Print ---------- */
 function printHead(ev, sectionTitle){
-  return `<header class="ph">${crest(40)}<div><b>${esc(tripTitle())}</b><span>${esc(tsub())}</span></div><h1>${esc(ev.name)}${sectionTitle ? `<span class="psec-sec">${esc(sectionTitle)}</span>` : ''}</h1></header><p class="small">${eventSummary(ev)}</p>`;
+  const ttl = sponsorsSorted().filter(x => x.tier === 'title');
+  return `${ttl.length ? `<p class="ph-sp"><span>Presented by</span>${ttl.map(x => spLogoTile(x, 'sp-sm')).join('')}</p>` : ''}<header class="ph">${crest(40)}<div><b>${esc(tripTitle())}</b><span>${esc(tsub())}</span></div><h1>${esc(ev.name)}${sectionTitle ? `<span class="psec-sec">${esc(sectionTitle)}</span>` : ''}</h1></header><p class="small">${eventSummary(ev)}</p>`;
 }
 function printEventPages(ev){
   const fmt = ev.format || '';
@@ -7663,7 +7798,7 @@ function printView(){
   syncEngine();
   const evs = (view.printEv ? state.events.filter(e => e.id === view.printEv) : visibleEvents()).filter(hasPlayEv);
   return `<div class="printpage"><div class="noprint row" style="padding:12px"><button class="btn" data-act="doprint">Print</button><button class="btn alt" data-act="closeprint">Back</button></div>
-  ${evs.map(printEventPages).join('') || '<p style="padding:20px">Nothing drawn yet.</p>'}</div>`;
+  ${evs.map(printEventPages).join('') || '<p style="padding:20px">Nothing drawn yet.</p>'}${!view.printEv && sponsorsSorted().length ? `<section class="psec psp"><header class="ph">${crest(40)}<div><b>${esc(tripTitle())}</b><span>${esc(tsub())}</span></div><h1>Thank you to our sponsors</h1></header>${spGroups().map(g => `<div class="psp-tier">${g.t && SP_TIERS[g.t] ? `<h3>${esc(SP_TIERS[g.t])}</h3>` : ''}<div class="psp-row">${g.list.map(x => spLogoTile(x, spTierCls(g.t))).join('')}</div></div>`).join('')}</section>` : ''}</div>`;
 }
 
 
@@ -8436,8 +8571,7 @@ function wzBasicsOld(){
   <div class="card adm"><p class="small muted" style="margin-top:0">Anyone with the PIN can run setup and fix scores. Give it to co-directors only.</p>
     <div class="row" style="flex-wrap:nowrap"><input id="newpin" type="password" inputmode="numeric" autocomplete="new-password" placeholder="New PIN"><button class="btn alt sm" data-act="setpin">Change PIN</button></div></div>
   <h3>Sponsors</h3>
-  <div class="card adm">${(c.sponsors || []).map((s, i) => `<div class="sprow2">${s.logo ? `<img src="${s.logo}" alt="" width="40" height="40">` : ''}${inp(`data-chg="sponsor" data-i="${i}" placeholder="Sponsor name"`, s.name)}${sel(`data-chg="sponsortier" data-i="${i}" aria-label="Sponsor level" class="sptier"`, [['', 'Level'], ...Object.entries(SP_TIERS)], s.tier || '')}<label class="btn alt sm">Logo<input type="file" accept="image/*" hidden data-chg="sponsorlogo" data-i="${i}"></label><button class="btn alt sm" data-act="rmsponsor" data-i="${i}">Remove</button></div>`).join('')}
-    <button class="btn alt sm" data-act="addsponsor">Add a sponsor</button></div>
+  ${sponsorsEditor()}
   <p class="wnote">Welcome message, cover photo, check-in, rules and the off-court schedule are on the next step.</p>`;
 }
 
@@ -8921,7 +9055,7 @@ const paProPhoto = (ev, pid) => pid ? ((paPhotos(ev).pros || {})[pid] || cardOf(
 function fitTV(extra){
   const sec = document.querySelector('.tvpa');
   if (!sec){ /* v3.3: courts/next/results and draw slides shrink to fit short screens (1280x720) instead of running off the bottom */
-    const g = document.querySelector('.tv .tvgrid, .tv .tvdraw'); if (!g) return;
+    const g = document.querySelector('.tv .tvgrid, .tv .tvdraw, .tv .tvsp'); if (!g) return;
     const sp = g.parentElement && g.parentElement.querySelector(':scope > .sponsors');
     if (sp && window.innerHeight < 900){ let cut = false; [...sp.children].forEach((el, i) => { if (i > 0 && el.classList.contains('lbl')) cut = true; if (cut) el.style.display = 'none' }) }
     const spH = sp && sp.offsetHeight ? sp.getBoundingClientRect().height + 16 : 0;
@@ -9038,7 +9172,7 @@ function tvProAm(ev){
 }
 function tvSponsors(){
   const sp = sponsorsSorted(); if (!sp.length) return '';
-  return `<section class="tvsp"><h2>Thank you to our sponsors</h2><div class="tvsp-grid">${sp.map(s => `<figure class="${s.tier === 'title' ? 'title' : ''}">${s.logo ? `<img src="${esc(s.logo)}" alt="${esc(s.name || 'Sponsor')}">` : `<span>${esc(s.name)}</span>`}${s.logo && s.name ? `<figcaption>${esc(s.name)}${s.tier && SP_TIERS[s.tier] ? ` · ${esc(SP_TIERS[s.tier])}` : ''}</figcaption>` : ''}</figure>`).join('')}</div></section>`;
+  return `<section class="tvsp"><h2>Thank you to our sponsors</h2>${spGroups().map(g => `<div class="tvsp-tier t-${g.t || 'none'}">${g.t && SP_TIERS[g.t] ? `<p class="tvsp-lbl">${esc(SP_TIERS[g.t])}</p>` : ''}<div class="tvsp-row">${g.list.map(x => spLogoTile(x, spTierCls(g.t))).join('')}</div></div>`).join('')}</section>`;
 }
 const SP_TIERS = {title:'Presenting sponsor', gold:'Gold', silver:'Silver', bronze:'Bronze', friend:'Friend of the event'};
 const sponsorsSorted = () => { const ord = ['title', 'gold', 'silver', 'bronze', 'friend', '']; return ((cfg() || {}).sponsors || []).filter(s => s && (s.name || s.logo)).map((s, i) => Object.assign({i}, s)).sort((a, b) => ord.indexOf(a.tier || '') - ord.indexOf(b.tier || '') || a.i - b.i) };
@@ -9419,7 +9553,28 @@ const ACT = {
     if (el.dataset.p === 'sport') saveEvents(evsCopy().map(e => { if (!hasResults(e)){ e.scoring = {main:sport().main, consolation:sport().cons}; e.scoringOverride = e.scoring } return e })) },
   async setpin(){ const v = ((document.getElementById('newpin') || {}).value || '').trim(); try{ await Dir.setPin(v); toast('PIN changed.') }catch(e){ toast(e.message || String(e)) } },
   addsponsor(){ const c = cfg(); c.sponsors = (c.sponsors || []).concat([{name:'', logo:null}]); Store.set('config', c) },
-  rmsponsor(el){ const c = cfg(); c.sponsors.splice(+el.dataset.i, 1); Store.set('config', c) },
+  rmsponsor(el){ const c = cfg(), gone = c.sponsors.splice(+el.dataset.i, 1)[0]; Store.set('config', c); if (gone && gone.logo) Dir.removeMedia(gone.logo) },
+  spnologo(el){ spSetLogo(+el.dataset.i, null) },
+  sppaste(){ const t = (document.getElementById('sp-paste') || {}).value || ''; if (!t.trim()) return toast('Paste a list first.'); spImportStart(siTablesFromText(t), 'your list') },
+  spicancel(){ view.spi = null },
+  async spigo(){ const pi = view.spi; if (!pi || view.spBusy) return; const c = cfg(); c.sponsors = c.sponsors || []; let added = 0, upd = 0, logos = 0, kept = 0; const fetchList = [];
+    pi.sponsors.filter(x => x.on).forEach(x => { let sp = x.at >= 0 ? c.sponsors[x.at] : c.sponsors.find(y => normName(y.name) === normName(x.name));
+      if (sp){ upd++; if (x.tier) sp.tier = x.tier; if (x.url) sp.url = x.url } else { sp = {name:x.name, logo:null}; if (x.tier) sp.tier = x.tier; if (x.url) sp.url = x.url; c.sponsors.push(sp); added++ }
+      if (x.logo){ if (/^https?:\/\//i.test(x.logo)) fetchList.push([sp, x.logo]); else if (/^data:image\//.test(x.logo)) sp.logo = x.logo; else if (!sp.logo) sp.logoFile = x.logo.split(/[\\/]/).pop() } });
+    view.spi = null; Store.set('config', c); render();
+    for (let k = 0; k < fetchList.length; k++){ const [sp, u] = fetchList[k]; view.spBusy = `Copying logo ${k + 1} of ${fetchList.length}…`; render();
+      let url; try{ url = await logoFromUrl(u); logos++ }catch(e){ url = u; kept++ }
+      const c2 = cfg(), t = (c2.sponsors || []).find(y => normName(y.name) === normName(sp.name)); if (t){ const old = t.logo; t.logo = url; delete t.logoFile; Store.set('config', c2); if (old && old !== url) Dir.removeMedia(old) } }
+    view.spBusy = null; toast(`Sponsors: ${added} added, ${upd} updated${logos ? `, ${logos} logo${logos === 1 ? '' : 's'} copied in` : ''}${kept ? `, ${kept} logo link${kept === 1 ? '' : 's'} kept as links (that site blocks copying)` : ''}.`) },
+  spbcancel(){ (view.spb && view.spb.items || []).forEach(x => { try{ URL.revokeObjectURL(x.prev) }catch(e){} }); view.spb = null },
+  async spbgo(){ const b = view.spb; if (!b || view.spBusy) return; const todo = b.items.filter(x => x.to !== ''); let ok = 0; const errs = [];
+    for (let k = 0; k < todo.length; k++){ const x = todo[k]; view.spBusy = `Adding logo ${k + 1} of ${todo.length}…`; render();
+      try{ const url = await logoFromFile(x.f); const c = cfg(); c.sponsors = c.sponsors || [];
+        if (x.to === '__new'){ c.sponsors.push({name:SmartImport.nameFromFile(x.f.name), logo:url}); Store.set('config', c) }
+        else { const i = +x.to; if (c.sponsors[i]){ const old = c.sponsors[i].logo; c.sponsors[i].logo = url; delete c.sponsors[i].logoFile; Store.set('config', c); if (old && old !== url) Dir.removeMedia(old) } }
+        ok++ }catch(e){ errs.push(`${x.f.name}: ${(e && e.message) || e}`) } }
+    b.items.forEach(x => { try{ URL.revokeObjectURL(x.prev) }catch(e){} }); view.spb = null; view.spBusy = null;
+    toast(`${ok} logo${ok === 1 ? '' : 's'} added.${errs.length ? ' Not added: ' + errs.join('; ') : ''}`) },
   rmlogo(el){ const c = cfg(), p = el.dataset.p; [p, p + 'Orig', p + 'Color'].forEach(k => c[k] = null); c[p + 'Keep'] = false; Store.set('config', c) },
   courtn(el){ const c = cfg(), cs = c.courts || []; if (+el.dataset.v > 0) cs.push({name:'Court ' + (cs.length + 1)}); else if (cs.length > 1) cs.pop(); c.courts = cs; Store.set('config', c) },
   psort(el){ view.psort = el.dataset.v },
@@ -9900,7 +10055,14 @@ const CHG = {
   rule(el){ const c = cfg(); c.rules = Object.assign({}, c.rules || {}, {[el.dataset.p]:el.checked}); Store.set('config', c) },
   finalcourt(el){ const c = cfg(), r = Object.assign({}, c.rules || {}), set = new Set(r.finalsCourts || []); el.checked ? set.add(+el.dataset.i) : set.delete(+el.dataset.i); r.finalsCourts = set.size ? [...set].sort((a,b) => a - b) : null; c.rules = r; Store.set('config', c) },
   sponsor(el){ const c = cfg(); c.sponsors[+el.dataset.i].name = el.value; Store.set('config', c) },
-  async sponsorlogo(el){ const f = el.files[0]; if (!f) return; const im = await loadImgURL(await fileURL(f)); const u = await saveImg(resizedURL(im, 300, true), 'png'); const c = cfg(); c.sponsors[+el.dataset.i].logo = u; Store.set('config', c) },
+  async sponsorlogo(el){ const f = el.files[0], i = +el.dataset.i; if (!f) return; view.spBusy = 'Uploading the logo…'; render();
+    try{ spSetLogo(i, await logoFromFile(f)); toast('Logo updated.') }catch(e){ toast("Couldn't add that logo: " + ((e && e.message) || e)) } finally { view.spBusy = null; el.value = ''; render() } },
+  sponsorurl(el){ const c = cfg(), sp = c.sponsors[+el.dataset.i]; if (!sp) return; let v = el.value.trim(); if (v && !/^https?:\/\//i.test(v)) v = 'https://' + v; if (v && !/^https?:\/\/[^\s.]+\.[^\s]+$/i.test(v)) return toast("That doesn't look like a web address."); if (v) sp.url = v; else delete sp.url; Store.set('config', c) },
+  async spfile(el){ const f = el.files[0]; if (!f) return; try{ const tables = SI_SHEET_EXT.test(f.name) ? await siReadFile(f) : siTablesFromText(await f.text()); spImportStart(tables, f.name) }catch(e){ toast("Couldn't read that file: " + ((e && e.message) || e)) } finally { el.value = ''; render() } },
+  splogos(el){ const fs = [...(el.files || [])].filter(f => /^image\//.test(f.type) || /\.(png|jpe?g|gif|webp|svg)$/i.test(f.name)); el.value = ''; if (!fs.length) return toast('Pick image files (PNG, JPG, SVG or WebP).'); spBulkStart(fs); render() },
+  spion(el){ const x = view.spi && view.spi.sponsors[+el.dataset.k]; if (x) x.on = el.checked },
+  spitier(el){ const x = view.spi && view.spi.sponsors[+el.dataset.k]; if (x) x.tier = el.value },
+  spbto(el){ const x = view.spb && view.spb.items[+el.dataset.k]; if (x) x.to = el.value },
   pl(el){ const pl = players(), p = pl.find(x => x.id === el.dataset.id); if (!p) return; const f = el.dataset.f;
     if (f === 'name'){ const v = el.value.trim(); if (!v) return; const clash = findByName(v); if (clash && clash.id !== p.id) return toast(`${v} is already on the roster.`); p.name = v; savePlayers(pl); refreshNames(); return }
     if (f === 'rating'){ const v = el.value.trim(); const r = v === '' ? null : parseRating(v); if (v !== '' && r === null) return toast('Ratings are numbers like 3.5.'); p.rating = r }
