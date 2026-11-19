@@ -2257,6 +2257,21 @@ img.cover.fit-contain,img.bk-cover.fit-contain{max-height:200px;padding:14px}
 .themed .v3-tcard-ph > img.stock{opacity:.6;mix-blend-mode:luminosity}
 
 .tplbtn{display:inline-flex;align-items:center;gap:6px;text-decoration:none}.tplbtn .i{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* v3.4.2: processed logos fill their round frames; no padding, no box-in-a-circle */
+img.lg-badge,img.lg-box{object-fit:cover!important;padding:0!important;box-sizing:border-box}
+img.lg-wait{opacity:0}
+img.lg-plain{object-fit:contain!important;padding:0!important;background:#fff}
+.v3-logo.v3-tlogo.lg-badge{background:transparent!important}
+.v3-logo.v3-tlogo.lg-box{border-color:rgba(255,255,255,.9)}
+.v3-tcard-ph.fit-banner > img.lg-badge{border-radius:50%;width:120px;height:120px;max-width:none}
+.v3-tcard-ph.fit-banner > img.lg-box{border-radius:50%;width:120px;height:120px;max-width:none}
+@media (min-width:740px){ .v3-tcard-ph.fit-banner > img.lg-badge,.v3-tcard-ph.fit-banner > img.lg-box{width:auto;height:70%;aspect-ratio:1} }
+.v3-ecard-ph.fit-banner img.lg-badge,.v3-ecard-ph.fit-banner img.lg-box{border-radius:50%;aspect-ratio:1}
+.splogo img.lg-badge{border-radius:50%;aspect-ratio:1;width:auto}
+/* v3.4.2: the player button is one centred circle, same size and ring as the bell and More buttons */
+.v6-hme.hbtn{margin-left:0;padding:0;overflow:hidden}
+.v6-hme.hbtn .v4-av{--s:calc(var(--tap) - 7px);width:calc(100% - 7px);height:calc(100% - 7px);flex:none;margin:0!important;box-shadow:none;font-size:15px;letter-spacing:.02em}
 </style>
 </head>
 <body>
@@ -2270,7 +2285,7 @@ img.cover.fit-contain,img.bk-cover.fit-contain{max-height:200px;padding:14px}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '3.4.1';
+const APP_VERSION = '3.4.2';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -6399,7 +6414,7 @@ function header(){
   const bell = `<button class="hbtn v3-ring" data-act="alerts" aria-label="Notifications${un ? `, ${un} unread chat message${un === 1 ? '' : 's'}` : ''}">${ICON.bell}${un ? '<i class="v3-dot" aria-hidden="true"></i>' : ''}</button>`;
   const more = `<button class="hbtn more v3-ring" data-act="tab" data-v="more" aria-label="More">${ICON.more}</button>`;
   const me = !dir && view.me && view.me !== GUEST && P(view.me) ? view.me : null;
-  const meBtn = me ? `<button class="v6-hme" data-act="openplayer" data-id="${esc(me)}" aria-label="Your player card: ${esc(pname(me))}">${avatar(me, 34)}</button>` : '';
+  const meBtn = me ? `<button class="hbtn v3-ring v6-hme" data-act="openplayer" data-id="${esc(me)}" aria-label="Your player card: ${esc(pname(me))}">${avatar(me, 34)}</button>` : '';
   return `<header class="top bk-top v3-top ${home ? 'tall' : ''} ${view.slim ? 'slim' : ''}">
     ${hdrImg()}
     <div class="v3-top-row">
@@ -9524,8 +9539,8 @@ function drawInner(){
     return;
   }
   syncEngine();
-  if (view.print){ app.innerHTML = `<div id="scroller">${printView()}</div>`; requestAnimationFrame(fitPrintBrackets); return }
-  if (view.tv){ app.innerHTML = `<div id="scroller">${tvView()}</div>`; requestAnimationFrame(() => fitTV()); return }
+  if (view.print){ app.innerHTML = `<div id="scroller">${printView()}</div>`; try{ fitImages(app) }catch(e){} requestAnimationFrame(fitPrintBrackets); return }
+  if (view.tv){ app.innerHTML = `<div id="scroller">${tvView()}</div>`; try{ fitImages(app) }catch(e){} requestAnimationFrame(() => fitTV()); return }
   if (view.signup){ app.innerHTML = `<div id="scroller">${signupView()}</div>` + modal(); restoreFocus(fid, sel); return }
   if (view.screen === 'wizard'){ app.innerHTML = wizardView() + modal(); finishDraw(keep, fid, sel); return }
   if (!view.me && view.tab !== 'admin'){ app.innerHTML = gate() + modal(); restoreFocus(fid, sel); return }
@@ -9575,7 +9590,7 @@ function fitProbe(url){
     if (cross) im.crossOrigin = 'anonymous';
     im.onload = () => read(im, true);
     im.onerror = () => { if (!cross) return done({w:1, h:1, alpha:false, edge:null, uniform:false, bad:true}); const j = new Image(); j.onload = () => read(j, false); j.onerror = () => done({w:1, h:1, alpha:false, edge:null, uniform:false, bad:true}); j.src = url };
-    im.src = url;
+    im.src = cross ? url + (url.includes('?') ? '&' : '?') + 'bkcors=1' : url;
   });
   FITP.set(url, pr); return pr;
 }
@@ -9593,8 +9608,85 @@ function fitApply(im, o, kind){
   if (kind === 'solo'){ const isLogo = ratio < 1.3 || o.alpha; im.classList.toggle('fit-contain', isLogo); im.style.background = isLogo ? (o.edge || '#fff') : ''; return }
   if (kind === 'logo'){ im.classList.add('fit-contain'); const sq = Math.abs(ratio - 1) < .08;
     // a square logo with a solid background fills a round frame (only the plain corners are lost); anything else sits inside it
-    im.style.background = o.edge || '#fff'; im.style.padding = fitPad(im, (sq && o.uniform && !o.alpha) ? 0 : (o.uniform && !o.alpha ? .06 : .14)); return }
+    im.style.background = o.edge || '#fff'; im.style.padding = '0'; return }
   if (kind === 'face'){ const lg = o.alpha || ratio > 1.7 || ratio < .5; im.classList.toggle('fit-contain', lg); im.style.background = lg ? (o.edge || '#fff') : ''; im.style.padding = lg ? fitPad(im, .12) : ''; return }
+}
+
+/* ---------- v3.4.2 logo processing at render time ----------
+   A logo is redrawn once (cached by URL) into a clean square PNG: a circular badge (plain corners, content
+   reaching the middle of every side) becomes a transparent circle that fills a round frame edge to edge;
+   any other logo is trimmed and centred inside the frame's circle on its own corner colour. No box-in-a-circle,
+   no padding (padding shrinks badly when the header collapses), and never upscaled past the source. */
+const LOGOP = new Map(), LOGOV = new Map();
+function logoProc(url){
+  if (LOGOP.has(url)) return LOGOP.get(url);
+  const pr = new Promise(res => {
+    const im = new Image(), cross = /^https?:/i.test(url) && !url.startsWith(location.origin);
+    if (cross) im.crossOrigin = 'anonymous';
+    im.onload = () => { try{ res(logoBuild(im)) }catch(e){ res(null) } };
+    im.onerror = () => res(null);
+    im.src = cross ? url + (url.includes('?') ? '&' : '?') + 'bkcors=1' : url;
+  }).then(o => { LOGOV.set(url, o || false); return o || false });
+  LOGOP.set(url, pr); return pr;
+}
+function logoBuild(im){
+  const W = im.naturalWidth, H = im.naturalHeight; if (!W || !H) return null;
+  const k = Math.min(1, 1200 / Math.max(W, H)), w = Math.round(W * k), h = Math.round(H * k);
+  const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const x = cv.getContext('2d', {willReadFrequently:true}); x.drawImage(im, 0, 0, w, h);
+  const d = x.getImageData(0, 0, w, h).data, at = (px, py) => { const i = (Math.max(0, Math.min(h - 1, py)) * w + Math.max(0, Math.min(w - 1, px))) * 4; return [d[i], d[i + 1], d[i + 2], d[i + 3]] };
+  const cs = [], bl = Math.max(2, Math.round(Math.min(w, h) * .03));
+  for (let yy = 0; yy < bl; yy++) for (let xx = 0; xx < bl; xx++) [[xx, yy], [w - 1 - xx, yy], [xx, h - 1 - yy], [w - 1 - xx, h - 1 - yy]].forEach(([a, c]) => cs.push(at(a, c)));
+  const clear = cs.filter(c => c[3] < 40).length > cs.length * .6, opq = cs.filter(c => c[3] >= 40);
+  const med = opq.length ? [0, 1, 2].map(ch => opq.map(c => c[ch]).sort((p, q) => p - q)[opq.length >> 1]) : [255, 255, 255];
+  const dist = c => Math.abs(c[0] - med[0]) + Math.abs(c[1] - med[1]) + Math.abs(c[2] - med[2]);
+  const uniform = clear || opq.filter(c => dist(c) < 60).length > opq.length * .8;
+  const ratio = W / H;
+  if (!uniform) return {kind:'photo', ratio};
+  const isBg = (px, py) => { const c = at(Math.round(px), Math.round(py)); return c[3] < 40 || (!clear && dist(c) < 70) };
+  const st = Math.max(1, Math.round(Math.min(w, h) / 300)); let x0 = w, y0 = h, x1 = -1, y1 = -1;
+  for (let py = 0; py < h; py += st) for (let px = 0; px < w; px += st) if (!isBg(px, py)){ if (px < x0) x0 = px; if (px > x1) x1 = px; if (py < y0) y0 = py; if (py > y1) y1 = py }
+  if (x1 < 0) return null;
+  x0 = Math.max(0, x0 - st); y0 = Math.max(0, y0 - st); x1 = Math.min(w - 1, x1 + st); y1 = Math.min(h - 1, y1 + st);
+  const bw = x1 - x0 + 1, bh = y1 - y0 + 1, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  const corners = [[x0 + bw * .1, y0 + bh * .1], [x1 - bw * .1, y0 + bh * .1], [x0 + bw * .1, y1 - bh * .1], [x1 - bw * .1, y1 - bh * .1]].filter(([a, c]) => isBg(a, c)).length;
+  const near = (a, c, da, dc) => [0, .02, .04, .06].some(t => !isBg(a + da * t, c + dc * t));
+  const mids = [near(cx, y0, 0, bh), near(cx, y1, 0, -bh), near(x0, cy, bw, 0), near(x1, cy, -bw, 0)].filter(Boolean).length;
+  const badge = bw / bh > .9 && bw / bh < 1.11 && corners === 4 && mids >= 3;
+  const out = document.createElement('canvas'), o = out.getContext('2d');
+  o.imageSmoothingEnabled = true; o.imageSmoothingQuality = 'high';
+  if (badge){
+    const r = Math.max(bw, bh) / 2 * .985, S = Math.max(96, Math.min(1024, Math.round(r * 2 / k)));
+    out.width = out.height = S; o.beginPath(); o.arc(S / 2, S / 2, S / 2, 0, Math.PI * 2); o.closePath(); o.clip();
+    o.drawImage(im, (cx - r) / k, (cy - r) / k, 2 * r / k, 2 * r / k, 0, 0, S, S);
+    return {kind:'badge', src:out.toDataURL('image/png'), ratio, bg:'transparent'};
+  }
+  // content luminance decides the backdrop for a transparent logo (light artwork needs a dark backdrop)
+  let lum = 0, n = 0; for (let py = y0; py <= y1; py += st * 3) for (let px = x0; px <= x1; px += st * 3){ const c = at(px, py); if (c[3] > 120 && (clear || dist(c) >= 70)){ lum += (c[0] * .3 + c[1] * .59 + c[2] * .11) / 255; n++ } }
+  const light = n && lum / n > .78;
+  const bg = clear ? (light ? (getComputedStyle(document.documentElement).getPropertyValue('--g1').trim() || '#063D2B') : '#FFFFFF') : rgb2hex(med);
+  const side = Math.max(bw, bh) / k, S = Math.max(96, Math.min(1024, Math.round(side / .7)));
+  out.width = out.height = S; o.fillStyle = bg; o.fillRect(0, 0, S, S);
+  const sc = S * .7 / side, dw = bw / k * sc, dh = bh / k * sc;
+  o.drawImage(im, x0 / k, y0 / k, bw / k, bh / k, (S - dw) / 2, (S - dh) / 2, dw, dh);
+  return {kind:'box', src:out.toDataURL('image/png'), ratio, bg};
+}
+function lgApply(im, url, o, kind){
+  im.dataset.lgOrig = url; im.dataset.lgDone = '1';
+  if (!o || o.kind === 'photo'){ if (kind === 'crest') im.classList.add('lg-plain'); return }
+  if (kind === 'sponsor' && o.kind !== 'badge') return;
+  if (kind === 'hero' && !(im.dataset.logo === '1' || o.ratio < 1.3)) return;
+  im.removeAttribute('srcset'); im.src = o.src; im.classList.remove('fit-contain', 'lg-plain'); im.classList.add(o.kind === 'badge' ? 'lg-badge' : 'lg-box');
+  im.style.padding = '0'; im.style.background = o.bg;
+}
+function fitLogos(root){
+  root.querySelectorAll(FIT_LOGO + ', .v3-tcard-ph > img:first-child:not(.stock), .v3-ecard-ph > img:not(.stock), .splogo img').forEach(im => {
+    if (im.dataset.lgDone) return; const url = im.dataset.lgOrig || im.getAttribute('src'); if (!url || /^data:image\/svg/.test(url)) return;
+    const kind = im.closest('.splogo') ? 'sponsor' : im.closest('.v3-tcard-ph, .v3-ecard-ph') ? 'hero' : 'crest';
+    const o = LOGOV.get(url); if (o !== undefined) return lgApply(im, url, o, kind);
+    if (kind === 'crest') im.classList.add('lg-wait');
+    logoProc(url).then(o2 => { im.classList.remove('lg-wait'); if (im.isConnected) lgApply(im, url, o2, kind) });
+  });
 }
 function fitImages(root){
   root = root || document;
@@ -9603,6 +9695,7 @@ function fitImages(root){
     const o = FITV.get(url); if (o) return fitApply(im, o, kind);
     im.classList.add('fit-wait'); fitProbe(url).then(o2 => { im.classList.remove('fit-wait'); if (im.isConnected) fitApply(im, o2, kind) });
   }));
+  try{ fitLogos(root) }catch(e){ console.warn(e) }
 }
 function finishDraw(keep, fid, sel){
   const sc = document.getElementById('scroller'); if (sc) sc.scrollTop = keep;
