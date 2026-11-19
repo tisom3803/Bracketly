@@ -7084,7 +7084,7 @@ function overviewView(){
   const nc = (c.courts || []).length;
   const live = liveNow(), nxt = upNext(live.length ? 3 : 4);
   const hero = `<section class="ov-hero" aria-labelledby="ov-h">
-    <div class="ov-hero-top">${crest(72)}<div class="ov-hero-t"><p class="bk-eyebrow">${esc(v3BadgeText(ph))}</p><h1 id="ov-h" class="${tripTitle().length > 34 ? 'long' : ''}">${escNB(tripTitle())}</h1>
+    <div class="ov-hero-top">${crest(72)}<div class="ov-hero-t"><p class="bk-eyebrow">${esc(future && ph.k !== 'done' ? 'Coming up' : v3BadgeText(ph))}</p><h1 id="ov-h" class="${tripTitle().length > 34 ? 'long' : ''}">${escNB(tripTitle())}</h1>
       <p class="ov-meta">${[datesLabel(), c.club].filter(Boolean).map(esc).join(' · ')}</p>
       ${start && future ? `<p class="ov-meta">First ball ${esc(dayLabel(isoDay(start)))}, ${esc(clock(start))} · ${esc(startsIn(start))}</p>` : ''}</div></div>
     <ul class="ov-facts">${evs.length ? `<li><b>${evs.length}</b><span>${specialMode() === 'proam' ? 'section' : 'event'}${evs.length === 1 ? '' : 's'}</span></li>` : ''}${np ? `<li><b>${np}</b><span>players</span></li>` : ''}${nc ? `<li><b>${nc}</b><span>court${nc === 1 ? '' : 's'}</span></li>` : ''}${dayRows().filter(d => d.enabled).length ? `<li><b>${dayRows().filter(d => d.enabled).length}</b><span>day${dayRows().filter(d => d.enabled).length === 1 ? '' : 's'}</span></li>` : ''}</ul>
