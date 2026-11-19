@@ -2,7 +2,8 @@
 import asyncio, sys, json
 from playwright.async_api import async_playwright
 URL, TAG = sys.argv[1], sys.argv[2]
-SH = f'/workspace/shots/v342/{TAG}-'
+MODE = sys.argv[3] if len(sys.argv) > 3 else 'plain'
+SH = f'/workspace/shots/v342/{TAG}{"-sample" if MODE == "sample" else ""}-'
 LOGO = 'http://127.0.0.1:8769/lobapalooza-logo.jpg'
 fails = []
 def check(ok, msg):
@@ -18,9 +19,9 @@ async def main():
             ev = pg.evaluate
             await pg.goto(URL, wait_until='networkidle'); await pg.wait_for_timeout(1000)
             await ev("ACT.sampletrip()"); await pg.wait_for_timeout(4500)
-            await ev("""(logo => { const c = cfg(); c.logo = logo; c.cover = logo; c.style = {preset:'courtside', colors:{primary:'#4B2A7B', gold:'#B9A3E3'}};
+            await ev("""(([logo, MODE]) => { const c = cfg(); c.logo = MODE === 'sample' ? 'http://127.0.0.1:8770/s_mwmpf1ywkst8.png' : logo; if (MODE === 'sample'){ c.logoKeep = true; c.logoOrig = 'http://127.0.0.1:8770/s_mwmpf1tcky7b.png'; c.logoColor = 'http://127.0.0.1:8770/s_mwmpf23197hv.png' } c.cover = MODE === 'sample' ? c.logoOrig : logo; c.style = {preset:'courtside', colors:{primary:'#4B2A7B', gold:'#B9A3E3'}};
               c.sponsors = [{name:'Lobapalooza', tier:'title', logo:logo}, {name:'Tiny Bakery', tier:'gold'}]; Store.set('config', c);
-              view.me = players()[0].id; LS.set(TK('me'), view.me); view.screen = 'app'; view.tab = 'today'; render() })""", LOGO)
+              view.me = players()[0].id; LS.set(TK('me'), view.me); view.screen = 'app'; view.tab = 'today'; render() })""", [LOGO, MODE])
             await pg.wait_for_timeout(2500); await ev("render()"); await pg.wait_for_timeout(800)
             await pg.screenshot(path=SH + f'header-expanded-{W}.png', clip={'x':0, 'y':0, 'width':W, 'height':560})
             info = await ev("""(() => { const lg = document.querySelector('.v3-logo'), me = document.querySelector('.v6-hme'), bell = document.querySelector('.v3-top .hbtn'), av = me && me.querySelector('.v4-av');
