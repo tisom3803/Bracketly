@@ -2225,6 +2225,30 @@ a.splogo:hover{border-color:var(--au2,#c9a45c)}
 .psp-tier{margin:10px 0 16px;text-align:center}.psp-tier h3{font:600 12px/1 var(--fb);letter-spacing:.14em;text-transform:uppercase;color:#555;margin:0 0 8px}
 .psp-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}.psp .splogo.sp-xl{min-width:300px;min-height:110px}.psp .splogo.sp-xl img{max-height:96px;max-width:360px}
 @media print{ .splogo{border:1px solid #ddd;break-inside:avoid} .psp{break-before:page} }
+
+/* ===== v3.4 image fitting ===== */
+img.fit-wait{opacity:0}
+img.fit-contain{object-fit:contain!important;box-sizing:border-box}
+img.logo{object-fit:contain;box-sizing:border-box}
+.v3-logo.v3-tlogo{object-fit:contain;box-sizing:border-box}
+.tboard .tlogo img,.tit img{object-fit:contain;box-sizing:border-box}
+.v3-tcard-ph.fit-photo > img{object-position:center 40%}
+.v3-tcard-ph.fit-banner{background:var(--edge,var(--g1));background:radial-gradient(110% 90% at 22% 20%,color-mix(in srgb,var(--edge,var(--g1)) 78%,#fff) 0%,var(--edge,var(--g1)) 48%,color-mix(in srgb,var(--edge,var(--g1)) 60%,#000) 100%);min-height:270px}
+.v3-tcard-ph.fit-banner > img{inset:auto;top:16px;left:20px;transform:none;width:auto;height:120px;max-width:58%;aspect-ratio:auto;object-fit:contain;object-position:center;border-radius:14px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.25))}
+.v3-tcard-ph.fit-banner .v3-tcard-ov{background:linear-gradient(180deg,transparent 0%,transparent 48%,rgba(0,0,0,.38) 100%)}
+.v3-tcard-ph.fit-banner .v3-tcard-top{position:absolute;top:14px;right:14px}
+@media (min-width:740px){
+  .v3-tcard-ph.fit-banner{min-height:280px;background:radial-gradient(90% 120% at 82% 50%,color-mix(in srgb,var(--edge,var(--g1)) 78%,#fff) 0%,var(--edge,var(--g1)) 45%,color-mix(in srgb,var(--edge,var(--g1)) 60%,#000) 100%)}
+  .v3-tcard-ph.fit-banner > img{top:calc(50% + 14px);left:auto;right:36px;transform:translateY(-50%);height:70%;max-width:42%}
+  .v3-tcard-ph.fit-banner .v3-tcard-ov{padding-right:46%;background:linear-gradient(90deg,rgba(0,0,0,.28) 0%,transparent 60%)}
+}
+.v3-ecard-ph.fit-banner{background:var(--edge,var(--g1));display:flex;align-items:center;justify-content:center}
+.v3-ecard-ph.fit-banner img{object-fit:contain;width:auto;height:84%;max-width:60%;margin:auto}
+.v3-ecard-ph.fit-banner::after{background:none}
+img.cover.fit-contain,img.bk-cover.fit-contain{max-height:200px;padding:14px}
+/* people: round/rounded crops centred on faces */
+.tpic img,.v4-av img,.v5-me-ph img,.v4-pcard-ph img,.pacard-ph img{object-position:50% 22%}
+.tpic img.fit-contain,.v4-av img.fit-contain{object-position:center}
 </style>
 </head>
 <body>
@@ -6417,7 +6441,7 @@ function tournamentCard(){
   const c = cfg() || {}, cover = pic(c, 'cover'), st = tourPhase(), np = players().length;
   const tile = (v, label, icon) => `<button class="v3-tile" data-act="tab" data-v="${v}">${ICON[icon]}<span>${label}</span></button>`;
   return `<article class="v3-tcard" aria-labelledby="tc-h">
-    <div class="v3-tcard-ph">${cover ? `<img src="${cover}" alt="" loading="lazy">` : `<img src="${IMG_HERO}" srcset="${imgSet('court-hero')}" sizes="(min-width:740px) 700px, 100vw" alt="" loading="lazy" decoding="async">`}
+    <div class="v3-tcard-ph${cover && cover === pic(c, 'logo') ? ' fit-banner' : ''}">${cover ? `<img src="${cover}" alt="" ${cover === pic(c, 'logo') ? 'data-logo="1"' : ''}>` : `<img src="${IMG_HERO}" srcset="${imgSet('court-hero')}" sizes="(min-width:740px) 700px, 100vw" alt="" loading="lazy" decoding="async">`}
       <div class="v3-tcard-ov">
         <div class="v3-tcard-top">${v3Badge(st)}</div>
         <h1 class="v3-tcard-h" id="tc-h">${escNB(tripTitle())}</h1>
@@ -9470,9 +9494,68 @@ function centerStrips(){
   document.querySelectorAll('.wsteps, .rtabs, .v4-cztabs').forEach(w => { if (w.scrollWidth <= w.clientWidth + 2) return; const on = w.querySelector('.on, [aria-selected="true"]'); if (!on) return;
     const a = w.getBoundingClientRect(), b = on.getBoundingClientRect(); w.scrollLeft += (b.left - a.left) - (w.clientWidth - b.width) / 2 });
 }
+
+/* ---------- v3.4 image fitting: logos are never cropped; photos crop to faces ----------
+   Each image is probed once (size, transparent edges, edge colour). Results are cached by URL so redraws apply instantly. */
+const FITV = new Map(), FITP = new Map();
+function fitProbe(url){
+  if (FITP.has(url)) return FITP.get(url);
+  const pr = new Promise(res => {
+    const done = o => { FITV.set(url, o); res(o) };
+    const read = (im, canSample) => { const o = {w:im.naturalWidth || 1, h:im.naturalHeight || 1, alpha:false, edge:null, uniform:false};
+      if (canSample) try{
+        const n = 48, cv = document.createElement('canvas'); cv.width = cv.height = n; const x = cv.getContext('2d', {willReadFrequently:true}); x.drawImage(im, 0, 0, n, n);
+        const d = x.getImageData(0, 0, n, n).data, px = [];
+        for (let i = 0; i < n; i++){ px.push(i, i * n + n - 1, (n - 1) * n + i, i * n) }
+        let clear = 0; const cols = [];
+        px.forEach(j => { if (d[j * 4 + 3] < 200) clear++ });
+        // background colour = the four corners (a round badge may touch the sides but leaves the corners plain)
+        for (let y = 0; y < 6; y++) for (let x0 = 0; x0 < 6; x0++) [[x0, y], [n - 1 - x0, y], [x0, n - 1 - y], [n - 1 - x0, n - 1 - y]].forEach(([a, b]) => { const j = b * n + a; if (d[j * 4 + 3] >= 200) cols.push([d[j * 4], d[j * 4 + 1], d[j * 4 + 2]]) });
+        o.alpha = clear > px.length * .08;
+        if (cols.length){ const med = [0, 1, 2].map(ch => cols.map(c => c[ch]).sort((a, b) => a - b)[cols.length >> 1]);
+          const near = cols.filter(c => Math.abs(c[0] - med[0]) + Math.abs(c[1] - med[1]) + Math.abs(c[2] - med[2]) < 60);
+          o.uniform = near.length >= cols.length * .8;
+          if (o.uniform){ const avg = [0, 1, 2].map(ch => near.reduce((t, c) => t + c[ch], 0) / near.length); o.edge = '#' + avg.map(v => Math.round(v).toString(16).padStart(2, '0')).join('') } }
+      }catch(e){}
+      done(o) };
+    const cross = /^https?:/i.test(url) && !url.startsWith(location.origin);
+    const im = new Image(); im.decoding = 'async';
+    if (cross) im.crossOrigin = 'anonymous';
+    im.onload = () => read(im, true);
+    im.onerror = () => { if (!cross) return done({w:1, h:1, alpha:false, edge:null, uniform:false, bad:true}); const j = new Image(); j.onload = () => read(j, false); j.onerror = () => done({w:1, h:1, alpha:false, edge:null, uniform:false, bad:true}); j.src = url };
+    im.src = url;
+  });
+  FITP.set(url, pr); return pr;
+}
+const FIT_HERO = '.v3-tcard-ph > img:first-child, .v3-ecard-ph > img';
+const FIT_SOLO = 'img.cover, img.bk-cover';
+const FIT_LOGO = 'img.logo:not(.brandmark), img.v3-tlogo, .tlogo img, .tit img, .next.hero .badge img, .tp-board img, .tp-cup img';
+const FIT_FACE = '.tpic:not(.tp-board):not(.tp-cup) img, .v4-av img, .v5-me-ph img, .v4-pcard-ph img, .pacard-ph img';
+// padding in px from the frame's own size (a % padding would follow the parent's width)
+const fitPad = (im, f) => { if (!f) return '0'; const w = im.getBoundingClientRect().width || +im.getAttribute('width') || parseFloat(getComputedStyle(im).getPropertyValue('--s')) || 40; return Math.max(1, Math.round(w * f)) + 'px' };
+function fitApply(im, o, kind){
+  const ratio = o.w / o.h, logoish = o.alpha || o.uniform || ratio > 1.7 || ratio < .6;
+  im.dataset.fitDone = '1';
+  if (kind === 'hero'){ const box = im.parentElement; const isLogo = im.dataset.logo === '1' || ratio < 1.3 || o.alpha;
+    box.classList.toggle('fit-banner', isLogo); box.classList.toggle('fit-photo', !isLogo); if (o.edge) box.style.setProperty('--edge', o.edge); else box.style.removeProperty('--edge'); return }
+  if (kind === 'solo'){ const isLogo = ratio < 1.3 || o.alpha; im.classList.toggle('fit-contain', isLogo); im.style.background = isLogo ? (o.edge || '#fff') : ''; return }
+  if (kind === 'logo'){ im.classList.add('fit-contain'); const sq = Math.abs(ratio - 1) < .08;
+    // a square logo with a solid background fills a round frame (only the plain corners are lost); anything else sits inside it
+    im.style.background = o.edge || '#fff'; im.style.padding = fitPad(im, (sq && o.uniform && !o.alpha) ? 0 : (o.uniform && !o.alpha ? .06 : .14)); return }
+  if (kind === 'face'){ const lg = o.alpha || ratio > 1.7 || ratio < .5; im.classList.toggle('fit-contain', lg); im.style.background = lg ? (o.edge || '#fff') : ''; im.style.padding = lg ? fitPad(im, .12) : ''; return }
+}
+function fitImages(root){
+  root = root || document;
+  [[FIT_HERO, 'hero'], [FIT_SOLO, 'solo'], [FIT_LOGO, 'logo'], [FIT_FACE, 'face']].forEach(([q, kind]) => root.querySelectorAll(q).forEach(im => {
+    if (im.dataset.fitDone) return; const url = im.getAttribute('src'); if (!url) return;
+    const o = FITV.get(url); if (o) return fitApply(im, o, kind);
+    im.classList.add('fit-wait'); fitProbe(url).then(o2 => { im.classList.remove('fit-wait'); if (im.isConnected) fitApply(im, o2, kind) });
+  }));
+}
 function finishDraw(keep, fid, sel){
   const sc = document.getElementById('scroller'); if (sc) sc.scrollTop = keep;
   try{ centerStrips() }catch(e){}
+  try{ fitImages() }catch(e){ console.warn(e) }
   restoreFocus(fid, sel);
   if (view.tab === 'chat' && sc){ const n = Store.keys('chat:').length; if (n !== view.chatCount || view.stick){ view.chatCount = n; view.stick = false; sc.scrollTop = sc.scrollHeight } LS.set(TK('chatseen'), Date.now()) }
 }
