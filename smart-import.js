@@ -798,7 +798,131 @@ function proAmTeams(rows){
   return {teams, pros:[], warnings, how};
 }
 
-const API = {proAmTeams, levelAsDivision, clean, normName, parseName, splitTeam, parseSex, parseLevel, parseEventItem, parseEvents, eventLabel, groupKey, parseGroupKey, headerRole, sniff, findHeader, analyzeSheet, extract, build, run, tablesFromText, csvRows, guessSexFromFirst, ROLES, fmtLv};
+/* ===== v3.4 Sponsor list: one sponsor per row (Sponsor | Tier | Website | Logo), or tier headings followed by
+   names ("Gold Sponsors" then a list, comma lists allowed). Returns {sponsors, warnings, how, cols, tierNote}. ===== */
+const SP_TIER_KEYS = ['title', 'gold', 'silver', 'bronze', 'friend'];
+const SP_TIER_WORDS = [
+  ['title', /^(title|presenting|presented by|presenter|headline|headliner|premier|premiere|naming|grand|main|diamond|tier 1|level 1|1st tier|top tier|lead)$/],
+  ['plat', /^(platinum|plat)$/],
+  ['gold', /^(gold|major|champion|championship|tier 2|level 2|2nd tier|ace)$/],
+  ['silver', /^(silver|tier 3|level 3|3rd tier|match|set)$/],
+  ['bronze', /^(bronze|copper|tier 4|level 4|4th tier|game|court)$/],
+  ['friend', /^(friend|friends|friends of the event|friend of the event|supporter|supporters|patron|patrons|community|donor|donors|in kind|in-kind|contributor|contributors|partner|partners|tier 5|level 5|other|additional|thank you|thanks|special thanks)$/],
+];
+const SP_FUZZY = [['presenting', 'title'], ['platinum', 'plat'], ['gold', 'gold'], ['silver', 'silver'], ['bronze', 'bronze'], ['friend', 'friend'], ['supporter', 'friend'], ['diamond', 'title'], ['title', 'title']];
+function sponsorTierRaw(v){
+  let h = normName(v).replace(/\b(sponsors?|sponsorship|level|tier|package|partner(s)?|club|member(s)?|the)\b/g, m => /^(level|tier)$/.test(m) ? m : '').replace(/\s+/g, ' ').trim();
+  if (!h) return null;
+  if (/^\d$/.test(h)) h = 'tier ' + h;
+  const n = h.replace(/^(level|tier) /, '');
+  for (const [k, re] of SP_TIER_WORDS) if (re.test(h) || re.test(n)) return {k, why:'word'};
+  const words = h.split(' ');
+  for (const w of words) for (const [k, re] of SP_TIER_WORDS) if (re.test(w) && w.length > 2) return {k, why:'word'};
+  for (const w of words){ if (w.length < 4) continue; for (const [word, k] of SP_FUZZY) if (lev(w, word) <= (word.length > 6 ? 2 : 1)) return {k, why:'spelling', near:word} }
+  return null;
+}
+const SP_HEAD = [
+  ['name', /^(sponsor|sponsors|sponsor name|name|company|company name|business|business name|organization|organisation|org|brand|donor|partner|sponsor company)$/],
+  ['tier', /^(tier|level|sponsor level|sponsorship|sponsorship level|sponsor tier|package|category|type|class|tier level)$/],
+  ['amount', /^(amount|\$|dollars|donation|pledge|contribution|price|cost|paid|value)$/],
+  ['url', /^(website|web site|url|link|site|web|homepage|web address|website url)$/],
+  ['logo', /^(logo|logo url|logo link|logo file|logo filename|image|image url|file|filename|file name|artwork|graphic|logo image)$/],
+];
+const isUrl = v => /^(https?:\/\/|www\.)/i.test(clean(v));
+const isImgRef = v => /\.(png|jpe?g|gif|webp|svg|avif)(\?.*)?$/i.test(clean(v)) || /^data:image\//.test(clean(v));
+function sponsorList(rows){
+  const raw = (rows || []).map(r => (r || []).map(v => S(v)));
+  rows = raw.map(r => r.map(clean));
+  const warnings = [], out = [];
+  const head = r => { const m = {}; r.forEach((v, i) => { const h = normHead(v); const hit = SP_HEAD.find(([k, re]) => re.test(h)); if (hit && m[hit[0]] == null) m[hit[0]] = i }); return m };
+  let hi = -1, map = null;
+  for (let i = 0; i < Math.min(rows.length, 10); i++){ const m = head(rows[i]); if (m.name != null && (m.tier != null || m.url != null || m.logo != null || m.amount != null || rows[i].filter(Boolean).length === 1)){ hi = i; map = m; break } }
+  let how;
+  const push = (o, row) => { o.name = clean(o.name).replace(/\s+/g, ' ').trim(); if (!o.name || /^(total|totals|sponsor|sponsors|name|tbd|n\/?a)$/i.test(o.name)) return; o.row = row; out.push(o) };
+  if (!map){
+    // no header: sniff columns (url / image / tier words / name) when rows have several cells
+    const multi = rows.filter(r => r.filter(Boolean).length >= 2).length;
+    if (multi >= Math.max(2, rows.filter(r => r.some(Boolean)).length * .5)){
+      const w = Math.max(...rows.map(r => r.length)), m = {};
+      for (let c = 0; c < w; c++){ const vals = rows.map(r => r[c]).filter(Boolean); if (!vals.length) continue;
+        const pct = f => vals.filter(f).length / vals.length;
+        if (m.logo == null && pct(isImgRef) >= .5) m.logo = c; else if (m.url == null && pct(isUrl) >= .5) m.url = c;
+        else if (m.tier == null && pct(v => sponsorTierRaw(v)) >= .5) m.tier = c;
+        else if (m.amount == null && pct(v => /^\$?\s*\d[\d,]*(\.\d\d)?$/.test(v)) >= .6) m.amount = c;
+        else if (m.name == null) m.name = c }
+      if (m.name != null){ map = m; hi = -1; how = 'sniffed' }
+    }
+  } else how = 'columns';
+  if (map){
+    for (let i = hi + 1; i < rows.length; i++){ const r = rows[i]; if (!r.some(Boolean)) continue; const g = k => map[k] == null ? '' : r[map[k]] || '';
+      // a heading row inside a table ("Gold Sponsors" alone in the name column)
+      if (!g('tier') && !g('url') && !g('logo') && r.filter(Boolean).length === 1 && sponsorTierRaw(g('name')) && /sponsor|tier|level|presenting|gold|silver|bronze|platinum|friend/i.test(g('name'))){ map._cur = g('name'); continue }
+      push({name:g('name'), tierIn:g('tier') || map._cur || '', amount:g('amount'), url:g('url'), logo:g('logo')}, i + 1) }
+  } else {
+    // headings + lists: "PRESENTED BY" / "Western Bank" / "Gold" / "A, B, C"
+    how = 'list'; let cur = '';
+    rows.forEach((r, i) => { const cells = r.filter(Boolean); if (!cells.length) return; const one = cells.join(' ').trim();
+      const t = sponsorTierRaw(one.replace(/[:\-–]+$/, ''));
+      if (t && one.length <= 40 && (/sponsor|tier|level|presented|partner|friend|patron|supporter/i.test(one) || one.split(/\s+/).length <= 2)){ cur = one.replace(/[:\-–]+$/, ''); return }
+      const lab = one.match(/^([^:]{2,30}):\s*(.+)$/); if (lab && sponsorTierRaw(lab[1])){ lab[2].split(/\s*[,;]\s*/).forEach(n => push({name:n, tierIn:lab[1]}, i + 1)); return }
+      raw[i].filter(v => v.trim()).forEach(cell => cell.split(/\s*[,;•·\t]\s*|\s{3,}/).forEach(n => push({name:n, tierIn:cur}, i + 1))) });
+  }
+  // URLs: a website column that is really an image goes to logo
+  out.forEach(o => { o.url = clean(o.url || ''); o.logo = clean(o.logo || ''); if (o.url && isImgRef(o.url) && !o.logo){ o.logo = o.url; o.url = '' } if (o.url && /^www\./i.test(o.url)) o.url = 'https://' + o.url; if (o.url && !isUrl(o.url) && /^[a-z0-9-]+(\.[a-z0-9-]+)+(\/.*)?$/i.test(o.url)) o.url = 'https://' + o.url; if (o.url && !isUrl(o.url)) { warnings.push({t:'badUrl', row:o.row, msg:`${o.name}: "${o.url}" doesn't look like a web address, left out`}); o.url = '' } });
+  // tiers
+  const anyTitleWord = out.some(o => { const t = sponsorTierRaw(o.tierIn); return t && t.k === 'title' });
+  const amounts = out.map(o => Number(String(o.amount || (!sponsorTierRaw(o.tierIn) ? o.tierIn : '') || '').replace(/[$,\s]/g, ''))).map(n => n > 0 ? n : 0);
+  const useAmt = !out.some(o => sponsorTierRaw(o.tierIn)) && amounts.filter(Boolean).length >= Math.max(2, out.length * .5);
+  let tierNote = '';
+  if (useAmt){
+    const ds = [...new Set(amounts.filter(Boolean))].sort((a, b) => b - a), top = ds[0], topN = amounts.filter(a => a === top).length;
+    const ladder = topN === 1 ? ['title', 'gold', 'silver', 'bronze', 'friend'] : ['gold', 'silver', 'bronze', 'friend'];
+    out.forEach((o, i) => { const a = amounts[i]; if (!a){ o.tier = ''; o.tierWhy = 'no amount'; return } const r = Math.min(ds.indexOf(a), ladder.length - 1); o.tier = ladder[r]; o.tierWhy = `$${a.toLocaleString('en-US')} (rank ${ds.indexOf(a) + 1} of ${ds.length} amounts)` });
+    tierNote = topN === 1 ? 'No tier column, so levels come from the amounts: the single biggest gift is Presenting, then Gold, Silver, Bronze, Friend by amount.' : 'No tier column, so levels come from the amounts (biggest = Gold, then Silver, Bronze, Friend).';
+  } else {
+    out.forEach(o => { const raw = o.tierIn || ''; if (!raw){ o.tier = ''; o.tierWhy = 'no level given'; return }
+      const t = sponsorTierRaw(raw);
+      if (!t){ o.tier = ''; o.tierWhy = 'unknown'; warnings.push({t:'unknownTier', row:o.row, msg:`${o.name}: level "${raw}" isn't one we know, so it has no level (pick one in the preview or later)`}); return }
+      if (t.k === 'plat'){ o.tier = anyTitleWord ? 'gold' : 'title'; o.tierWhy = anyTitleWord ? `"${raw}" → Gold (the list already has a Title/Presenting sponsor)` : `"${raw}" → Presenting (top level in this list)`; return }
+      o.tier = t.k; o.tierWhy = t.why === 'spelling' ? `"${raw}" read as ${t.near}` : `"${raw}"` });
+  }
+  // de-duplicate by name inside the list (first wins, later rows fill blanks)
+  const seen = new Map(), sponsors = [];
+  out.forEach(o => { const k = normName(o.name); if (seen.has(k)){ const a = seen.get(k); ['tier', 'url', 'logo'].forEach(f => { if (!a[f] && o[f]) a[f] = o[f] }); warnings.push({t:'dupe', row:o.row, msg:`${o.name} is listed twice; kept one`}); return } seen.set(k, o); sponsors.push(o) });
+  return {sponsors:sponsors.map(o => ({name:o.name, tier:o.tier, tierIn:o.tierIn || (o.amount ? '$' + o.amount : ''), tierWhy:o.tierWhy, url:o.url, logo:o.logo, row:o.row})), warnings, how:sponsors.length ? how : '', cols:map, tierNote};
+}
+/* Bulk logos: match image file names to sponsor names ("texas-tech-fcu.png" -> "Texas Tech FCU").
+   Returns [{file, idx (sponsor index or -1), score, why}] with each sponsor used at most once. */
+const LOGO_NOISE = /\b(logo|logos|final|color|colour|colored|full|fullcolor|rgb|cmyk|hi ?res|highres|hires|lowres|web|print|vector|sponsor|sponsors|transparent|trans|white|black|dark|light|horizontal|horiz|vertical|stacked|primary|secondary|mark|icon|copy|v\d+|\d{2,}x\d{2,}|\d+x|\d+)\b/g;
+const compact = s => normName(s).replace(/\s+/g, '');
+const fileKey = f => normName(String(f).replace(/\.[a-z0-9]{2,5}$/i, '').replace(/[_\-.+]+/g, ' ').replace(/([a-z])([A-Z])/g, '$1 $2')).replace(LOGO_NOISE, ' ').replace(/\s+/g, ' ').trim();
+const STOP = new Set(['the', 'and', 'of', 'co', 'inc', 'llc', 'company', 'corp', 'ltd', 'group', 'a']);
+function nameScore(fk, name){
+  const n = normName(name).replace(/&/g, ' '), cf = fk.replace(/\s+/g, ''), cn = n.replace(/\s+/g, '');
+  if (!cf || !cn) return [0, ''];
+  if (cf === cn) return [1, 'same name'];
+  const nt = n.split(' ').filter(w => !STOP.has(w)), ft = fk.split(' ').filter(w => !STOP.has(w));
+  if (nt.length && nt.join('') === ft.join('')) return [.98, 'same name'];
+  const acr = nt.map(w => w[0]).join(''); if (acr.length >= 2 && (cf === acr || ft.some(w => w === acr))) return [.9, 'initials'];
+  if (ft.length && ft.every(w => nt.some(x => x === w || (w.length >= 4 && x.startsWith(w))))) { const s = .7 + .25 * ft.length / Math.max(nt.length, ft.length); return [s, 'words match'] }
+  if (cn.length >= 4 && (cf.includes(cn) || cn.includes(cf) && cf.length >= 4)) return [.8, 'contains the name'];
+  const d = lev(cf, cn), r = 1 - d / Math.max(cf.length, cn.length); if (r >= .72) return [r * .9, 'close spelling'];
+  const shared = ft.filter(w => w.length >= 3 && nt.includes(w)).length; if (shared) return [.45 + .2 * shared / Math.max(nt.length, ft.length), 'shares a word'];
+  return [0, ''];
+}
+function matchLogos(files, names, opts){
+  opts = opts || {}; const min = opts.min || .6, refs = opts.refs || [];
+  const cand = [];
+  files.forEach((f, fi) => { const base = String(f).split(/[\\/]/).pop(); const fk = fileKey(base);
+    names.forEach((n, ni) => { let [sc, why] = refs[ni] && String(refs[ni]).split(/[\\/]/).pop().toLowerCase() === base.toLowerCase() ? [1.01, 'file named in the list'] : nameScore(fk, n); if (sc >= min) cand.push({fi, ni, sc, why}) }) });
+  cand.sort((a, b) => b.sc - a.sc);
+  const usedF = new Set(), usedN = new Set(), res = files.map(f => ({file:f, idx:-1, score:0, why:''}));
+  cand.forEach(c => { if (usedF.has(c.fi) || usedN.has(c.ni)) return; usedF.add(c.fi); usedN.add(c.ni); res[c.fi] = {file:files[c.fi], idx:c.ni, score:Math.min(1, c.sc), why:c.why} });
+  return res;
+}
+const nameFromFile = f => titleCase(fileKey(String(f).split(/[\\/]/).pop()) || String(f)).replace(/\b(Fcu|Llc|Inc|Cc|Ftnb|Dds|Usa|Bbq)\b/g, w => w.toUpperCase());
+
+const API = {sponsorList, sponsorTierRaw, matchLogos, nameFromFile, fileKey, proAmTeams, levelAsDivision, clean, normName, parseName, splitTeam, parseSex, parseLevel, parseEventItem, parseEvents, eventLabel, groupKey, parseGroupKey, headerRole, sniff, findHeader, analyzeSheet, extract, build, run, tablesFromText, csvRows, guessSexFromFirst, ROLES, fmtLv};
 if (typeof module !== 'undefined' && module.exports) module.exports = API;
 root.SmartImport = API;
 })(typeof window !== 'undefined' ? window : globalThis);
