@@ -2188,9 +2188,9 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 .splogo.sp-xl{min-height:84px;min-width:200px;padding:12px 22px}.splogo.sp-xl img{max-height:72px;max-width:280px}.splogo.sp-xl .spname{font-size:22px}
 .splogo.sp-lg{min-height:64px;min-width:150px}.splogo.sp-lg img{max-height:52px;max-width:200px}.splogo.sp-lg .spname{font-size:18px}
 .splogo.sp-md{min-height:52px;min-width:120px}.splogo.sp-md img{max-height:40px;max-width:160px}
-.splogo.sp-sm{min-height:44px;min-width:96px;padding:6px 10px}.splogo.sp-sm img{max-height:32px;max-width:130px}.splogo.sp-sm .spname{font-size:13.5px}
+.splogo.sp-sm{min-height:44px;min-width:96px;padding:6px 10px}.splogo.sp-sm img{max-height:32px;max-width:150px}.splogo.sp-sm .spname{font-size:13.5px}
 a.splogo:hover{border-color:var(--au2,#c9a45c)}
-.sprow{gap:10px 12px}.sprow img{max-height:none;max-width:none}.sptitle img{max-height:72px!important;max-width:280px!important}
+.sprow{gap:10px 12px}.sponsors .sprow + .sprow{margin-top:10px}.sprow img{max-height:none;max-width:none}.sptitle img{max-height:72px!important;max-width:280px!important}
 .ov-sp li{background:none;border:0;padding:0;min-height:0;display:flex}.ov-sp li > .splogo{width:100%}
 .ov-sp.title li > .splogo{min-height:96px}
 /* TV: logos keep a white card on the dark slide; presenting sponsor big */
@@ -2199,8 +2199,8 @@ a.splogo:hover{border-color:var(--au2,#c9a45c)}
 .tvsp .splogo{border-radius:16px;border:0;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .tvsp .splogo.sp-xl{min-width:520px;min-height:190px;padding:20px 40px}.tvsp .splogo.sp-xl img{max-height:160px;max-width:560px}.tvsp .splogo.sp-xl .spname{font-size:48px}
 .tvsp .splogo.sp-lg{min-width:340px;min-height:130px}.tvsp .splogo.sp-lg img{max-height:100px;max-width:340px}.tvsp .splogo.sp-lg .spname{font-size:32px}
-.tvsp .splogo.sp-md{min-width:250px;min-height:100px}.tvsp .splogo.sp-md img{max-height:76px;max-width:250px}.tvsp .splogo.sp-md .spname{font-size:24px}
-.tvsp .splogo.sp-sm{min-width:190px;min-height:78px;padding:10px 16px}.tvsp .splogo.sp-sm img{max-height:56px;max-width:190px}.tvsp .splogo.sp-sm .spname{font-size:19px}
+.tvsp .splogo.sp-md{min-width:250px;min-height:100px}.tvsp .splogo.sp-md img{max-height:76px;max-width:300px}.tvsp .splogo.sp-md .spname{font-size:24px}
+.tvsp .splogo.sp-sm{min-width:190px;min-height:78px;padding:10px 16px}.tvsp .splogo.sp-sm img{max-height:56px;max-width:250px}.tvsp .splogo.sp-sm .spname{font-size:19px}
 .tv .sponsors .splogo{box-shadow:none}.tv .sponsors .splogo.sp-xl{min-height:64px}.tv .sponsors .splogo.sp-xl img{max-height:54px}
 /* setup editor */
 .spedit-tools{gap:8px;flex-wrap:wrap;margin:0 0 8px}.spaste textarea{width:100%;font:14px/1.4 var(--fb)}
@@ -2212,7 +2212,7 @@ a.splogo:hover{border-color:var(--au2,#c9a45c)}
 .spf2 input{width:100%}.spf3{gap:6px;flex-wrap:wrap}.spf3 .btn{min-height:40px}
 .spimp,.spbulk{margin:10px 0;border:1.5px solid var(--au2,#c9a45c);border-radius:12px;padding:12px;background:var(--paper)}
 .spi-wrap{overflow-x:auto;margin:6px 0}.tbl.spi td{vertical-align:top;padding:8px 6px}.tbl.spi small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
-.tbl.spi small.new{color:#1b6b3a}.tbl.spi small.upd{color:#8a5a00}.tbl.spi tr.off{opacity:.45}.tbl.spi select{min-height:40px;max-width:150px}
+.tbl.spi small.new{color:#1b6b3a}.tbl.spi small.upd{color:#8a5a00}.tbl.spi tr.off{opacity:.45}.tbl.spi select{min-height:40px;max-width:none;width:auto}.tbl.spi td:nth-child(3){white-space:nowrap}.tbl.spi td:nth-child(3) small{white-space:normal}
 .tbl.spi input[type=checkbox]{width:22px;height:22px}.ell{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px}
 .spb-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
 .spb-list li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:10px;align-items:center;padding:8px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
@@ -7264,7 +7264,7 @@ function spBulkCard(){
 function sponsorsHtml(){
   const all = sponsorsSorted(); if (!all.length) return '';
   const ttl = all.filter(s => s.tier === 'title'), sp = all.filter(s => s.tier !== 'title'), link = !view.tv;
-  return `<div class="sponsors">${ttl.length ? `<div class="lbl">Presented by</div><div class="sprow sptitle">${ttl.map(x => spLogoTile(x, 'sp-xl', link)).join('')}</div>` : ''}${sp.length ? `<div class="lbl">${ttl.length ? 'With thanks to' : 'Thanks to our sponsors'}</div><div class="sprow">${sp.map(x => spLogoTile(x, spTierCls(x.tier), link)).join('')}</div>` : ''}</div>`;
+  return `<div class="sponsors">${ttl.length ? `<div class="lbl">Presented by</div><div class="sprow sptitle">${ttl.map(x => spLogoTile(x, 'sp-xl', link)).join('')}</div>` : ''}${sp.length ? `<div class="lbl">${ttl.length ? 'With thanks to' : 'Thanks to our sponsors'}</div>${spGroups().filter(g => g.t !== 'title').map(g => `<div class="sprow">${g.list.map(x => spLogoTile(x, spTierCls(g.t), link)).join('')}</div>`).join('')}` : ''}</div>`;
 }
 function todayView(){
   syncEngine();

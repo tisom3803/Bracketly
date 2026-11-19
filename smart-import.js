@@ -862,9 +862,11 @@ function sponsorList(rows){
     // headings + lists: "PRESENTED BY" / "Western Bank" / "Gold" / "A, B, C"
     how = 'list'; let cur = '';
     rows.forEach((r, i) => { const cells = r.filter(Boolean); if (!cells.length) return; const one = cells.join(' ').trim();
+      // "Gold: A, B" or "Emerald Sponsors: C" (an unknown level still counts as a label, so it gets a warning)
+      const lab = one.match(/^([^:]{2,30}):\s*(.+)$/);
+      if (lab && (sponsorTierRaw(lab[1]) || /sponsor|tier|level|partner/i.test(lab[1]) || !/\s/.test(lab[1].trim()))){ lab[2].split(/\s*[,;•·]\s*|\s{3,}/).forEach(n => push({name:n, tierIn:lab[1].trim()}, i + 1)); return }
       const t = sponsorTierRaw(one.replace(/[:\-–]+$/, ''));
       if (t && one.length <= 40 && (/sponsor|tier|level|presented|partner|friend|patron|supporter/i.test(one) || one.split(/\s+/).length <= 2)){ cur = one.replace(/[:\-–]+$/, ''); return }
-      const lab = one.match(/^([^:]{2,30}):\s*(.+)$/); if (lab && sponsorTierRaw(lab[1])){ lab[2].split(/\s*[,;]\s*/).forEach(n => push({name:n, tierIn:lab[1]}, i + 1)); return }
       raw[i].filter(v => v.trim()).forEach(cell => cell.split(/\s*[,;•·\t]\s*|\s{3,}/).forEach(n => push({name:n, tierIn:cur}, i + 1))) });
   }
   // URLs: a website column that is really an image goes to logo

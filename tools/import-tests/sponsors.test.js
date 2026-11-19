@@ -52,3 +52,9 @@ test('logos: file names match sponsors', () => {
   assert.deepEqual(r.map(x => x.idx), [-1, 0]); // the file named in the list wins over initials
   assert.equal(SI.nameFromFile('texas-tech-fcu.png'), 'Texas Tech FCU');
 });
+
+test('sponsors: inline "Level: names" labels, unknown label warns, Friends line not taken as a heading', () => {
+  const r = L(SI.tablesFromText('Presented by: Western Bank\nGold Sponsors\nNew Gold Co\nEmerald: Mystery Corp\nFriends: Pat & Sam, Tiny Bakery')[0].rows);
+  assert.deepEqual(r.sponsors.map(s => [s.name, s.tier]), [['Western Bank', 'title'], ['New Gold Co', 'gold'], ['Mystery Corp', ''], ['Pat & Sam', 'friend'], ['Tiny Bakery', 'friend']]);
+  assert.ok(r.warnings.some(w => w.t === 'unknownTier' && /Emerald/.test(w.msg)));
+});
