@@ -9996,7 +9996,7 @@ const ACT = {
   photolike(el){ const p = Store.get(el.dataset.k); if (!p || !view.me || view.me === GUEST) return; const l = p.likes || []; Store.set(el.dataset.k, Object.assign({}, p, {likes:l.includes(view.me) ? l.filter(x => x !== view.me) : l.concat(view.me)})) },
   async photodel(el){ const k = el.dataset.k, p = Store.get(k); if (!p) return; if (!await ask('Remove this photo from the wall?')) return; if (k.startsWith('chat:')) Store.set(k, Object.assign({}, p, {img:null})); else { Store.del(k); if (p.chat){ const c = Store.get(p.chat); if (c) Store.set(p.chat, Object.assign({}, c, {img:null})) } } view.modal = null; toast('Removed.') },
   /* app */
-  tab(el){ view.tab = el.dataset.v; view.modal = null; view.reactOpen = null; view.resetScroll = true; if (view.tab === 'chat'){ view.stick = true; view.chatMark = chatSeen() } view.q = '' },
+  tab(el){ view.tab = el.dataset.v; view.modal = null; view.reactOpen = null; view.resetScroll = true; if (view.tab === 'chat'){ view.stick = true; view.chatMark = chatSeen(); if (chatOn()) LS.set(TK('chatseen'), Date.now()) } view.q = '' },
   day(el){ view.day = el.dataset.v },
   cfilter(el){ view.cf = el.dataset.v },
   sfmine(){ view.sf = Object.assign({}, view.sf || {}); view.sf.mine = !view.sf.mine },
