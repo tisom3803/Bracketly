@@ -2084,6 +2084,97 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 .tvsp-grid{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;align-items:center}.tvsp-grid figure{margin:0;background:rgba(247,245,236,.95);border-radius:18px;padding:18px 26px;min-width:220px}.tvsp-grid figure.title{flex-basis:100%;max-width:640px;margin:0 auto;padding:26px}
 .tvsp-grid img{max-height:110px;max-width:280px;object-fit:contain}.tvsp-grid .title img{max-height:180px;max-width:520px}.tvsp-grid span{font:700 28px/1.2 var(--fd);color:var(--ink)}.tvsp-grid figcaption{font-size:15px;color:var(--muted);margin-top:8px}
 .ptbl{width:100%;border-collapse:collapse;font-size:12.5px;margin:6px 0 14px}.ptbl th,.ptbl td{border:1px solid #bbb;padding:5px 6px;text-align:left;vertical-align:top}.ptbl th{background:#f1f1ec}.psched td.pscore{white-space:nowrap;font-size:15px;text-align:center;min-width:110px}
+
+/* v3.3 searchable "Who are you?" list */
+.whoq2{position:sticky;top:env(safe-area-inset-top);z-index:3;background:var(--paper);padding:6px 0 8px;margin:0 -2px;box-shadow:0 calc(-1 * env(safe-area-inset-top)) 0 var(--paper)}
+.sheet .whoq2{top:-18px;box-shadow:none}
+.gate-links{justify-content:center;gap:8px;margin:8px 0 4px}.gate-links .btn{min-height:40px}
+.sheet .whoq2{background:var(--card)}
+.whol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;text-align:left}
+.whoh{font:700 12px/1.2 var(--fm);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:12px 4px 2px}
+.whol li:first-child.whoh{padding-top:2px}
+.whor{width:100%;display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 12px;background:var(--card);border:1px solid var(--bd);border-radius:var(--rad-c);text-align:left;color:var(--ink);cursor:pointer}
+.whor:active{background:var(--slot)}
+.whor[aria-current=true]{border-color:var(--gold);box-shadow:inset 4px 0 0 var(--gold)}
+.whor .v4-av{flex:0 0 auto}
+.whor-t{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.whor-t b{font:600 16px/1.25 var(--fb);overflow-wrap:anywhere}
+.whor-t small{font-size:13px;color:var(--muted);line-height:1.3;overflow-wrap:anywhere}
+.whor .chev{color:var(--muted);font-size:22px;flex:0 0 auto}
+.whor-me{font:700 11px/1 var(--fm);letter-spacing:.1em;text-transform:uppercase;color:var(--navy);background:var(--ok-bg);padding:5px 8px;border-radius:999px;flex:0 0 auto}
+
+/* v3.3 Overview */
+.ov-hero{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad-l,18px);padding:16px;margin:4px 0 12px}
+.ov-hero-top{display:flex;gap:14px;align-items:center}.ov-hero-top .logo,.ov-hero-top svg{flex:0 0 auto;border-radius:50%}
+.ov-hero-t{min-width:0}.ov-hero-t h1{font:600 26px/1.15 var(--fd);margin:2px 0 4px;overflow-wrap:anywhere}.ov-hero-t .bk-eyebrow{margin:0}.ov-hero-t h1.long{font-size:23px}
+.ov-meta{margin:0;color:var(--muted);font-size:14px;line-height:1.4}
+.ov-facts{list-style:none;margin:14px 0 0;padding:12px 0 0;border-top:1px solid var(--bd);display:grid;grid-template-columns:repeat(auto-fit,minmax(64px,1fr));gap:8px;text-align:center}
+.ov-facts b{display:block;font:700 24px/1 var(--fd);color:var(--ink)}.ov-facts span{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.ov-links{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 16px}
+.ov-link{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:64px;padding:8px 4px;background:var(--card);border:1px solid var(--bd);border-radius:var(--rad-c);color:var(--ink);font:600 13px/1.2 var(--fb);text-decoration:none;cursor:pointer}
+.ov-link svg{width:22px;height:22px;color:var(--navy)}
+.ov-sec{margin:18px 0}.ov-h3{font:700 12px/1.2 var(--fm);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
+.ov-evs{display:grid;gap:10px}
+.ov-ev{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad-c);overflow:hidden}
+.ov-ev-h{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:none;border:0;text-align:left;color:var(--ink);cursor:pointer;min-height:56px}
+.ov-ev-h > span:first-child{min-width:0;display:flex;flex-direction:column}.ov-ev-h b{font:600 17px/1.25 var(--fb);overflow-wrap:anywhere}.ov-ev-h small{color:var(--muted);font-size:13px}
+.ov-tag{flex:0 0 auto;font:600 12px/1.2 var(--fb);padding:5px 9px;border-radius:999px;background:var(--slot);color:var(--muted);text-align:center;max-width:46%}
+.ov-tag.live{background:var(--warn-bg,#FFF4D6);color:var(--ink)}.ov-tag.ok{background:var(--ok-bg);color:var(--navy)}
+.ov-ev-b{padding:0 14px 12px;display:grid;gap:10px}
+.ov-fl h4{margin:6px 0 6px;font:700 13px/1.2 var(--fb);color:var(--muted)}
+.ov-st{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.ov-st li{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:10px;background:var(--slot);min-height:40px}
+.ov-st li.lead{background:var(--ok-bg)}.ov-st .n{width:18px;text-align:center;font:700 14px var(--fd);color:var(--muted);flex:0 0 auto}
+.ov-st b{flex:1 1 auto;min-width:0;font:600 14px/1.25 var(--fb);overflow-wrap:anywhere}.ov-st em{font:700 16px var(--fd);font-style:normal;font-variant-numeric:tabular-nums;flex:0 0 auto}
+.ov-final{margin:0;font-size:14px;line-height:1.4;display:flex;flex-wrap:wrap;gap:4px;align-items:center}.ov-final svg{width:18px;height:18px;color:var(--gold)}
+.ov-cup{display:flex;align-items:center;justify-content:center;gap:14px;text-align:center}.ov-cup span{flex:1 1 0;min-width:0}.ov-cup small{display:block;color:var(--muted);font-size:13px;overflow-wrap:anywhere}.ov-cup b{font:700 32px/1 var(--fd)}.ov-cup i{color:var(--muted);font-style:normal}
+.ov-pros{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}.ov-pros li{display:flex}.ov-pros li > button{height:100%}
+@media (min-width:740px){.ov-pros{grid-template-columns:repeat(var(--c,6),minmax(0,1fr))}}
+.ov-pros button{width:100%;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;background:var(--card);border:1px solid var(--bd);border-radius:var(--rad-c);color:var(--ink);text-align:center;cursor:pointer;min-height:44px}
+.ov-pros b{font:600 14px/1.2 var(--fb);overflow-wrap:anywhere}.ov-pros small{font-size:12px;color:var(--muted);line-height:1.25}
+.ov-day{background:var(--card);border:1px solid var(--bd);border-radius:var(--rad-c);margin:0 0 8px}
+.ov-day summary{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;min-height:48px;list-style:none}.ov-day summary::-webkit-details-marker{display:none}
+.ov-day summary small{color:var(--muted)}
+.ov-tl{list-style:none;margin:0;padding:0 14px 12px;display:grid;gap:2px}
+.ov-tl li{display:grid;grid-template-columns:76px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--bd)}
+.ov-tl li.done{opacity:.6}.ov-tl time{font:700 14px/1.3 var(--fb);color:var(--navy);font-variant-numeric:tabular-nums}
+.ov-tl b{display:block;font:600 14px/1.3 var(--fb);overflow-wrap:anywhere}.ov-tl small{color:var(--muted);font-size:13px}
+.ov-tl li.ov-x time{color:var(--gold)}
+.ov-row{display:flex;gap:12px;align-items:flex-start;padding:12px 14px}.ov-row svg{width:22px;height:22px;flex:0 0 auto;color:var(--navy);margin-top:2px}
+.ov-row > span{min-width:0;display:flex;flex-direction:column;gap:2px}.ov-row > span > span{color:var(--muted);font-size:14px;overflow-wrap:anywhere}.ov-pre{white-space:pre-wrap}
+.nw{white-space:nowrap}.ov-det{border-top:0}.ov-det > li:last-child{border-bottom:0}
+.ov-sp{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ov-sp li{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;display:flex;align-items:center;justify-content:center;min-height:48px;flex:1 1 auto;text-align:center}
+.ov-sp li span{font:600 15px/1.25 var(--fd)}.ov-sp img{max-height:48px;max-width:160px;object-fit:contain}
+.ov-sp.title li{flex-basis:100%;min-height:72px}.ov-sp.title li span{font-size:20px}
+@media (min-width:740px){.ov-links{grid-template-columns:repeat(6,1fr)}.ov-evs{grid-template-columns:1fr 1fr}.ov-hero-t h1{font-size:32px}.ov-hero-t h1.long{font-size:28px}}
+
+/* ===== v3.3 formatting sweep ===== */
+@media (max-width:560px){
+  .tbl.hours, .tbl.hours tbody{display:block;border:0;background:none}
+  .tbl.hours tr:first-child{display:none}
+  .tbl.hours tr:not(.dayn){display:grid;grid-template-columns:44px 1fr 1fr;gap:4px 8px;align-items:end;padding:10px 0 4px;border-top:1px solid var(--bd)}
+  .tbl.hours tr:nth-child(2){border-top:0;padding-top:0}
+  .tbl.hours tr:not(.dayn) > td:first-child{grid-column:1/-1;padding:0 0 2px}
+  .tbl.hours tr:not(.dayn) > td[colspan]{grid-column:1/-1}
+  .tbl.hours td{border:0!important;padding:0!important;min-width:0}
+  .tbl.hours td[data-l]::before{content:attr(data-l);display:block;font:600 11.5px var(--fb);color:var(--muted);margin-bottom:3px;white-space:nowrap}
+  .tbl.hours td[data-l="Play"]{text-align:center}
+  .tbl.hours td[data-l="Play"] input{width:26px;height:26px;margin:8px auto}
+  .tbl.hours input[type=time]{min-width:0;width:100%;min-height:44px}
+  .tbl.hours tr.dayn, .tbl.hours tr.dayn td{display:block;padding:2px 0 6px!important}
+}
+.checks.inline label{min-height:40px;padding:2px 4px}.checks input[type=checkbox]{width:20px;height:20px;flex:0 0 auto}
+.v6-md-all{min-height:40px;padding:10px 0}.v6-md-more{min-height:40px;padding:12px 0 6px}
+.x{min-width:40px;min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+.linkbtn{min-height:36px}
+.tbl select, select.sm{min-height:40px}
+@media (max-width:560px){ .paassign-r{grid-template-columns:40px minmax(0,1fr)} .paassign-r > :nth-child(3){grid-column:2/-1} .paassign-n span{white-space:normal;overflow:visible} }
+@media screen and (max-width:700px){ .printpage .ptbl{table-layout:fixed;font-size:11.5px} .printpage .ptbl th,.printpage .ptbl td{overflow-wrap:anywhere;padding:4px} .printpage .ptbl th:first-child,.printpage .ptbl td:first-child{width:22%} }
+/* long doubles names: two lines instead of an ellipsis on the TV and on paper */
+.tv .tl .nm{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.2;overflow-wrap:anywhere}
+@media print{ .tl .nm{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.15;overflow-wrap:anywhere} }
+.printpage .tl .nm{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.15}
 </style>
 </head>
 <body>
@@ -2097,7 +2188,7 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
    claude   : the hosted Claude artifact (artifact database + asset store)
    local    : this device only (testing); tabs on the same device stay in sync
    Everything above this layer uses Dir (trips) and Store (one trip's documents). */
-const APP_VERSION = '3.2.1';
+const APP_VERSION = '3.3.0';
 const CONF = window.BK_CONFIG || {};
 const SUPA_URL = String(CONF.SUPABASE_URL || '').trim();
 const SUPA_KEY = String(CONF.SUPABASE_ANON_KEY || '').trim();
@@ -4341,7 +4432,7 @@ function playersInMatch(team, match) {
 }
 function teamLabel(team, match = null) {
   if (!team) return null;
-  return playersInMatch(team, match).map(p => p.split(' ').slice(-1)[0]).join('/');
+  return playersInMatch(team, match).map(surname).join('/');
 }
 function teamFullLabel(team, match = null) {
   if (!team) return null;
@@ -4948,11 +5039,20 @@ function sideNames(m, slot){
   const t = matchTeam(m, slot); if (!t) return null;
   return playersInMatch(t, m);
 }
+/* Short (last) name: keeps particles and drops suffixes, so "Kimberly St. Clair-Montgomery" -> "St. Clair-Montgomery",
+   "Evangeline Vander Dussen" -> "Vander Dussen", "Rafael Hatch Jr." -> "Hatch". */
+const SURNAME_PRE = new Set(['st', 'st.', 'saint', 'van', 'vander', 'van der', 'von', 'de', 'del', 'della', 'der', 'den', 'da', 'di', 'du', 'la', 'le', 'dos', 'das', 'ó', 'o', 'mac', 'bin', 'al', 'el', 'ten', 'ter']);
+function surname(full){
+  const w = String(full || '').trim().split(/\s+/); while (w.length > 2 && /^(jr\.?|sr\.?|ii|iii|iv|v)$/i.test(w[w.length - 1])) w.pop();
+  if (w.length < 2) return w[0] || '';
+  let i = w.length - 1; while (i > 1 && SURNAME_PRE.has(w[i - 1].toLowerCase())) i--;
+  return w.slice(i).join(' ');
+}
 function sideLabel(m, slot, short){
   const n = sideNames(m, slot);
   if (n === null) return feederLabel(m, slot);
   if (!n.length) return '—';
-  return short ? n.map(x => x.split(' ').slice(-1)[0]).join(' / ') : n.join(' / ');
+  return short ? n.map(surname).join(' / ') : n.join(' / ');
 }
 function feederLabel(m, slot){
   const i = slot === 'team1' ? 0 : 1;
@@ -5851,7 +5951,7 @@ function champion(ev){
 function pickLabel(b){
   const ev = findEvent(b.ev);
   if (b.type === 'match'){ const m = findMatch(b.match); return m ? (sideNames(m, b.pick) === null ? feederLabel(m, b.pick) : sideLabel(m, b.pick, true)) : '?' }
-  if (b.type === 'event'){ if (ev && ev.format === 'club_cup') return b.pick === 'A' ? ev.clubCup.teamAName : ev.clubCup.teamBName; const t = findTeam(b.pick); return t ? (t.name || t.players.map(n => n.split(' ').slice(-1)[0]).join(' / ')) : '?' }
+  if (b.type === 'event'){ if (ev && ev.format === 'club_cup') return b.pick === 'A' ? ev.clubCup.teamAName : ev.clubCup.teamBName; const t = findTeam(b.pick); return t ? (t.name || t.players.map(surname).join(' / ')) : '?' }
   return '';
 }
 function betDesc(b){
@@ -6005,7 +6105,7 @@ function checkAlerts(key){
     if (before.m[k] === v) continue;
     const m = findMatch(k.slice(2)); if (!m) continue;
     const r = resOf(m.id) || {}, why = cares(m); if (!why) continue;
-    if (r.w && !String(before.m[k] || '').match(/team|A|B/)){ const w = winnerSlot(m), l = w === 'team1' ? 'team2' : 'team1'; alertOut('result', `${sideLabel(m, w, true)} d. ${sideLabel(m, l, true)} ${scoreText(m)}`.trim() + ` · ${(findEvent(m.eventId) || {}).name}`, 'm:' + m.id) }
+    if (r.w && !String(before.m[k] || '').match(/team|A|B/)){ const w = winnerSlot(m); alertOut('result', `${resultText(m, w)} ${scoreText(m)}`.trim() + ` · ${(findEvent(m.eventId) || {}).name}`, 'm:' + m.id) }
     else if (r.live && !String(before.m[k] || '').includes('L')) alertOut(why === 'mine' ? 'remind' : 'result', `${why === 'mine' ? "You're on" : 'On court'}: ${sideLabel(m, 'team1', true)} vs ${sideLabel(m, 'team2', true)}, ${courtName(m.court)}`, 'live:' + m.id);
   }
   if (ALERTS.draws) state.events.forEach(e => { if (e.published && before.pub[e.id] === false) alertOut('draws', `${e.name} draw is out`, 'pub:' + e.id) });
@@ -6124,6 +6224,7 @@ const ICON = {
   home:'<svg class="i" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>',
   bets:'<svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2c-.5-1-1.6-1.6-2.8-1.6-1.6 0-2.8.9-2.8 2.1 0 2.9 5.8 1.6 5.8 4.6 0 1.2-1.3 2.1-3 2.1-1.3 0-2.5-.6-3-1.6M12 6v1.6M12 16.4V18"/></svg>',
   bell:'<svg class="i" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z"/><path d="M10 21h4"/></svg>',
+  overview:'<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M14 15h6M14 18h4"/></svg>',
   today:'<svg class="i" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M8 3v4M16 3v4M8 14h3"/></svg>',
   courts:'<svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="M12 5v14M3 12h18M6.5 5v14M17.5 5v14"/></svg>',
   draws:'<svg class="i" viewBox="0 0 24 24"><path d="M3 5h5v4H3zM3 15h5v4H3zM8 7h3v10H8M11 12h4M15 10h6v4h-6z"/></svg>',
@@ -6254,6 +6355,7 @@ function meCard(me, m, mine, pre){
     ${next}
   </section>`;
 }
+function v3BadgeText(ph){ ph = ph || tourPhase(); return ph.k === 'done' ? 'Final results' : ph.k === 'prog' ? 'In progress' : ph.k === 'upcoming' ? 'Coming up' : (ph.label || 'Tournament') }
 function cardStrip(){
   const c = cfg() || {}, live = liveNow().length, nc = (c.courts || []).length || (typeof courtCount === 'function' ? courtCount() : 0), ph = tourPhase();
   const ncs = nc ? `${nc} court${nc === 1 ? '' : 's'}` : '';
@@ -6269,7 +6371,7 @@ function tournamentCard(){
     <div class="v3-tcard-ph">${cover ? `<img src="${cover}" alt="" loading="lazy">` : `<img src="${IMG_HERO}" srcset="${imgSet('court-hero')}" sizes="(min-width:740px) 700px, 100vw" alt="" loading="lazy" decoding="async">`}
       <div class="v3-tcard-ov">
         <div class="v3-tcard-top">${v3Badge(st)}</div>
-        <h1 class="v3-tcard-h" id="tc-h">${esc(tripTitle())}</h1>
+        <h1 class="v3-tcard-h" id="tc-h">${escNB(tripTitle())}</h1>
         ${c.club ? `<p class="v3-tcard-club">${esc(c.club)}</p>` : ''}
         <p class="v3-tcard-meta">${datesShort() ? `<span>${ICON.cal}${esc(datesShort())}</span>` : ''}${np ? `<span>${ICON.people}${np} Player${np === 1 ? '' : 's'}</span>` : ''}</p>
       </div></div>
@@ -6309,14 +6411,14 @@ function v3Match(m){
 }
 /* v4 bar, as in the mockup: Home · Events · Players · More. Schedule, Courts and Info are one tap away on Home's tournament card (and under More). */
 /* v5: each destination lives in one place. Bar: Home · Draws · Schedule · Players · More. Courts and Info sit on Home's tournament card. */
-const NAV_MAIN = ['today', 'draws', 'schedule', 'players'], NAV_HOME = ['today', 'courts', 'info'];
+const NAV_MAIN = ['today', 'overview', 'draws', 'schedule'], NAV_HOME = ['today', 'courts', 'info'];
 function tabbar(){
   const cur = NAV_HOME.includes(view.tab) ? 'today' : NAV_MAIN.includes(view.tab) ? view.tab : 'more';
   const un = unreadCount(), live = liveNow().length;
   const me = view.me && view.me !== GUEST ? view.me : null, pend = me && betsOn() ? bets().filter(b => betNeedsMe(b, me)).length : 0;
   const moreN = un + pend, moreAria = moreN ? `More, ${[un ? `${un} unread chat message${un === 1 ? '' : 's'}` : '', pend ? `${pend} bet${pend === 1 ? '' : 's'} waiting on you` : ''].filter(Boolean).join(', ')}` : '';
   const tb = (v, label, badge, aria) => `<button data-act="tab" data-v="${v}" ${cur === v ? 'aria-current="page"' : ''} ${aria ? `aria-label="${esc(aria)}"` : ''}>${ICON[v]}<span>${label}</span>${badge ? `<span class="badge" aria-hidden="true">${badge}</span>` : ''}</button>`;
-  return `<nav class="tabs bk-nav" aria-label="Tournament">${tb('today', 'Home', live, live ? `Home, ${live} on court now` : '')}${tb('draws', 'Draws')}${tb('schedule', 'Schedule')}${tb('players', 'Players')}${tb('more', 'More', moreN, moreAria)}</nav>`;
+  return `<nav class="tabs bk-nav" aria-label="Tournament">${tb('today', 'Home', live, live ? `Home, ${live} on court now` : '')}${tb('overview', 'Overview')}${tb('draws', 'Draws')}${tb('schedule', 'Schedule')}${tb('more', 'More', moreN, moreAria)}</nav>`;
 }
 function body(){
   switch (view.tab){
@@ -6324,6 +6426,7 @@ function body(){
     case 'schedule': return scheduleView();
     case 'more': return moreView();
     case 'info': return infoView();
+    case 'overview': return overviewView();
     case 'bets': return betsView();
     case 'courts': return courtsView();
     case 'draws': return drawsView();
@@ -6333,22 +6436,65 @@ function body(){
   }
   return homeView();
 }
+/* v3.3: "Who are you?" is a searchable vertical list (was a sideways-scrolling grid). Type-to-filter on first or last name,
+   accent and case insensitive; grouped by team for a Pro-Am or Club Cup, A-Z with letter headers otherwise. */
+function whoGroups(){
+  const evs = events(), out = [];
+  const pa = evs.filter(e => e.kind === 'proam' && Array.isArray(e.paTeams) && e.paTeams.length);
+  if (pa.length){
+    pa.forEach(e => (e.paTeams || []).forEach(t => { const pro = (e.paAssign || {})[t.id];
+      const ids = [[pro, 'Pro'], [t.a, 'A'], [t.b, 'B'], [t.c, 'C']].filter(x => x[0] && P(x[0]));
+      if (ids.length) out.push({h:paRecName(e, t) + (paSecLabel(e) ? ' · ' + e.name : ''), rows:ids.map(([id, r]) => ({id, sub:r === 'Pro' ? 'Pro' : r + ' player'}))}) }));
+  }
+  evs.filter(e => e.kind === 'clubcup' && e.clubCup).forEach(e => { const cc = e.clubCup;
+    [[cc.aIds, cc.teamAName || 'Team A'], [cc.bIds, cc.teamBName || 'Team B']].forEach(([ids, nm]) => { ids = (ids || []).filter(P); if (ids.length) out.push({h:nm, rows:ids.map(id => ({id, sub:nm}))}) }) });
+  const seen = new Set(out.flatMap(g => g.rows.map(r => r.id)));
+  return {groups:out, seen};
+}
+function whoCtx(pid){
+  if (whoCtx._k !== whoCtx._key()){ whoCtx._m = new Map(); whoCtx._k = whoCtx._key() }
+  if (whoCtx._m.has(pid)) return whoCtx._m.get(pid);
+  const bits = [];
+  try{ for (const e of events()){
+    if (e.kind === 'proam' && e.paTeams){ const t = e.paTeams.find(x => [x.a, x.b, x.c].includes(pid)) || e.paTeams.find(x => (e.paAssign || {})[x.id] === pid); if (t) bits.push(paRecName(e, t) + (paSecLabel(e) ? ' · ' + e.name : '')); continue }
+    if (e.kind === 'clubcup' && e.clubCup){ const cc = e.clubCup; if ((cc.aIds || []).includes(pid)) bits.push(cc.teamAName || 'Team A'); else if ((cc.bIds || []).includes(pid)) bits.push(cc.teamBName || 'Team B'); continue }
+    if (teamsOf(e).some(t => t.pids.includes(pid))) bits.push(e.name);
+  } }catch(err){}
+  const p = P(pid), club = p && p.club ? p.club : '';
+  const v = [bits.slice(0, 3).join(', ') + (bits.length > 3 ? ` +${bits.length - 3}` : ''), club].filter(Boolean).join(' · ');
+  whoCtx._m.set(pid, v); return v;
+}
+whoCtx._key = () => (TRIP && TRIP.id) + '|' + events().length + '|' + players().length;
+function whoMatch(name, q){ if (!q) return true; const n = normName(name), w = n.split(' '); return q.split(' ').every(t => n.includes(t) && (w.some(x => x.startsWith(t)) || t.length > 2)) }
 function nameGrid(){
-  const all = players(), q = normName(view.q), pl = all.filter(p => !q || normName(p.name).includes(q)).sort((a,b) => a.name.localeCompare(b.name)), av = brand().cards.show !== false;
+  const all = players(), q = normName(view.q), av = brand().cards.show !== false;
   if (av && view.cards === undefined && TRIP){ view.cards = null; setTimeout(loadCards, 0) }
-  return `${all.length > 6 ? `<div class="v6-whoq"><label class="sr" for="whoq">Search your name</label><input id="whoq" class="bk-input" type="search" placeholder="Search your name" value="${esc(view.q || '')}" autocomplete="off" autocapitalize="words" enterkeyhint="search"></div>${q ? `<p class="bk-hint v6-whoq-n" role="status">${pl.length ? `${pl.length} of ${all.length} players` : ''}</p>` : ''}` : ''}
-  ${pl.length ? `<div class="who-grid v6-who">${pl.map(p => `<button style="--c:${p.id === view.me ? 'var(--gold)' : 'var(--bd)'}" data-act="pickme" data-id="${p.id}" ${p.id === view.me ? 'aria-current="true"' : ''}>${av ? avatar(p.id, 30) : ''}<span>${esc(p.name)}</span></button>`).join('')}</div>` : `<p class="muted small">${all.length ? `No one named “${esc(view.q)}”. Check the spelling, or ask the director to add you.` : 'No players yet. The director adds them in setup.'}</p>`}`;
+  const last = n => { const w = String(n || '').trim().split(/\s+/); return normName(w.length > 1 ? w[w.length - 1] + ' ' + w.slice(0, -1).join(' ') : n) };
+  const row = (id, sub) => `<li><button class="whor" data-act="pickme" data-id="${esc(id)}" ${id === view.me ? 'aria-current="true"' : ''}>${av ? avatar(id, 36) : ''}<span class="whor-t"><b>${esc(pname(id))}</b>${sub ? `<small>${esc(sub)}</small>` : ''}</span>${id === view.me ? '<span class="whor-me">You</span>' : '<span class="chev" aria-hidden="true">›</span>'}</button></li>`;
+  let body = '', shown = 0;
+  if (q){
+    const hit = all.filter(p => whoMatch(p.name, q)).sort((a, b) => { const sa = normName(a.name).startsWith(q) ? 0 : 1, sb = normName(b.name).startsWith(q) ? 0 : 1; return sa - sb || a.name.localeCompare(b.name) });
+    shown = hit.length; body = hit.length ? `<ul class="whol">${hit.map(p => row(p.id, whoCtx(p.id))).join('')}</ul>` : '';
+  } else {
+    const {groups, seen} = whoGroups(), rest = all.filter(p => !seen.has(p.id)).sort((a, b) => last(a.name).localeCompare(last(b.name)));
+    const parts = groups.map(g => `<li class="whoh" role="presentation">${esc(g.h)}</li>${g.rows.map(r => row(r.id, r.sub)).join('')}`);
+    if (rest.length){ if (groups.length) parts.push('<li class="whoh" role="presentation">Everyone else</li>'); let L = ''; rest.forEach(p => { const k = (last(p.name)[0] || '#').toUpperCase(); if (!groups.length && k !== L){ L = k; parts.push(`<li class="whoh" role="presentation">${esc(k)}</li>`) } parts.push(row(p.id, whoCtx(p.id))) }) }
+    shown = all.length; body = all.length ? `<ul class="whol">${parts.join('')}</ul>` : '';
+  }
+  return `${all.length ? `<div class="v6-whoq whoq2"><label class="sr" for="whoq">Search your name</label><input id="whoq" class="bk-input" type="search" placeholder="Search by first or last name" value="${esc(view.q || '')}" autocomplete="off" autocorrect="off" autocapitalize="words" spellcheck="false" enterkeyhint="search"></div>
+    <p class="bk-hint v6-whoq-n" role="status">${q ? (shown ? `${shown} of ${all.length} players` : '') : `${all.length} player${all.length === 1 ? '' : 's'}`}</p>` : ''}
+  ${body || `<p class="muted small">${all.length ? `No one named “${esc(view.q)}”. Check the spelling, or ask the director to add you.` : 'No players yet. The director adds them in setup.'}</p>`}`;
 }
 function gate(){
   return `<div class="gate"><main class="gate-in">
     <div style="display:flex;justify-content:center">${crest(72)}</div>
-    <h1>${esc(tripTitle())}</h1>
+    <h1>${escNB(tripTitle())}</h1>
     <p class="muted gate-sub">${esc(tsub())}</p>
     <h2 style="margin:0 0 4px">Who are you?</h2>
     <p class="muted small" style="margin:0 0 12px">Pick your name to put your matches first. This personalizes this device only; it doesn't verify who you are.</p>
     <div class="gate-top"><button class="btn alt" data-act="pickme" data-id="${GUEST}">Continue as spectator</button></div>
+    <div class="row gate-links"><button class="btn alt sm" data-act="leavetrip">All tournaments</button><button class="btn alt sm" data-act="tab" data-v="admin">Director</button></div>
     ${nameGrid()}
-    <div class="row" style="justify-content:center;margin-top:18px"><button class="btn alt sm" data-act="leavetrip">All tournaments</button><button class="btn alt sm" data-act="tab" data-v="admin">Director</button></div>
   </main></div>`;
 }
 const chatSeen = () => LS.get(TK('chatseen'), 0);
@@ -6360,7 +6506,7 @@ function teamLine(m, slot, opts){
   const names = sideNames(m, slot), w = winnerSlot(m), won = w === slot, lost = w && !won;
   const team = (m.team1Id || m.team2Id || m.feedsFrom) && !m.sideAPlayers ? matchTeam(m, slot) : null;
   const seed = team && team.seed && !m.proAm && m.poolIdx == null ? `<i class="seed">${team.seed}</i>` : '';
-  const label = names === null ? `<span class="tbd">${esc(feederLabel(m, slot))}</span>` : esc(opts.short ? names.map(x => x.split(' ').slice(-1)[0]).join(' / ') : names.join(' / ') || '—');
+  const label = names === null ? `<span class="tbd">${esc(feederLabel(m, slot))}</span>` : esc(opts.short || (teamLine.tv && names.length > 1) ? names.map(surname).join(' / ') : names.join(' / ') || '—');
   const mine = view.me && names && names.includes(pname(view.me));
   return `<div class="tl ${won ? 'won' : ''} ${lost ? 'lost' : ''} ${mine ? 'mine' : ''}">${seed}<span class="nm">${label}</span>${won ? '<b class="ck">✓</b>' : ''}</div>`;
 }
@@ -6409,7 +6555,7 @@ function teamRow(m, slot, opts){
   const names = sideNames(m, slot), w = winnerSlot(m), won = w === slot, lost = !!w && !won;
   const team = (m.team1Id || m.team2Id || m.feedsFrom) && !m.sideAPlayers ? matchTeam(m, slot) : null;
   const seed = team && team.seed && !m.proAm && m.poolIdx == null ? `<span class="mr-seed">${team.seed}</span>` : '';
-  const label = names === null ? `<span class="tbd">${esc(feederLabel(m, slot))}</span>` : esc(opts.short ? names.map(x => x.split(' ').slice(-1)[0]).join(' / ') : names.join(' / ') || '—');
+  const label = names === null ? `<span class="tbd">${esc(feederLabel(m, slot))}</span>` : esc(opts.short ? names.map(surname).join(' / ') : names.join(' / ') || '—');
   const mine = view.me && names && names.includes(pname(view.me));
   const ph = names === null ? null : sidePhoto(m, slot);
   return `<span class="mr-t ${won ? 'won' : ''} ${lost ? 'lost' : ''} ${mine ? 'mine' : ''}">${seed}${ph ? teamPic(ph, 24, '', 'tp-side') : ''}<span class="mr-n">${label}</span>${won ? '<span class="mr-w" aria-hidden="true">✓</span>' : ''}<span class="mr-s">${setCells(m, slot).map(c => `<span>${esc(c)}</span>`).join('')}</span></span>`;
@@ -6470,6 +6616,9 @@ function divisionMix(){
 const isOpen = k => !!(view.open && view.open[k]);
 const DISC_ICON = {welcome:'wave', arrival:'pin', food:'cup', dress:'shirt', awards:'medal', formats:'list', rules:'book', rain:'rain', contact:'phone'};
 const disc = (k, title, inner) => { if (!inner) return ''; const ic = ICON[DISC_ICON[String(k).replace(/^i-/, '')]]; return `<details class="bk-disc${ic ? ' v3-acc' : ''}" data-k="${esc(k)}" ${isOpen(k) ? 'open' : ''}><summary>${ic ? `<span class="v3-ric" aria-hidden="true">${ic}</span>` : ''}<span class="v3-acc-t">${esc(title)}</span></summary><div>${inner}</div></details>` };
+/* keep phone numbers on one line (no break at the hyphen) */
+const escNB = v => esc(v).replace(/(\S+-\S+)/g, '<span class="nw">$1</span>'); // keep "Pro-Am" together in big titles
+const escTel = v => esc(v).replace(/(\+?\d[\d\s().-]{6,}\d)/g, x => `<span class="nw">${x}</span>`);
 function infoSections(opts){
   opts = opts || {};
   const c = cfg() || {}, w = welcome(), i = c.info || {}, K = k => (opts.prefix || '') + k;
@@ -6485,7 +6634,7 @@ function infoSections(opts){
     disc(K('formats'), 'Events and formats', fmtLines ? `<ul class="fmts">${fmtLines}</ul>` : ''),
     disc(K('rules'), 'Rules', i.rules ? `<p>${esc(i.rules)}</p>` : ''),
     disc(K('rain'), 'Rain plan', i.rain ? `<p>${esc(i.rain)}</p>` : ''),
-    disc(K('contact'), 'Contacts', i.contact ? `<p>${esc(i.contact)}</p>` : '')
+    disc(K('contact'), 'Contacts', i.contact ? `<p>${escTel(i.contact)}</p>` : '')
   ].join('');
   return html ? `<section class="bk-sec" aria-labelledby="info-h"><h2 class="bk-h2" id="info-h">${opts.title || 'Tournament information'}</h2>${html}</section>` : '';
 }
@@ -6858,6 +7007,7 @@ function moreView(){
   const grp = (title, rows) => `<section class="v3-group" aria-label="${esc(title)}"><h2 class="v3-glabel">${esc(title)}</h2><ul class="bk-rows v3-card">${rows}</ul></section>`;
   return `${pageHead('More')}<p class="bk-meta">Everything else for this tournament</p>
   ${grp('Tournament tools', [
+    irow('people', 'tab', 'players', 'Players', 'Find players, teams and their events'),
     irow('chat', 'tab', 'chat', 'Chat & photos', 'Tournament conversation and photo wall', un, un === 1 ? 'unread message' : 'unread messages'),
     irow('bell', 'alerts', '', 'Notifications', 'Choose what this device alerts you about'),
     irow('share', 'invite', '', 'Share', 'Player link, TV link and QR codes')].join(''))}
@@ -6874,6 +7024,85 @@ function infoView(){
   return `${pageHead('Tournament information')}<p class="bk-meta">${esc([datesLabel(), c.club].filter(Boolean).join(' · '))}</p>${infoSections({welcome:true, title:'Details', prefix:'i-'}) || '<p class="bk-empty">The director hasn\'t added tournament information yet.</p>'}${sponsorsHtml()}`;
 }
 
+/* ===== v3.3 Overview: the whole tournament at a glance (modeled on Roundly's Trip page: hero, now/next board,
+   standings, day-by-day timeline, details, links). Home stays the personal "my day" page. ===== */
+function ovTeamName(t){ try{ return t ? (t.name || teamLabel(t)) : 'TBD' }catch(e){ return t && t.players ? t.players.join(' / ') : 'TBD' } }
+function ovEvSnap(ev){
+  const ms = (ev.matches || []).filter(m => !state.results[m.id] || resOf(m.id)), real = ev.matches.filter(m => !(state.results[m.id] && !resOf(m.id)));
+  const done = real.filter(m => { const r = resOf(m.id); return r && r.w }).length, tot = real.length;
+  let status = !isDrawn(ev) ? 'Draw not made yet' : done === 0 ? `${tot} matches scheduled` : done >= tot ? 'Complete' : `${done} of ${tot} results in`;
+  let body = '';
+  try{
+    const ch = champion(ev);
+    if (ev.format === 'pro_am' && isDrawn(ev)){
+      const fl = ev.flights || [], fin = ev.matches.find(m => m.proAm && m.proAm.isFinal);
+      body = fl.map(f => { const st = computeProAmFlightStandings(ev, f).slice(0, 4); return `<div class="ov-fl"><h4>${esc(f.name)}${flightComplete(ev, f.id) ? ' <span class="ov-tag ok">Final</span>' : ''}</h4><ol class="ov-st">${st.map((r, i) => `<li class="${i === 0 && r.games ? 'lead' : ''}"><span class="n">${i + 1}</span>${teamPic(paTeamPhoto(ev, r.team) || paProPhoto(ev, paProId(r.team)), 28, paTeamName(r.team))}<b>${esc(paTeamName(r.team))}</b><em>${r.games}</em></li>`).join('')}</ol></div>` }).join('');
+      if (fin){ const fins = ev.matches.filter(m => m.proAm && m.proAm.isFinal), fd = fins.filter(m => resOf(m.id) && resOf(m.id).w).length, at0 = fin.slotIdx != null ? slotParts(fin) : null;
+        body += `<p class="ov-final"><b>Final</b> · ${ch ? `Won by ${esc(paTeamName(findTeam(ch) || {}))}` : fin.team1Id && fin.team2Id ? `${esc(sideLabel(fin, 'team1', true))} vs ${esc(sideLabel(fin, 'team2', true))}${fd ? ` · ${fd} of ${fins.length} lines in` : ''}` : 'Flight winners meet'}${at0 && !ch ? ` · ${esc(at0.day)} ${esc(at0.time)}` : ''}</p>` }
+    } else if (ev.format === 'club_cup' && ev.clubCup && isDrawn(ev)){
+      const t = getClubCupTotals(ev), cc = ev.clubCup;
+      body = `<div class="ov-cup"><span><small>${esc(cc.teamAName || 'Team A')}</small><b>${fmtPts(t.sideA)}</b></span><i>–</i><span><small>${esc(cc.teamBName || 'Team B')}</small><b>${fmtPts(t.sideB)}</b></span></div>${t.winner ? `<p class="ov-final"><b>${esc(t.winner === 'A' ? cc.teamAName : cc.teamBName)}</b> win the cup</p>` : cc.pointsToWin ? `<p class="ov-final">${fmtPts(cc.pointsToWin)} points to win</p>` : ''}`;
+    } else if (ev.format === 'round_robin' && done){
+      const st = rrStandings(ev, ev.matches).slice(0, 3);
+      body = `<ol class="ov-st">${st.map((r, i) => `<li class="${i === 0 ? 'lead' : ''}"><span class="n">${i + 1}</span><b>${esc(ovTeamName(r.team))}</b><em>${r.W}–${r.L}</em></li>`).join('')}</ol>`;
+    } else if (ch){
+      const t = findTeam(ch); body = `<p class="ov-final">${ICON.trophy}<b>Champion</b> · ${esc(ovTeamName(t))}</p>`;
+    } else if (isDrawn(ev) && done){
+      const open = ev.matches.filter(m => !state.results[m.id] && m.team1Id && m.team2Id).sort((a, b) => (a.slotIdx ?? 1e6) - (b.slotIdx ?? 1e6))[0];
+      if (open) body = `<p class="ov-final">Next: ${esc(roundBase(open))} · ${esc(sideLabel(open, 'team1', true))} vs ${esc(sideLabel(open, 'team2', true))}</p>`;
+    }
+  }catch(e){ console.warn('overview', ev.name, e) }
+  return {status, body, done, tot};
+}
+function ovDays(){
+  const days = dayRows().filter(d => d.enabled), ms = allMatches(true).filter(m => TIME_SLOTS[m.slotIdx]), extras = ((cfg() || {}).extras || []);
+  const today = isoDay(new Date());
+  return days.map(d => {
+    const items = [];
+    const bySlot = new Map(); ms.filter(m => SLOT_KEYS[m.slotIdx] && SLOT_KEYS[m.slotIdx].startsWith(d.date)).forEach(m => { const k = m.slotIdx; if (!bySlot.has(k)) bySlot.set(k, []); bySlot.get(k).push(m) });
+    [...bySlot.entries()].forEach(([k, g]) => {
+      const lab = new Map(); g.forEach(m => { const ev = findEvent(m.eventId) || {}; const l = [ev.name, m.proAm ? (m.proAm.isFinal ? 'Final' : `${m.proAm.flightName} · Round ${m.proAm.round}`) : roundBase(m)].filter(Boolean).join(' · '); if (!lab.has(l)) lab.set(l, []); lab.get(l).push(m) });
+      const t = SLOT_KEYS[k].slice(11);
+      lab.forEach((mm, l) => { const cs = [...new Set(mm.map(m => m.court).filter(Boolean))].sort((a, b) => a - b), fin = mm.every(m => state.results[m.id]);
+        items.push({t, html:`<li class="${fin ? 'done' : ''}"><time>${esc(fmtClock(t))}</time><span><b>${esc(l)}</b><small>${mm.length} match${mm.length === 1 ? '' : 'es'}${cs.length ? ' · ' + esc(cs.length > 2 && cs[cs.length - 1] - cs[0] === cs.length - 1 ? `${courtName(cs[0])}–${cs[cs.length - 1]}` : cs.map(courtName).join(', ')) : ''}${fin ? ' · final' : ''}</small></span></li>`}) });
+    });
+    extras.filter(x => x.date === d.date).forEach(x => items.push({t:x.time || '99:99', html:`<li class="ov-x"><time>${x.time ? esc(fmtClock(x.time)) : ''}</time><span><b>${esc(x.title)}</b>${x.place ? `<small>${esc(x.place)}</small>` : ''}</span></li>`}));
+    items.sort((a, b) => a.t.localeCompare(b.t));
+    const ts = items.map(i => i.t).filter(t => /^\d\d:\d\d$/.test(t)).sort();
+    return {d, today:d.date === today, html:items.map(i => i.html).join(''), from:ts[0], to:ts[ts.length - 1]};
+  });
+}
+function overviewView(){
+  syncEngine();
+  const c = cfg() || {}, w = welcome(), evs = state.events.filter(e => e.published || view.admin), np = players().length, ph = tourPhase();
+  const start = firstBall(), future = !!start && start.getTime() > Date.now();
+  const nc = (c.courts || []).length;
+  const live = liveNow(), nxt = upNext(live.length ? 3 : 4);
+  const hero = `<section class="ov-hero" aria-labelledby="ov-h">
+    <div class="ov-hero-top">${crest(72)}<div class="ov-hero-t"><p class="bk-eyebrow">${esc(v3BadgeText(ph))}</p><h1 id="ov-h" class="${tripTitle().length > 34 ? 'long' : ''}">${escNB(tripTitle())}</h1>
+      <p class="ov-meta">${[datesLabel(), c.club].filter(Boolean).map(esc).join(' · ')}</p>
+      ${start && future ? `<p class="ov-meta">First ball ${esc(dayLabel(isoDay(start)))}, ${esc(clock(start))} · ${esc(startsIn(start))}</p>` : ''}</div></div>
+    <ul class="ov-facts">${evs.length ? `<li><b>${evs.length}</b><span>${specialMode() === 'proam' ? 'section' : 'event'}${evs.length === 1 ? '' : 's'}</span></li>` : ''}${np ? `<li><b>${np}</b><span>players</span></li>` : ''}${nc ? `<li><b>${nc}</b><span>court${nc === 1 ? '' : 's'}</span></li>` : ''}${dayRows().filter(d => d.enabled).length ? `<li><b>${dayRows().filter(d => d.enabled).length}</b><span>day${dayRows().filter(d => d.enabled).length === 1 ? '' : 's'}</span></li>` : ''}</ul>
+  </section>`;
+  const link = (attrs, icon, label) => `<${attrs.startsWith('href') ? 'a' : 'button'} class="ov-link" ${attrs}>${ICON[icon] || ''}<span>${label}</span></${attrs.startsWith('href') ? 'a' : 'button'}>`;
+  const links = `<nav class="ov-links" aria-label="Quick links">${link('data-act="tab" data-v="schedule"', 'schedule', 'Schedule')}${link('data-act="tab" data-v="draws"', 'draws', 'Draws')}${link(`href="${esc(tvLink())}" target="_blank" rel="noopener"`, 'tv', 'TV')}${link('data-act="print" data-v=""', 'print', 'Print')}${link('data-act="tab" data-v="courts"', 'courts', 'Courts')}${link('data-act="tab" data-v="info"', 'info', 'Info')}</nav>`;
+  const board = live.length || nxt.length ? `<section class="ov-sec" aria-labelledby="ov-now">${v3SecHead(live.length ? 'On court now' : 'Up next', 'ov-now', '<button class="v3-link" data-act="tab" data-v="schedule">Schedule <span aria-hidden="true">→</span></button>')}<div class="v3-mlist">${(live.length ? live.slice(0, 4) : nxt).map(v3Match).join('')}</div>${live.length && nxt.length ? `<h3 class="ov-h3">Up next</h3><div class="v3-mlist">${nxt.map(v3Match).join('')}</div>` : ''}</section>` : '';
+  const secs = evs.length ? `<section class="ov-sec" aria-labelledby="ov-ev">${v3SecHead(specialMode() === 'proam' ? 'Sections & standings' : 'Events & standings', 'ov-ev')}<div class="ov-evs">${evs.map(ev => { const sn = ovEvSnap(ev);
+      return `<article class="ov-ev"><button class="ov-ev-h" data-act="openev" data-id="${esc(ev.id)}"><span><b>${esc(ev.name)}</b><small>${esc(FORMAT_LABELS[ev.format] || '')}${view.admin && !ev.published ? ' · not published' : ''}</small></span><span class="ov-tag ${sn.status === 'Complete' ? 'ok' : sn.done ? 'live' : ''}">${esc(sn.status)}</span></button>${sn.body ? `<div class="ov-ev-b">${sn.body}</div>` : ''}</article>` }).join('')}</div></section>` : '';
+  let pros = '';
+  try{ if (specialMode() === 'proam'){ const pool = paPool(); if (pool.length) pros = `<section class="ov-sec" aria-labelledby="ov-pros">${v3SecHead('The Pros', 'ov-pros', '<button class="v3-link" data-act="tab" data-v="players">Teams & players <span aria-hidden="true">→</span></button>')}<ul class="ov-pros" style="--c:${pool.length <= 8 ? Math.max(pool.length, 4) : 6}">${pool.map(pid => { const ws = paWhereAll(pid); return `<li><button data-act="openplayer" data-id="${esc(pid)}">${teamPic(paProPhoto(null, pid), 64, pname(pid))}<b>${esc(pname(pid))}</b><small>${esc(ws.map(x => paSecLabel(x.ev) ? x.ev.name : paRecName(x.ev, x.team)).join(' · ') || 'Available')}</small></button></li>` }).join('')}</ul>
+      <p class="bk-meta">${paEvsAll().map(e => `${esc(e.name)}: ${paModelOf(e).teams.length} teams`).join(' · ')}</p></section>` } }catch(e){}
+  const days = ovDays().filter(x => x.html), sched = days.length ? `<section class="ov-sec" aria-labelledby="ov-days">${v3SecHead('Schedule by day', 'ov-days')}${days.map((x, i) => `<details class="ov-day" ${x.today || (!days.some(y => y.today) && i === 0) ? 'open' : ''}><summary><b>${esc(dayLabel(x.d.date))}</b><small>${x.from ? esc(x.from === x.to ? fmtClock(x.from) : `${fmtClock(x.from)} – ${fmtClock(x.to)}`) : ''}</small></summary><ul class="ov-tl">${x.html}</ul></details>`).join('')}</section>` : '';
+  const addr = w.address || '', contact = (c.info || {}).contact || '';
+  const details = addr || c.club || contact || nc ? `<section class="ov-sec" aria-labelledby="ov-det">${v3SecHead('Venue & contact', 'ov-det', '<button class="v3-link" data-act="tab" data-v="info">All info <span aria-hidden="true">→</span></button>')}<ul class="bk-rows v3-card ov-det">
+    ${c.club || addr ? `<li class="ov-row">${ICON.pin || ''}<span><b>${esc(c.club || 'Venue')}</b>${addr ? `<span>${placeLink(addr)}</span>` : ''}</span></li>` : ''}
+    ${nc ? `<li class="ov-row">${ICON.courts || ''}<span><b>${nc} court${nc === 1 ? '' : 's'}</b><span>${esc((c.courts || []).slice(0, 8).map(x => x.name).join(', '))}${nc > 8 ? '…' : ''}</span></span></li>` : ''}
+    ${contact ? `<li class="ov-row">${ICON.phone || ''}<span><b>Director contact</b><span class="ov-pre">${escTel(contact)}</span></span></li>` : ''}</ul></section>` : '';
+  const sp = sponsorsSorted(); const tiers = ['title', 'gold', 'silver', 'bronze', 'friend', ''];
+  const spons = sp.length ? `<section class="ov-sec" aria-labelledby="ov-sp">${v3SecHead('Sponsors', 'ov-sp')}${tiers.map(t => { const g = sp.filter(x => (x.tier || '') === t); return g.length ? `<h3 class="ov-h3">${esc(SP_TIERS[t] || 'Sponsors')}</h3><ul class="ov-sp ${t === 'title' ? 'title' : ''}">${g.map(x => `<li>${x.logo ? `<img src="${esc(x.logo)}" alt="${esc(x.name || 'Sponsor')}">` : `<span>${esc(x.name)}</span>`}</li>`).join('')}</ul>` : '' }).join('')}</section>` : '';
+  const empty = !evs.length ? `<p class="bk-empty">${view.admin ? 'Add events in setup and they show up here.' : 'The director is still setting things up. Check back soon.'}</p>` : '';
+  return `${hero}${links}${board}${secs}${pros}${sched}${details}${spons}${empty}`;
+}
 function liveNow(){ syncEngine(); return allMatches(true).filter(m => ['live', 'now'].includes(matchStatus(m))) }
 function upNext(n){
   const now = Date.now();
@@ -6902,7 +7131,7 @@ function todayView(){
   syncEngine();
   const c = cfg() || {}, days = dayRows().filter(d => d.enabled);
   if (!events().some(e => e.published || view.admin)){
-    return `<div class="hello2">${crest(64)}<h2>${esc(tripTitle())}</h2><p class="muted">${esc(tsub())}</p></div>${countdownHtml()}
+    return `<div class="hello2">${crest(64)}<h2>${escNB(tripTitle())}</h2><p class="muted">${esc(tsub())}</p></div>${countdownHtml()}
     <div class="empty-state"><p>The draws aren't out yet.</p>${view.admin ? '<button class="btn" data-act="wzopen" data-v="basics">Open setup</button>' : '<p class="small">Check back once the director publishes them.</p>'}</div>${infoCard()}${sponsorsHtml()}`;
   }
   const todayKey = dayKey(isoDay(new Date()));
@@ -7349,7 +7578,7 @@ function signupView(){
   const c = cfg() || {}, evs = events().filter(e => e.kind !== 'clubcup'), s = view.su || {};
   if (s.done) return `<div class="land"><div class="land-in" style="text-align:center;padding-top:40px">${crest(76)}<h2>You're signed up</h2><p>The director will confirm your spot in ${esc(tripTitle())}.</p><button class="btn" data-act="signupdone">See the tournament</button></div></div>`;
   return `<div class="land"><div class="land-in">
-    <div style="text-align:center">${crest(76)}<h2 style="margin-bottom:2px">${esc(tripTitle())}</h2><p class="muted" style="margin-top:0">${esc(tsub())}</p></div>
+    <div style="text-align:center">${crest(76)}<h2 style="margin-bottom:2px">${escNB(tripTitle())}</h2><p class="muted" style="margin-top:0">${esc(tsub())}</p></div>
     ${!c.signupsOpen ? `<div class="card"><b>Signups are closed.</b><p class="small">Ask the director if you still want in.</p><button class="btn alt sm" data-act="signupdone">See the tournament</button></div>` : `
     <div class="card form">
       <h3 style="margin-top:0">You</h3>
@@ -8221,7 +8450,7 @@ function wzCourts(){
     <div class="cnames">${courts.map((x, i) => inp(`data-chg="courtname" data-i="${i}" aria-label="Court ${i + 1} name"`, x.name)).join('')}</div>
     <p class="wnote" style="margin-bottom:0">Rename courts to match the signs at your club, like "Stadium" or "Court 7".</p></div>
   <h3>Hours</h3>
-  <div class="card adm">${days.length ? `<table class="tbl hours"><tr><th style="text-align:left">Day</th><th>Play</th><th>First match</th><th>Last match starts</th></tr>${days.map(d => `<tr><td style="text-align:left"><b>${esc(dayLabel(d.date))}</b></td><td><input type="checkbox" data-chg="dayon" data-d="${d.date}" ${d.on !== false ? 'checked' : ''} aria-label="Play on ${esc(dayLabel(d.date))}"></td><td><input type="time" data-chg="dayt" data-d="${d.date}" data-f="start" value="${esc(d.start)}"></td><td><input type="time" data-chg="dayt" data-d="${d.date}" data-f="end" value="${esc(d.end)}"></td></tr>${d.on !== false && !daySlotCount(d) ? `<tr><td colspan="4" style="text-align:left"><span class="warn" style="margin:0">No match times on ${esc(dayLabel(d.date))}: the last match starts before the first. Check AM/PM.</span></td></tr>` : d.on !== false ? `<tr class="dayn"><td colspan="4" style="text-align:left">${daySlotCount(d)} match time${daySlotCount(d) === 1 ? '' : 's'}: ${esc(fmt12h(toMin(d.start)))} to ${esc(fmt12h(toMin(d.start) + (daySlotCount(d) - 1) * (c.slotMinutes || 90)))}</td></tr>` : ''}`).join('')}</table>` : '<p class="small muted">Pick the dates on the Basics step first.</p>'}
+  <div class="card adm">${days.length ? `<table class="tbl hours"><tr><th style="text-align:left">Day</th><th>Play</th><th>First match</th><th>Last match starts</th></tr>${days.map(d => `<tr><td style="text-align:left"><b>${esc(dayLabel(d.date))}</b></td><td data-l="Play"><input type="checkbox" data-chg="dayon" data-d="${d.date}" ${d.on !== false ? 'checked' : ''} aria-label="Play on ${esc(dayLabel(d.date))}"></td><td data-l="First match"><input type="time" data-chg="dayt" data-d="${d.date}" data-f="start" value="${esc(d.start)}" aria-label="First match, ${esc(dayLabel(d.date))}"></td><td data-l="Last match starts"><input type="time" data-chg="dayt" data-d="${d.date}" data-f="end" value="${esc(d.end)}" aria-label="Last match starts, ${esc(dayLabel(d.date))}"></td></tr>${d.on !== false && !daySlotCount(d) ? `<tr><td colspan="4" style="text-align:left"><span class="warn" style="margin:0">No match times on ${esc(dayLabel(d.date))}: the last match starts before the first. Check AM/PM.</span></td></tr>` : d.on !== false ? `<tr class="dayn"><td colspan="4" style="text-align:left">${daySlotCount(d)} match time${daySlotCount(d) === 1 ? '' : 's'}: ${esc(fmt12h(toMin(d.start)))} to ${esc(fmt12h(toMin(d.start) + (daySlotCount(d) - 1) * (c.slotMinutes || 90)))}</td></tr>` : ''}`).join('')}</table>` : '<p class="small muted">Pick the dates on the Basics step first.</p>'}
     <label class="small muted" style="margin-top:10px;display:block">Match length (time slot)</label>
     <div class="seg">${[45, 60, 75, 90, 105, 120].map(n => `<button class="${(c.slotMinutes || 90) === n ? 'on' : ''}" data-act="cfgset" data-p="slotMinutes" data-v="${n}" data-num="1">${n < 60 ? n + 'm' : Math.floor(n / 60) + 'h' + (n % 60 ? ' ' + n % 60 : '')}</button>`).join('')}</div></div>
   <h3>Scheduling rules</h3>
@@ -8617,10 +8846,10 @@ function tvView(){
   const tp = (m, sl) => { const u = sideNames(m, sl) === null ? null : sidePhoto(m, sl); return u ? teamPic(u, 34, '', 'tp-tv') : '' };
   const vs = m => `${tp(m, 'team1')}${esc(sideLabel(m, 'team1', true))} <i>vs</i> ${tp(m, 'team2')}${esc(sideLabel(m, 'team2', true))}`;
   return `<div class="tv tv2">${head}
-    ${ev ? (ev.format === 'pro_am' && (ev.teams || []).length ? tvProAm(ev) : `<section class="tvdraw"><h2>${esc(ev.name)}</h2>${eventDraw(ev, true)}</section>`) : `
+    ${ev ? (ev.format === 'pro_am' && (ev.teams || []).length ? tvProAm(ev) : `<section class="tvdraw"><h2>${esc(ev.name)}</h2>${(() => { teamLine.tv = true; try{ return eventDraw(ev, true) }finally{ teamLine.tv = false } })()}</section>`) : `
     <section class="tvgrid"><div><h2>Courts</h2><div class="tvcourts">${tiles.slice(0, 6).map(t => { const st = t.cur ? matchStatus(t.cur) : ''; return `<div class="tvc2 ${t.cur ? 'busy' : ''}"><div class="tvc2-h"><b>${esc(courtName(t.c))}</b><span class="st ${t.cur ? 'live' : 'neutral'}">${t.cur ? (st === 'live' ? 'In progress' : 'Scheduled now') : 'No match in progress'}</span></div>${t.cur ? `<p class="tvc2-t">${vs(t.cur)}</p><p class="tvc2-s">${esc((findEvent(t.cur.eventId) || {}).name || '')}</p>` : ''}${t.nxt ? `<p class="tvc2-n">Next ${esc(at(t.nxt.slotIdx))} · ${vs(t.nxt)}</p>` : ''}</div>` }).join('')}${tiles.length > 6 ? `<p class="tvmore">+ ${tiles.length - 6} more courts on the app</p>` : ''}</div></div>
     <div><h2>Up next</h2>${nxt.map(m => `<div class="tvrow"><b>${mcodeBadge(m)}${esc(at(m.slotIdx))} · ${esc(courtName(m.court))}</b><div>${vs(m)}</div><span>${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundBase(m))}</span></div>`).join('') || '<p class="tvempty">Nothing else scheduled today.</p>'}</div>
-    <div><h2>Results</h2>${rec.map(m => { const w = winnerSlot(m); return `<div class="tvrow"><div><strong>${esc(sideLabel(m, w, true))}</strong> d. ${esc(sideLabel(m, w === 'team1' ? 'team2' : 'team1', true))}</div><b class="tvsc">${esc(scoreText(m) || (resOf(m.id) || {}).note || '')}</b><span>${mcodeBadge(m)}${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundBase(m))}</span></div>` }).join('') || '<p class="tvempty">No results yet.</p>'}</div></section>`}
+    <div><h2>Results</h2>${rec.map(m => { const w = winnerSlot(m); return `<div class="tvrow"><div>${w === 'tie' ? `${esc(sideLabel(m, 'team1', true))} <i>tied</i> ${esc(sideLabel(m, 'team2', true))}` : `<strong>${esc(sideLabel(m, w, true))}</strong> d. ${esc(sideLabel(m, w === 'team1' ? 'team2' : 'team1', true))}`}</div><b class="tvsc">${esc(scoreText(m) || (resOf(m.id) || {}).note || '')}</b><span>${mcodeBadge(m)}${esc((findEvent(m.eventId) || {}).name || '')} · ${esc(roundBase(m))}</span></div>` }).join('') || '<p class="tvempty">No results yet.</p>'}</div></section>`}
     ${sponsorsHtml()}
   </div>`;
 }
@@ -8685,7 +8914,22 @@ const paTeamPhoto = (ev, t) => { const pt = paHasModel(ev) && t && t.pids ? ev.p
 const paProPhoto = (ev, pid) => pid ? ((paPhotos(ev).pros || {})[pid] || cardOf(pid).photo || null) : null;
 /* v3.2.1: fit the Pro-Am TV slide to the screen (1280x720 up to 1920x1080): no clipped bios, no scrollbars */
 function fitTV(extra){
-  const sec = document.querySelector('.tvpa'); if (!sec) return;
+  const sec = document.querySelector('.tvpa');
+  if (!sec){ /* v3.3: courts/next/results and draw slides shrink to fit short screens (1280x720) instead of running off the bottom */
+    const g = document.querySelector('.tv .tvgrid, .tv .tvdraw'); if (!g) return;
+    const sp = g.parentElement && g.parentElement.querySelector(':scope > .sponsors');
+    if (sp && window.innerHeight < 900){ let cut = false; [...sp.children].forEach((el, i) => { if (i > 0 && el.classList.contains('lbl')) cut = true; if (cut) el.style.display = 'none' }) }
+    const spH = sp && sp.offsetHeight ? sp.getBoundingClientRect().height + 16 : 0;
+    g.style.zoom = ''; const avail = window.innerHeight - 12 - spH - g.getBoundingClientRect().top; let gh = g.scrollHeight;
+    if (avail < 120 || gh <= avail) return;
+    if (g.classList.contains('tvdraw')){ /* keep the main draw readable: drop the later sections (consolation…) before shrinking below ~70% */
+      const hs = [...g.querySelectorAll(':scope > h3')], cut = [];
+      for (let i = hs.length - 1; i >= 1 && avail / gh < .7; i--){ for (let el = hs[i]; el && !(el !== hs[i] && el.tagName === 'H3'); el = el.nextElementSibling){ if (el.style.display !== 'none'){ el.style.display = 'none' } } cut.unshift(hs[i].textContent); gh = g.scrollHeight }
+      if (cut.length){ const n = document.createElement('p'); n.className = 'tvmore'; n.textContent = `${cut.join(' and ')} on the app`; g.appendChild(n); gh = g.scrollHeight }
+    }
+    if (gh > avail) g.style.zoom = Math.max(.5, avail / gh).toFixed(3);
+    return;
+  }
   /* the sponsor strip under a Pro-Am slide keeps only the presenting sponsor (every sponsor gets the sponsors slide) */
   const spx = sec.parentElement && sec.parentElement.querySelector(':scope > .sponsors');
   if (spx){ let cut = false; [...spx.children].forEach((el, i) => { if (i > 0 && el.classList.contains('lbl')) cut = true; if (cut) el.style.display = 'none' }) }
@@ -9083,8 +9327,13 @@ function restoreFocus(fid, sel){
   n.focus({preventScroll:true});
   if (sel) try{ n.setSelectionRange(sel[0], sel[1]) }catch(e){}
 }
+function centerStrips(){
+  document.querySelectorAll('.wsteps, .rtabs, .v4-cztabs').forEach(w => { if (w.scrollWidth <= w.clientWidth + 2) return; const on = w.querySelector('.on, [aria-selected="true"]'); if (!on) return;
+    const a = w.getBoundingClientRect(), b = on.getBoundingClientRect(); w.scrollLeft += (b.left - a.left) - (w.clientWidth - b.width) / 2 });
+}
 function finishDraw(keep, fid, sel){
   const sc = document.getElementById('scroller'); if (sc) sc.scrollTop = keep;
+  try{ centerStrips() }catch(e){}
   restoreFocus(fid, sel);
   if (view.tab === 'chat' && sc){ const n = Store.keys('chat:').length; if (n !== view.chatCount || view.stick){ view.chatCount = n; view.stick = false; sc.scrollTop = sc.scrollHeight } LS.set(TK('chatseen'), Date.now()) }
 }
@@ -9382,7 +9631,7 @@ const ACT = {
       applyImport([e], {eventId:ev.id});
       const ids = [findByName(n1).id, findByName(n2).id];
       if (ev.kind !== 'mixed' && lvl.rating != null){ const pl = players(); pl.forEach(p => { if (ids.includes(p.id)) delete p.teamRating }); savePlayers(pl) }
-      const iss = pairIssue(EV(ev.id), ids); msg = `${n1.split(' ').slice(-1)[0]} / ${n2.split(' ').slice(-1)[0]} added.${iss ? ' Note: ' + iss + '.' : ''}`;
+      const iss = pairIssue(EV(ev.id), ids); msg = `${surname(n1)} / ${surname(n2)} added.${iss ? ' Note: ' + iss + '.' : ''}`;
     }
     view.qa = null; view.qaFocus = 'qa-1'; toast(msg);
   },
@@ -10028,7 +10277,7 @@ let LVER = 0;
 const _lmemo = new Map();
 function lmemo(key, fn){ const k = key + '|' + LVER + '|' + Math.floor(Date.now() / 60000); if (_lmemo.has(k)) return _lmemo.get(k); if (_lmemo.size > 300) _lmemo.clear(); const v = fn(); _lmemo.set(k, v); return v }
 function lEntries(ev){ return lmemo('ent:' + ev.id + ':' + JSON.stringify([ev.entrants, ev.pairs, ev.kind]), () => { const m = new Map(); teamsOf(ev).forEach(t => m.set(t.id, t)); return m }) }
-function lName(ev, id, short){ const ids = lPids(id); if (!ids.length) return '?'; return ids.map(p => short ? pname(p).split(' ').slice(-1)[0] : pname(p)).join(' / ') }
+function lName(ev, id, short){ const ids = lPids(id); if (!ids.length) return '?'; return ids.map(p => short ? surname(pname(p)) : pname(p)).join(' / ') }
 function lMine(ev){ const me = view.me && view.me !== GUEST ? view.me : null; if (!me || !ev) return null; for (const [id, t] of lEntries(ev)) if (t.pids.includes(me)) return id; return null }
 const lAway = (ev, id) => !!((((ev && ev.ladder) || {}).away || {})[id]);
 const lRespondBy = (c, ev) => c.postponed ? c.postponed.until : c.created.at + lrules(ev).respondDays * DAY;
