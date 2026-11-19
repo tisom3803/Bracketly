@@ -2152,7 +2152,8 @@ header.top.bk-top.v3-top.slim{padding-bottom:6px}
 /* ===== v3.3 formatting sweep ===== */
 @media (max-width:560px){
   .tbl.hours, .tbl.hours tbody{display:block;border:0;background:none}
-  .tbl.hours tr:first-child{display:none}
+  .tbl.hours tr:first-child{display:none!important}
+  .tbl.hours{border:0!important;background:none!important;border-radius:0!important;box-shadow:none!important}
   .tbl.hours tr:not(.dayn){display:grid;grid-template-columns:44px 1fr 1fr;gap:4px 8px;align-items:end;padding:10px 0 4px;border-top:1px solid var(--bd)}
   .tbl.hours tr:nth-child(2){border-top:0;padding-top:0}
   .tbl.hours tr:not(.dayn) > td:first-child{grid-column:1/-1;padding:0 0 2px}
